@@ -1,0 +1,766 @@
+[
+  {
+    "id": "cd-001",
+    "topic": "lexical-analysis",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many tokens does a C lexical analyzer produce for the following statement? Treat every keyword, identifier, constant, operator and punctuation symbol as one token; a unary minus is a separate token.\n\n```c\nif (x1 >= 10) y = x1 * -2;\n```",
+    "answer": { "min": 13, "max": 13 },
+    "explanation": "Tokens in order: `if`, `(`, `x1`, `>=`, `10`, `)`, `y`, `=`, `x1`, `*`, `-`, `2`, `;`. The operator `>=` is a single token by maximal munch, and `-2` is two tokens (unary minus and the constant). Total 13."
+  },
+  {
+    "id": "cd-002",
+    "topic": "lexical-analysis",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many tokens are produced by a C lexical analyzer for the code below? Comments produce no tokens, a string literal or character constant is one token, and multi-character operators are one token each.\n\n```c\nint main() {\n  /* count = 0; */\n  char *s = \"a+b;\";  // tail\n  return s[0]++ != 'a';\n}\n```",
+    "answer": { "min": 21, "max": 21 },
+    "explanation": "Line 1: `int`, `main`, `(`, `)`, `{` gives 5.\nLine 2 is a comment: 0.\nLine 3: `char`, `*`, `s`, `=`, `\"a+b;\"`, `;` gives 6 (the `+` and `;` inside the string are part of the literal, and the `//` comment is dropped).\nLine 4: `return`, `s`, `[`, `0`, `]`, `++`, `!=`, `'a'`, `;` gives 9.\nLine 5: `}` gives 1.\nTotal $5 + 6 + 9 + 1 = 21$."
+  },
+  {
+    "id": "cd-003",
+    "topic": "lexical-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following errors in a C program is detected by the lexical analyzer?",
+    "options": [
+      "A variable used without being declared",
+      "A missing semicolon at the end of a statement",
+      "A string literal that is never closed",
+      "Adding an integer to a structure variable"
+    ],
+    "answer": 2,
+    "explanation": "The scanner cannot form a valid token from an unterminated string literal, so it reports the error itself. An undeclared variable and a type mismatch are semantic errors. A missing semicolon is a syntax error found by the parser, because every token on its own is valid."
+  },
+  {
+    "id": "cd-004",
+    "topic": "lexical-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A C scanner follows the longest match rule. How is the character sequence `a+++b` split into tokens?",
+    "options": [
+      "`a` `+` `++` `b`",
+      "`a` `++` `+` `b`",
+      "`a` `+` `+` `+` `b`",
+      "`a` `+++` `b`"
+    ],
+    "answer": 1,
+    "explanation": "After `a`, the longest operator that starts at the first `+` is `++` (C has no `+++` operator), so the scanner takes `++`. The remaining `+` becomes the next token, then `b`. Maximal munch never goes back to try `+` followed by `++`."
+  },
+  {
+    "id": "cd-005",
+    "topic": "lexical-analysis",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about lexical analysis are correct?",
+    "options": [
+      "The lexical analyzer removes comments and whitespace from the input it passes on.",
+      "Token patterns are usually written as regular expressions and recognised by simulating a DFA.",
+      "The lexical analyzer reports an error when a variable is used without a declaration.",
+      "When two patterns match the same longest prefix, the pattern listed first in the specification is normally chosen."
+    ],
+    "answer": [0, 1, 3],
+    "explanation": "Statement 1 is true: whitespace and comments never reach the parser. Statement 2 is true: each token class is regular, and tools like Lex build one DFA. Statement 3 is false: declaration checks need the symbol table and scope information, which is semantic analysis. Statement 4 is true: it is the priority rule used together with longest match."
+  },
+  {
+    "id": "cd-006",
+    "topic": "lexical-analysis",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A scanner has three token classes, listed in this priority order:\n\n```\nT1 : (ab)+\nT2 : a b*\nT3 : b+\n```\n\nIt uses the longest match rule, and breaks ties in favour of the class listed first. What token sequence does it produce for the input `ababbab`?",
+    "options": [
+      "T1 T3 T1",
+      "T1 T3 T2",
+      "T2 T2 T3 T2",
+      "T2 T1 T3"
+    ],
+    "answer": 0,
+    "explanation": "Position 0: `T1` matches `abab` (4 characters), `T2` matches only `ab`, `T3` cannot start with `a`. Take `T1(abab)`.\nPosition 4: the next character is `b` followed by `a`, so only `T3` matches, giving `T3(b)`.\nPosition 5: the rest is `ab`. Both `T1` and `T2` match 2 characters, a tie, so `T1` wins by priority.\nResult: `T1 T3 T1`."
+  },
+  {
+    "id": "cd-007",
+    "topic": "lexical-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In the C fragment `x = y /* old value */ + 1;`, which item is NOT passed to the parser as a token?",
+    "options": [
+      "`=`",
+      "`/* old value */`",
+      "`1`",
+      "`;`"
+    ],
+    "answer": 1,
+    "explanation": "The scanner discards comments, so `/* old value */` produces no token. The tokens passed on are `x`, `=`, `y`, `+`, `1`, `;`."
+  },
+  {
+    "id": "cd-008",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Consider the grammar below, where `eps` denotes the empty string.\n\n```\nS -> A B c | d\nA -> a A | eps\nB -> b | eps\n```\n\nWhat is $\\text{FIRST}(S)$?",
+    "options": [
+      "$\\{a, d\\}$",
+      "$\\{a, b, d\\}$",
+      "$\\{a, b, c, d\\}$",
+      "$\\{a, b, c, d, \\varepsilon\\}$"
+    ],
+    "answer": 2,
+    "explanation": "From $S \\to ABc$: $A$ contributes $a$; since $A$ can vanish, $B$ contributes $b$; since $B$ can also vanish, $c$ is added. $c$ is a terminal, so $S \\to ABc$ never derives $\\varepsilon$. From $S \\to d$ we add $d$. So $\\text{FIRST}(S) = \\{a, b, c, d\\}$."
+  },
+  {
+    "id": "cd-009",
+    "topic": "parsing",
+    "type": "nat",
+    "marks": 1,
+    "q": "For the grammar below (`eps` is the empty string, $S$ is the start symbol), how many symbols are in $\\text{FOLLOW}(B)$? Count the end-of-input marker as a symbol if it is present.\n\n```\nS -> A B | B c\nA -> a A | B\nB -> b B | eps\n```",
+    "answer": { "min": 3, "max": 3 },
+    "explanation": "$\\text{FOLLOW}(S) = \\{\\text{\\textdollar}\\}$.\n$\\text{FOLLOW}(A)$: from $S \\to AB$ we get $\\text{FIRST}(B) - \\{\\varepsilon\\} = \\{b\\}$, and since $B$ can vanish, also $\\text{FOLLOW}(S)$. So $\\text{FOLLOW}(A) = \\{b, \\text{\\textdollar}\\}$.\n$\\text{FOLLOW}(B)$: from $S \\to AB$, $\\text{FOLLOW}(S)$; from $S \\to Bc$, $c$; from $A \\to B$, $\\text{FOLLOW}(A) = \\{b, \\text{\\textdollar}\\}$; from $B \\to bB$, nothing new. So $\\text{FOLLOW}(B) = \\{b, c, \\text{\\textdollar}\\}$, which has 3 symbols."
+  },
+  {
+    "id": "cd-010",
+    "topic": "parsing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following grammars are LL(1)? (`eps` is the empty string; the first nonterminal listed is the start symbol.)\n\nG1:\n```\nS -> a S b | eps\n```\nG2:\n```\nS -> A a | b\nA -> b | eps\n```\nG3:\n```\nS -> S a | b\n```\nG4:\n```\nE -> T X\nX -> + T X | eps\nT -> id | ( E )\n```",
+    "options": ["G1", "G2", "G3", "G4"],
+    "answer": [0, 3],
+    "explanation": "G1: $\\text{FIRST}(aSb) = \\{a\\}$ and $\\text{FOLLOW}(S) = \\{b, \\text{\\textdollar}\\}$, which are disjoint. LL(1).\nG2: $\\text{FIRST}(Aa) = \\{a, b\\}$ (since $A$ can derive $b$ or vanish) and $\\text{FIRST}(b) = \\{b\\}$. Both alternatives of $S$ go into the cell $M[S, b]$. Not LL(1).\nG3 is left recursive, so $\\text{FIRST}(Sa) = \\{b\\}$ collides with $S \\to b$. Not LL(1).\nG4: the only choices are $X \\to +TX$ on $+$ and $X \\to \\varepsilon$ on $\\text{FOLLOW}(X) = \\{), \\text{\\textdollar}\\}$, and $T \\to \\text{id}$ versus $T \\to (E)$. No cell has two entries. LL(1)."
+  },
+  {
+    "id": "cd-011",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Build the LL(1) parsing table $M$ for the grammar below (`eps` is the empty string, $S$ is the start symbol). Which cell contains more than one production?\n\n```\nS -> P Q r\nP -> p P | eps\nQ -> q | P\n```",
+    "options": [
+      "$M[S, p]$",
+      "$M[P, p]$",
+      "$M[Q, q]$",
+      "$M[P, r]$"
+    ],
+    "answer": 1,
+    "explanation": "$\\text{FIRST}(P) = \\{p, \\varepsilon\\}$ and $\\text{FIRST}(Q) = \\{q, p, \\varepsilon\\}$.\n$\\text{FOLLOW}(Q) = \\{r\\}$. From $S \\to PQr$, $\\text{FOLLOW}(P) \\supseteq \\text{FIRST}(Qr) = \\{q, p, r\\}$. So $\\text{FOLLOW}(P) = \\{p, q, r\\}$.\n$P \\to pP$ goes into $M[P, p]$. $P \\to \\varepsilon$ goes into $M[P, x]$ for every $x \\in \\text{FOLLOW}(P)$, which includes $p$. So $M[P, p]$ has two productions. $M[S, p]$ has only $S \\to PQr$, $M[Q, q]$ has only $Q \\to q$, and $M[P, r]$ has only $P \\to \\varepsilon$."
+  },
+  {
+    "id": "cd-012",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which grammar results from removing left recursion from\n\n```\nA -> A c | A d | e | f\n```\n\n(`eps` is the empty string)?",
+    "options": [
+      "`A -> e A' | f A'` and `A' -> c A' | d A' | eps`",
+      "`A -> c A' | d A'` and `A' -> e A' | f A' | eps`",
+      "`A -> e A' | f A' | eps` and `A' -> c A' | d A'`",
+      "`A -> A' e | A' f` and `A' -> c A' | d A' | eps`"
+    ],
+    "answer": 0,
+    "explanation": "For $A \\to A\\alpha_1 \\mid A\\alpha_2 \\mid \\beta_1 \\mid \\beta_2$ the standard rewrite is $A \\to \\beta_1 A' \\mid \\beta_2 A'$ and $A' \\to \\alpha_1 A' \\mid \\alpha_2 A' \\mid \\varepsilon$. Here $\\beta$ values are $e, f$ and $\\alpha$ values are $c, d$. The original grammar generates one of $e, f$ followed by any string of $c$ and $d$. Option 2 starts with $c$ or $d$, option 3 makes $A'$ unable to terminate, and option 4 puts $e$ or $f$ at the end, so all three change the language."
+  },
+  {
+    "id": "cd-013",
+    "topic": "parsing",
+    "type": "nat",
+    "marks": 2,
+    "q": "Consider the grammar\n\n```\nS -> A S | b\nA -> a A | c\n```\n\nThe grammar is augmented with $S' \\to S$. How many states are in the canonical collection of LR(0) item sets? Count the initial state and the state containing $S' \\to S\\cdot$.",
+    "answer": { "min": 8, "max": 8 },
+    "explanation": "I0 = closure of $S' \\to \\cdot S$: $\\{S' \\to \\cdot S, S \\to \\cdot AS, S \\to \\cdot b, A \\to \\cdot aA, A \\to \\cdot c\\}$.\nI1 = goto(I0, S) = $\\{S' \\to S\\cdot\\}$.\nI2 = goto(I0, A) = $\\{S \\to A\\cdot S, S \\to \\cdot AS, S \\to \\cdot b, A \\to \\cdot aA, A \\to \\cdot c\\}$.\nI3 = goto(I0, b) = $\\{S \\to b\\cdot\\}$.\nI4 = goto(I0, a) = $\\{A \\to a\\cdot A, A \\to \\cdot aA, A \\to \\cdot c\\}$.\nI5 = goto(I0, c) = $\\{A \\to c\\cdot\\}$.\nI6 = goto(I2, S) = $\\{S \\to AS\\cdot\\}$. goto(I2, A) = I2, and on b, a, c it reaches I3, I4, I5.\nI7 = goto(I4, A) = $\\{A \\to aA\\cdot\\}$. goto(I4, a) = I4 and goto(I4, c) = I5.\nTotal 8 states."
+  },
+  {
+    "id": "cd-014",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider the grammar with start symbol $S$:\n\n```\nS -> x A y | x B z | A z\nA -> w\nB -> w\n```\n\nWhich statement best describes it?",
+    "options": [
+      "It is LL(1)",
+      "It is SLR(1) but not LL(1)",
+      "It is LALR(1) but not SLR(1)",
+      "It is CLR(1) but not LALR(1)"
+    ],
+    "answer": 2,
+    "explanation": "Not LL(1): the first two alternatives of $S$ both start with $x$.\nAfter reading `x w` the LR(0) state is $\\{A \\to w\\cdot, B \\to w\\cdot\\}$. $\\text{FOLLOW}(A) = \\{y, z\\}$ and $\\text{FOLLOW}(B) = \\{z\\}$ overlap on $z$, so SLR(1) has a reduce-reduce conflict.\nWith LR(1) lookaheads, in that state $A \\to w\\cdot$ has lookahead $y$ (from $S \\to xAy$) and $B \\to w\\cdot$ has lookahead $z$. No conflict. The other state with $A \\to w\\cdot$ (reached by `w` from the start) has a different core, so LALR does not merge them. LALR(1) is conflict free, so the grammar is LALR(1) but not SLR(1)."
+  },
+  {
+    "id": "cd-015",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of these parsing methods accepts the largest class of grammars?",
+    "options": ["LR(0)", "SLR(1)", "LALR(1)", "Canonical LR(1)"],
+    "answer": 3,
+    "explanation": "For grammars, $\\text{LR}(0) \\subset \\text{SLR}(1) \\subset \\text{LALR}(1) \\subset \\text{LR}(1)$, with all inclusions strict. Canonical LR(1) keeps full lookahead information in every item, so it handles the most grammars, at the cost of more states."
+  },
+  {
+    "id": "cd-016",
+    "topic": "parsing",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following statements are true?",
+    "options": [
+      "Every SLR(1) grammar is LALR(1).",
+      "Every LL(1) grammar is LALR(1).",
+      "For any grammar, the LALR(1) and SLR(1) parsing tables have the same number of states.",
+      "An ambiguous grammar can be CLR(1) if the lookaheads are chosen carefully."
+    ],
+    "answer": [0, 2],
+    "explanation": "Statement 1 is true: SLR(1) is a subset of LALR(1). Statement 2 is false: every LL(1) grammar is LR(1), but some LL(1) grammars are not LALR(1). Statement 3 is true: both use the LR(0) cores, LALR only refines lookaheads. Statement 4 is false: no ambiguous grammar is LR(k) for any $k$."
+  },
+  {
+    "id": "cd-017",
+    "topic": "parsing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Consider the grammar $G$ with the single nonterminal $S$:\n\n```\nS -> a S | a\n```\n\nAugment it with $S' \\to S$. Which of the following are true?",
+    "options": [
+      "$G$ is LL(1).",
+      "$G$ is LR(0).",
+      "$G$ is SLR(1).",
+      "The canonical collection of LR(0) item sets has exactly 4 states, counting the initial state."
+    ],
+    "answer": [2, 3],
+    "explanation": "Both alternatives start with $a$, so $M[S, a]$ has two entries: not LL(1).\nLR(0) states: I0 $= \\{S' \\to \\cdot S, S \\to \\cdot aS, S \\to \\cdot a\\}$, I1 $= \\{S' \\to S\\cdot\\}$, I2 $= \\{S \\to a\\cdot S, S \\to a\\cdot, S \\to \\cdot aS, S \\to \\cdot a\\}$ (goto on $a$ from I0 and from I2), I3 $= \\{S \\to aS\\cdot\\}$. That is 4 states.\nI2 has the complete item $S \\to a\\cdot$ and shift items on $a$, so LR(0) has a shift-reduce conflict. SLR reduces only on $\\text{FOLLOW}(S) = \\{\\text{\\textdollar}\\}$, which does not clash with the shift on $a$. So $G$ is SLR(1)."
+  },
+  {
+    "id": "cd-018",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The sequence of reductions made by a shift-reduce (bottom-up) parser on a valid input corresponds to",
+    "options": [
+      "a leftmost derivation",
+      "a leftmost derivation in reverse",
+      "a rightmost derivation",
+      "a rightmost derivation in reverse"
+    ],
+    "answer": 3,
+    "explanation": "A bottom-up parser always reduces the handle, which is the part introduced by the last step of a rightmost derivation. Reading its reductions from first to last therefore traces a rightmost derivation backwards."
+  },
+  {
+    "id": "cd-019",
+    "topic": "parsing",
+    "type": "nat",
+    "marks": 2,
+    "q": "An SLR(1) parser for the grammar\n\n```\nE -> E + T | T\nT -> T * F | F\nF -> id\n```\n\nparses the input `id + id * id + id`. How many reduce moves does it make? (Do not count the final accept action.)",
+    "answer": { "min": 11, "max": 11 },
+    "explanation": "Reductions in order: $F \\to \\text{id}$, $T \\to F$, $E \\to T$ (first id, 3); $F \\to \\text{id}$, $T \\to F$ (second id, 2; the parser does not reduce $E + T$ because the next token is `*`); $F \\to \\text{id}$, $T \\to T * F$, $E \\to E + T$ (3); $F \\to \\text{id}$, $T \\to F$, $E \\to E + T$ (3). Total 11. This equals the number of interior nodes of the parse tree."
+  },
+  {
+    "id": "cd-020",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A state in the LR(0) automaton of some grammar contains exactly the items $X \\to y\\cdot$ and $Y \\to y\\cdot z$, where $z$ is a terminal. Given $\\text{FOLLOW}(X) = \\{z, \\text{\\textdollar}\\}$, what happens in the SLR(1) table for this state?",
+    "options": [
+      "No conflict",
+      "A shift-reduce conflict on $z$",
+      "A reduce-reduce conflict on $z$",
+      "A shift-reduce conflict on the end marker"
+    ],
+    "answer": 1,
+    "explanation": "SLR places reduce by $X \\to y$ on every symbol in $\\text{FOLLOW}(X)$, which includes $z$. The item $Y \\to y\\cdot z$ asks for a shift on $z$. Both actions land in the same cell, a shift-reduce conflict on $z$. On the end marker there is only the reduce, so no conflict there."
+  },
+  {
+    "id": "cd-021",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following grammars is ambiguous?",
+    "options": [
+      "`S -> a S b | a b`",
+      "`S -> S S | a`",
+      "`S -> a S | b`",
+      "`S -> a S a | b`"
+    ],
+    "answer": 1,
+    "explanation": "With $S \\to SS \\mid a$, the string `aaa` has two parse trees: $(aa)a$ and $a(aa)$, depending on which $S$ of the first $SS$ is expanded again. The other three grammars give exactly one derivation for each string they generate."
+  },
+  {
+    "id": "cd-022",
+    "topic": "parsing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Let $A \\to \\alpha \\mid \\beta$ be any two alternatives for the same nonterminal in a grammar $G$ with no useless symbols. Which of the following conditions are necessary for $G$ to be LL(1)?",
+    "options": [
+      "$\\text{FIRST}(\\alpha) \\cap \\text{FIRST}(\\beta) = \\emptyset$",
+      "If $\\beta \\Rightarrow^* \\varepsilon$ then $\\text{FIRST}(\\alpha) \\cap \\text{FOLLOW}(A) = \\emptyset$",
+      "Both $\\alpha$ and $\\beta$ derive $\\varepsilon$",
+      "$G$ has no $\\varepsilon$-productions"
+    ],
+    "answer": [0, 1],
+    "explanation": "Conditions 1 and 2 are part of the LL(1) definition: otherwise some cell of the table would get both productions. Condition 3 is the opposite of what is needed; at most one alternative may derive $\\varepsilon$. Condition 4 is not required: LL(1) grammars commonly have $\\varepsilon$-productions, such as $X \\to +TX \\mid \\varepsilon$."
+  },
+  {
+    "id": "cd-023",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Left factor the grammar\n\n```\nA -> a b c | a b d | a e\n```\n\ncompletely. Which result is correct?",
+    "options": [
+      "`A -> a A'`, `A' -> b A'' | e`, `A'' -> c | d`",
+      "`A -> a b A' | a e`, `A' -> c | d`",
+      "`A -> a A'`, `A' -> b c | b d | e`",
+      "`A -> A' c | A' d | a e`, `A' -> a b`"
+    ],
+    "answer": 0,
+    "explanation": "All three alternatives share the prefix $a$: factor it out to get $A \\to aA'$ with $A' \\to bc \\mid bd \\mid e$. Two of these still share $b$, so factor again: $A' \\to bA'' \\mid e$ and $A'' \\to c \\mid d$. Options 2 and 3 are only partly factored (a common prefix remains), and option 4 does not factor anything."
+  },
+  {
+    "id": "cd-024",
+    "topic": "parsing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An operator grammar has no $\\varepsilon$-productions and no right side with two adjacent nonterminals. Which of the following is an operator grammar? (`eps` is the empty string.)",
+    "options": [
+      "`E -> E + E | E * E | id`",
+      "`E -> E A E | id` and `A -> + | *`",
+      "`S -> a S b | eps`",
+      "`S -> A B` and `A -> a`, `B -> b`"
+    ],
+    "answer": 0,
+    "explanation": "Option 1 has no empty production and every right side has a terminal between nonterminals. Option 2 has $E A E$ with adjacent nonterminals. Option 3 has an $\\varepsilon$-production. Option 4 has $AB$."
+  },
+  {
+    "id": "cd-025",
+    "topic": "parsing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Consider the grammar with start symbol $S$ (`eps` is the empty string):\n\n```\nS -> A b S | eps\nA -> a A | eps\n```\n\nLet $M$ be its LL(1) parsing table, with columns for $a$, $b$ and the end marker. Which statements are true?",
+    "options": [
+      "The grammar is LL(1).",
+      "$M[S, b]$ contains $S \\to AbS$.",
+      "$M[A, \\text{\\textdollar}]$ contains $A \\to \\varepsilon$.",
+      "Exactly 5 cells of $M$ are non-empty."
+    ],
+    "answer": [0, 1, 3],
+    "explanation": "$\\text{FIRST}(AbS) = \\{a, b\\}$ since $A$ can vanish. $\\text{FOLLOW}(S) = \\{\\text{\\textdollar}\\}$ and $\\text{FOLLOW}(A) = \\{b\\}$.\nRow $S$: $S \\to AbS$ on $a$ and $b$; $S \\to \\varepsilon$ on the end marker.\nRow $A$: $A \\to aA$ on $a$; $A \\to \\varepsilon$ on $b$ only.\nNo cell has two entries, so the grammar is LL(1). $M[S, b]$ holds $S \\to AbS$. The end marker is not in $\\text{FOLLOW}(A)$, so $M[A, \\text{\\textdollar}]$ is empty. Non-empty cells: 3 in row $S$ and 2 in row $A$, total 5."
+  },
+  {
+    "id": "cd-026",
+    "topic": "syntax-directed-translation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An S-attributed definition can always be evaluated",
+    "options": [
+      "only by a top-down parser",
+      "in a single bottom-up pass, for example during LR parsing",
+      "only after building a dependency graph and checking it for cycles",
+      "only if the grammar is LL(1)"
+    ],
+    "answer": 1,
+    "explanation": "S-attributed definitions use only synthesized attributes, so each node's attributes depend only on its children. A postorder traversal, which is exactly the order of reductions in an LR parser, evaluates them. They can never form a cycle, and they do not require an LL(1) grammar."
+  },
+  {
+    "id": "cd-027",
+    "topic": "syntax-directed-translation",
+    "type": "nat",
+    "marks": 2,
+    "q": "Consider the syntax-directed definition below. `num.lexval` is the integer value supplied by the scanner.\n\n```\nE -> E1 # T    { E.v = E1.v * T.v }\nE -> T         { E.v = T.v }\nT -> T1 & F    { T.v = T1.v - F.v }\nT -> F         { T.v = F.v }\nF -> num       { F.v = num.lexval }\n```\n\nWhat is $E.v$ at the root for the input `2 # 7 & 3 & 1 # 4`?",
+    "answer": { "min": 24, "max": 24 },
+    "explanation": "The operator `&` is produced at a lower level ($T$), so it binds tighter than `#`. Both rules are left recursive, so both operators are left associative.\nGroup: `2 # (7 & 3 & 1) # 4`.\n$T$ for `7 & 3 & 1` $= (7 - 3) - 1 = 3$.\n$E = (2 \\times 3) \\times 4 = 24$.\nA plain left-to-right reading would give $((2 \\times 7 - 3) - 1) \\times 4 = 40$, which is wrong."
+  },
+  {
+    "id": "cd-028",
+    "topic": "syntax-directed-translation",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A bottom-up (LR) parser uses the translation scheme below. Each action runs when its production is reduced.\n\n```\nS -> A B      { print 0 }\nA -> a A      { print 1 }\nA -> b        { print 2 }\nB -> c B      { print 3 }\nB -> d        { print 4 }\n```\n\nWhat is printed for the input `a a b c c d`?",
+    "options": ["2114330", "1124330", "0112334", "2113340"],
+    "answer": 0,
+    "explanation": "The parser shifts `a a b`, then reduces $A \\to b$ (prints 2), $A \\to aA$ (1), $A \\to aA$ (1). The whole $A$ subtree is finished before `c` is shifted. Then it shifts `c c d` and reduces $B \\to d$ (4), $B \\to cB$ (3), $B \\to cB$ (3). Finally $S \\to AB$ prints 0. Output: `2114330`. Because $A$ and $B$ are right recursive, the innermost (rightmost) part is reduced first."
+  },
+  {
+    "id": "cd-029",
+    "topic": "syntax-directed-translation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Using the translation scheme\n\n```\nE -> E + T    { print '+' }\nE -> T\nT -> T * F    { print '*' }\nT -> F\nF -> id       { print id.name }\n```\n\nwhat is printed for the input `a * b + c * d`?",
+    "options": ["`ab*cd*+`", "`abcd**+`", "`+*ab*cd`", "`ab*c+d*`"],
+    "answer": 0,
+    "explanation": "All actions are at the right end, so they run in postorder of the parse tree. The tree is $(a * b) + (c * d)$ since `*` binds tighter. Postorder: `a`, `b`, `*`, `c`, `d`, `*`, `+`. This is the postfix form `ab*cd*+`."
+  },
+  {
+    "id": "cd-030",
+    "topic": "syntax-directed-translation",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about syntax-directed definitions are true?",
+    "options": [
+      "Every S-attributed definition is also L-attributed.",
+      "An L-attributed definition can be evaluated in one depth-first, left-to-right traversal of the parse tree.",
+      "In an L-attributed definition with production $A \\to X_1 X_2 X_3$, an inherited attribute of $X_1$ may depend on a synthesized attribute of $X_2$.",
+      "Attributes of terminal symbols are synthesized and are supplied by the lexical analyzer."
+    ],
+    "answer": [0, 1, 3],
+    "explanation": "Statement 1 is true: having no inherited attributes satisfies the L-attributed restriction trivially. Statement 2 is true: that is the defining property. Statement 3 is false: an inherited attribute of $X_i$ may use only the head's inherited attributes and symbols to its left, and $X_2$ is to the right of $X_1$. Statement 4 is true: terminals get values such as `lexval` from the scanner and have no inherited attributes."
+  },
+  {
+    "id": "cd-031",
+    "topic": "syntax-directed-translation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An inherited attribute of a nonterminal $B$ at a parse-tree node is computed from",
+    "options": [
+      "attributes of the children of that node only",
+      "attributes of the parent and siblings of that node, and of the node itself",
+      "the lexeme returned by the scanner only",
+      "attributes of nodes anywhere in the tree, with no restriction"
+    ],
+    "answer": 1,
+    "explanation": "By definition, an inherited attribute of $B$ is defined by a rule on the production where $B$ appears on the right side, so it uses attributes of the head (parent), of $B$'s siblings, and of $B$ itself. Synthesized attributes are the ones computed from children."
+  },
+  {
+    "id": "cd-032",
+    "topic": "syntax-directed-translation",
+    "type": "nat",
+    "marks": 2,
+    "q": "Consider the syntax-directed definition\n\n```\nN -> N1 D    { N.v = 3 * N1.v + D.v }\nN -> D       { N.v = D.v }\nD -> 0       { D.v = 0 }\nD -> 1       { D.v = 1 }\nD -> 2       { D.v = 2 }\n```\n\nWhat is $N.v$ at the root for the input `2101`?",
+    "answer": { "min": 64, "max": 64 },
+    "explanation": "The grammar is left recursive, so the leftmost digit is innermost and is combined first.\n`2` gives 2.\n`21` gives $3 \\times 2 + 1 = 7$.\n`210` gives $3 \\times 7 + 0 = 21$.\n`2101` gives $3 \\times 21 + 1 = 64$.\nThis is the base 3 value of 2101."
+  },
+  {
+    "id": "cd-033",
+    "topic": "syntax-directed-translation",
+    "type": "mcq",
+    "marks": 2,
+    "q": "For the production $P \\to Q\\,R\\,S$, where attributes ending in $i$ are inherited and those ending in $s$ are synthesized, which set of rules is L-attributed?",
+    "options": [
+      "$Q.i = P.i$, $R.i = Q.s$, $S.i = R.s + P.i$, $P.s = S.s$",
+      "$Q.i = P.i$, $R.i = S.i$, $S.i = Q.s$, $P.s = R.s$",
+      "$Q.i = P.s$, $R.i = Q.s$, $S.i = R.s$, $P.s = S.s$",
+      "$Q.i = P.i$, $R.i = Q.s$, $S.i = Q.s$, $Q.i = R.s$"
+    ],
+    "answer": 0,
+    "explanation": "Option 1: every inherited attribute uses only $P.i$ or symbols to its left, and $P.s$ is synthesized. Valid.\nOption 2: $R.i = S.i$ uses $S$, which is to the right of $R$.\nOption 3: $Q.i = P.s$ uses a synthesized attribute of the head, which is not allowed in an L-attributed definition.\nOption 4: $Q.i = R.s$ uses $R$, to the right of $Q$."
+  },
+  {
+    "id": "cd-034",
+    "topic": "syntax-directed-translation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For a given parse tree, the dependency graph of a syntax-directed definition contains a cycle. Which of the following is correct?",
+    "options": [
+      "The attributes can be evaluated in postorder.",
+      "The attributes can be evaluated in preorder.",
+      "There is no order in which all attributes on that tree can be evaluated.",
+      "The definition must be S-attributed."
+    ],
+    "answer": 2,
+    "explanation": "A valid evaluation order is a topological order of the dependency graph, and a graph with a cycle has no topological order. S-attributed definitions never produce cycles, so option 4 is also wrong."
+  },
+  {
+    "id": "cd-035",
+    "topic": "syntax-directed-translation",
+    "type": "nat",
+    "marks": 1,
+    "q": "For the definition\n\n```\nS -> a S1    { S.c = S1.c + 2 }\nS -> b       { S.c = 1 }\n```\n\nwhat is $S.c$ at the root for the input `aaab`?",
+    "answer": { "min": 7, "max": 7 },
+    "explanation": "The innermost $S$ derives `b` and has $c = 1$. Each of the three `a` levels adds 2: $1 + 2 + 2 + 2 = 7$."
+  },
+  {
+    "id": "cd-036",
+    "topic": "runtime-environments",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following is NOT normally stored in the activation record of a procedure call?",
+    "options": [
+      "The return address",
+      "The local variables of the call",
+      "The control link to the caller's activation record",
+      "The machine code of the called procedure"
+    ],
+    "answer": 3,
+    "explanation": "The code of a procedure is stored once in the code area and shared by all its activations. An activation record holds per-call data: parameters, return value, control and access links, saved machine status including the return address, locals and temporaries."
+  },
+  {
+    "id": "cd-037",
+    "topic": "runtime-environments",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider this program in a C-like language that supports both scoping rules:\n\n```\nint a = 4;\nint f() { return a + 1; }\nint g() { int a = 10; a = f() * 2; return a; }\nvoid main() { print(g() + f()); }\n```\n\nWhat is printed under static scoping and under dynamic scoping respectively? Assume `g()` is evaluated before `f()` in `main`.",
+    "options": ["15 and 27", "15 and 15", "27 and 15", "22 and 27"],
+    "answer": 0,
+    "explanation": "Static scoping: `a` in `f` is always the global, 4, so `f()` returns 5. In `g`, the local `a` becomes $5 \\times 2 = 10$, returned. Then `f()` in `main` returns 5. Total 15.\nDynamic scoping: when `g` calls `f`, the latest binding of `a` is `g`'s local, 10, so `f()` returns 11 and `g`'s `a` becomes 22. Back in `main`, `f()` sees the global 4 and returns 5. Total 27."
+  },
+  {
+    "id": "cd-038",
+    "topic": "runtime-environments",
+    "type": "nat",
+    "marks": 2,
+    "q": "What value is printed when the program below runs with call by reference?\n\n```\nvoid p(int x, int y) { x = x + y; y = x * 2; }\nvoid main() { int a = 3; p(a, a); print(a); }\n```",
+    "answer": { "min": 12, "max": 12 },
+    "explanation": "With call by reference, `x`, `y` and `a` all name the same cell.\n`x = x + y` gives $3 + 3 = 6$, so `a` is 6.\n`y = x * 2` gives $6 \\times 2 = 12$, so `a` is 12.\nPrinted value: 12. (Call by value would print 3.)"
+  },
+  {
+    "id": "cd-039",
+    "topic": "runtime-environments",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider\n\n```\nvoid q(int u, int v) { u = u + 1; v = v + 10; }\nvoid main() { int b = 1; q(b, b); print(b); }\n```\n\nWhat is printed under call by reference and under call by value-result (copy back from left to right, so `u` is copied first and `v` last)?",
+    "options": [
+      "12 and 11",
+      "12 and 12",
+      "11 and 2",
+      "2 and 11"
+    ],
+    "answer": 0,
+    "explanation": "Reference: `u` and `v` both alias `b`. `u = u + 1` makes `b` 2, then `v = v + 10` makes it 12.\nValue-result: `u` and `v` start as copies with value 1. `u` becomes 2 and `v` becomes 11, independently. On return, `b = u = 2`, then `b = v = 11`. Final value 11."
+  },
+  {
+    "id": "cd-040",
+    "topic": "runtime-environments",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about storage allocation are correct?",
+    "options": [
+      "If all local variables are allocated statically, recursive procedures cannot be supported correctly.",
+      "With stack allocation, a function that returns the address of one of its own local variables gives the caller a dangling pointer.",
+      "A language with recursion must allocate every local variable on the heap.",
+      "The control link in an activation record points to the record of the lexically enclosing procedure."
+    ],
+    "answer": [0, 1],
+    "explanation": "Statement 1 is true: a second activation would overwrite the fixed storage of the first. Statement 2 is true: the local's storage is popped on return. Statement 3 is false: a stack is enough for recursion. Statement 4 is false: the control link points to the caller; the access link points to the lexically enclosing procedure."
+  },
+  {
+    "id": "cd-041",
+    "topic": "runtime-environments",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a language with nested procedures and static scoping, which field of the activation record is followed to reach a non-local variable declared in an enclosing procedure?",
+    "options": ["Control link", "Access link", "Return address", "Saved stack pointer"],
+    "answer": 1,
+    "explanation": "The access (static) link points to the most recent activation of the lexically enclosing procedure. Following $d$ access links reaches a name declared $d$ nesting levels out. The control link follows the call chain, which is what dynamic scoping uses."
+  },
+  {
+    "id": "cd-042",
+    "topic": "runtime-environments",
+    "type": "nat",
+    "marks": 2,
+    "q": "What does the program below print under dynamic scoping? A parameter counts as a local declaration of its name. Assume the left operand of `+` is evaluated first.\n\n```\nint n = 2;\nint h() { return n * 3; }\nint k(int n) { return h() + n; }\nvoid main() { print(k(5) + h()); }\n```",
+    "answer": { "min": 26, "max": 26 },
+    "explanation": "In `k(5)`, the parameter `n` is 5. `h` is called from `k`, so under dynamic scoping `h` sees `k`'s `n = 5` and returns 15. `k` returns $15 + 5 = 20$.\nThen `main` calls `h` directly, which sees the global `n = 2` and returns 6.\nOutput: $20 + 6 = 26$. (Static scoping would give $(6 + 5) + 6 = 17$.)"
+  },
+  {
+    "id": "cd-043",
+    "topic": "intermediate-code",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Three-address code is generated for\n\n```\nx = (m - n) * (m - n) + (m - n) / k\n```\n\nfrom its DAG, so each distinct subexpression is computed once. Each instruction has at most one operator, and the result may be assigned directly to `x`. What is the minimum number of three-address instructions?",
+    "options": ["4", "5", "6", "7"],
+    "answer": 0,
+    "explanation": "The DAG has leaves $m, n, k$ and interior nodes $m - n$, $(m-n) * (m-n)$, $(m-n) / k$, and the final $+$. One instruction per interior node:\n```\nt1 = m - n\nt2 = t1 * t1\nt3 = t1 / k\nx  = t2 + t3\n```\nThat is 4 instructions. Without sharing, $m - n$ would be computed three times, giving 6."
+  },
+  {
+    "id": "cd-044",
+    "topic": "intermediate-code",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which intermediate representation allows an optimiser to reorder instructions by changing only a list of pointers, without rewriting references inside the instructions?",
+    "options": ["Quadruples", "Triples", "Indirect triples", "Postfix notation"],
+    "answer": 2,
+    "explanation": "Indirect triples keep the triples fixed and store a separate list of pointers giving the execution order. Moving an instruction means reordering the pointer list, while triples that refer to it by position stay valid. With plain triples, moving an instruction changes its position and breaks references."
+  },
+  {
+    "id": "cd-045",
+    "topic": "intermediate-code",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many basic blocks does the following three-address code contain?\n\n```\n1:  i = 1\n2:  j = 1\n3:  t1 = 5 * i\n4:  t2 = t1 + j\n5:  if t2 > 50 goto 8\n6:  j = j + 1\n7:  goto 3\n8:  i = i + 1\n9:  if i < 10 goto 2\n10: x = 0\n```",
+    "answer": { "min": 6, "max": 6 },
+    "explanation": "Leaders: instruction 1 (first); jump targets 8, 3 and 2; instructions right after jumps: 6 (after 5), 8 (after 7), 10 (after 9).\nDistinct leaders: 1, 2, 3, 6, 8, 10. Blocks: {1}, {2}, {3, 4, 5}, {6, 7}, {8, 9}, {10}. Total 6."
+  },
+  {
+    "id": "cd-046",
+    "topic": "intermediate-code",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many nodes (leaves plus interior nodes) are in the DAG built for this basic block? Leaves stand for the initial values of variables.\n\n```\na = b + c\nd = a - e\nb = b + c\ne = d - e\nf = a - e\n```",
+    "answer": { "min": 7, "max": 7 },
+    "explanation": "1. Leaves $b_0, c_0$; node $n_1 = b_0 + c_0$ labelled `a`.\n2. Leaf $e_0$; node $n_2 = n_1 - e_0$ labelled `d`.\n3. $b_0 + c_0$ already exists as $n_1$; attach label `b` to $n_1$. No new node.\n4. $n_3 = n_2 - e_0$ labelled `e`. This is new because its left child is $n_2$, not $n_1$.\n5. `a - e` is now $n_1 - n_3$ since `e` was redefined. New node $n_4$ labelled `f`.\nTotal: 3 leaves and 4 interior nodes, so 7."
+  },
+  {
+    "id": "cd-047",
+    "topic": "intermediate-code",
+    "type": "nat",
+    "marks": 2,
+    "q": "The straight-line code below is converted to static single assignment form. Count the distinct variable names in the SSA code, counting each version created by an assignment as one name, and each variable whose initial value is used before any assignment as one more name.\n\n```\nx = a + b\ny = x * 2\nx = y - a\na = x + y\ny = a * x\nz = y + a\n```",
+    "answer": { "min": 8, "max": 8 },
+    "explanation": "SSA form:\n```\nx1 = a0 + b0\ny1 = x1 * 2\nx2 = y1 - a0\na1 = x2 + y1\ny2 = a1 * x2\nz1 = y2 + a1\n```\nAssigned versions: x1, y1, x2, a1, y2, z1 (6). Incoming values: a0, b0 (2). Total 8. There are no merges, so no $\\phi$ functions."
+  },
+  {
+    "id": "cd-048",
+    "topic": "intermediate-code",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the postfix form of `a * (b - c) + d / e`?",
+    "options": [
+      "`a b c - * d e / +`",
+      "`a b * c - d e / +`",
+      "`a b c * - d e + /`",
+      "`+ * a - b c / d e`"
+    ],
+    "answer": 0,
+    "explanation": "The tree is $(a * (b - c)) + (d / e)$. Postorder: `a`, then `b c -`, then `*`, then `d e /`, then `+`. Result `a b c - * d e / +`. Option 4 is the prefix form."
+  },
+  {
+    "id": "cd-049",
+    "topic": "intermediate-code",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about intermediate representations are true?",
+    "options": [
+      "In SSA form, each variable name is the target of exactly one assignment in the program text.",
+      "Each triple has a separate field naming the temporary that holds its result.",
+      "The DAG of a basic block exposes common subexpressions within that block.",
+      "Moving an instruction to another position is harder with quadruples than with triples."
+    ],
+    "answer": [0, 2],
+    "explanation": "Statement 1 is the definition of SSA. Statement 2 is false: triples have no result field and are referred to by position. Statement 3 is true: identical $(op, l, r)$ nodes are shared. Statement 4 is false: quadruples name their results explicitly, so they are easier to move than triples."
+  },
+  {
+    "id": "cd-050",
+    "topic": "intermediate-code",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following is NOT a rule for identifying a leader of a basic block?",
+    "options": [
+      "The first instruction of the program",
+      "Any instruction that is the target of a jump",
+      "Any instruction immediately following a conditional or unconditional jump",
+      "Any instruction immediately before an unconditional jump"
+    ],
+    "answer": 3,
+    "explanation": "The three leader rules are the first instruction, jump targets, and instructions right after a jump. An instruction just before a jump simply belongs to the same block as the jump."
+  },
+  {
+    "id": "cd-051",
+    "topic": "optimization-dataflow",
+    "type": "nat",
+    "marks": 2,
+    "q": "Consider the control flow graph below. `print` and `return` read their operands.\n\n```\nB1: a = x + 1\n    b = 2                 -> B2\nB2: c = a + b\n    if c > y goto B4      -> B3, B4\nB3: a = c * 2\n    b = b - 1             -> B2\nB4: print(a)\n    return b + x\n```\n\nHow many variables are live at the exit of block B2?",
+    "answer": { "min": 5, "max": 5 },
+    "explanation": "use/def: B2 uses $\\{a, b, y\\}$, defines $c$. B3 uses $\\{b, c\\}$ (b is read before it is written), defines $\\{a, b\\}$. B4 uses $\\{a, b, x\\}$.\n$\\text{IN}[B4] = \\{a, b, x\\}$.\nIterating: $\\text{IN}[B2] = \\{a, b, y\\} \\cup (\\text{OUT}[B2] - \\{c\\})$ and $\\text{IN}[B3] = \\{b, c\\} \\cup (\\text{IN}[B2] - \\{a, b\\})$.\nFixpoint: $\\text{IN}[B2] = \\{a, b, x, y\\}$, $\\text{IN}[B3] = \\{b, c, x, y\\}$.\n$\\text{OUT}[B2] = \\text{IN}[B3] \\cup \\text{IN}[B4] = \\{a, b, c, x, y\\}$, which has 5 variables."
+  },
+  {
+    "id": "cd-052",
+    "topic": "optimization-dataflow",
+    "type": "nat",
+    "marks": 2,
+    "q": "All variables in the basic block below must be held in registers; constants are immediate operands. No variable is live after the `return`. An instruction may reuse, for its result, the register of an operand whose last use is that instruction. What is the minimum number of registers needed without spilling?\n\n```\na = 3\nb = a + 2\nc = a * b\nd = c - b\ne = d + a\nf = e * c\ng = f + d\nreturn g + b\n```",
+    "answer": { "min": 4, "max": 4 },
+    "explanation": "Live sets just before each instruction, working backward:\n`return g + b`: {g, b}\n`g = f + d`: {f, d, b}\n`f = e * c`: {e, c, d, b}\n`e = d + a`: {d, a, c, b}\n`d = c - b`: {c, b, a}\n`c = a * b`: {a, b}\n`b = a + 2`: {a}\nThe maximum is 4 (before `e = d + a` and before `f = e * c`). So 4 registers are necessary and sufficient."
+  },
+  {
+    "id": "cd-053",
+    "topic": "optimization-dataflow",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Live variable analysis is a",
+    "options": [
+      "forward analysis with union as the meet operator",
+      "forward analysis with intersection as the meet operator",
+      "backward analysis with union as the meet operator",
+      "backward analysis with intersection as the meet operator"
+    ],
+    "answer": 2,
+    "explanation": "A variable is live if it is used along some later path, so information flows from uses back toward definitions (backward), and one path is enough (union): $\\text{OUT}[B] = \\bigcup_{S} \\text{IN}[S]$."
+  },
+  {
+    "id": "cd-054",
+    "topic": "optimization-dataflow",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following correctly describe the direction and meet operator of a data flow analysis?",
+    "options": [
+      "Reaching definitions: forward, union",
+      "Available expressions: forward, union",
+      "Live variables: backward, union",
+      "Very busy expressions: forward, intersection"
+    ],
+    "answer": [0, 2],
+    "explanation": "Reaching definitions asks whether a definition reaches along some path: forward, union. Available expressions must hold on every path: forward, intersection, so option 2 is wrong. Live variables: backward, union. Very busy expressions are evaluated on every path from a point onward: backward, intersection, so option 4 is wrong."
+  },
+  {
+    "id": "cd-055",
+    "topic": "optimization-dataflow",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Global constant propagation with constant folding is applied to the code below, where `c` is read from input.\n\n```\nx = 4\ny = x * 2\nif (c) z = y + 1;\nelse   z = 9;\nw = z * x\n```\n\nWhat does the analysis conclude about `w` at the last statement?",
+    "options": [
+      "`w` is the constant 36",
+      "`w` is the constant 32",
+      "`w` is not a constant because `z` depends on `c`",
+      "`w` is the constant 40"
+    ],
+    "answer": 0,
+    "explanation": "`x = 4` and `y = 8` on every path. On the true branch `z = 8 + 1 = 9`; on the false branch `z = 9`. At the merge both values agree, so `z` is the constant 9. Then `w = 9 * 4 = 36`. The value of `c` does not matter because both branches give the same constant."
+  },
+  {
+    "id": "cd-056",
+    "topic": "optimization-dataflow",
+    "type": "mcq",
+    "marks": 2,
+    "q": "In the basic block below, which computations can be removed by common subexpression elimination (replaced by a copy of an earlier result)?\n\n```\np = x + y\nq = p * z\nx = x - 1\nr = x + y\ns = p * z\nu = x + y\n```",
+    "options": [
+      "`s` and `u` only",
+      "`r`, `s` and `u`",
+      "`r` and `u` only",
+      "`s` only"
+    ],
+    "answer": 0,
+    "explanation": "`r = x + y` is not redundant: `x` was changed after `p = x + y`, so that value of `x + y` is no longer available.\n`s = p * z` is redundant: neither `p` nor `z` changed since `q`. Replace with `s = q`.\n`u = x + y` is redundant with `r`, since `x` and `y` are unchanged after `r`. Replace with `u = r`."
+  },
+  {
+    "id": "cd-057",
+    "topic": "optimization-dataflow",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which data flow analysis directly tells the compiler that an assignment `t = a + b` can be deleted as dead code (assuming no side effects)?",
+    "options": [
+      "Reaching definitions",
+      "Available expressions",
+      "Live variable analysis",
+      "Constant propagation"
+    ],
+    "answer": 2,
+    "explanation": "The assignment is dead if `t` is not live immediately after it, meaning no path reaches a use of `t` before it is redefined. That is exactly what liveness computes."
+  },
+  {
+    "id": "cd-058",
+    "topic": "optimization-dataflow",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many variables are live at the entry of block B3 in the control flow graph below?\n\n```\nB1: i = 0\n    s = 0\n    k = a * 2              -> B2\nB2: if i >= n goto B4      -> B3, B4\nB3: t = a * i\n    s = s + t\n    i = i + 1              -> B2\nB4: return s + k\n```",
+    "answer": { "min": 5, "max": 5 },
+    "explanation": "B3 uses $a, i, s$ before defining them and defines $t, s, i$. Its successor B2 uses $i, n$ and leads to B4, which uses $s, k$.\nFixpoint: $\\text{IN}[B4] = \\{s, k\\}$; $\\text{IN}[B2] = \\{i, n\\} \\cup \\text{IN}[B3] \\cup \\{s, k\\}$; $\\text{IN}[B3] = \\{a, i, s\\} \\cup (\\text{IN}[B2] - \\{t, s, i\\})$.\nThis settles at $\\text{IN}[B3] = \\{a, i, k, n, s\\}$. `n` and `k` are live because of the loop back to B2 and the later use in B4. `t` is not live at entry, since it is written before being read. Answer 5."
+  },
+  {
+    "id": "cd-059",
+    "topic": "optimization-dataflow",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following is NOT a local optimisation (one that can be done looking at a single basic block)?",
+    "options": [
+      "Constant folding",
+      "Algebraic simplification such as replacing `x * 1` with `x`",
+      "Loop-invariant code motion",
+      "Eliminating a repeated `a * b` inside one block"
+    ],
+    "answer": 2,
+    "explanation": "Moving loop-invariant code needs the loop structure of the control flow graph and placement in a preheader block, so it is a global (loop) optimisation. The others work within one block."
+  },
+  {
+    "id": "cd-060",
+    "topic": "optimization-dataflow",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which pair of equations defines live variable analysis for a block $B$, where $\\text{use}[B]$ is the set of variables read in $B$ before being assigned in $B$ and $\\text{def}[B]$ is the set of variables assigned in $B$?",
+    "options": [
+      "$\\text{IN}[B] = \\text{use}[B] \\cup (\\text{OUT}[B] - \\text{def}[B])$ and $\\text{OUT}[B] = \\bigcup_{S \\in \\text{succ}(B)} \\text{IN}[S]$",
+      "$\\text{OUT}[B] = \\text{use}[B] \\cup (\\text{IN}[B] - \\text{def}[B])$ and $\\text{IN}[B] = \\bigcup_{P \\in \\text{pred}(B)} \\text{OUT}[P]$",
+      "$\\text{IN}[B] = \\text{def}[B] \\cup (\\text{OUT}[B] - \\text{use}[B])$ and $\\text{OUT}[B] = \\bigcup_{S \\in \\text{succ}(B)} \\text{IN}[S]$",
+      "$\\text{IN}[B] = \\text{use}[B] \\cup (\\text{OUT}[B] - \\text{def}[B])$ and $\\text{OUT}[B] = \\bigcap_{S \\in \\text{succ}(B)} \\text{IN}[S]$"
+    ],
+    "answer": 0,
+    "explanation": "Liveness flows backward: a variable is live entering $B$ if $B$ reads it first, or if it is live leaving $B$ and $B$ does not overwrite it. Leaving $B$, a variable is live if it is live entering any successor, so the meet is union over successors. Option 2 is a forward form, option 3 swaps use and def, and option 4 uses intersection."
+  }
+]

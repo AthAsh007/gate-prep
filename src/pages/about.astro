@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  url: "https://gate.athash.in/about/",
+  mainEntity: {
+    "@type": "Person",
+    name: "Atharva Ashtekar",
+    url: "https://athash.in/",
+    jobTitle: "AI / ML, Automation and Product Engineer",
+    sameAs: ["https://github.com/AthAsh007", "https://www.linkedin.com/in/atharva-ashtekar-315288240/"],
+  },
+};
+---
+<Base title="About" description="Who builds GATE 2027 CS Prep and how the notes and tests are made.">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <article class="page">
+    <p class="eyebrow">About</p>
+    <h1>About this site</h1>
+    <p class="lead">GATE 2027 CS Prep is a free study site for the GATE Computer Science and Information Technology paper. It covers the full 2027 syllabus published by IIT Madras.</p>
+
+    <h2>Who builds it</h2>
+    <p>I'm Atharva Ashtekar, a software engineer working on AI, automation and product engineering. I built this site to prepare for GATE 2027 myself, and kept it public so anyone else preparing can use it.</p>
+    <ul class="link-list">
+      <li><a href="https://athash.in/">Portfolio <span>athash.in</span></a></li>
+      <li><a href="https://github.com/AthAsh007" rel="me">GitHub <span>@AthAsh007</span></a></li>
+      <li><a href="https://www.linkedin.com/in/atharva-ashtekar-315288240/" rel="me">LinkedIn <span>Atharva Ashtekar</span></a></li>
+    </ul>
+
+    <h2>What's here</h2>
+    <ul>
+      <li><b>Notes:</b> one page for every topic in the syllabus, with definitions, formulas, worked examples, common traps and a revision list.</li>
+      <li><b>Tests:</b> full-length mocks in the GATE pattern (65 questions, 100 marks, 180 minutes) and one test per subject, with a full solution for every question.</li>
+      <li><b>Progress:</b> topics you mark as done, your reading position and your test scores are saved in your browser. There are no accounts.</li>
+    </ul>
+
+    <h2>How the material is made</h2>
+    <p>The notes and questions are original. Questions follow the style and difficulty of past GATE CS papers, but they are not copies of any past paper or coaching material. Every topic page links to free sources for further reading. For official past papers and answer keys, use the GATE 2027 website at gate2027.iitm.ac.in.</p>
+
+    <h2>Found a mistake?</h2>
+    <p>If an answer or explanation looks wrong, send the test name and question number through the contact section on <a href="https://athash.in/#contact">athash.in</a>, or open an issue on GitHub.</p>
+  </article>
+</Base>

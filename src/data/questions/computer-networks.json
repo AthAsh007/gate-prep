@@ -1,0 +1,873 @@
+[
+  {
+    "id": "cn-001",
+    "topic": "layering-switching",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In the TCP/IP model, which layer is responsible for delivering data to the correct process on a host, using port numbers?",
+    "options": [
+      "Transport layer",
+      "Application layer",
+      "Link layer",
+      "Network layer"
+    ],
+    "answer": 0,
+    "explanation": "The network layer delivers a datagram to a host (identified by IP address). The transport layer (TCP or UDP) then demultiplexes to the right process using the 16-bit source and destination port numbers. So the answer is the transport layer."
+  },
+  {
+    "id": "cn-002",
+    "topic": "layering-switching",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A router sends a 1500-byte packet onto a 10 Mbps link (1 Mbps = $10^6$ bps). What is the transmission delay of the packet?",
+    "options": [
+      "12 ms",
+      "150 ms",
+      "0.12 ms",
+      "1.2 ms"
+    ],
+    "answer": 3,
+    "explanation": "Transmission delay $= L/R = (1500 \\times 8)/(10 \\times 10^6) = 12000/10^7 = 1.2 \\times 10^{-3}$ s $= 1.2$ ms. Distance and signal speed do not matter here; they decide propagation delay."
+  },
+  {
+    "id": "cn-003",
+    "topic": "layering-switching",
+    "type": "nat",
+    "marks": 2,
+    "q": "Host A sends one packet of 1000 bytes to host B through two store-and-forward routers, so the path has 3 links. Every link is 8 Mbps ($10^6$ bps per Mbps) with a propagation delay of 2 ms. Ignore queuing and processing delays. The end-to-end delay of the packet, in milliseconds, is ______.",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "Per link transmission delay $= 8000/(8 \\times 10^6) = 1$ ms. With store-and-forward, each of the 3 links adds one transmission delay plus one propagation delay.\n\nTotal $= 3 \\times (1 + 2) = 9$ ms."
+  },
+  {
+    "id": "cn-004",
+    "topic": "layering-switching",
+    "type": "nat",
+    "marks": 2,
+    "q": "A message is split into 10 packets of 1000 bytes each and sent over a path of 3 links (2 store-and-forward routers). Each link is 1 Mbps ($10^6$ bps). Ignore propagation, queuing and processing delays and headers. The time (in ms) from when the first bit leaves the source until the last packet is fully received at the destination is ______.",
+    "answer": {
+      "min": 96,
+      "max": 96
+    },
+    "explanation": "Per-packet transmission time $T = 8000/10^6 = 8$ ms.\n\nWith pipelining, the first packet reaches the destination after $3T$. After that, one more packet finishes every $T$. So total $= (N + h - 1)T = (10 + 3 - 1) \\times 8 = 96$ ms, where $N = 10$ packets and $h = 3$ links."
+  },
+  {
+    "id": "cn-005",
+    "topic": "layering-switching",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which statement about circuit switching and datagram packet switching is correct?",
+    "options": [
+      "Circuit switching shares link capacity on demand, so idle users free bandwidth for others",
+      "In circuit switching, resources are reserved for the whole call, so there is no queuing delay at switches once the circuit is set up",
+      "Datagram packet switching needs a connection setup phase before any data moves",
+      "Datagram packet switching guarantees in-order delivery"
+    ],
+    "answer": 1,
+    "explanation": "Circuit switching reserves a fixed share of every link (a TDM slot or FDM band) for the call. Data then flows at a constant rate with no queuing. Option A describes packet switching (statistical multiplexing). Datagrams need no setup phase and can arrive out of order because each is routed independently."
+  },
+  {
+    "id": "cn-006",
+    "topic": "layering-switching",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A link has bandwidth 100 Mbps and one-way propagation delay 20 ms. How many bytes can be in flight on the link at one time (the bandwidth-delay product)? Take 1 KB = 1000 bytes.",
+    "options": [
+      "2000 KB",
+      "25 KB",
+      "250 KB",
+      "500 KB"
+    ],
+    "answer": 2,
+    "explanation": "Bits in flight $= R \\times T_p = 100 \\times 10^6 \\times 0.02 = 2 \\times 10^6$ bits $= 250000$ bytes $= 250$ KB. Using RTT instead of one-way delay would give 500 KB, which is the amount a sender must keep unacknowledged to fill the pipe, not what fits on the link."
+  },
+  {
+    "id": "cn-007",
+    "topic": "layering-switching",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following are true for a virtual circuit packet-switched network?",
+    "options": [
+      "A connection setup phase establishes the path before data packets flow",
+      "Each data packet carries the full destination address",
+      "Packets of one connection follow the same path and arrive in order",
+      "The virtual circuit identifier carried by a packet can change at each switch"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "A: true, signalling sets up the path and per-switch state first.\n\nB: false, data packets carry only a short VC number. The full address is used only in the setup message.\n\nC: true, all packets of the circuit use the fixed path, so order is preserved.\n\nD: true, VC numbers are local to a link. Each switch rewrites the incoming VC number to the outgoing one using its table."
+  },
+  {
+    "id": "cn-008",
+    "topic": "layering-switching",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 1.536 Mbps link is shared by TDM into 24 equal slots. A circuit takes 500 ms to set up and then uses one slot. How long does it take to send a 640,000-bit file after the request is made?",
+    "options": [
+      "0.92 s",
+      "10 s",
+      "10.5 s",
+      "11 s"
+    ],
+    "answer": 2,
+    "explanation": "Rate of one slot $= 1.536 \\times 10^6 / 24 = 64000$ bps.\n\nTransfer time $= 640000 / 64000 = 10$ s. Adding the 0.5 s setup gives $10.5$ s. Option A wrongly uses the full link rate."
+  },
+  {
+    "id": "cn-009",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The data bits 1110010101 are sent using CRC with generator polynomial $x^4 + x + 1$. Which bits are appended to the data?",
+    "options": [
+      "0110",
+      "1001",
+      "0011",
+      "1110"
+    ],
+    "answer": 0,
+    "explanation": "Generator $= 10011$ (degree 4), so append four 0s: 11100101010000. Divide by 10011 using XOR:\n\n- XOR at bit 0: 01111101010000\n- XOR at bit 1: 00110001010000\n- XOR at bit 2: 00010111010000\n- XOR at bit 3: 00000100010000\n- XOR at bit 5: 00000000100000\n- XOR at bit 8: 00000000000110\n\nThe last 4 bits are the remainder: 0110. The transmitted frame is 11100101010110."
+  },
+  {
+    "id": "cn-010",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A CRC generator $G(x)$ is guaranteed to detect every error pattern with an odd number of flipped bits when:",
+    "options": [
+      "$G(x)$ has degree at least 16",
+      "The coefficient of $x^0$ in $G(x)$ is 0",
+      "$G(x)$ has an odd number of terms",
+      "$G(x)$ has $(x + 1)$ as a factor"
+    ],
+    "answer": 3,
+    "explanation": "If $(x+1)$ divides $G(x)$ and $G(x)$ divides the error polynomial $E(x)$, then $E(1) = 0$, so $E(x)$ has an even number of terms. Hence every error with an odd number of bit flips leaves a nonzero remainder and is detected."
+  },
+  {
+    "id": "cn-011",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A block code has minimum Hamming distance 7. Which pair gives the guaranteed number of detectable errors and correctable errors?",
+    "options": [
+      "Detect 3, correct 6",
+      "Detect 7, correct 3",
+      "Detect 6, correct 3",
+      "Detect 6, correct 4"
+    ],
+    "answer": 2,
+    "explanation": "To detect $s$ errors you need $d_{min} \\ge s + 1$, so $s = 6$. To correct $t$ errors you need $d_{min} \\ge 2t + 1$, so $t = \\lfloor (7-1)/2 \\rfloor = 3$."
+  },
+  {
+    "id": "cn-012",
+    "topic": "data-link-layer",
+    "type": "nat",
+    "marks": 1,
+    "q": "A Hamming code is used to correct single-bit errors in 20-bit data words. The minimum number of check bits needed is ______.",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "Need the smallest $r$ with $2^r \\ge m + r + 1$ where $m = 20$.\n\n$r = 4$: $16 \\ge 25$ fails. $r = 5$: $32 \\ge 26$ holds. So 5 check bits."
+  },
+  {
+    "id": "cn-013",
+    "topic": "data-link-layer",
+    "type": "nat",
+    "marks": 1,
+    "q": "Stop-and-wait ARQ runs on a 1 Mbps link ($10^6$ bps) with one-way propagation delay 12 ms. Frames are 1000 bytes. Ignore ACK transmission time and processing. The link utilisation, in percent, is ______.",
+    "answer": {
+      "min": 25,
+      "max": 25
+    },
+    "explanation": "$T_t = 8000/10^6 = 8$ ms, $T_p = 12$ ms.\n\nUtilisation $= \\dfrac{T_t}{T_t + 2T_p} = \\dfrac{8}{8 + 24} = 0.25$, which is 25 percent."
+  },
+  {
+    "id": "cn-014",
+    "topic": "data-link-layer",
+    "type": "msq",
+    "marks": 2,
+    "q": "A sliding window protocol uses 3-bit sequence numbers. Which of the following sender window sizes are safe (the receiver can never confuse a new frame with a retransmitted old frame)?",
+    "options": [
+      "Go-Back-N with window 7",
+      "Selective Repeat with window 4",
+      "Selective Repeat with window 5",
+      "Go-Back-N with window 8"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "With $k$-bit sequence numbers there are $2^k = 8$ numbers.\n\nGo-Back-N (receiver window 1) allows a sender window up to $2^k - 1 = 7$, so A is safe and D is not.\n\nSelective Repeat needs sender window + receiver window $\\le 2^k$; with equal windows that gives at most $2^{k-1} = 4$. So B is safe and C is not."
+  },
+  {
+    "id": "cn-015",
+    "topic": "data-link-layer",
+    "type": "nat",
+    "marks": 2,
+    "q": "A Selective Repeat sender with window size 8 frames uses a 10 Mbps link ($10^6$ bps per Mbps) whose one-way propagation delay is 4 ms. Each frame is 1000 bytes. ACKs are tiny (ignore their transmission time) and there are no errors. The maximum achievable throughput in Mbps (round to 2 decimal places) is ______.",
+    "answer": {
+      "min": 7.25,
+      "max": 7.29
+    },
+    "explanation": "$T_t = 8000/10^7 = 0.8$ ms. A cycle from the first frame of a window to its ACK is $T_t + 2T_p = 0.8 + 8 = 8.8$ ms.\n\nThe window of 8 frames takes $8 \\times 0.8 = 6.4$ ms $< 8.8$ ms, so the sender stalls and the window is the limit.\n\nThroughput $= \\dfrac{8 \\times 8000 \\text{ bits}}{8.8 \\text{ ms}} \\approx 7.27$ Mbps. (Utilisation $= 6.4/8.8 \\approx 72.7$ percent.)"
+  },
+  {
+    "id": "cn-016",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A Go-Back-N protocol uses $k$-bit sequence numbers. The largest sender window that works correctly is:",
+    "options": [
+      "$2^{k-1}$",
+      "$2^k - 1$",
+      "$2^k$",
+      "$2^k + 1$"
+    ],
+    "answer": 1,
+    "explanation": "If the window were $2^k$, a full window of lost ACKs would make the receiver accept retransmitted frames as new ones because the sequence numbers wrap to the same values. With $2^k - 1$ the next expected number is never inside the old window."
+  },
+  {
+    "id": "cn-017",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The maximum throughput of pure ALOHA, as a fraction of channel capacity, is closest to:",
+    "options": [
+      "0.184",
+      "0.368",
+      "0.5",
+      "0.092"
+    ],
+    "answer": 0,
+    "explanation": "Pure ALOHA throughput is $S = Ge^{-2G}$, maximised at $G = 0.5$ giving $S = 1/(2e) \\approx 0.184$. Slotted ALOHA has $S = Ge^{-G}$, maximum $1/e \\approx 0.368$ at $G = 1$."
+  },
+  {
+    "id": "cn-018",
+    "topic": "data-link-layer",
+    "type": "nat",
+    "marks": 2,
+    "q": "In a slotted ALOHA network, 10 stations share a channel. In every slot each station transmits independently with probability 0.1. The probability that a given slot carries a successful transmission (exactly one station transmits) is ______ (round to 3 decimal places).",
+    "answer": {
+      "min": 0.386,
+      "max": 0.388
+    },
+    "explanation": "Success means exactly one of the $N = 10$ stations transmits:\n\n$$P = N p (1-p)^{N-1} = 10 \\times 0.1 \\times 0.9^9$$\n\n$0.9^9 \\approx 0.38742$, so $P \\approx 0.387$."
+  },
+  {
+    "id": "cn-019",
+    "topic": "data-link-layer",
+    "type": "nat",
+    "marks": 2,
+    "q": "A CSMA/CD network runs at 1 Gbps ($10^9$ bps) over a 2 km cable with signal speed $2 \\times 10^8$ m/s. Ignoring repeaters and jam time, the minimum frame size needed to detect collisions, in bytes, is ______.",
+    "answer": {
+      "min": 2500,
+      "max": 2500
+    },
+    "explanation": "$T_p = 2000 / (2 \\times 10^8) = 10\\ \\mu$s.\n\nA sender must still be transmitting when the collision signal returns, so $T_t \\ge 2T_p = 20\\ \\mu$s.\n\n$L_{min} = 2T_p \\times R = 20 \\times 10^{-6} \\times 10^9 = 20000$ bits $= 2500$ bytes."
+  },
+  {
+    "id": "cn-020",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In classic Ethernet (IEEE 802.3), the minimum frame length measured from destination address through the CRC field, excluding preamble and start delimiter, is:",
+    "options": [
+      "72 bytes",
+      "1518 bytes",
+      "46 bytes",
+      "64 bytes"
+    ],
+    "answer": 3,
+    "explanation": "Header (6 + 6 + 2 = 14 bytes) + minimum payload (46 bytes) + CRC (4 bytes) $= 64$ bytes. 46 is the minimum payload; 1518 is the maximum frame; 72 adds the 8-byte preamble and SFD."
+  },
+  {
+    "id": "cn-021",
+    "topic": "data-link-layer",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about error detection are true?",
+    "options": [
+      "Two-dimensional parity detects every 4-bit error",
+      "A single even-parity bit detects every error that flips an odd number of bits",
+      "The Internet checksum is the one's complement of the one's complement sum of 16-bit words",
+      "A CRC with a degree-$r$ generator whose $x^0$ coefficient is 1 detects every burst error of length at most $r$"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "A: false, four errors at the corners of a rectangle leave every row and column parity unchanged.\n\nB: true, an odd number of flips changes the parity.\n\nC: true, that is the definition used by IP, UDP and TCP.\n\nD: true, a burst of length $\\le r$ is $x^i B(x)$ with $\\deg B < r$, which $G(x)$ cannot divide when $G$ has degree $r$ and a constant term."
+  },
+  {
+    "id": "cn-022",
+    "topic": "data-link-layer",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A sender computes the 16-bit Internet checksum over three words: 0x8F3C, 0x9A41 and 0x1234. What checksum value is sent?",
+    "options": [
+      "0x3BB3",
+      "0x3BB2",
+      "0xC44D",
+      "0xC44C"
+    ],
+    "answer": 2,
+    "explanation": "Add with end-around carry:\n\n0x8F3C + 0x9A41 = 0x1297D. Fold the carry: 0x297D + 0x1 = 0x297E.\n\n0x297E + 0x1234 = 0x3BB2 (no carry).\n\nChecksum = one's complement of 0x3BB2 = 0xFFFF - 0x3BB2 = 0xC44D."
+  },
+  {
+    "id": "cn-023",
+    "topic": "data-link-layer",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which statements about Ethernet MAC addresses are true?",
+    "options": [
+      "A MAC address is 48 bits long",
+      "FF:FF:FF:FF:FF:FF is the broadcast address",
+      "If the least significant bit of the first byte is 1, the address is a group (multicast) address",
+      "A host's MAC address changes when it moves to a different IP subnet"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A, B and C are true. D is false: the MAC address is fixed to the interface (burned in) and does not depend on the network; the IP address is what changes when a host moves."
+  },
+  {
+    "id": "cn-024",
+    "topic": "data-link-layer",
+    "type": "nat",
+    "marks": 1,
+    "q": "HDLC-style bit stuffing inserts a 0 after every run of five consecutive 1s in the payload. How many bits are stuffed into the payload 0111111011111110111111?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "Runs of 1s: six, then seven, then six. Each run of length 5 to 9 gets one stuffed 0 (after its fifth 1, and the counter restarts). So $1 + 1 + 1 = 3$ stuffed bits."
+  },
+  {
+    "id": "cn-025",
+    "topic": "routing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In link state routing, each router:",
+    "options": [
+      "Sends its full routing table only to its neighbours",
+      "Floods information about its own links to all routers and runs Dijkstra's algorithm on the resulting map",
+      "Uses Bellman-Ford with vectors received from neighbours",
+      "Learns routes only from the default gateway"
+    ],
+    "answer": 1,
+    "explanation": "Link state routers flood link state packets describing their directly attached links. Every router builds the same topology map and runs Dijkstra's shortest path algorithm. Option A and C describe distance vector routing."
+  },
+  {
+    "id": "cn-026",
+    "topic": "routing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Router C runs distance vector routing. Its neighbours and link costs are B (6), D (3) and E (5). It receives these vectors (distances to A, B, D, E, F):\n\n- From B: (5, 0, 7, 2, 4)\n- From D: (9, 7, 0, 4, 6)\n- From E: (3, 2, 4, 0, 1)\n\nWhat is C's new distance vector to (A, B, D, E, F)?",
+    "options": [
+      "(8, 6, 3, 5, 6)",
+      "(11, 6, 3, 7, 9)",
+      "(8, 7, 3, 5, 6)",
+      "(12, 6, 3, 5, 9)"
+    ],
+    "answer": 0,
+    "explanation": "Use $D_C(y) = \\min_v \\{c(C,v) + D_v(y)\\}$.\n\n- A: min(6+5, 3+9, 5+3) = 8 via E\n- B: min(6+0, 3+7, 5+2) = 6 via B\n- D: min(6+7, 3+0, 5+4) = 3 via D\n- E: min(6+2, 3+4, 5+0) = 5 via E\n- F: min(6+4, 3+6, 5+1) = 6 via E\n\nResult: (8, 6, 3, 5, 6)."
+  },
+  {
+    "id": "cn-027",
+    "topic": "routing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about distance vector routing are true?",
+    "options": [
+      "Split horizon with poisoned reverse removes count to infinity in every topology",
+      "Good news (a cost decrease) spreads quickly but bad news (a link failure) can spread slowly",
+      "With split horizon, a router does not advertise a route back over the interface it learned it from",
+      "Using a small value such as 16 for infinity bounds how long count to infinity can last"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "A: false, poisoned reverse fixes loops between two routers but loops of three or more routers can still count to infinity.\n\nB: true, that is the count to infinity behaviour.\n\nC: true, that is the definition of split horizon.\n\nD: true, RIP uses 16 as infinity so counting stops after a bounded number of exchanges."
+  },
+  {
+    "id": "cn-028",
+    "topic": "routing",
+    "type": "nat",
+    "marks": 2,
+    "q": "An undirected network has these link costs: S-A 4, S-B 1, B-A 2, A-C 5, B-C 8, B-D 10, C-D 2, C-T 6, D-T 3. The least-cost path cost from S to T is ______.",
+    "answer": {
+      "min": 13,
+      "max": 13
+    },
+    "explanation": "Run Dijkstra from S.\n\n- Finalise S (0). Tentative: A 4, B 1.\n- Finalise B (1). A becomes 3, C 9, D 11.\n- Finalise A (3). C becomes 8.\n- Finalise C (8). D becomes 10, T 14.\n- Finalise D (10). T becomes 13.\n- Finalise T (13).\n\nPath S-B-A-C-D-T with cost $1+2+5+2+3 = 13$."
+  },
+  {
+    "id": "cn-029",
+    "topic": "routing",
+    "type": "nat",
+    "marks": 2,
+    "q": "Three routers form a line A - B - C with both links of cost 1, and distance vector routing has converged (B's distance to A is 1, C's is 2). The link A-B fails. B immediately recomputes its distance to A using C's last advertised distance (this is B's first update). After that, C and B alternate: C updates using B's latest value, then B updates using C's latest value, and so on. No split horizon is used. What is B's distance to A after B's 4th update?",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "B's only remaining neighbour is C (cost 1), and C's only neighbour is B.\n\n- B update 1: $1 + 2 = 3$\n- C: $3 + 1 = 4$; B update 2: $4 + 1 = 5$\n- C: 6; B update 3: 7\n- C: 8; B update 4: 9\n\nB's distance climbs by 2 per round: count to infinity."
+  },
+  {
+    "id": "cn-030",
+    "topic": "routing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Match each protocol with its routing algorithm class: RIP, OSPF, BGP.",
+    "options": [
+      "RIP: path vector, OSPF: link state, BGP: distance vector",
+      "RIP: distance vector, OSPF: path vector, BGP: link state",
+      "RIP: link state, OSPF: distance vector, BGP: path vector",
+      "RIP: distance vector, OSPF: link state, BGP: path vector"
+    ],
+    "answer": 3,
+    "explanation": "RIP is a distance vector protocol (hop count, infinity 16). OSPF is link state (flooding plus Dijkstra). BGP between autonomous systems is a path vector protocol: it carries the full AS path to avoid loops."
+  },
+  {
+    "id": "cn-031",
+    "topic": "routing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Using the network S-A 4, S-B 1, B-A 2, A-C 5, B-C 8, B-D 10, C-D 2, C-T 6, D-T 3 (undirected), Dijkstra's algorithm is run from S. In what order are the nodes added to the set of finalised nodes?",
+    "options": [
+      "S, B, A, D, C, T",
+      "S, B, C, A, D, T",
+      "S, B, A, C, D, T",
+      "S, A, B, C, D, T"
+    ],
+    "answer": 2,
+    "explanation": "Each step picks the smallest tentative distance: S (0), B (1), then A (3 via B), then C (8), then D (10 via C, not 11 via B), then T (13). Order: S, B, A, C, D, T."
+  },
+  {
+    "id": "cn-032",
+    "topic": "ipv4",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many addresses can be assigned to hosts in a /27 subnet?",
+    "options": [
+      "27",
+      "30",
+      "32",
+      "62"
+    ],
+    "answer": 1,
+    "explanation": "Host bits $= 32 - 27 = 5$, giving $2^5 = 32$ addresses. Remove the network address and the broadcast address: $32 - 2 = 30$."
+  },
+  {
+    "id": "cn-033",
+    "topic": "ipv4",
+    "type": "nat",
+    "marks": 2,
+    "q": "An IPv4 datagram of total length 4020 bytes (20-byte header, no options) must cross a link with MTU 1500 bytes. Each fragment carries a 20-byte header. The fragment offset field value of the third fragment is ______.",
+    "answer": {
+      "min": 370,
+      "max": 370
+    },
+    "explanation": "Data in the datagram $= 4000$ bytes. Max data per fragment $= 1500 - 20 = 1480$ (a multiple of 8, so usable as is).\n\nFragments carry 1480, 1480 and 1040 data bytes. The third starts at byte $2 \\times 1480 = 2960$.\n\nOffset is in 8-byte units: $2960/8 = 370$."
+  },
+  {
+    "id": "cn-034",
+    "topic": "ipv4",
+    "type": "nat",
+    "marks": 2,
+    "q": "A host sends a datagram carrying 5000 bytes of data (20-byte IP header) over a network whose MTU is 620 bytes. Every fragment has a 20-byte header. The value of the total length field in the last fragment, in bytes, is ______.",
+    "answer": {
+      "min": 220,
+      "max": 220
+    },
+    "explanation": "Max data per fragment $= 620 - 20 = 600$, which is a multiple of 8.\n\nNumber of fragments $= \\lceil 5000/600 \\rceil = 9$. The first 8 carry $8 \\times 600 = 4800$ bytes, so the last carries $200$ bytes of data.\n\nTotal length $= 200 + 20 = 220$ bytes. (Its offset is $4800/8 = 600$ and MF = 0.)"
+  },
+  {
+    "id": "cn-035",
+    "topic": "ipv4",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A router has this forwarding table:\n\n| Prefix | Next hop |\n|---|---|\n| 131.40.0.0/16 | R1 |\n| 131.40.64.0/18 | R2 |\n| 131.40.96.0/19 | R3 |\n| 131.40.100.0/22 | R4 |\n| default | R5 |\n\nWhere is a packet for 131.40.104.5 forwarded?",
+    "options": [
+      "R3",
+      "R4",
+      "R1",
+      "R2"
+    ],
+    "answer": 0,
+    "explanation": "Third octet 104 = 01101000.\n\n- /16: first two octets match, yes.\n- /18: 64 = 01000000, compare top 2 bits of the third octet: 01 = 01, yes.\n- /19: 96 = 01100000, top 3 bits: 011 = 011, yes.\n- /22: 100 = 01100100, top 6 bits: 011010 vs 011001, no (the /22 covers 100 to 103 only).\n\nLongest match is the /19, so R3."
+  },
+  {
+    "id": "cn-036",
+    "topic": "ipv4",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the directed broadcast address of the subnet that contains 172.16.45.130/26?",
+    "options": [
+      "172.16.45.255",
+      "172.16.45.159",
+      "172.16.45.127",
+      "172.16.45.191"
+    ],
+    "answer": 3,
+    "explanation": "A /26 has blocks of 64 in the last octet: 0, 64, 128, 192. 130 falls in the block 128 to 191. Network 172.16.45.128, broadcast 172.16.45.191."
+  },
+  {
+    "id": "cn-037",
+    "topic": "ipv4",
+    "type": "nat",
+    "marks": 1,
+    "q": "An ISP wants to advertise the eight contiguous blocks 200.10.64.0/24 through 200.10.71.0/24 as a single aggregated route. The prefix length of that aggregate is ______.",
+    "answer": {
+      "min": 21,
+      "max": 21
+    },
+    "explanation": "Eight /24 blocks $= 2^3$ blocks, so 3 bits are freed: $24 - 3 = 21$. The blocks are aligned because 64 is a multiple of 8 (64 = 01000000, 71 = 01000111 share the first 5 bits of the third octet). Aggregate: 200.10.64.0/21."
+  },
+  {
+    "id": "cn-038",
+    "topic": "ipv4",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about the IPv4 header are true?",
+    "options": [
+      "The header length field counts 4-byte words, so a value of 5 means 20 bytes",
+      "The fragment offset field is measured in units of 8 bytes",
+      "The header checksum covers both the header and the payload",
+      "Every router must recompute the header checksum because TTL changes"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "A: true, HLEN is in 32-bit words (range 5 to 15, so 20 to 60 bytes).\n\nB: true, the 13-bit offset is in 8-byte units, so every fragment except the last carries a multiple of 8 data bytes.\n\nC: false, the IPv4 checksum covers only the header; transport protocols check their own data.\n\nD: true, TTL is decremented at every hop, so the checksum must be updated."
+  },
+  {
+    "id": "cn-039",
+    "topic": "ipv4",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A home router using NAPT (port-based NAT) forwards a packet from 192.168.1.20:5000 to a web server. What does it change in the outgoing packet?",
+    "options": [
+      "The destination IP address and destination port",
+      "Only the destination IP address",
+      "The source IP address and usually the source port",
+      "Only the TTL"
+    ],
+    "answer": 2,
+    "explanation": "NAPT replaces the private source address with the router's public address and maps the source port to a free port, recording the pair in its translation table. Replies to that public port are translated back. (TTL is decremented as by any router, but that is not the NAT step.)"
+  },
+  {
+    "id": "cn-040",
+    "topic": "ipv4",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The block 10.20.0.0/20 is divided into equal /26 subnets, numbered 0, 1, 2, ... in address order. What is the broadcast address of subnet number 37?",
+    "options": [
+      "10.20.9.127",
+      "10.20.37.63",
+      "10.20.9.191",
+      "10.20.9.63"
+    ],
+    "answer": 0,
+    "explanation": "Each /26 has 64 addresses. Subnet 37 starts $37 \\times 64 = 2368$ addresses after 10.20.0.0.\n\n$2368 = 9 \\times 256 + 64$, so the subnet is 10.20.9.64/26. Its broadcast is $64 + 63 = 127$: 10.20.9.127."
+  },
+  {
+    "id": "cn-041",
+    "topic": "ipv4",
+    "type": "nat",
+    "marks": 2,
+    "q": "A router receives an IPv4 fragment with HLEN = 5, total length = 1020, fragment offset = 100 and MF = 1. Bytes of the original payload are numbered from 0. The number of the last payload byte in this fragment is ______.",
+    "answer": {
+      "min": 1799,
+      "max": 1799
+    },
+    "explanation": "Header $= 5 \\times 4 = 20$ bytes, so data $= 1020 - 20 = 1000$ bytes.\n\nFirst byte $= 100 \\times 8 = 800$. Last byte $= 800 + 1000 - 1 = 1799$. MF = 1 says more fragments follow."
+  },
+  {
+    "id": "cn-042",
+    "topic": "ipv4",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of these addresses belongs to a private (RFC 1918) range?",
+    "options": [
+      "11.0.0.1",
+      "172.32.10.1",
+      "192.169.0.5",
+      "172.20.5.9"
+    ],
+    "answer": 3,
+    "explanation": "Private ranges are 10.0.0.0/8, 172.16.0.0/12 (172.16.0.0 to 172.31.255.255) and 192.168.0.0/16. Only 172.20.5.9 lies inside one of them. 172.32.x.x is just outside the /12."
+  },
+  {
+    "id": "cn-043",
+    "topic": "ipv4",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 4000-byte IPv4 datagram (20-byte header, 3980 bytes of data) first crosses a link with MTU 1500 bytes and then a link with MTU 576 bytes. Every fragment has a 20-byte header, and routers fragment as needed (no reassembly in between). The number of fragments that reach the destination is ______.",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "First link: max data $1480$. Fragments carry 1480, 1480 and 1020 bytes.\n\nSecond link: $576 - 20 = 556$, rounded down to a multiple of 8 gives 552.\n\n- 1480 splits into 552, 552, 376: 3 fragments\n- 1480: another 3\n- 1020 splits into 552, 468: 2\n\nTotal $= 3 + 3 + 2 = 8$."
+  },
+  {
+    "id": "cn-044",
+    "topic": "ipv4",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following can be assigned to a host in the subnet 192.168.5.64/27?",
+    "options": [
+      "192.168.5.64",
+      "192.168.5.65",
+      "192.168.5.94",
+      "192.168.5.95"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "The /27 block is 64 to 95. 64 is the network address and 95 is the broadcast address. Usable hosts are 65 to 94, so B and C."
+  },
+  {
+    "id": "cn-045",
+    "topic": "tcp",
+    "type": "nat",
+    "marks": 2,
+    "q": "A TCP sender starts with cwnd = 1 MSS and ssthresh = 32 MSS. In slow start cwnd doubles each RTT but never jumps past ssthresh (it is capped at ssthresh); at or above ssthresh it grows by 1 MSS per RTT. The windows used in transmission rounds 1, 2, 3, ... are therefore 1, 2, 4, .... A timeout occurs during round 10. On timeout, ssthresh is set to half the current cwnd and cwnd is reset to 1 MSS for the next round. The congestion window (in MSS) used in round 17 is ______.",
+    "answer": {
+      "min": 19,
+      "max": 19
+    },
+    "explanation": "Rounds 1 to 6: 1, 2, 4, 8, 16, 32 (reaches ssthresh).\n\nRounds 7 to 10: 33, 34, 35, 36. Timeout in round 10: ssthresh $= 36/2 = 18$, cwnd $= 1$.\n\nRounds 11 to 16: 1, 2, 4, 8, 16, 18 (capped at 18).\n\nRound 17: 19 (congestion avoidance)."
+  },
+  {
+    "id": "cn-046",
+    "topic": "tcp",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A TCP Reno sender receives three duplicate ACKs. What does it do?",
+    "options": [
+      "Sets cwnd to 1 MSS and re-enters slow start",
+      "Retransmits the missing segment, sets ssthresh to half of cwnd and continues from about the new ssthresh (fast recovery)",
+      "Doubles cwnd",
+      "Closes the connection"
+    ],
+    "answer": 1,
+    "explanation": "Three duplicate ACKs mean later segments are getting through, so the loss is mild. Reno does fast retransmit, sets ssthresh $= $ cwnd/2 and sets cwnd to ssthresh (plus 3 MSS during fast recovery) instead of dropping to 1. Option A is what happens on a timeout (and in Tahoe on any loss)."
+  },
+  {
+    "id": "cn-047",
+    "topic": "tcp",
+    "type": "nat",
+    "marks": 2,
+    "q": "A TCP connection without window scaling has a receive window of 65535 bytes, and the round-trip time is 20 ms. Assume an infinitely fast link and no losses. The maximum throughput in Mbps ($10^6$ bps), rounded to 2 decimal places, is ______.",
+    "answer": {
+      "min": 26.2,
+      "max": 26.23
+    },
+    "explanation": "At most one window can be sent per RTT.\n\nThroughput $= \\dfrac{65535 \\times 8}{0.02} = 26214000$ bps $\\approx 26.21$ Mbps."
+  },
+  {
+    "id": "cn-048",
+    "topic": "tcp",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A client sends SYN with sequence number 1000. After the handshake it sends three data segments of 500 bytes each, back to back. What is the sequence number of the third data segment?",
+    "options": [
+      "2501",
+      "2000",
+      "2001",
+      "2500"
+    ],
+    "answer": 2,
+    "explanation": "The SYN consumes one sequence number, so the first data byte is 1001. Segments start at 1001, 1501 and 2001. The third segment has sequence number 2001."
+  },
+  {
+    "id": "cn-049",
+    "topic": "tcp",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the correct order of socket calls on a TCP server before it can exchange data with a client?",
+    "options": [
+      "socket, listen, bind, accept",
+      "socket, bind, listen, accept",
+      "socket, connect, accept, listen",
+      "bind, socket, accept, listen"
+    ],
+    "answer": 1,
+    "explanation": "The server creates a socket, binds it to a local address and port, marks it passive with listen, then blocks in accept until a client connects. accept returns a new socket for that connection. The client calls socket then connect."
+  },
+  {
+    "id": "cn-050",
+    "topic": "tcp",
+    "type": "nat",
+    "marks": 2,
+    "q": "TCP uses 32-bit sequence numbers that count bytes. On a link sending at 1 Gbps ($10^9$ bps), how many seconds does it take for the sequence number space to wrap around? Round to 2 decimal places.",
+    "answer": {
+      "min": 34.3,
+      "max": 34.4
+    },
+    "explanation": "Sequence space $= 2^{32}$ bytes $= 2^{32} \\times 8$ bits $\\approx 3.436 \\times 10^{10}$ bits.\n\nTime $= 3.436 \\times 10^{10} / 10^9 \\approx 34.36$ s."
+  },
+  {
+    "id": "cn-051",
+    "topic": "tcp",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following segments consume one or more TCP sequence numbers?",
+    "options": [
+      "A SYN segment",
+      "A segment carrying 100 bytes of data",
+      "A pure ACK with no data",
+      "A FIN segment"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "SYN and FIN each consume one sequence number so that they can be acknowledged reliably. Data consumes one number per byte (100 here). A pure ACK carries nothing to acknowledge, so it does not advance the sequence number."
+  },
+  {
+    "id": "cn-052",
+    "topic": "tcp",
+    "type": "mcq",
+    "marks": 2,
+    "q": "TCP estimates RTT with $\\text{EstRTT} = (1-\\alpha)\\,\\text{EstRTT} + \\alpha\\,\\text{SampleRTT}$ with $\\alpha = 0.125$. EstRTT is currently 100 ms. The next two samples are 120 ms and then 80 ms. What is EstRTT after both samples?",
+    "options": [
+      "99.6875 ms",
+      "97.5 ms",
+      "100 ms",
+      "102.5 ms"
+    ],
+    "answer": 0,
+    "explanation": "After 120: $0.875 \\times 100 + 0.125 \\times 120 = 87.5 + 15 = 102.5$.\n\nAfter 80: $0.875 \\times 102.5 + 0.125 \\times 80 = 89.6875 + 10 = 99.6875$ ms."
+  },
+  {
+    "id": "cn-053",
+    "topic": "tcp",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which statement about TCP Tahoe and TCP Reno is correct?",
+    "options": [
+      "Reno sets cwnd to 1 MSS after triple duplicate ACKs but Tahoe does not",
+      "Tahoe halves cwnd after a timeout but Reno sets it to 1 MSS",
+      "Neither uses slow start after the connection is set up",
+      "Both set cwnd to 1 MSS after a timeout"
+    ],
+    "answer": 3,
+    "explanation": "A timeout is treated as severe congestion by both: ssthresh = cwnd/2 and cwnd = 1 MSS, then slow start. The difference is on triple duplicate ACKs: Tahoe also drops to 1 MSS, while Reno halves and enters fast recovery."
+  },
+  {
+    "id": "cn-054",
+    "topic": "tcp",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A TCP segment arrives with the header length (data offset) field equal to 8. How many bytes of options does the header carry?",
+    "options": [
+      "8",
+      "12",
+      "20",
+      "32"
+    ],
+    "answer": 1,
+    "explanation": "The data offset counts 4-byte words, so the header is $8 \\times 4 = 32$ bytes. The fixed part is 20 bytes, leaving $32 - 20 = 12$ bytes of options."
+  },
+  {
+    "id": "cn-055",
+    "topic": "tcp",
+    "type": "nat",
+    "marks": 2,
+    "q": "A TCP sender starts with cwnd = 1 MSS and ssthresh = 8 MSS. In slow start cwnd doubles each RTT (capped at ssthresh); from ssthresh onwards it grows by 1 MSS per RTT. The receiver window is large, there are no losses, and the sender always sends a full window each RTT. How many RTTs are needed to send 60 segments?",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "Window per RTT: 1, 2, 4, 8, 9, 10, 11, 12, 13.\n\nCumulative segments: 1, 3, 7, 15, 24, 34, 45, 57, 70.\n\nAfter 8 RTTs only 57 are sent; the 9th RTT covers segment 60. Answer: 9."
+  },
+  {
+    "id": "cn-056",
+    "topic": "dns-http",
+    "type": "nat",
+    "marks": 2,
+    "q": "A client clicks a link. The local DNS server has nothing cached, so it resolves the name iteratively by querying a root server, a TLD server and an authoritative server; each of these exchanges takes 30 ms. The client to local DNS server RTT is 2 ms. The page is a base HTML file with 8 small embedded images, all on the same server, and the RTT to that server is 20 ms. HTTP uses non-persistent connections with no parallel connections. Ignore transmission times. The total time in ms from the click until all objects are received is ______.",
+    "answer": {
+      "min": 452,
+      "max": 452
+    },
+    "explanation": "DNS: $2 + 3 \\times 30 = 92$ ms.\n\nNon-persistent HTTP: each object needs 1 RTT for the TCP handshake and 1 RTT for request and response, so $2 \\times 20 = 40$ ms per object. 9 objects: $9 \\times 40 = 360$ ms.\n\nTotal $= 92 + 360 = 452$ ms."
+  },
+  {
+    "id": "cn-057",
+    "topic": "dns-http",
+    "type": "nat",
+    "marks": 2,
+    "q": "A web page has a base HTML file and 8 embedded objects on the same server. RTT is 20 ms, the server address is already known and transmission times are ignored. Using persistent HTTP with pipelining (all 8 object requests are sent together once the base file arrives), the total time in ms to receive everything is ______.",
+    "answer": {
+      "min": 60,
+      "max": 60
+    },
+    "explanation": "1 RTT for the TCP handshake, 1 RTT for the base file, then 1 RTT for all 8 pipelined objects: $3 \\times 20 = 60$ ms.\n\n(Persistent without pipelining would need $2 + 8 = 10$ RTTs $= 200$ ms.)"
+  },
+  {
+    "id": "cn-058",
+    "topic": "dns-http",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which transport protocol and port does a normal DNS query from a host to its resolver use?",
+    "options": [
+      "TCP port 25",
+      "TCP port 80",
+      "UDP port 53",
+      "UDP port 67"
+    ],
+    "answer": 2,
+    "explanation": "Ordinary DNS queries use UDP port 53 because a single request and reply fit in one datagram. TCP port 53 is used for zone transfers and large responses. Port 67 is DHCP, 80 is HTTP and 25 is SMTP."
+  },
+  {
+    "id": "cn-059",
+    "topic": "dns-http",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about DNS resource records are true?",
+    "options": [
+      "An NS record gives the IPv4 address of the authoritative server directly",
+      "An MX record names a mail server for the domain",
+      "A CNAME record maps an alias name to its canonical name",
+      "An AAAA record maps a hostname to an IPv6 address"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "A: false, an NS record gives the hostname of the name server. Its address comes from a separate A record (often supplied as glue).\n\nB, C and D are true: MX for mail exchangers, CNAME for aliases, AAAA for IPv6 addresses (A is for IPv4)."
+  },
+  {
+    "id": "cn-060",
+    "topic": "dns-http",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which HTTP method is not idempotent?",
+    "options": [
+      "POST",
+      "GET",
+      "PUT",
+      "DELETE"
+    ],
+    "answer": 0,
+    "explanation": "Repeating GET, PUT or DELETE leaves the server in the same state as doing it once. Repeating POST can create a second resource or submit a form twice, so POST is not idempotent."
+  }
+]

@@ -1,0 +1,147 @@
+---
+import "katex/dist/katex.min.css";
+import { getCollection, render } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import { SECTIONS } from "../../../data/syllabus";
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes");
+  return notes
+    .map((note) => {
+      const [sectionSlug, topicSlug] = note.id.split("/");
+      const section = SECTIONS.find((s) => s.slug === sectionSlug);
+      const topic = section?.topics.find((t) => t.slug === topicSlug);
+      return section && topic ? { params: { section: sectionSlug, topic: topicSlug }, props: { note, section, topic } } : null;
+    })
+    .filter((p) => p !== null);
+}
+
+const { note, section, topic } = Astro.props;
+const { Content, headings } = await render(note);
+const toc = headings.filter((h) => h.depth === 2);
+
+// Flat reading order across the whole syllabus, for previous/next links.
+const order = SECTIONS.flatMap((s) => s.topics.map((t) => ({ s, t })));
+const i = order.findIndex((o) => o.s.slug === section.slug && o.t.slug === topic.slug);
+const prev = order[i - 1];
+const next = order[i + 1];
+const key = `${section.slug}/${topic.slug}`;
+const words = note.body?.split(/\s+/).length ?? 0;
+const minutes = Math.max(1, Math.round(words / 200));
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  name: note.data.title,
+  description: note.data.summary,
+  educationalLevel: "Undergraduate",
+  learningResourceType: "Study notes",
+  about: section.title,
+  inLanguage: "en",
+  isPartOf: { "@type": "WebSite", name: "GATE 2027 CS Prep", url: "https://gate.athash.in/" },
+};
+---
+<Base title={note.data.title} description={note.data.summary}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <div class="read-progress" aria-hidden="true"><i id="read-bar"></i></div>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/notes/">Notes</a><span>/</span><a href={`/notes/${section.slug}/`}>{section.title}</a>
+  </nav>
+  <div class="layout-note">
+    <aside class="side-nav" aria-label={`${section.title} topics`}>
+      <p>{section.title}</p>
+      {section.topics.map((t, n) => (
+        <a href={`/notes/${section.slug}/${t.slug}/`} aria-current={t.slug === topic.slug ? "page" : undefined} data-topic={`${section.slug}/${t.slug}`}>
+          <span>{String(n + 1).padStart(2, "0")}</span>{t.title}
+        </a>
+      ))}
+    </aside>
+
+    <article class="note" data-note={key}>
+      <p class="eyebrow">Section {section.n} · {minutes} min read</p>
+      <h1>{note.data.title}</h1>
+      <p class="lead">{note.data.summary}</p>
+      {toc.length > 0 && (
+        <details class="toc-mobile">
+          <summary>On this page</summary>
+          <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </details>
+      )}
+      <div class="prose">
+        <Content />
+      </div>
+
+      {note.data.sources.length > 0 && (
+        <section class="sources">
+          <h2>Further reading</h2>
+          <ul>
+            {note.data.sources.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.title}</a></li>)}
+          </ul>
+        </section>
+      )}
+
+      <div class="done-row">
+        <button class="btn" id="mark-done" type="button" data-key={key}>Mark as done</button>
+        <a class="btn secondary" href={`/tests/subject-${section.slug}/`}>Test this section</a>
+      </div>
+
+      <div class="pager">
+        {prev ? <a href={`/notes/${prev.s.slug}/${prev.t.slug}/`}><small>Previous</small>{prev.t.title}</a> : <span></span>}
+        {next ? <a class="next" href={`/notes/${next.s.slug}/${next.t.slug}/`}><small>Next</small>{next.t.title}</a> : <span></span>}
+      </div>
+    </article>
+
+    {toc.length > 0 && (
+      <aside class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+      </aside>
+    )}
+  </div>
+</Base>
+
+<script>
+  import { markDone, isDone, setLast, saveScroll, getScroll } from "../../../scripts/progress";
+
+  const article = document.querySelector<HTMLElement>("[data-note]")!;
+  const key = article.dataset.note!;
+  const title = document.querySelector("h1")!.textContent ?? "";
+  setLast(key, title, location.pathname);
+
+  const btn = document.getElementById("mark-done") as HTMLButtonElement;
+  const paint = () => {
+    const done = isDone(key);
+    btn.textContent = done ? "Done ✓ (undo)" : "Mark as done";
+    btn.classList.toggle("secondary", done);
+  };
+  paint();
+  btn.addEventListener("click", () => {
+    markDone(key, !isDone(key));
+    paint();
+  });
+
+  // Restore and remember the reading position.
+  const y = getScroll(key);
+  if (y && !location.hash) requestAnimationFrame(() => scrollTo(0, y));
+  const bar = document.getElementById("read-bar")!;
+  let t = 0;
+  addEventListener("scroll", () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = `${max > 0 ? Math.min(100, (scrollY / max) * 100) : 0}%`;
+    clearTimeout(t);
+    t = window.setTimeout(() => saveScroll(key, scrollY), 250);
+  }, { passive: true });
+
+  // Highlight the current heading in the table of contents.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".toc a")];
+  const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter(Boolean) as HTMLElement[];
+  if (heads.length) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          links.forEach((a) => a.classList.toggle("active", a.hash === `#${e.target.id}`));
+        }
+      }
+    }, { rootMargin: "-90px 0px -70% 0px" });
+    heads.forEach((h) => io.observe(h));
+  }
+</script>

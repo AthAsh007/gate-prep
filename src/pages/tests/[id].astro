@@ -1,0 +1,157 @@
+---
+import "katex/dist/katex.min.css";
+import "../../styles/exam.css";
+import Base from "../../layouts/Base.astro";
+import { getPapers, totalMarks } from "../../lib/tests";
+
+export function getStaticPaths() {
+  return getPapers().map((p) => ({ params: { id: p.id }, props: { paper: p } }));
+}
+const { paper } = Astro.props;
+const marks = totalMarks(paper);
+const hasGa = paper.questions.some((q) => q.part === "ga");
+const count = (t: string) => paper.questions.filter((q) => q.type === t).length;
+---
+<Base title={paper.kind === "full" ? paper.title : `${paper.title} test`} description={`Timed GATE CS practice test: ${paper.questions.length} questions, ${marks} marks, ${paper.minutes} minutes.`} bare>
+  <script type="application/json" id="paper-data" set:html={JSON.stringify(paper)} />
+
+  <!-- 1. Instructions -->
+  <section class="exam-intro wrap" id="screen-intro">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/tests/">Tests</a><span>/</span><span>{paper.title}</span></nav>
+    <p class="eyebrow">{paper.kind === "full" ? "Full-length mock" : "Subject test"}</p>
+    <h1>{paper.title}</h1>
+    <div class="intro-facts">
+      <div><b>{paper.questions.length}</b><span>questions</span></div>
+      <div><b>{marks}</b><span>marks</span></div>
+      <div><b>{paper.minutes}</b><span>minutes</span></div>
+      <div><b>{count("mcq")}/{count("msq")}/{count("nat")}</b><span>MCQ / MSQ / NAT</span></div>
+    </div>
+
+    <div class="resume-box" id="resume-box" hidden>
+      <p><b>You have an unfinished attempt.</b> The timer kept running while you were away: <span id="resume-left"></span> left.</p>
+      <div class="btn-row">
+        <button class="btn" type="button" id="resume-btn">Resume attempt</button>
+        <button class="btn secondary" type="button" id="discard-btn">Discard and start over</button>
+      </div>
+    </div>
+
+    <div class="instructions panel">
+      <h2>Instructions</h2>
+      <ol>
+        <li>The clock starts when you press <b>Start test</b> and the paper submits itself when it reaches zero. Reloading or closing the tab does not stop it.</li>
+        {hasGa && <li>The paper has two sections: <b>General Aptitude</b> (10 questions, 15 marks) and <b>Computer Science</b>. Switch between them with the tabs above the question.</li>}
+        <li><b>MCQ:</b> one correct option. A wrong answer costs 1/3 of the marks (−1/3 for a 1-mark question, −2/3 for a 2-mark question).</li>
+        <li><b>MSQ:</b> one or more correct options. You get the marks only if you pick exactly the right set. No negative marking.</li>
+        <li><b>NAT:</b> type a number with the keypad or keyboard. No negative marking.</li>
+        <li>As in the real exam, an answer counts only after <b>Save &amp; Next</b> or <b>Mark for Review &amp; Next</b>. Jumping to another question from the palette drops an unsaved choice.</li>
+        <li>Questions marked for review that have an answer are evaluated.</li>
+        <li>A calculator is available from the top bar.</li>
+      </ol>
+      <h3>Question palette</h3>
+      <ul class="legend">
+        <li><span class="pal nv">1</span> Not visited</li>
+        <li><span class="pal na">2</span> Not answered</li>
+        <li><span class="pal a">3</span> Answered</li>
+        <li><span class="pal m">4</span> Marked for review</li>
+        <li><span class="pal am">5</span> Answered and marked for review (will be evaluated)</li>
+      </ul>
+      <label class="agree"><input type="checkbox" id="agree" /> I have read the instructions.</label>
+      <button class="btn" type="button" id="start-btn" disabled>Start test <span class="arrow">→</span></button>
+    </div>
+  </section>
+
+  <!-- 2. Exam -->
+  <section class="exam" id="screen-exam" hidden>
+    <header class="exam-top">
+      <div class="exam-title"><a href="/tests/" class="exam-back" aria-label="Back to tests">←</a><span>{paper.title}</span></div>
+      <div class="exam-tools">
+        <button class="tool-btn" type="button" id="calc-open">Calculator</button>
+        <button class="tool-btn palette-toggle" type="button" id="palette-open">Questions</button>
+        <div class="exam-timer" role="timer" aria-live="off"><small>Time left</small><b id="timer">--:--:--</b></div>
+      </div>
+    </header>
+
+    <div class="exam-body">
+      <div class="q-pane">
+        <div class="q-tabs" id="q-tabs" hidden></div>
+        <div class="q-head">
+          <h2 id="q-num">Question 1</h2>
+          <div class="q-meta" id="q-meta"></div>
+        </div>
+        <div class="q-scroll">
+          <div class="q-text" id="q-text"></div>
+          <div class="q-answer" id="q-answer"></div>
+        </div>
+        <div class="q-actions">
+          <div class="q-actions-left">
+            <button class="btn secondary" type="button" id="mark-btn">Mark for Review &amp; Next</button>
+            <button class="btn secondary" type="button" id="clear-btn">Clear Response</button>
+          </div>
+          <div class="q-actions-right">
+            <button class="btn secondary" type="button" id="prev-btn">Back</button>
+            <button class="btn" type="button" id="save-btn">Save &amp; Next</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="palette" id="palette" aria-label="Question palette">
+        <div class="palette-head">
+          <b>Question palette</b>
+          <button class="tool-btn palette-close" type="button" id="palette-close" aria-label="Close palette">✕</button>
+        </div>
+        <ul class="legend compact" id="legend"></ul>
+        <div class="palette-section" id="palette-section"></div>
+        <div class="palette-grid" id="palette-grid"></div>
+        <button class="btn submit-btn" type="button" id="submit-btn">Submit test</button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 3. Results -->
+  <section class="results wrap" id="screen-results" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/tests/">Tests</a><span>/</span><span>{paper.title}</span></nav>
+    <p class="eyebrow">Result</p>
+    <h1>{paper.title}</h1>
+    <div class="score-card" id="score-card"></div>
+    <div class="section-scores" id="section-scores"></div>
+    <div class="btn-row" style="margin: 24px 0 8px">
+      <button class="btn" type="button" id="retake-btn">Retake test</button>
+      <a class="btn secondary" href="/tests/">All tests</a>
+    </div>
+    <h2>Review answers</h2>
+    <div class="review-filter" role="tablist" id="review-filter">
+      <button type="button" data-f="all" aria-selected="true">All</button>
+      <button type="button" data-f="wrong">Wrong</button>
+      <button type="button" data-f="skipped">Not attempted</button>
+      <button type="button" data-f="right">Correct</button>
+    </div>
+    <ol class="review-list" id="review-list"></ol>
+  </section>
+
+  <!-- dialogs -->
+  <dialog class="modal" id="submit-dialog">
+    <h2>Submit the test?</h2>
+    <div id="submit-summary"></div>
+    <div class="btn-row">
+      <button class="btn" type="button" id="submit-confirm">Submit</button>
+      <button class="btn secondary" type="button" id="submit-cancel">Keep going</button>
+    </div>
+  </dialog>
+
+  <dialog class="modal calc" id="calc-dialog" aria-label="Calculator">
+    <div class="calc-head"><b>Calculator</b><button class="tool-btn" type="button" id="calc-close" aria-label="Close calculator">✕</button></div>
+    <input class="calc-display" id="calc-display" inputmode="none" autocomplete="off" aria-label="Expression" />
+    <div class="calc-result" id="calc-result">0</div>
+    <div class="calc-keys" id="calc-keys">
+      {["sin(", "cos(", "tan(", "log(", "ln(", "√(", "^", "(", ")", "C", "7", "8", "9", "/", "⌫", "4", "5", "6", "*", "π", "1", "2", "3", "-", "e", "0", ".", "!", "+", "="].map((k) => (
+        <button type="button" data-k={k} class={k === "=" ? "eq" : /^[0-9.]$/.test(k) ? "num" : ""}>{k}</button>
+      ))}
+    </div>
+    <p class="calc-note">Trig functions use degrees. log is base 10.</p>
+  </dialog>
+</Base>
+
+<script>
+  import { startExam } from "../../scripts/exam";
+  startExam();
+</script>

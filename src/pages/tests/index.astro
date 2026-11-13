@@ -1,7 +1,65 @@
 ---
 import Base from "../../layouts/Base.astro";
+import { getPapers, totalMarks } from "../../lib/tests";
+
+const papers = getPapers();
+const full = papers.filter((p) => p.kind === "full");
+const subject = papers.filter((p) => p.kind === "subject");
 ---
-<Base title="Tests" description="Timed GATE 2027 CS mock tests.">
-  <h1>Tests</h1>
-  <p class="lead">Full-length mocks and subject tests are on the way.</p>
+<Base title="Tests" description={`${papers.length} timed GATE CS practice tests: full-length mocks with negative marking and subject tests.`}>
+  <p class="eyebrow">{papers.length} tests</p>
+  <h1>Timed tests</h1>
+  <p class="lead">
+    Full mocks follow the GATE CS pattern: 65 questions, 100 marks, 180 minutes, with General Aptitude, MCQ, MSQ and NAT questions,
+    and negative marking on MCQs. Subject tests take 75 minutes. Your attempts and scores stay in this browser.
+  </p>
+
+  <div class="section-head"><h2>Full-length mocks</h2><p>Each mock has its own questions, spread across all ten subjects.</p></div>
+  <div class="grid test-grid">
+    {full.map((p, i) => (
+      <a class="card test-card" href={`/tests/${p.id}/`} data-test={p.id}>
+        <span class="card-num">MOCK {String(i + 1).padStart(2, "0")}</span>
+        <h3>{p.title}</h3>
+        <p>{p.questions.length} questions · {totalMarks(p)} marks · {p.minutes} min</p>
+        <div class="card-foot"><span data-best>Not attempted</span><span class="go">Start →</span></div>
+      </a>
+    ))}
+  </div>
+
+  <div class="section-head"><h2>Subject tests</h2><p>One subject at a time, to check a section right after you finish its notes.</p></div>
+  <div class="grid test-grid">
+    {subject.map((p) => (
+      <a class="card test-card" href={`/tests/${p.id}/`} data-test={p.id}>
+        <span class="card-num">SUBJECT</span>
+        <h3>{p.title}</h3>
+        <p>{p.questions.length} questions · {totalMarks(p)} marks · {p.minutes} min</p>
+        <div class="card-foot"><span data-best>Not attempted</span><span class="go">Start →</span></div>
+      </a>
+    ))}
+  </div>
+
+  {papers.length === 0 && <p class="note-callout">Tests appear here once the question banks are in place.</p>}
 </Base>
+
+<script>
+  import { getResults } from "../../scripts/progress";
+  document.querySelectorAll<HTMLElement>("[data-test]").forEach((card) => {
+    const id = card.dataset.test!;
+    const list = getResults(id) as { score: number; total: number }[];
+    let inProgress = false;
+    try {
+      const a = JSON.parse(localStorage.getItem(`gate27:attempt:${id}`) ?? "null");
+      inProgress = !!a && !a.submittedAt && a.endsAt > Date.now();
+    } catch {}
+    const best = card.querySelector<HTMLElement>("[data-best]")!;
+    if (inProgress) {
+      best.textContent = "In progress";
+      best.classList.add("in-progress");
+      card.querySelector(".go")!.textContent = "Resume →";
+    } else if (list.length) {
+      const top = Math.max(...list.map((r) => r.score));
+      best.textContent = `Best ${Math.round(top * 100) / 100} / ${list[0].total} · ${list.length} attempt${list.length > 1 ? "s" : ""}`;
+      best.classList.add("attempted");
+    }
+  });
+</script>

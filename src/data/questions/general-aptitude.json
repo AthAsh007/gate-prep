@@ -1,0 +1,1492 @@
+[
+  {
+    "id": "ga-001",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the option that correctly fills the blank.\n\nNeither the manager nor the employees ___ aware of the change in the schedule.",
+    "options": [
+      "is",
+      "are",
+      "was",
+      "has been"
+    ],
+    "answer": 1,
+    "explanation": "With 'neither ... nor', the verb agrees with the subject closer to it. The nearer subject is 'the employees', which is plural, so the plural verb 'are' is correct. 'is', 'was' and 'has been' are singular."
+  },
+  {
+    "id": "ga-002",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is closest in meaning to the word **ephemeral**?",
+    "options": [
+      "Eternal",
+      "Unusual",
+      "Short-lived",
+      "Heavenly"
+    ],
+    "answer": 2,
+    "explanation": "'Ephemeral' describes something that lasts for a very short time, so 'short-lived' is the closest meaning. 'Eternal' is its opposite, and 'heavenly' is a confusion with 'ethereal'."
+  },
+  {
+    "id": "ga-003",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Pen : Write :: Knife : ___",
+    "options": [
+      "Sharp",
+      "Steel",
+      "Kitchen",
+      "Cut"
+    ],
+    "answer": 3,
+    "explanation": "The relation is tool : the action it is used for. A pen is used to write; a knife is used to cut. 'Sharp' is a property, 'steel' a material and 'kitchen' a place."
+  },
+  {
+    "id": "ga-004",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the word that best fills the blank.\n\nDespite her ___ preparation, she did not clear the first round, which surprised everyone who knew her.",
+    "options": [
+      "meticulous",
+      "careless",
+      "inadequate",
+      "hasty"
+    ],
+    "answer": 0,
+    "explanation": "'Despite' signals a contrast, and the result 'surprised everyone'. Failing would only be surprising if the preparation had been very thorough. 'Meticulous' (very careful and thorough) fits. The other three would make the failure expected, not surprising."
+  },
+  {
+    "id": "ga-005",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the correct preposition.\n\nShe has been living in Pune ___ 2019.",
+    "options": [
+      "since",
+      "for",
+      "from",
+      "by"
+    ],
+    "answer": 0,
+    "explanation": "With the present perfect continuous, a point in time at which the action began takes 'since'. 'For' is used with a length of time (for six years), not a starting year."
+  },
+  {
+    "id": "ga-006",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is most nearly **opposite** in meaning to **frugal**?",
+    "options": [
+      "Thrifty",
+      "Economical",
+      "Extravagant",
+      "Prudent"
+    ],
+    "answer": 2,
+    "explanation": "'Frugal' means careful and sparing with money. 'Thrifty', 'economical' and 'prudent' are close in meaning to it. 'Extravagant' means spending far too much, which is the opposite."
+  },
+  {
+    "id": "ga-007",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the option with the correct articles.\n\nHe is ___ honest man and ___ university professor.",
+    "options": [
+      "a, an",
+      "an, an",
+      "a, a",
+      "an, a"
+    ],
+    "answer": 3,
+    "explanation": "Articles follow the sound, not the spelling. 'Honest' begins with a vowel sound (the h is silent), so it takes 'an'. 'University' begins with a 'yoo' consonant sound, so it takes 'a'."
+  },
+  {
+    "id": "ga-008",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the correct option.\n\nBy the time we reached the station, the train ___.",
+    "options": [
+      "had left",
+      "has left",
+      "leaves",
+      "will leave"
+    ],
+    "answer": 0,
+    "explanation": "Two past actions are compared and the train leaving happened first. The earlier of two past actions takes the past perfect: 'had left'."
+  },
+  {
+    "id": "ga-009",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Ornithology : Birds :: Entomology : ___",
+    "options": [
+      "Words",
+      "Fossils",
+      "Fish",
+      "Insects"
+    ],
+    "answer": 3,
+    "explanation": "Ornithology is the study of birds. Entomology is the study of insects. (Words relate to etymology, fossils to palaeontology and fish to ichthyology.)"
+  },
+  {
+    "id": "ga-010",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following words is spelt correctly?",
+    "options": [
+      "Acommodate",
+      "Accomodate",
+      "Acomodate",
+      "Accommodate"
+    ],
+    "answer": 3,
+    "explanation": "The correct spelling has a double c and a double m: accommodate."
+  },
+  {
+    "id": "ga-011",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The idiom **to burn the midnight oil** means",
+    "options": [
+      "to work or study late into the night",
+      "to waste money on useless things",
+      "to start a quarrel",
+      "to celebrate a success"
+    ],
+    "answer": 0,
+    "explanation": "The phrase comes from working by lamplight at night. It means staying up late to work or study."
+  },
+  {
+    "id": "ga-012",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the correct option.\n\nThe quality of the mangoes this year ___ not good.",
+    "options": [
+      "are",
+      "were",
+      "is",
+      "have been"
+    ],
+    "answer": 2,
+    "explanation": "The subject is 'quality', which is singular. 'Of the mangoes' only describes it, so the verb must be singular: 'is'."
+  },
+  {
+    "id": "ga-013",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which word does NOT belong with the others?",
+    "options": [
+      "Tiger",
+      "Leopard",
+      "Wolf",
+      "Lion"
+    ],
+    "answer": 2,
+    "explanation": "Tiger, leopard and lion all belong to the cat family. The wolf belongs to the dog family."
+  },
+  {
+    "id": "ga-014",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is closest in meaning to **candid**?",
+    "options": [
+      "Secretive",
+      "Cautious",
+      "Rude",
+      "Frank"
+    ],
+    "answer": 3,
+    "explanation": "'Candid' means open and honest in what one says. 'Frank' has the same meaning. 'Secretive' is the opposite; 'rude' is not implied."
+  },
+  {
+    "id": "ga-015",
+    "topic": "verbal",
+    "type": "msq",
+    "marks": 1,
+    "q": "Select ALL the sentences that are grammatically correct.",
+    "options": [
+      "Each of the students has submitted the assignment.",
+      "Each of the students have submitted the assignment.",
+      "Every student has submitted the assignment.",
+      "Every students has submitted the assignment."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "'Each of the students' takes a singular verb because the subject is 'each', so the first is correct and the second is not. 'Every' is followed by a singular noun and singular verb, so 'Every student has' is correct and 'Every students' is wrong."
+  },
+  {
+    "id": "ga-016",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Read the passage.\n\n\"All the paintings in the exhibition were either landscapes or portraits. None of the landscapes was painted before 1950. Some of the portraits were painted by Meera.\"\n\nWhich one of the following can be inferred with certainty?",
+    "options": [
+      "Meera painted only portraits.",
+      "Some paintings made after 1950 are portraits.",
+      "Every painting in the exhibition made before 1950 is a portrait.",
+      "Meera did not paint any landscape."
+    ],
+    "answer": 2,
+    "explanation": "Every painting is a landscape or a portrait, and no landscape is from before 1950. So any painting from before 1950 cannot be a landscape and must be a portrait. The passage says nothing about what else Meera painted, so the first and last options do not follow. It also does not say any portrait is from after 1950."
+  },
+  {
+    "id": "ga-017",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Arrange the sentences P, Q, R and S into a logical paragraph.\n\nP: However, the bridge was too narrow for the growing traffic.\n\nQ: The old bridge was built in 1920 to connect the two villages.\n\nR: So, a new four-lane bridge was opened in 2015.\n\nS: For decades, it served the farmers well.",
+    "options": [
+      "QPSR",
+      "SQPR",
+      "QSPR",
+      "QSRP"
+    ],
+    "answer": 2,
+    "explanation": "Q introduces the bridge and must come first. S ('it served the farmers well') continues the history. P begins with 'However' and states the problem. R begins with 'So' and gives the solution. The order is Q, S, P, R."
+  },
+  {
+    "id": "ga-018",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A city introduced a fee for driving into its centre during peak hours. In the following year, peak-hour traffic in the centre fell by 18%. The city council claimed that the fee caused the fall.\n\nWhich one of the following, if true, most weakens the council's claim?",
+    "options": [
+      "Many drivers complained about the fee.",
+      "Peak-hour traffic in nearby cities that had no such fee fell by about the same amount in the same year.",
+      "The fee was collected electronically.",
+      "Bus fares in the city were unchanged that year."
+    ],
+    "answer": 1,
+    "explanation": "If cities without the fee saw the same fall, something else (for example fuel prices or remote work) probably caused it, and the fee cannot be credited. Complaints, the collection method and bus fares do not show that the fall would have happened without the fee."
+  },
+  {
+    "id": "ga-019",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which one of the following sentences is grammatically correct?",
+    "options": [
+      "Hardly I had reached home when it started raining.",
+      "Hardly had I reached home than it started raining.",
+      "Hardly did I reached home when it started raining.",
+      "Hardly had I reached home when it started raining."
+    ],
+    "answer": 3,
+    "explanation": "When a sentence begins with 'Hardly', the subject and auxiliary are inverted ('had I reached'), and 'hardly' pairs with 'when', not 'than'. The first option lacks inversion, the second uses 'than', and the third has the wrong verb form after 'did'."
+  },
+  {
+    "id": "ga-020",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Read the passage.\n\n\"Bees pollinate a large share of the crops that people eat. In recent decades, bee populations in many regions have declined because of habitat loss, pesticide use and disease. As there is no cheap way to replace natural pollination at a large scale, this decline is a threat to food production.\"\n\nWhich one of the following best states the main point of the passage?",
+    "options": [
+      "The decline of bees is a threat to food production.",
+      "Pesticides are the main cause of the decline of bees.",
+      "Artificial pollination is cheaper than natural pollination.",
+      "Bees pollinate every crop that people eat."
+    ],
+    "answer": 0,
+    "explanation": "The passage builds to its final sentence: bee decline threatens food production. It lists pesticides as one of three causes, not the main one. It says replacement is not cheap, the opposite of the third option, and it says 'a large share', not every crop."
+  },
+  {
+    "id": "ga-021",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the word that best fills the blank.\n\nThe two countries signed an agreement to ___ their trade disputes through talks rather than by raising tariffs.",
+    "options": [
+      "dissolve",
+      "absolve",
+      "revolve",
+      "resolve"
+    ],
+    "answer": 3,
+    "explanation": "To 'resolve' a dispute is to settle it. 'Dissolve' means to melt or formally end a body, 'absolve' means to free someone from blame, and 'revolve' means to turn around. Only 'resolve' fits disputes."
+  },
+  {
+    "id": "ga-022",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the connector that best fills the blank.\n\nThe new drug lowered blood pressure in trials, but it also caused dizziness in a third of the patients; ___, doctors prescribe it only when other drugs have failed.",
+    "options": [
+      "nevertheless",
+      "moreover",
+      "therefore",
+      "in contrast"
+    ],
+    "answer": 2,
+    "explanation": "The limited use of the drug is a consequence of its side effect, so a cause-and-effect connector is needed: 'therefore'. 'Nevertheless' and 'in contrast' signal opposition, and 'moreover' only adds a point."
+  },
+  {
+    "id": "ga-023",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the pair that has the same relationship as\n\nCartographer : Map",
+    "options": [
+      "Pilot : Aircraft",
+      "Teacher : School",
+      "Sculptor : Statue",
+      "Doctor : Hospital"
+    ],
+    "answer": 2,
+    "explanation": "A cartographer makes maps, so the relation is maker : thing made. A sculptor makes statues. A pilot operates an aircraft, and a school and a hospital are places of work, not things made."
+  },
+  {
+    "id": "ga-024",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Ravi said, \"I will finish the report only if the data arrives by Friday.\" Ravi kept his word, and the report was finished.\n\nWhich one of the following must be true?",
+    "options": [
+      "The data arrived by Friday.",
+      "The data arrived after Friday.",
+      "Ravi finished the report on Friday.",
+      "Had the data arrived by Friday, the report would certainly have been finished."
+    ],
+    "answer": 0,
+    "explanation": "'X only if Y' means X cannot happen without Y. The report was finished, so the data must have arrived by Friday. 'Only if' does not promise the reverse, and it says nothing about the day the report was finished."
+  },
+  {
+    "id": "ga-025",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Arrange the sentences P, Q, R and S into a logical paragraph.\n\nP: Most of them now travel by the metro instead.\n\nQ: Ten years ago, a majority of commuters in the city used private cars.\n\nR: This shift has noticeably reduced air pollution.\n\nS: Since then, the metro network has grown to over 200 km.",
+    "options": [
+      "SQPR",
+      "QPSR",
+      "PSQR",
+      "QSPR"
+    ],
+    "answer": 3,
+    "explanation": "Q sets the starting point (ten years ago). S follows with 'Since then'. P ('Most of them', meaning the commuters) describes the change, and R ('This shift') gives its effect. The order is Q, S, P, R."
+  },
+  {
+    "id": "ga-026",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The sentence below is divided into four parts. Identify the part that contains an error.\n\nThe number of applicants (P) / have increased (Q) / sharply over (R) / the last three years (S).",
+    "options": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "answer": 1,
+    "explanation": "'The number of applicants' is singular because its head is 'number'. It needs 'has increased', so part Q is wrong. ('A number of applicants' would take a plural verb.)"
+  },
+  {
+    "id": "ga-027",
+    "topic": "verbal",
+    "type": "msq",
+    "marks": 2,
+    "q": "Select ALL the words that can correctly fill the blank.\n\nThe speaker's argument was so ___ that nobody in the audience could find a flaw in it.",
+    "options": [
+      "cogent",
+      "compelling",
+      "fallacious",
+      "tenuous"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "The argument had no flaw, so the word must mean strong and convincing. 'Cogent' and 'compelling' both mean that. 'Fallacious' means based on false reasoning and 'tenuous' means weak, both of which contradict the rest of the sentence."
+  },
+  {
+    "id": "ga-028",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "In a survey of 500 office workers, those who cycled to work reported fewer sick days than those who drove. The researchers concluded that cycling to work improves health.\n\nWhich one of the following, if true, most weakens the conclusion?",
+    "options": [
+      "Some of the drivers live far from their offices.",
+      "People who are already in good health are more likely to choose cycling.",
+      "The city's cycle lanes are well maintained.",
+      "The survey was carried out in winter."
+    ],
+    "answer": 1,
+    "explanation": "If healthy people tend to choose cycling, the link may run the other way: good health leads to cycling, not cycling to good health. That undermines the causal claim. The other options do not explain the difference in sick days."
+  },
+  {
+    "id": "ga-029",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the pair of words that best fills the blanks.\n\nThe sudden ___ of the river after the heavy rains forced the villagers to move to ___ ground.",
+    "options": [
+      "raise, higher",
+      "rise, higher",
+      "arise, higher",
+      "raise, highest"
+    ],
+    "answer": 1,
+    "explanation": "'Rise' (noun) is an increase in level; 'raise' is mainly a verb that takes an object, and 'arise' means to come into being. 'Higher ground' is the standard phrase for safer, more elevated land. So 'rise, higher' is correct."
+  },
+  {
+    "id": "ga-030",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What is the tone of the following statement?\n\n\"Of course, the minister's promise to repair every road by next month is entirely believable, given how well the last ten promises worked out.\"",
+    "options": [
+      "Appreciative",
+      "Neutral",
+      "Hopeful",
+      "Sarcastic"
+    ],
+    "answer": 3,
+    "explanation": "The speaker says the promise is 'entirely believable' while pointing to ten earlier promises that, by implication, failed. Saying the opposite of what is meant to mock someone is sarcasm."
+  },
+  {
+    "id": "ga-031",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The price of an article is first increased by 20% and then decreased by 20%. The net change in its price is",
+    "options": [
+      "a 4% decrease",
+      "no change",
+      "a 4% increase",
+      "a 2% decrease"
+    ],
+    "answer": 0,
+    "explanation": "Take the price as 100. After a 20% increase it is 120. A 20% decrease on 120 is 24, giving 96. The net change is a 4% decrease."
+  },
+  {
+    "id": "ga-032",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 1,
+    "q": "The average of five numbers is 24. When one number is removed, the average of the remaining four is 22. The number removed is ___.",
+    "answer": {
+      "min": 32,
+      "max": 32
+    },
+    "explanation": "Sum of five numbers = 5 x 24 = 120. Sum of the remaining four = 4 x 22 = 88. Removed number = 120 - 88 = 32."
+  },
+  {
+    "id": "ga-033",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "If A : B = 2 : 3 and B : C = 4 : 5, then A : C is",
+    "options": [
+      "8 : 15",
+      "2 : 5",
+      "6 : 15",
+      "4 : 5"
+    ],
+    "answer": 0,
+    "explanation": "Make B the same in both ratios. A : B = 8 : 12 and B : C = 12 : 15. So A : C = 8 : 15."
+  },
+  {
+    "id": "ga-034",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the next number in the series?\n\n2, 6, 12, 20, 30, ___",
+    "options": [
+      "36",
+      "40",
+      "42",
+      "44"
+    ],
+    "answer": 2,
+    "explanation": "The terms are 1x2, 2x3, 3x4, 4x5, 5x6. The next is 6x7 = 42. (Equivalently, the differences 4, 6, 8, 10 increase by 2, so the next difference is 12.)"
+  },
+  {
+    "id": "ga-035",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A train 360 m long runs at 54 km/h. The time it takes to pass a signal pole is",
+    "options": [
+      "16 s",
+      "18 s",
+      "20 s",
+      "24 s"
+    ],
+    "answer": 3,
+    "explanation": "54 km/h = 54 x 1000 / 3600 = 15 m/s. To pass a pole the train covers its own length: 360 / 15 = 24 s."
+  },
+  {
+    "id": "ga-036",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 1,
+    "q": "The simple interest (in rupees) on Rs. 8000 at 5% per annum for 3 years is ___.",
+    "answer": {
+      "min": 1200,
+      "max": 1200
+    },
+    "explanation": "Simple interest = P x R x T / 100 = 8000 x 5 x 3 / 100 = 1200."
+  },
+  {
+    "id": "ga-037",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Two fair six-sided dice are rolled. The probability that the sum of the numbers shown is 7 is",
+    "options": [
+      "$\\frac{1}{6}$",
+      "$\\frac{1}{12}$",
+      "$\\frac{5}{36}$",
+      "$\\frac{7}{36}$"
+    ],
+    "answer": 0,
+    "explanation": "There are 36 equally likely outcomes. The pairs with sum 7 are (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), which is 6 outcomes. Probability = 6/36 = 1/6."
+  },
+  {
+    "id": "ga-038",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A shopkeeper buys an article for Rs. 400 and sells it for Rs. 460. His profit percentage is",
+    "options": [
+      "12%",
+      "13%",
+      "15%",
+      "18%"
+    ],
+    "answer": 2,
+    "explanation": "Profit = 460 - 400 = 60. Profit % = 60 / 400 x 100 = 15%."
+  },
+  {
+    "id": "ga-039",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A can finish a piece of work in 10 days and B can finish it in 15 days. Working together, they will finish it in",
+    "options": [
+      "5 days",
+      "6 days",
+      "8 days",
+      "12.5 days"
+    ],
+    "answer": 1,
+    "explanation": "In one day A does 1/10 and B does 1/15 of the work. Together: 1/10 + 1/15 = 3/30 + 2/30 = 1/6. So they need 6 days."
+  },
+  {
+    "id": "ga-040",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The diagonal of a square is 10 cm. Its area is",
+    "options": [
+      "25 sq cm",
+      "40 sq cm",
+      "50 sq cm",
+      "100 sq cm"
+    ],
+    "answer": 2,
+    "explanation": "Area of a square = (diagonal)^2 / 2 = 100 / 2 = 50 sq cm. (Side = 10/sqrt(2), and side^2 = 50.)"
+  },
+  {
+    "id": "ga-041",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 1,
+    "q": "The least common multiple (LCM) of 12, 18 and 30 is ___.",
+    "answer": {
+      "min": 180,
+      "max": 180
+    },
+    "explanation": "12 = 2^2 x 3, 18 = 2 x 3^2, 30 = 2 x 3 x 5. Take the highest power of each prime: 2^2 x 3^2 x 5 = 180."
+  },
+  {
+    "id": "ga-042",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "If 30% of a number is 45, the number is",
+    "options": [
+      "120",
+      "135",
+      "150",
+      "160"
+    ],
+    "answer": 2,
+    "explanation": "0.3 x N = 45, so N = 45 / 0.3 = 150."
+  },
+  {
+    "id": "ga-043",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The units digit of $7^{23}$ is",
+    "options": [
+      "1",
+      "3",
+      "7",
+      "9"
+    ],
+    "answer": 1,
+    "explanation": "Units digits of powers of 7 repeat in a cycle of 4: 7, 9, 3, 1. Since 23 = 4 x 5 + 3, the units digit is the third in the cycle, which is 3."
+  },
+  {
+    "id": "ga-044",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a class, the average weight of 30 boys is 60 kg and the average weight of 20 girls is 50 kg. The average weight of the whole class is",
+    "options": [
+      "54 kg",
+      "55 kg",
+      "56 kg",
+      "57 kg"
+    ],
+    "answer": 2,
+    "explanation": "Total weight = 30 x 60 + 20 x 50 = 1800 + 1000 = 2800 kg for 50 students. Average = 2800 / 50 = 56 kg."
+  },
+  {
+    "id": "ga-045",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the next number in the series?\n\n3, 5, 9, 17, 33, ___",
+    "options": [
+      "62",
+      "63",
+      "64",
+      "65"
+    ],
+    "answer": 3,
+    "explanation": "Each term is twice the previous term minus 1: 3x2-1 = 5, 5x2-1 = 9, and so on. Next: 33 x 2 - 1 = 65. (The differences 2, 4, 8, 16 double, so the next difference is 32.)"
+  },
+  {
+    "id": "ga-046",
+    "topic": "quantitative",
+    "type": "msq",
+    "marks": 1,
+    "q": "Select ALL the prime numbers.",
+    "options": [
+      "91",
+      "97",
+      "51",
+      "89"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "91 = 7 x 13 and 51 = 3 x 17, so they are not prime. 97 and 89 have no divisor among 2, 3, 5, 7 (the primes up to their square roots), so both are prime."
+  },
+  {
+    "id": "ga-047",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The angle between the hour hand and the minute hand of a clock at 3:30 is",
+    "options": [
+      "75 degrees",
+      "80 degrees",
+      "90 degrees",
+      "105 degrees"
+    ],
+    "answer": 0,
+    "explanation": "The minute hand is at 30 x 6 = 180 degrees. The hour hand moves 0.5 degrees per minute, so it is at 3 x 30 + 30 x 0.5 = 105 degrees. The angle is 180 - 105 = 75 degrees."
+  },
+  {
+    "id": "ga-048",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The table shows the sales (in thousand units) of four products of a company in two years.\n\n| Product | 2023 | 2024 |\n|---|---|---|\n| P | 120 | 150 |\n| Q | 200 | 210 |\n| R | 80 | 120 |\n| S | 100 | 90 |\n\nWhich product had the highest percentage growth in sales from 2023 to 2024?",
+    "options": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "answer": 2,
+    "explanation": "Growth: P = 30/120 = 25%, Q = 10/200 = 5%, R = 40/80 = 50%, S = -10/100 = -10%. The highest is R."
+  },
+  {
+    "id": "ga-049",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "The table shows the sales (in thousand units) of four products of a company in two years.\n\n| Product | 2023 | 2024 |\n|---|---|---|\n| P | 120 | 150 |\n| Q | 200 | 210 |\n| R | 80 | 120 |\n| S | 100 | 90 |\n\nThe percentage growth in the total sales of all four products from 2023 to 2024 is ___.",
+    "answer": {
+      "min": 14,
+      "max": 14
+    },
+    "explanation": "Total in 2023 = 120 + 200 + 80 + 100 = 500. Total in 2024 = 150 + 210 + 120 + 90 = 570. Growth = 70 / 500 x 100 = 14%."
+  },
+  {
+    "id": "ga-050",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A car covers the first half of a journey at 40 km/h and the second half at 60 km/h. Its average speed for the whole journey is",
+    "options": [
+      "48 km/h",
+      "50 km/h",
+      "52 km/h",
+      "54 km/h"
+    ],
+    "answer": 0,
+    "explanation": "For equal distances the average speed is the harmonic mean: 2 x 40 x 60 / (40 + 60) = 4800 / 100 = 48 km/h. (Check with 120 km each way: time = 3 + 2 = 5 h for 240 km.)"
+  },
+  {
+    "id": "ga-051",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "Pipe A can fill a tank in 12 hours and pipe B can fill it in 18 hours. Pipe C can empty the full tank in 36 hours. If all three pipes are opened together on an empty tank, the tank will be full in ___ hours.",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "Net filling per hour = 1/12 + 1/18 - 1/36 = 3/36 + 2/36 - 1/36 = 4/36 = 1/9. So the tank fills in 9 hours."
+  },
+  {
+    "id": "ga-052",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A shopkeeper marks an article 40% above its cost price and then gives a discount of 15% on the marked price. His profit percentage is",
+    "options": [
+      "11%",
+      "15%",
+      "17%",
+      "19%"
+    ],
+    "answer": 3,
+    "explanation": "Let cost = 100. Marked price = 140. Selling price = 140 x 0.85 = 119. Profit = 19 on 100, so 19%."
+  },
+  {
+    "id": "ga-053",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A bag has 5 red balls and 3 blue balls. Two balls are drawn at random without replacement. The probability that both are of the same colour is",
+    "options": [
+      "$\\frac{13}{28}$",
+      "$\\frac{15}{28}$",
+      "$\\frac{25}{64}$",
+      "$\\frac{17}{28}$"
+    ],
+    "answer": 0,
+    "explanation": "Total ways to pick 2 of 8 balls = C(8,2) = 28. Both red: C(5,2) = 10. Both blue: C(3,2) = 3. Probability = (10 + 3) / 28 = 13/28."
+  },
+  {
+    "id": "ga-054",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "The present ages of Anil and Bina are in the ratio 5 : 7. After 6 years, the ratio will be 3 : 4. The sum of their present ages (in years) is ___.",
+    "answer": {
+      "min": 72,
+      "max": 72
+    },
+    "explanation": "Let the ages be 5k and 7k. Then (5k + 6) / (7k + 6) = 3/4, so 20k + 24 = 21k + 18, giving k = 6. Ages are 30 and 42, and their sum is 72."
+  },
+  {
+    "id": "ga-055",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "On a sum of Rs. 10000 at 10% per annum for 2 years, the difference between compound interest (compounded annually) and simple interest is",
+    "options": [
+      "Rs. 100",
+      "Rs. 110",
+      "Rs. 200",
+      "Rs. 210"
+    ],
+    "answer": 0,
+    "explanation": "CI = 10000 x 1.1^2 - 10000 = 12100 - 10000 = 2100. SI = 10000 x 10 x 2 / 100 = 2000. Difference = 100. (Shortcut: P x (R/100)^2 = 10000 x 0.01 = 100.)"
+  },
+  {
+    "id": "ga-056",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A cylinder has a base radius of 7 cm and a height of 10 cm. Taking $\\pi = \\frac{22}{7}$, its volume is",
+    "options": [
+      "1100 cubic cm",
+      "1320 cubic cm",
+      "1440 cubic cm",
+      "1540 cubic cm"
+    ],
+    "answer": 3,
+    "explanation": "Volume = pi r^2 h = (22/7) x 49 x 10 = 22 x 7 x 10 = 1540 cubic cm."
+  },
+  {
+    "id": "ga-057",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Two trains 150 m and 100 m long run on parallel tracks in opposite directions at 54 km/h and 36 km/h. The time they take to cross each other completely is",
+    "options": [
+      "10 s",
+      "20 s",
+      "25 s",
+      "50 s"
+    ],
+    "answer": 0,
+    "explanation": "Speeds are 15 m/s and 10 m/s. In opposite directions the relative speed is 25 m/s. The distance to cover is the sum of the lengths, 250 m. Time = 250 / 25 = 10 s."
+  },
+  {
+    "id": "ga-058",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What is the next number in the series?\n\n1, 2, 6, 15, 31, ___",
+    "options": [
+      "52",
+      "56",
+      "57",
+      "62"
+    ],
+    "answer": 1,
+    "explanation": "The differences are 1, 4, 9, 16, which are the squares 1^2, 2^2, 3^2, 4^2. The next difference is 5^2 = 25, so the next term is 31 + 25 = 56."
+  },
+  {
+    "id": "ga-059",
+    "topic": "quantitative",
+    "type": "msq",
+    "marks": 2,
+    "q": "For every positive integer $n$, which of the following expressions is ALWAYS divisible by 6? Select ALL that apply.",
+    "options": [
+      "$n(n+1)(n+2)$",
+      "$n^3 - n$",
+      "$n^2 + n$",
+      "$n(n+1)(2n+1)$"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "The product of three consecutive integers is divisible by 2 and 3, hence by 6. The first is such a product, and $n^3 - n = (n-1)n(n+1)$ is too. $n(n+1)(2n+1) = 6(1^2 + 2^2 + ... + n^2)$, so it is divisible by 6. But $n^2 + n = n(n+1)$ is only guaranteed divisible by 2: for $n = 1$ it equals 2."
+  },
+  {
+    "id": "ga-060",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "The number of integers from 1 to 500 (both inclusive) that are divisible by 3 or by 5, but NOT by both, is ___.",
+    "answer": {
+      "min": 200,
+      "max": 200
+    },
+    "explanation": "Divisible by 3: floor(500/3) = 166. By 5: 100. By both (by 15): 33. Divisible by exactly one = 166 + 100 - 2 x 33 = 200."
+  },
+  {
+    "id": "ga-061",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The average of 11 results is 50. The average of the first six results is 49 and the average of the last six results is 52. The sixth result is",
+    "options": [
+      "50",
+      "52",
+      "54",
+      "56"
+    ],
+    "answer": 3,
+    "explanation": "The sixth result is counted in both groups. Sum of first six + sum of last six = 294 + 312 = 606. Sum of all 11 = 550. The sixth result = 606 - 550 = 56."
+  },
+  {
+    "id": "ga-062",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "A container has 40 litres of a mixture of milk and water in the ratio 3 : 1. The amount of water (in litres) that must be added to make the ratio 3 : 2 is ___.",
+    "answer": {
+      "min": 10,
+      "max": 10
+    },
+    "explanation": "Milk = 30 L and water = 10 L. For milk : water = 3 : 2 with 30 L of milk, water must be 20 L. So 20 - 10 = 10 L of water must be added."
+  },
+  {
+    "id": "ga-063",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The population of a town is 50000. It increases by 10% in the first year, decreases by 10% in the second year and increases by 20% in the third year. The population at the end of the third year is",
+    "options": [
+      "59400",
+      "60000",
+      "60500",
+      "61000"
+    ],
+    "answer": 0,
+    "explanation": "50000 x 1.1 = 55000. 55000 x 0.9 = 49500. 49500 x 1.2 = 59400."
+  },
+  {
+    "id": "ga-064",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "12 workers can complete a job in 18 days working 8 hours a day. How many days will 16 workers take to complete the same job working 9 hours a day?",
+    "options": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "answer": 3,
+    "explanation": "Total work = 12 x 18 x 8 = 1728 worker-hours. 16 workers at 9 hours a day give 144 worker-hours per day. Days = 1728 / 144 = 12."
+  },
+  {
+    "id": "ga-065",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A household's monthly income is Rs. 80000. It is spent as shown, and the rest is saved.\n\n| Head | Share of income |\n|---|---|\n| Rent | 25% |\n| Food | 20% |\n| Transport | 10% |\n| Education | 15% |\n\nIf the rent goes up by 20% while income and all other expenses stay the same, the savings will be what percentage of income?",
+    "options": [
+      "20%",
+      "24%",
+      "25%",
+      "26%"
+    ],
+    "answer": 2,
+    "explanation": "Savings are 100 - (25 + 20 + 10 + 15) = 30% of income. Rent rises by 20% of 25%, which is 5% of income, to 30%. Savings fall to 30 - 5 = 25% of income."
+  },
+  {
+    "id": "ga-066",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Riya walks 4 km north, turns right and walks 3 km, then turns right again and walks 8 km. How far is she from her starting point, and in which direction?",
+    "options": [
+      "5 km, north-east",
+      "5 km, south-east",
+      "7 km, south-east",
+      "5 km, south-west"
+    ],
+    "answer": 1,
+    "explanation": "Start at (0, 0). 4 km north gives (0, 4). Turning right she faces east: 3 km gives (3, 4). Turning right again she faces south: 8 km gives (3, -4). Distance = sqrt(9 + 16) = 5 km, and (3, -4) is to the south-east."
+  },
+  {
+    "id": "ga-067",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Pointing to a man, Kavya said, \"He is the only son of my mother's father.\" How is the man related to Kavya?",
+    "options": [
+      "Maternal uncle",
+      "Father",
+      "Brother",
+      "Grandfather"
+    ],
+    "answer": 0,
+    "explanation": "Kavya's mother's father is her maternal grandfather. His only son is her mother's brother, which makes the man Kavya's maternal uncle."
+  },
+  {
+    "id": "ga-068",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a certain code, COMPUTER is written as DPNQVUFS. How is KEYBOARD written in that code?",
+    "options": [
+      "LFZCPBSE",
+      "LFXCPBSE",
+      "JDXANZQC",
+      "LFZCQBSE"
+    ],
+    "answer": 0,
+    "explanation": "Each letter is replaced by the next letter of the alphabet (C to D, O to P, and so on). Applying this to KEYBOARD: K to L, E to F, Y to Z, B to C, O to P, A to B, R to S, D to E, giving LFZCPBSE."
+  },
+  {
+    "id": "ga-069",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Statements:\n\n1. All roses are flowers.\n2. Some flowers are red.\n\nConclusions:\n\nI. Some roses are red.\n\nII. All flowers are roses.\n\nWhich conclusion(s) follow from the statements?",
+    "options": [
+      "Only I",
+      "Only II",
+      "Both I and II",
+      "Neither I nor II"
+    ],
+    "answer": 3,
+    "explanation": "The red flowers may all be flowers that are not roses, so I does not follow. 'All roses are flowers' does not mean all flowers are roses, so II does not follow either."
+  },
+  {
+    "id": "ga-070",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Among five friends, Asha is taller than Bina but shorter than Chetan. Dev is taller than Chetan. Esha is shorter than Bina. Who is the tallest?",
+    "options": [
+      "Asha",
+      "Chetan",
+      "Dev",
+      "Esha"
+    ],
+    "answer": 2,
+    "explanation": "From the clues: Chetan > Asha > Bina, Dev > Chetan, and Bina > Esha. Together: Dev > Chetan > Asha > Bina > Esha. Dev is the tallest."
+  },
+  {
+    "id": "ga-071",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "1 January 2025 was a Wednesday. What day of the week was 1 March 2025?",
+    "options": [
+      "Friday",
+      "Saturday",
+      "Sunday",
+      "Thursday"
+    ],
+    "answer": 1,
+    "explanation": "From 1 January to 1 March there are 31 (January) + 28 (February, 2025 is not a leap year) = 59 days. 59 = 8 x 7 + 3, so the day moves 3 places forward from Wednesday: Saturday."
+  },
+  {
+    "id": "ga-072",
+    "topic": "analytical",
+    "type": "nat",
+    "marks": 1,
+    "q": "At a meeting, each of 10 people shakes hands exactly once with each of the others. The total number of handshakes is ___.",
+    "answer": {
+      "min": 45,
+      "max": 45
+    },
+    "explanation": "Each handshake is a pair of people. Number of pairs = C(10, 2) = 10 x 9 / 2 = 45."
+  },
+  {
+    "id": "ga-073",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What comes next in the letter series?\n\nA, C, F, J, O, ___",
+    "options": [
+      "T",
+      "U",
+      "V",
+      "W"
+    ],
+    "answer": 1,
+    "explanation": "Positions in the alphabet are 1, 3, 6, 10, 15. The gaps are 2, 3, 4, 5, so the next gap is 6, giving 21, which is U."
+  },
+  {
+    "id": "ga-074",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Statement: \"If it rains, the match is cancelled.\" It is known that the match was NOT cancelled. Which one of the following follows?",
+    "options": [
+      "It rained.",
+      "It did not rain.",
+      "The match was played in the evening.",
+      "Nothing can be concluded about rain."
+    ],
+    "answer": 1,
+    "explanation": "If rain had fallen, the match would have been cancelled. The match was not cancelled, so it could not have rained (this is the contrapositive)."
+  },
+  {
+    "id": "ga-075",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "P, Q, R and S sit in a row facing north. Q sits immediately to the right of P. S sits at one end of the row. R does not sit next to S. Who sits at the other end of the row?",
+    "options": [
+      "P",
+      "Q",
+      "R",
+      "Cannot be determined"
+    ],
+    "answer": 2,
+    "explanation": "Facing north, 'right' means toward the east end. If S is at the left end, R cannot be second, so P and Q take seats 2 and 3 and R is at the right end: S P Q R. If S is at the right end, R cannot be third, so R is first and P, Q are second and third: R P Q S. In both cases R is at the other end."
+  },
+  {
+    "id": "ga-076",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a certain code language, \"sky is blue\" is written as \"ta pa ma\" and \"blue is nice\" is written as \"ma ra pa\". What is the code for \"sky\"?",
+    "options": [
+      "pa",
+      "ma",
+      "ra",
+      "ta"
+    ],
+    "answer": 3,
+    "explanation": "The words 'is' and 'blue' appear in both sentences, and the codes common to both are 'pa' and 'ma'. So the remaining code in the first sentence, 'ta', stands for 'sky'."
+  },
+  {
+    "id": "ga-077",
+    "topic": "analytical",
+    "type": "msq",
+    "marks": 1,
+    "q": "Statements:\n\n1. No cat is a dog.\n2. All dogs are animals.\n\nSelect ALL the conclusions that follow.",
+    "options": [
+      "No cat is an animal.",
+      "Some animals are dogs.",
+      "Some animals are not cats.",
+      "All animals are dogs."
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "Since all dogs are animals, some animals are dogs. Those animals that are dogs are not cats (no cat is a dog), so some animals are not cats. Cats may still be animals, so the first does not follow, and nothing says every animal is a dog."
+  },
+  {
+    "id": "ga-078",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a row of 40 students, Meena is 15th from the left end. What is her position from the right end?",
+    "options": [
+      "23rd",
+      "24th",
+      "25th",
+      "26th"
+    ],
+    "answer": 3,
+    "explanation": "Position from right = total - position from left + 1 = 40 - 15 + 1 = 26."
+  },
+  {
+    "id": "ga-079",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Six friends A, B, C, D, E and F sit around a round table, equally spaced, facing the centre.\n\n- A sits opposite D.\n- B sits immediately to the right of A.\n- E sits next to D but not next to B.\n- C does not sit next to A.\n\nWho sits immediately to the left of A?",
+    "options": [
+      "C",
+      "E",
+      "F",
+      "B"
+    ],
+    "answer": 2,
+    "explanation": "Number the seats 0 to 5 going round so that, for someone facing the centre, the next seat is on the right. Put A at 0; then D is at 3 and B at 1. E must be next to D (seat 2 or 4) but not next to B (seat 2 is next to B), so E is at 4. C must not be next to A, so C is not at 5; C is at 2 and F at 5. Seat 5 is on A's left, so F sits immediately to the left of A."
+  },
+  {
+    "id": "ga-080",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A is the brother of B. C is the father of A. D is the sister of C. E is the son of D. How is E related to B?",
+    "options": [
+      "Brother",
+      "Nephew",
+      "Uncle",
+      "Cousin"
+    ],
+    "answer": 3,
+    "explanation": "C is the father of A, and A is B's brother, so C is also B's father. D is C's sister, so D is B's aunt (father's sister). E is D's son, so E is B's cousin."
+  },
+  {
+    "id": "ga-081",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Three jars contain marbles. One has only red marbles, one has only blue marbles and one has both red and blue marbles. The jars are labelled \"Red\", \"Blue\" and \"Mixed\", but EVERY label is wrong. Without looking, Sana takes one marble from the jar labelled \"Mixed\" and finds that it is red.\n\nWhat does the jar labelled \"Blue\" contain?",
+    "options": [
+      "Only red marbles",
+      "Only blue marbles",
+      "Both red and blue marbles",
+      "Cannot be determined"
+    ],
+    "answer": 2,
+    "explanation": "The jar labelled \"Mixed\" is not mixed, and it gave a red marble, so it contains only red. The jar labelled \"Blue\" cannot hold only blue (its label is wrong) and cannot hold only red (that jar is taken), so it holds the mixed marbles. The jar labelled \"Red\" therefore holds only blue."
+  },
+  {
+    "id": "ga-082",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Exactly one of Ajay, Bala and Chirag broke a window. When asked, they said:\n\n- Ajay: \"I did not break it.\"\n- Bala: \"Chirag broke it.\"\n- Chirag: \"Bala is lying.\"\n\nIf exactly one of the three statements is true, who broke the window?",
+    "options": [
+      "Ajay",
+      "Bala",
+      "Chirag",
+      "Cannot be determined"
+    ],
+    "answer": 0,
+    "explanation": "Bala's and Chirag's statements contradict each other, so exactly one of them is true. Since only one statement in total is true, Ajay's statement must be false, so Ajay broke the window. Check: then Bala's claim is false and Chirag's is true, which is exactly one true statement."
+  },
+  {
+    "id": "ga-083",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Five lectures P, Q, R, S and T are scheduled from Monday to Friday, one lecture per day.\n\n- R is on Wednesday.\n- Q is on the day immediately after P.\n- S is neither on Monday nor on Friday.\n- T is on a later day than R.\n\nOn which day is Q?",
+    "options": [
+      "Tuesday",
+      "Monday",
+      "Thursday",
+      "Friday"
+    ],
+    "answer": 0,
+    "explanation": "R is on Wednesday, so S is on Tuesday or Thursday and T is on Thursday or Friday. If S were on Tuesday, the free days would be Monday, Thursday and Friday; P and Q need two consecutive days (Thursday, Friday), leaving Monday for T, which is not after R. So S is on Thursday, T is on Friday, and P and Q take Monday and Tuesday. Q is on Tuesday."
+  },
+  {
+    "id": "ga-084",
+    "topic": "analytical",
+    "type": "nat",
+    "marks": 2,
+    "q": "The number of three-digit positive integers whose digits are strictly increasing from left to right (for example, 147) is ___.",
+    "answer": {
+      "min": 84,
+      "max": 84
+    },
+    "explanation": "The digit 0 cannot appear: it would have to be the first digit. Any choice of 3 different digits from 1 to 9 can be arranged in increasing order in exactly one way. So the count is C(9, 3) = 84."
+  },
+  {
+    "id": "ga-085",
+    "topic": "analytical",
+    "type": "msq",
+    "marks": 2,
+    "q": "Statements:\n\n1. Some pens are pencils.\n2. All pencils are erasers.\n3. No eraser is a sharpener.\n\nSelect ALL the conclusions that follow.",
+    "options": [
+      "Some pens are erasers.",
+      "No pencil is a sharpener.",
+      "Some pens are not sharpeners.",
+      "All erasers are pens."
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "The pens that are pencils are erasers, so some pens are erasers. Every pencil is an eraser and no eraser is a sharpener, so no pencil is a sharpener. Those pens that are erasers are not sharpeners, so some pens are not sharpeners. Nothing says every eraser is a pen, so the last does not follow."
+  },
+  {
+    "id": "ga-086",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "In a code, each letter of a word is shifted forward in the alphabet by its position in the word: the 1st letter by 1, the 2nd by 2, and so on. For example, CODE becomes DQGI. How is GATE written in this code?",
+    "options": [
+      "HBWI",
+      "HCVI",
+      "HCWI",
+      "ICWJ"
+    ],
+    "answer": 2,
+    "explanation": "G + 1 = H, A + 2 = C, T + 3 = W, E + 4 = I. So GATE becomes HCWI."
+  },
+  {
+    "id": "ga-087",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A robot starts facing north. It moves 10 m forward, turns 90 degrees to its left and moves 6 m, turns 90 degrees to its left and moves 4 m, then turns 90 degrees to its right and moves 2 m. Where is it now with respect to its starting point?",
+    "options": [
+      "10 m, south-west",
+      "8 m, west",
+      "14 m, north-west",
+      "10 m, north-west"
+    ],
+    "answer": 3,
+    "explanation": "Start at (0, 0) facing north. 10 m north gives (0, 10). Turning left it faces west: 6 m gives (-6, 10). Turning left it faces south: 4 m gives (-6, 6). Turning right it faces west: 2 m gives (-8, 6). Distance = sqrt(64 + 36) = 10 m, toward the north-west."
+  },
+  {
+    "id": "ga-088",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Anu, Ben, Charu and Dinesh are a doctor, an engineer, a lawyer and a teacher, in some order, with one profession each.\n\n- Anu is neither the doctor nor the lawyer.\n- Ben is not the engineer.\n- Charu is the teacher.\n- Dinesh is not the doctor.\n\nWho is the doctor?",
+    "options": [
+      "Anu",
+      "Ben",
+      "Charu",
+      "Dinesh"
+    ],
+    "answer": 1,
+    "explanation": "Charu is the teacher. Anu is not the doctor, lawyer or teacher, so Anu is the engineer. Dinesh is not the doctor, so Dinesh is the lawyer. That leaves Ben as the doctor, which fits since Ben is not the engineer."
+  },
+  {
+    "id": "ga-089",
+    "topic": "analytical",
+    "type": "msq",
+    "marks": 2,
+    "q": "Five books V, W, X, Y and Z are placed in a row on a shelf.\n\n- Y is in the middle.\n- Z is next to Y.\n- V is not at either end.\n- W is somewhere to the left of X.\n\nSelect ALL the statements that MUST be true.",
+    "options": [
+      "W is at the left end.",
+      "X is at the right end.",
+      "V is to the left of Y.",
+      "Z is next to X."
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Y is in position 3. Z is in 2 or 4, and V (not at an end) must take the other of 2 and 4. So W and X occupy the two ends, and since W is left of X, W is at the left end and X at the right end. V and Z can be in either order, so the last two need not be true."
+  },
+  {
+    "id": "ga-090",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Counting the overlap at 12:00 noon but not the one at 12:00 midnight, how many times do the hour hand and the minute hand of a clock overlap between 12:00 noon and 12:00 midnight?",
+    "options": [
+      "11",
+      "12",
+      "22",
+      "24"
+    ],
+    "answer": 0,
+    "explanation": "The minute hand gains 330 degrees per hour on the hour hand, so it laps the hour hand every 360/330 = 12/11 hours. In 12 hours that is 12 / (12/11) = 11 overlaps, at 0, 12/11, 24/11, ... , 120/11 hours after noon."
+  },
+  {
+    "id": "ga-091",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A solid cube is painted on all six faces and then cut into 64 identical smaller cubes. How many of the smaller cubes have exactly two painted faces?",
+    "options": [
+      "8",
+      "16",
+      "24",
+      "32"
+    ],
+    "answer": 2,
+    "explanation": "64 = 4 x 4 x 4, so each edge has 4 small cubes. Cubes with exactly two painted faces lie on an edge but not at a corner: 4 - 2 = 2 per edge. A cube has 12 edges, so 12 x 2 = 24."
+  },
+  {
+    "id": "ga-092",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Four letters are placed in a 2 x 2 grid: P at top-left, Q at top-right, R at bottom-left and S at bottom-right. The grid is rotated 90 degrees clockwise. Which letter is now at the top-left?",
+    "options": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "answer": 2,
+    "explanation": "In a 90 degree clockwise turn, the left column becomes the top row, read from bottom to top. So the bottom-left letter R moves to the top-left (and P moves to the top-right)."
+  },
+  {
+    "id": "ga-093",
+    "topic": "spatial",
+    "type": "nat",
+    "marks": 1,
+    "q": "A square board is divided into a 4 x 4 grid of equal unit squares. The total number of squares of all sizes on the board is ___.",
+    "answer": {
+      "min": 30,
+      "max": 30
+    },
+    "explanation": "Count by size: 1 x 1: 16, 2 x 2: 9, 3 x 3: 4, 4 x 4: 1. Total = 16 + 9 + 4 + 1 = 30."
+  },
+  {
+    "id": "ga-094",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A square sheet of paper is folded in half, and then folded in half again. A single hole is punched through all the layers, away from every edge and fold. How many holes are there when the sheet is unfolded?",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "16"
+    ],
+    "answer": 0,
+    "explanation": "Each fold doubles the number of layers. After two folds there are 4 layers, and a hole punched away from the edges goes through all of them, giving 4 holes."
+  },
+  {
+    "id": "ga-095",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A cube is folded from a flat net of six squares numbered 1 to 6. The squares 1, 2, 3 and 4 lie in a horizontal row from left to right. Square 5 is attached directly above square 2 and square 6 directly below square 2. Which number is on the face opposite to 1?",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "6"
+    ],
+    "answer": 1,
+    "explanation": "When the row 1, 2, 3, 4 is folded into a loop around the cube, squares two apart end up opposite each other: 1 is opposite 3 and 2 is opposite 4. Squares 5 and 6 become the top and bottom, opposite each other."
+  },
+  {
+    "id": "ga-096",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A solid cube has its top and bottom faces painted red and its four side faces painted blue. It is then cut into 125 identical smaller cubes. How many of the smaller cubes have at least one red face AND at least one blue face?",
+    "options": [
+      "24",
+      "32",
+      "40",
+      "48"
+    ],
+    "answer": 1,
+    "explanation": "125 = 5 x 5 x 5. A small cube has both colours only if it is on the top or bottom layer and also on the outer ring of that layer. The outer ring of a 5 x 5 layer has 25 - 9 = 16 cubes (the inner 3 x 3 block of the top layer has only a red face). Two layers give 2 x 16 = 32. Note that counting 4 edges x 5 cubes = 20 per face would count each corner cube twice."
+  },
+  {
+    "id": "ga-097",
+    "topic": "spatial",
+    "type": "nat",
+    "marks": 2,
+    "q": "Unit cubes are stacked on a 3 x 3 square base. The table gives the number of cubes stacked on each cell. Row R1 is at the back and row R3 is at the front.\n\n| | C1 | C2 | C3 |\n|---|---|---|---|\n| R1 | 3 | 1 | 2 |\n| R2 | 0 | 2 | 1 |\n| R3 | 1 | 1 | 4 |\n\nThe front view (looking from the front toward the back, so each column C1, C2, C3 appears as one vertical strip) shows a shape made of unit squares. The number of unit squares in the front view is ___.",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "In the front view, the height of each column's strip is the tallest stack in that column. C1: max(3, 0, 1) = 3. C2: max(1, 2, 1) = 2. C3: max(2, 1, 4) = 4. The view has 3 + 2 + 4 = 9 unit squares."
+  },
+  {
+    "id": "ga-098",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A square sheet of paper is folded in half by bringing the top edge down onto the bottom edge. It is then folded in half again by bringing the left edge onto the right edge, giving a smaller square four layers thick. The corner of this small square that lies at the centre of the original sheet is cut off with one straight cut. What is seen when the sheet is fully unfolded?",
+    "options": [
+      "Four triangular holes near the four corners of the sheet",
+      "Two triangular holes on the vertical centre line",
+      "Four separate small holes around the centre",
+      "A single diamond-shaped (square) hole at the centre of the sheet"
+    ],
+    "answer": 3,
+    "explanation": "Both fold lines pass through the centre of the sheet, and the cut corner sits exactly where they cross. The cut removes a small right triangle from each of the four layers, and each triangle has its right angle at the centre. Unfolding reflects the triangle across both fold lines, so the four triangles join around the centre into one square hole turned 45 degrees (a diamond)."
+  },
+  {
+    "id": "ga-099",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A square is drawn and both of its diagonals are drawn inside it. How many triangles of any size can be seen in the figure?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "answer": 3,
+    "explanation": "The diagonals split the square into 4 small triangles meeting at the centre. Each pair of neighbouring small triangles forms a larger triangle (half the square, cut off by one diagonal), and there are 4 such halves. Total = 4 + 4 = 8."
+  },
+  {
+    "id": "ga-100",
+    "topic": "spatial",
+    "type": "msq",
+    "marks": 2,
+    "q": "Nine letters are arranged in a 3 x 3 grid:\n\n| | | |\n|---|---|---|\n| A | B | C |\n| D | E | F |\n| G | H | I |\n\nSelect ALL the operations after which the letter G is in the top-right corner.",
+    "options": [
+      "Rotate the grid by 180 degrees",
+      "Rotate the grid by 90 degrees clockwise",
+      "Rotate the grid by 90 degrees anticlockwise",
+      "Reflect the grid left to right, then reflect the result top to bottom"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "G starts at the bottom-left. A 180 degree rotation sends each corner to the opposite corner, so G goes to the top-right. Reflecting left to right moves G to the bottom-right, and then reflecting top to bottom moves it to the top-right (two such reflections equal a 180 degree rotation). A 90 degree clockwise turn sends G to the top-left, and a 90 degree anticlockwise turn sends it to the bottom-right."
+  }
+]

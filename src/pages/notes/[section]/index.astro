@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import { SECTIONS } from "../../../data/syllabus";
+
+export function getStaticPaths() {
+  return SECTIONS.map((s) => ({ params: { section: s.slug }, props: { section: s } }));
+}
+const { section } = Astro.props;
+const notes = await getCollection("notes", (n) => n.id.startsWith(`${section.slug}/`));
+const has = new Set(notes.map((n) => n.id.split("/")[1]));
+const idx = SECTIONS.indexOf(section);
+const prev = SECTIONS[idx - 1];
+const next = SECTIONS[idx + 1];
+---
+<Base title={section.title} description={`GATE CS notes for ${section.title}: ${section.topics.map((t) => t.title).join(", ")}.`}>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/notes/">Notes</a><span>/</span><span>Section {section.n}</span></nav>
+  <div class="layout-side">
+    <aside class="side-nav" aria-label="Sections">
+      <p>Sections</p>
+      {SECTIONS.map((s) => (
+        <a href={`/notes/${s.slug}/`} aria-current={s.slug === section.slug ? "page" : undefined}>
+          <span>{String(s.n).padStart(2, "0")}</span>{s.title}
+        </a>
+      ))}
+    </aside>
+    <div>
+      <p class="eyebrow">Section {section.n} · {section.topics.length} topics</p>
+      <h1>{section.title}</h1>
+      <div class="progress-line" data-section-progress={section.slug} data-total={section.topics.length}>
+        <div class="progress-track"><i></i></div>
+        <span>0 of {section.topics.length} topics done</span>
+      </div>
+      <ol class="topic-list">
+        {section.topics.map((t, i) => (
+          <li>
+            {has.has(t.slug) ? (
+              <a class="topic-row" href={`/notes/${section.slug}/${t.slug}/`} data-topic={`${section.slug}/${t.slug}`}>
+                <span class="n">{String(i + 1).padStart(2, "0")}</span>
+                <span><h3>{t.title}</h3><p>{t.covers}</p></span>
+                <span class="status" data-status>Read</span>
+              </a>
+            ) : (
+              <div class="topic-row">
+                <span class="n">{String(i + 1).padStart(2, "0")}</span>
+                <span><h3>{t.title}</h3><p>{t.covers}</p></span>
+                <span class="status">Coming soon</span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+      <div class="pager">
+        {prev ? <a href={`/notes/${prev.slug}/`}><small>Previous section</small>{prev.title}</a> : <span></span>}
+        {next ? <a class="next" href={`/notes/${next.slug}/`}><small>Next section</small>{next.title}</a> : <span></span>}
+      </div>
+      <p><a class="btn secondary" href={`/tests/subject-${section.slug}/`}>Take the {section.title} test <span class="arrow">→</span></a></p>
+    </div>
+  </div>
+</Base>

@@ -1,17 +1,29 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { SECTIONS } from "../../data/syllabus";
+const topicCount = SECTIONS.reduce((n, s) => n + s.topics.length, 0);
 ---
-<Base title="Notes" description="Study notes for every topic in the GATE 2027 CS syllabus.">
+<Base title="Notes" description="Study notes for every topic in the GATE 2027 CS syllabus, with worked examples and quick revision lists.">
+  <p class="eyebrow">{topicCount} topics · 10 sections</p>
   <h1>Notes</h1>
-  <p class="lead">Ten sections, one page per syllabus topic.</p>
-  <div class="grid">
+  <p class="lead">One page per syllabus topic: definitions, formulas, worked GATE-style examples, common traps and a quick revision list at the end. Mark a topic done when you finish it.</p>
+
+  <div class="syllabus-index">
     {SECTIONS.map((s) => (
-      <a class="card" href={`/notes/${s.slug}/`}>
-        <span class="tag">Section {s.n}</span>
-        <h3>{s.title}</h3>
-        <p>{s.topics.length} topics</p>
-      </a>
+      <section class="sx">
+        <a class="sx-head" href={`/notes/${s.slug}/`}>
+          <span class="card-num">{String(s.n).padStart(2, "0")}</span>
+          <h2>{s.title}</h2>
+        </a>
+        <div class="progress-line" data-section-progress={s.slug} data-total={s.topics.length}>
+          <div class="progress-track"><i></i></div><span>0 of {s.topics.length} topics done</span>
+        </div>
+        <ul>
+          {s.topics.map((t) => (
+            <li><a href={`/notes/${s.slug}/${t.slug}/`} data-topic={`${s.slug}/${t.slug}`}>{t.title}<span data-status></span></a></li>
+          ))}
+        </ul>
+      </section>
     ))}
   </div>
 </Base>

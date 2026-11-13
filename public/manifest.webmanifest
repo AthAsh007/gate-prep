@@ -1,0 +1,14 @@
+{
+  "name": "GATE 2027 CS Prep",
+  "short_name": "GATE CS",
+  "description": "Notes for every GATE 2027 CS syllabus topic and timed mock tests.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#16171b",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

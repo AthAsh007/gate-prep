@@ -1,23 +1,122 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SECTIONS } from "../data/syllabus";
----
-<Base title="GATE 2027 CS Prep">
-  <h1>GATE 2027 Computer Science</h1>
-  <p class="lead">
-    Notes for every topic in the IIT Madras syllabus, and timed tests that work like the real exam:
-    65 questions, 180 minutes, negative marking on MCQs.
-  </p>
-  <p><a class="btn" href="/tests/">Start a test</a> <a class="btn secondary" href="/notes/">Read notes</a></p>
+import { EXAM_DATE } from "../config";
+import { getPapers } from "../lib/tests";
 
-  <h2>Syllabus</h2>
+const topicCount = SECTIONS.reduce((n, s) => n + s.topics.length, 0);
+const papers = getPapers();
+const examDate = new Date(EXAM_DATE);
+const dateLabel = examDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" });
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "GATE 2027 CS Prep",
+  url: "https://gate.athash.in/",
+  description: "Free study notes for every GATE 2027 Computer Science syllabus topic and timed GATE-style mock tests.",
+  inLanguage: "en",
+  author: { "@type": "Person", name: "Atharva Ashtekar", url: "https://athash.in/" },
+};
+---
+<Base title="GATE 2027 CS Prep" description="Free notes for every GATE 2027 CS syllabus topic and timed GATE-style mock tests with negative marking, a palette and a calculator.">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow rise">GATE 2027 · Computer Science</p>
+        <h1 class="rise rise-2">Prepare for GATE CS <em>one topic at a time.</em></h1>
+        <p class="lead rise rise-2">
+          {topicCount} topic pages covering the full IIT Madras syllabus, each with worked examples, and
+          {papers.length > 0 ? ` ${papers.length} timed tests` : " timed tests"} that work like the real exam:
+          question palette, mark for review, calculator, and negative marking.
+        </p>
+        <div class="btn-row rise rise-3">
+          <a class="btn" href="/notes/">Start with the notes <span class="arrow">→</span></a>
+          <a class="btn secondary" href="/tests/">Take a mock test</a>
+        </div>
+        <a class="continue rise rise-3" id="continue" href="#" hidden>
+          <small>Continue where you left off</small><span id="continue-title"></span>
+        </a>
+      </div>
+
+      <div class="clock rise rise-3" aria-label="Countdown to GATE 2027">
+        <div class="clock-top"><span class="clock-title">GATE 2027 begins</span><span class="clock-date">{dateLabel}</span></div>
+        <div class="clock-days"><b data-countdown="d">--</b><span>days</span></div>
+        <div class="clock-units">
+          <div><b data-countdown="h">--</b><span>hours</span></div>
+          <div><b data-countdown="m">--</b><span>minutes</span></div>
+          <div><b data-countdown="s">--</b><span>seconds</span></div>
+        </div>
+        <div class="clock-bar"><i id="syllabus-bar" style="width:0%"></i></div>
+        <p class="clock-note"><span id="syllabus-done">0</span> of {topicCount} topics done</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div><b>10</b><span>syllabus sections</span></div>
+    <div><b>{topicCount}</b><span>topic pages</span></div>
+    <div><b>{papers.length || "20+"}</b><span>timed tests</span></div>
+    <div><b>180</b><span>minutes per full mock</span></div>
+  </div>
+
+  <div class="section-head">
+    <h2>The syllabus</h2>
+    <p>Ten sections from the official GATE 2027 CS syllabus. Your progress is saved in this browser.</p>
+  </div>
   <div class="grid">
     {SECTIONS.map((s) => (
       <a class="card" href={`/notes/${s.slug}/`}>
-        <span class="tag">Section {s.n}</span>
+        <span class="card-num">{String(s.n).padStart(2, "0")}</span>
         <h3>{s.title}</h3>
         <p>{s.topics.map((t) => t.title).join(" · ")}</p>
+        <div class="card-foot" data-section-progress={s.slug} data-total={s.topics.length}>
+          <div class="progress-track"><i></i></div>
+          <span>0 of {s.topics.length} topics done</span>
+        </div>
       </a>
     ))}
   </div>
+
+  <div class="section-head">
+    <h2>The exam pattern</h2>
+    <p>What a GATE CS paper looks like, and what the mocks here copy.</p>
+  </div>
+  <div class="pattern">
+    <div class="panel">
+      <h3>Marks</h3>
+      <table>
+        <thead><tr><th>Part</th><th>Questions</th><th>Marks</th></tr></thead>
+        <tbody>
+          <tr><td>General Aptitude</td><td>10 (5 × 1, 5 × 2)</td><td>15</td></tr>
+          <tr><td>Engineering Maths + CS</td><td>55 (25 × 1, 30 × 2)</td><td>85</td></tr>
+          <tr><th>Total</th><th>65</th><th>100</th></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <h3>Question types</h3>
+      <ul>
+        <li><b>MCQ:</b> one correct option. A wrong answer costs 1/3 of its marks.</li>
+        <li><b>MSQ:</b> one or more correct options. Marks only for the exact set, no negative.</li>
+        <li><b>NAT:</b> type a number. No negative marking.</li>
+        <li><b>Time:</b> 3 hours, on-screen calculator only.</li>
+      </ul>
+    </div>
+  </div>
 </Base>
+
+<script>
+  import { getLast, doneKeys } from "../scripts/progress";
+  const last = getLast();
+  if (last) {
+    const a = document.getElementById("continue") as HTMLAnchorElement;
+    a.href = last.href;
+    document.getElementById("continue-title")!.textContent = last.title;
+    a.hidden = false;
+  }
+  const total = Number(document.querySelector(".facts div:nth-child(2) b")?.textContent) || 1;
+  const n = doneKeys().length;
+  document.getElementById("syllabus-done")!.textContent = String(n);
+  document.getElementById("syllabus-bar")!.style.width = `${Math.min(100, (n / total) * 100)}%`;
+</script>

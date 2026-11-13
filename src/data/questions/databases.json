@@ -1,0 +1,891 @@
+[
+  {
+    "id": "db-001",
+    "topic": "er-model",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Entity sets Student (key `roll`) and Course (key `code`) are linked by a many-to-many relationship Registers that has its own attribute `grade`. When Registers is mapped to a relation, what is its primary key?",
+    "options": [
+      "`roll` alone",
+      "`code` alone",
+      "`{roll, code}`",
+      "`{roll, code, grade}`"
+    ],
+    "answer": 2,
+    "explanation": "A many-to-many relationship always becomes its own table holding the keys of both participating entities as foreign keys. One student registers for many courses and one course has many students, so neither key alone identifies a row. The pair `{roll, code}` does. `grade` is a descriptive attribute and is functionally determined by the pair, so it does not belong in the key."
+  },
+  {
+    "id": "db-002",
+    "topic": "er-model",
+    "type": "nat",
+    "marks": 2,
+    "q": "An ER diagram has three strong entity sets $E_1$, $E_2$, $E_3$, each with simple single-valued attributes only. Relationship $R_1$ is one-to-one between $E_1$ and $E_2$, with total participation of both $E_1$ and $E_2$. Relationship $R_2$ is many-to-many between $E_2$ and $E_3$. Neither relationship has attributes. What is the minimum number of relational tables needed to represent this design while keeping it in at least 3NF?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "$R_1$ is one-to-one with total participation on both sides, so every $E_1$ entity is paired with exactly one $E_2$ entity and vice versa. $E_1$, $E_2$ and $R_1$ can be merged into one table with no NULLs: 1 table.\n\n$E_3$ needs its own table: 1 table.\n\n$R_2$ is many-to-many, so it always needs a separate table with the keys of $E_2$ and $E_3$: 1 table.\n\nTotal = 1 + 1 + 1 = 3."
+  },
+  {
+    "id": "db-003",
+    "topic": "er-model",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Weak entity set Dependent (partial key `dname`) is identified through the identifying relationship HasDep by strong entity set Employee (key `eid`). Which attribute set is the primary key of the relation for Dependent?",
+    "options": [
+      "`dname`",
+      "`eid`",
+      "`{eid, dname}`",
+      "A new surrogate attribute must be added; no existing set can be the key"
+    ],
+    "answer": 2,
+    "explanation": "A weak entity cannot be identified by its own attributes. Its table includes the key of the owner (identifying) entity, and the primary key is owner key plus partial key, here `{eid, dname}`. Two employees may each have a dependent named the same, so `dname` alone fails, and one employee may have several dependents, so `eid` alone fails."
+  },
+  {
+    "id": "db-004",
+    "topic": "er-model",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about mapping an ER diagram to relations are correct?",
+    "options": [
+      "A one-to-many relationship without attributes can be represented by adding the key of the one-side entity as a foreign key in the many-side entity's table.",
+      "A many-to-many relationship can be absorbed into one of the participating entity tables without introducing redundancy.",
+      "A multivalued attribute is mapped to a separate table whose key contains the owner entity's key and the attribute itself.",
+      "The table for a weak entity set uses only the partial key as its primary key."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Option 1 is correct: each many-side entity relates to at most one one-side entity, so a single foreign key column holds the relationship.\n\nOption 2 is wrong: absorbing an M:N relationship into an entity table repeats that entity's attributes once per partner, which is redundancy (and breaks the key).\n\nOption 3 is correct: a multivalued attribute such as phone numbers becomes Table(owner_key, value) with both columns in the key.\n\nOption 4 is wrong: the weak entity's key is owner key plus partial key."
+  },
+  {
+    "id": "db-005",
+    "topic": "er-model",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Entity set Employee (key `eid`, attributes `name`, `salary`) has a recursive relationship Supervises: each employee has at most one supervisor, and a supervisor can supervise many employees. What is the minimum number of tables needed?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 0,
+    "explanation": "Supervises is a one-to-many relationship where the many side is the supervised employee. Add a column `supervisor_eid` to Employee that references Employee(eid). Employees without a supervisor hold NULL there. One table, Employee(eid, name, salary, supervisor_eid), is enough."
+  },
+  {
+    "id": "db-006",
+    "topic": "er-model",
+    "type": "nat",
+    "marks": 1,
+    "q": "Entity set Student has key `roll`, a composite attribute `name` made of `first` and `last`, a composite attribute `address` made of `city` and `pin`, and a multivalued attribute `phone`. It is mapped to relations in 1NF using the standard rules (composite attributes are flattened into their components). What is the total number of columns across all resulting tables?",
+    "answer": {
+      "min": 7,
+      "max": 7
+    },
+    "explanation": "Composite attributes are replaced by their simple components, so the main table is Student(roll, first, last, city, pin): 5 columns.\n\nThe multivalued attribute needs its own table StudentPhone(roll, phone): 2 columns.\n\nTotal = 5 + 2 = 7."
+  },
+  {
+    "id": "db-007",
+    "topic": "relational-algebra-calculus",
+    "type": "nat",
+    "marks": 1,
+    "q": "Consider relations $R(A, B)$ and $S(B, C)$:\n\n| A | B |\n|---|---|\n| 1 | a |\n| 2 | b |\n| 3 | a |\n| 4 | c |\n\n| B | C |\n|---|---|\n| a | x |\n| a | y |\n| c | z |\n| d | w |\n\nHow many tuples are in $\\pi_{A}(R \\bowtie S)$?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "The natural join matches on B. A=1 (B=a) joins with 2 tuples, A=3 (B=a) with 2 tuples, A=4 (B=c) with 1 tuple, and A=2 (B=b) with none. So $R \\bowtie S$ has 5 tuples with A values 1, 1, 3, 3, 4.\n\nRelational algebra projection removes duplicates, leaving {1, 3, 4}: 3 tuples."
+  },
+  {
+    "id": "db-008",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Relations: $Enrolled(sid, cid)$ and $Course(cid)$. Which expression returns the `sid` of students enrolled in every course listed in $Course$?",
+    "options": [
+      "$\\pi_{sid}(Enrolled) - \\pi_{sid}\\big((\\pi_{sid}(Enrolled) \\times Course) - Enrolled\\big)$",
+      "$\\pi_{sid}(Enrolled \\bowtie Course)$",
+      "$\\pi_{sid}(Enrolled) - \\pi_{sid}\\big(Enrolled - (\\pi_{sid}(Enrolled) \\times Course)\\big)$",
+      "$\\pi_{sid}\\big((\\pi_{sid}(Enrolled) \\times Course) \\cap Enrolled\\big)$"
+    ],
+    "answer": 0,
+    "explanation": "This is division, $Enrolled \\div Course$. Build every pair a student should have: $\\pi_{sid}(Enrolled) \\times Course$. Subtract the pairs that actually exist; what remains are (student, missing course) pairs. Project sid to get the students missing at least one course and subtract them from all students. That is option 1.\n\nOption 2 gives students enrolled in at least one listed course. Option 3 subtracts the wrong way round (it removes students who take a course outside $Course$). Option 4 again gives students with at least one listed course."
+  },
+  {
+    "id": "db-009",
+    "topic": "relational-algebra-calculus",
+    "type": "nat",
+    "marks": 2,
+    "q": "Relation $Takes(sid, cid)$ holds the pairs (1,C1), (1,C2), (1,C3), (2,C1), (2,C3), (3,C1), (3,C2), (4,C1), (4,C2), (4,C3), (4,C4), (5,C3). Relation $Core(cid)$ holds C1 and C3. How many tuples are in $Takes \\div Core$?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "$Takes \\div Core$ returns each sid that is paired with both C1 and C3.\n\n- sid 1: C1, C2, C3. Yes.\n- sid 2: C1, C3. Yes.\n- sid 3: C1, C2. No C3.\n- sid 4: C1, C2, C3, C4. Yes (extra courses do not matter).\n- sid 5: C3 only. No.\n\nResult {1, 2, 4}: 3 tuples."
+  },
+  {
+    "id": "db-010",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$R(A, B)$ has $m$ tuples and $S(B, C)$ has $n$ tuples. $B$ is the primary key of $S$, and $R.B$ is a foreign key referencing $S$ that is declared NOT NULL. How many tuples does $R \\bowtie S$ have?",
+    "options": [
+      "Exactly $n$",
+      "Exactly $\\min(m, n)$",
+      "Between 0 and $m \\cdot n$",
+      "Exactly $m$"
+    ],
+    "answer": 3,
+    "explanation": "Each tuple of $R$ has a non-null B value, and referential integrity guarantees that value exists in $S$. Since B is the key of $S$, it matches exactly one $S$ tuple. So every $R$ tuple produces exactly one joined tuple: $m$ tuples."
+  },
+  {
+    "id": "db-011",
+    "topic": "relational-algebra-calculus",
+    "type": "msq",
+    "marks": 2,
+    "q": "Assume set semantics. $R$ and $S$ are union-compatible relations with attributes including $A$ and $B$; $c_1$ and $c_2$ are selection conditions. Which equivalences hold for all instances?",
+    "options": [
+      "$\\sigma_{c_1 \\wedge c_2}(R) = \\sigma_{c_1}(\\sigma_{c_2}(R))$",
+      "$\\pi_{A}(R - S) = \\pi_{A}(R) - \\pi_{A}(S)$",
+      "$\\pi_{A}(R \\cup S) = \\pi_{A}(R) \\cup \\pi_{A}(S)$",
+      "$\\pi_{A}(\\pi_{A,B}(R)) = \\pi_{A}(R)$"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "Option 1: a cascade of selections equals one selection on the conjunction. True.\n\nOption 2: false. Take $R = \\{(1, x)\\}$, $S = \\{(1, y)\\}$ on (A, B). $R - S = R$, so the left side is {1}. The right side is {1} - {1} = empty.\n\nOption 3: projection distributes over union. True.\n\nOption 4: a cascade of projections reduces to the last (smallest) one. True."
+  },
+  {
+    "id": "db-012",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which tuple relational calculus expression is unsafe?",
+    "options": [
+      "$\\{t \\mid t \\in R \\wedge t[A] > 5\\}$",
+      "$\\{t \\mid \\exists s \\in R\\, (t[A] = s[A])\\}$ where $t$ has only attribute $A$",
+      "$\\{t \\mid t \\in R \\wedge \\neg (t \\in S)\\}$",
+      "$\\{t \\mid \\neg (t \\in R)\\}$"
+    ],
+    "answer": 3,
+    "explanation": "An expression is safe when every value in the result comes from the domain of the relations and constants in the expression. $\\{t \\mid \\neg (t \\in R)\\}$ asks for every possible tuple that is not in R, which is an infinite set over an unbounded domain. The others restrict $t$ to values that appear in R."
+  },
+  {
+    "id": "db-013",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Relation $Emp(name, dept, salary)$. What does this tuple calculus query return?\n\n$$\\{t \\mid \\exists e \\in Emp\\,(t[name] = e[name] \\wedge \\forall u \\in Emp\\,(u[dept] \\ne e[dept] \\vee u[salary] \\le e[salary]))\\}$$",
+    "options": [
+      "Names of employees who earn the highest salary in their own department (ties included)",
+      "Names of employees who earn the highest salary in the whole company",
+      "Names of employees who earn more than everyone in other departments",
+      "Names of employees in departments where everyone earns the same"
+    ],
+    "answer": 0,
+    "explanation": "For employee $e$, the inner condition requires that every employee $u$ either is in a different department or earns at most $e$'s salary. So $e$'s salary is at least that of everyone in the same department, which means $e$ is a top earner of that department. Ties pass because the test is $\\le$. Employees in other departments are ignored, so it is not the company-wide maximum."
+  },
+  {
+    "id": "db-014",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$R(A, B)$ = {(1,10), (2,20), (3,10), (4,40)} and $S(B, C)$ = {(10,5), (10,6), (30,7), (40,8)}. How many tuples are in the full outer join of $R$ and $S$ on $R.B = S.B$?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "answer": 2,
+    "explanation": "Inner join matches: (1,10) with 2 tuples, (3,10) with 2 tuples, (4,40) with 1 tuple: 5 tuples.\n\nUnmatched R tuple (2,20) is padded with NULLs: 1 tuple.\n\nUnmatched S tuple (30,7) is padded with NULLs: 1 tuple.\n\nTotal 5 + 1 + 1 = 7."
+  },
+  {
+    "id": "db-015",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Union-compatible relations $R$ and $S$ have 8 and 5 tuples respectively. Under set semantics, what are the minimum and maximum possible numbers of tuples in $R \\cup S$?",
+    "options": [
+      "5 and 13",
+      "8 and 13",
+      "0 and 13",
+      "8 and 40"
+    ],
+    "answer": 1,
+    "explanation": "The union contains all 8 tuples of R at least, reached when every tuple of S is also in R. It contains at most 8 + 5 = 13, reached when the relations share no tuple."
+  },
+  {
+    "id": "db-016",
+    "topic": "relational-algebra-calculus",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Relation $Emp(name, dept, sal)$:\n\n| name | dept | sal |\n|---|---|---|\n| Asha | D1 | 50 |\n| Bala | D1 | 70 |\n| Chen | D2 | 60 |\n| Dev | D2 | 60 |\n| Esha | D3 | 40 |\n| Farid | D1 | 70 |\n\nEvaluate\n$$\\pi_{name}(Emp) - \\pi_{e_1.name}\\big(\\rho_{e_1}(Emp) \\bowtie_{e_1.dept = e_2.dept \\,\\wedge\\, e_1.sal < e_2.sal} \\rho_{e_2}(Emp)\\big)$$",
+    "options": [
+      "{Bala, Farid}",
+      "{Bala, Chen, Dev, Farid}",
+      "{Bala, Chen, Dev, Esha, Farid}",
+      "{Asha}"
+    ],
+    "answer": 2,
+    "explanation": "The join keeps pairs where $e_1$ earns strictly less than someone in the same department. In D1, Asha (50) is below Bala and Farid (70). In D2, Chen and Dev both earn 60, so neither is strictly below the other. D3 has only Esha. So the subtracted set is {Asha}.\n\nAll names minus {Asha} = {Bala, Chen, Dev, Esha, Farid}: the top earners of each department, ties included, and single-member departments included."
+  },
+  {
+    "id": "db-017",
+    "topic": "sql",
+    "type": "nat",
+    "marks": 2,
+    "q": "Table Emp(eid, dept, salary):\n\n| eid | dept | salary |\n|---|---|---|\n| 1 | A | 100 |\n| 2 | A | NULL |\n| 3 | B | 200 |\n| 4 | NULL | 150 |\n| 5 | B | NULL |\n| 6 | C | 300 |\n| 7 | A | 100 |\n\nWhat value does this query return?\n\n```sql\nSELECT COUNT(*) + COUNT(salary) + COUNT(DISTINCT dept)\nFROM Emp;\n```",
+    "answer": {
+      "min": 15,
+      "max": 15
+    },
+    "explanation": "COUNT(*) counts rows regardless of NULLs: 7.\n\nCOUNT(salary) skips NULLs: rows 1, 3, 4, 6, 7 give 5.\n\nCOUNT(DISTINCT dept) skips NULL and counts distinct values A, B, C: 3.\n\n7 + 5 + 3 = 15."
+  },
+  {
+    "id": "db-018",
+    "topic": "sql",
+    "type": "nat",
+    "marks": 2,
+    "q": "Table Sales(region, product, amount):\n\n| region | product | amount |\n|---|---|---|\n| North | P1 | 40 |\n| North | P2 | 70 |\n| South | P1 | 120 |\n| East | P1 | 30 |\n| East | P2 | 30 |\n| East | P3 | 50 |\n| West | P2 | 60 |\n| West | P3 | NULL |\n| South | P3 | NULL |\n\nHow many rows does this query return?\n\n```sql\nSELECT region\nFROM Sales\nGROUP BY region\nHAVING SUM(amount) > 100 AND COUNT(*) >= 2;\n```",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "Per region (SUM ignores NULLs, COUNT(*) counts all rows):\n\n- North: sum 110, count 2. Passes.\n- South: sum 120, count 2 (the NULL row still counts in COUNT(*)). Passes.\n- East: sum 110, count 3. Passes.\n- West: sum 60, count 2. Fails the sum test.\n\n3 rows."
+  },
+  {
+    "id": "db-019",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Table Emp(name, dept, salary) has 10 rows, all with non-null salary, and no row has dept = 'Z'. What does this query return under standard SQL?\n\n```sql\nSELECT name\nFROM Emp\nWHERE salary > ALL (SELECT salary FROM Emp WHERE dept = 'Z');\n```",
+    "options": [
+      "No rows, because the subquery is empty",
+      "An error, because ALL needs a non-empty subquery",
+      "Only the employee(s) with the highest salary",
+      "All 10 rows"
+    ],
+    "answer": 3,
+    "explanation": "`x > ALL (S)` is true when the comparison holds for every element of S. If S is empty there is nothing to violate it, so the condition is true for every row (vacuous truth). All 10 names are returned. The opposite trap: `x > ANY (empty)` is false for every row."
+  },
+  {
+    "id": "db-020",
+    "topic": "sql",
+    "type": "nat",
+    "marks": 2,
+    "q": "Table E(eid, dept, salary):\n\n| eid | dept | salary |\n|---|---|---|\n| 1 | HR | 30 |\n| 2 | HR | 50 |\n| 3 | HR | 40 |\n| 4 | IT | 80 |\n| 5 | IT | 80 |\n| 6 | IT | 50 |\n| 7 | OPS | 45 |\n| 8 | OPS | 45 |\n| 9 | IT | 90 |\n\nWhat number does this query return?\n\n```sql\nSELECT COUNT(*)\nFROM E e\nWHERE e.salary > (SELECT AVG(x.salary)\n                  FROM E x\n                  WHERE x.dept = e.dept);\n```",
+    "answer": {
+      "min": 4,
+      "max": 4
+    },
+    "explanation": "The subquery is correlated: it computes the average of the current row's department.\n\n- HR average = (30 + 50 + 40) / 3 = 40. Only 50 is above: 1 row.\n- IT average = (80 + 80 + 50 + 90) / 4 = 75. 80, 80, 90 are above: 3 rows.\n- OPS average = 45. Nobody is strictly above: 0 rows.\n\nTotal 4."
+  },
+  {
+    "id": "db-021",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 1,
+    "q": "R(a) contains 1, 2, 3. S(b) contains 2 and NULL. How many rows does this query return?\n\n```sql\nSELECT a FROM R WHERE a NOT IN (SELECT b FROM S);\n```",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "answer": 0,
+    "explanation": "`a NOT IN (2, NULL)` means `a <> 2 AND a <> NULL`. Any comparison with NULL is UNKNOWN, so for a = 1 or a = 3 the condition is TRUE AND UNKNOWN = UNKNOWN, and for a = 2 it is FALSE. WHERE keeps only TRUE rows, so nothing is returned. A NOT EXISTS version would return 1 and 3."
+  },
+  {
+    "id": "db-022",
+    "topic": "sql",
+    "type": "msq",
+    "marks": 2,
+    "q": "Tables Student(sid, name) with key sid, and Enroll(sid, cid) with key (sid, cid). Names are not unique. Query Q is\n\n```sql\nSELECT name FROM Student S\nWHERE S.sid IN (SELECT sid FROM Enroll);\n```\n\nWhich queries return exactly the same multiset of rows as Q on every database instance?",
+    "options": [
+      "`SELECT name FROM Student S WHERE EXISTS (SELECT * FROM Enroll E WHERE E.sid = S.sid);`",
+      "`SELECT S.name FROM Student S, Enroll E WHERE S.sid = E.sid;`",
+      "`SELECT name FROM Student S WHERE S.sid = ANY (SELECT sid FROM Enroll);`",
+      "`SELECT DISTINCT S.name FROM Student S JOIN Enroll E ON S.sid = E.sid;`"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Q returns each student who has at least one enrollment exactly once (one row per Student row).\n\nOption 1: EXISTS tests the same condition once per student row. Same.\n\nOption 2: the join produces one row per enrollment, so a student with two courses appears twice. Different.\n\nOption 3: `= ANY` is the same as IN. Same.\n\nOption 4: DISTINCT merges two different students who share a name, while Q lists both. Different. Example: students (1, Ravi) and (2, Ravi) both enrolled: Q gives Ravi twice, option 4 gives it once."
+  },
+  {
+    "id": "db-023",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Dept(did, dname) has rows (1, CS), (2, EE), (3, ME), (4, CE). Prof(pid, did) has rows (10, 1), (11, 1), (12, 1), (13, 2), (14, 5), (15, NULL). How many rows does this query return?\n\n```sql\nSELECT D.dname, P.pid\nFROM Dept D LEFT OUTER JOIN Prof P ON D.did = P.did;\n```",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "answer": 2,
+    "explanation": "Every Dept row appears at least once. CS matches 3 professors (3 rows), EE matches 1 (1 row), ME and CE match none and appear once each with NULL pid (2 rows). Professors 14 and 15 do not match any department and a left join does not keep unmatched right rows. Total 3 + 1 + 2 = 6."
+  },
+  {
+    "id": "db-024",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which query is invalid in standard SQL?",
+    "options": [
+      "`SELECT dept FROM Emp GROUP BY dept HAVING AVG(salary) > 50;`",
+      "`SELECT dept, COUNT(*) FROM Emp WHERE salary > 50 GROUP BY dept;`",
+      "`SELECT dept, MAX(salary) FROM Emp GROUP BY dept;`",
+      "`SELECT dept FROM Emp WHERE AVG(salary) > 50 GROUP BY dept;`"
+    ],
+    "answer": 3,
+    "explanation": "WHERE filters individual rows before grouping, so an aggregate like AVG(salary) cannot appear there. Conditions on groups go in HAVING. The other three are valid."
+  },
+  {
+    "id": "db-025",
+    "topic": "sql",
+    "type": "nat",
+    "marks": 1,
+    "q": "R(a) contains the values 1, 1, 2, 3, 5 and S(a) contains 2, 3, 3, 4. How many rows does this query return?\n\n```sql\nSELECT a FROM R\nUNION\nSELECT a FROM S;\n```",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "UNION (without ALL) removes duplicates. The distinct values across both tables are 1, 2, 3, 4, 5: 5 rows. UNION ALL would return 9."
+  },
+  {
+    "id": "db-026",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Table T(a, b) has rows (5, 1), (15, NULL), (NULL, 2), (20, 3), (NULL, NULL), (10, 4). What does this query return?\n\n```sql\nSELECT COUNT(*) FROM T\nWHERE NOT (a > 10) OR b > 2;\n```",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 1,
+    "explanation": "Evaluate with three-valued logic; only TRUE rows pass.\n\n- (5, 1): NOT(F) = T. Passes.\n- (15, NULL): NOT(T) = F; NULL > 2 = U; F OR U = U. Fails.\n- (NULL, 2): NOT(U) = U; 2 > 2 = F; U OR F = U. Fails.\n- (20, 3): F OR T = T. Passes.\n- (NULL, NULL): U OR U = U. Fails.\n- (10, 4): NOT(F) = T. Passes.\n\nCount = 3."
+  },
+  {
+    "id": "db-027",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Column x of table T holds 10, 20, NULL, 30, NULL. What do `AVG(x)` and `SUM(x) / COUNT(*)` evaluate to?",
+    "options": [
+      "20 and 12",
+      "12 and 12",
+      "20 and 20",
+      "NULL and NULL"
+    ],
+    "answer": 0,
+    "explanation": "AVG ignores NULLs: (10 + 20 + 30) / 3 = 20. SUM(x) also ignores NULLs and gives 60, but COUNT(*) counts all 5 rows, so 60 / 5 = 12."
+  },
+  {
+    "id": "db-028",
+    "topic": "sql",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Table Emp(name, salary) has rows (P, 90), (Q, 70), (R, 90), (S, 60), (T, 70), (U, 50). Which names does this query return?\n\n```sql\nSELECT e1.name\nFROM Emp e1\nWHERE 2 = (SELECT COUNT(DISTINCT e2.salary)\n           FROM Emp e2\n           WHERE e2.salary >= e1.salary);\n```",
+    "options": [
+      "P and R",
+      "S only",
+      "Q only",
+      "Q and T"
+    ],
+    "answer": 3,
+    "explanation": "For each row, the subquery counts distinct salaries greater than or equal to it. For 90 the count is 1 (just 90). For 70 it is 2 (90, 70). For 60 it is 3, for 50 it is 4. So the query returns everyone earning the second highest distinct salary, 70: Q and T."
+  },
+  {
+    "id": "db-029",
+    "topic": "normalization",
+    "type": "nat",
+    "marks": 2,
+    "q": "Relation $R(A, B, C, D, E, F)$ has functional dependencies $AB \\to C$, $C \\to D$, $D \\to A$, $E \\to F$. How many candidate keys does $R$ have?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "B and E never appear on a right side, so every key contains both. $\\{B, E\\}^+ = \\{B, E, F\\}$, not a key.\n\nAdd one more attribute:\n- $ABE$: $AB \\to C$, $C \\to D$, so closure is everything. Key.\n- $BCE$: $C \\to D \\to A$, so closure is everything. Key.\n- $BDE$: $D \\to A$, then $AB \\to C$. Key.\n- $BEF$: closure $\\{B, E, F\\}$. Not a key.\n\nAny larger set containing B, E contains one of A, C, D and so is not minimal. Candidate keys: ABE, BCE, BDE, so 3."
+  },
+  {
+    "id": "db-030",
+    "topic": "normalization",
+    "type": "nat",
+    "marks": 2,
+    "q": "Relation $R(A, B, C, D, E, F)$ has functional dependencies $A \\to B$, $B \\to C$, $C \\to A$, $DE \\to F$, $F \\to D$. How many candidate keys does $R$ have?",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "The attributes split into two independent groups.\n\nGroup {A, B, C}: A, B, C determine each other in a cycle, so any one of them covers the group. 3 choices.\n\nGroup {D, E, F}: E is never on a right side, so it is in every key. $\\{E\\}^+ = \\{E\\}$. $DE \\to F$ makes DE enough, and $F \\to D$ makes EF enough. 2 choices.\n\nA key is one choice from each group: $3 \\times 2 = 6$ (ADE, BDE, CDE, AEF, BEF, CEF)."
+  },
+  {
+    "id": "db-031",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Relation $R(A, B, C)$ with functional dependencies $A \\to B$ and $B \\to C$ is in which highest normal form?",
+    "options": [
+      "1NF",
+      "2NF",
+      "3NF",
+      "BCNF"
+    ],
+    "answer": 1,
+    "explanation": "The only candidate key is A. A single-attribute key cannot have a proper subset that causes a partial dependency, so R is in 2NF. $B \\to C$ has B not a superkey and C not prime: a transitive dependency, so R is not in 3NF."
+  },
+  {
+    "id": "db-032",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Relation $R(A, B, C, D)$ has functional dependencies $AB \\to CD$ and $D \\to B$. What is the highest normal form $R$ satisfies?",
+    "options": [
+      "1NF",
+      "2NF",
+      "3NF",
+      "BCNF"
+    ],
+    "answer": 2,
+    "explanation": "Keys: A is never on a right side. $A^+ = A$. $AB^+ = ABCD$, so AB is a key. $AD^+$: $D \\to B$ gives ABD, then $AB \\to CD$, so AD is a key. AC gives only AC. Candidate keys: AB, AD. Prime attributes: A, B, D. Non-prime: C.\n\n2NF: C depends on the full key; no proper subset of a key (A, B, D alone) determines C. OK.\n\n3NF: $D \\to B$ has D not a superkey, but B is prime, so allowed. OK.\n\nBCNF: $D \\to B$ violates it because D is not a superkey. So R is in 3NF but not BCNF."
+  },
+  {
+    "id": "db-033",
+    "topic": "normalization",
+    "type": "msq",
+    "marks": 2,
+    "q": "Given $F = \\{A \\to B,\\; BC \\to D,\\; D \\to E,\\; E \\to C\\}$ on $R(A, B, C, D, E)$, which dependencies are in $F^+$?",
+    "options": [
+      "$AC \\to D$",
+      "$AD \\to C$",
+      "$B \\to D$",
+      "$AE \\to D$"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Compute closures.\n\n- $\\{A, C\\}^+$: $A \\to B$ gives ABC, $BC \\to D$ gives D, then E. Contains D. Yes.\n- $\\{A, D\\}^+$: $D \\to E$, $E \\to C$ gives C. Yes.\n- $\\{B\\}^+ = \\{B\\}$: no FD has B alone on the left. No.\n- $\\{A, E\\}^+$: $E \\to C$, $A \\to B$, then $BC \\to D$. Yes."
+  },
+  {
+    "id": "db-034",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which set is a minimal cover of $F = \\{A \\to BC,\\; B \\to C,\\; AB \\to D\\}$?",
+    "options": [
+      "$\\{A \\to B,\\; B \\to C,\\; A \\to D\\}$",
+      "$\\{A \\to B,\\; A \\to C,\\; A \\to D\\}$",
+      "$\\{A \\to B,\\; B \\to C,\\; B \\to D\\}$",
+      "$\\{A \\to C,\\; B \\to C,\\; AB \\to D\\}$"
+    ],
+    "answer": 0,
+    "explanation": "Step 1, single right sides: $A \\to B$, $A \\to C$, $B \\to C$, $AB \\to D$.\n\nStep 2, extraneous left attributes: in $AB \\to D$, $A^+$ already contains B, so B is extraneous and the FD becomes $A \\to D$.\n\nStep 3, redundant FDs: $A \\to C$ follows from $A \\to B$ and $B \\to C$, so drop it.\n\nResult $\\{A \\to B, B \\to C, A \\to D\\}$. Option 2 loses $B \\to C$, option 3 adds $B \\to D$ which F does not imply, option 4 loses $A \\to B$."
+  },
+  {
+    "id": "db-035",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 2,
+    "q": "$R(A, B, C, D, E)$ has $F = \\{A \\to B,\\; C \\to D,\\; AC \\to E\\}$. Which decomposition is both lossless-join and dependency-preserving?",
+    "options": [
+      "$\\{AB,\\; CD,\\; CE\\}$",
+      "$\\{AB,\\; CD,\\; ACE\\}$",
+      "$\\{ABE,\\; CD\\}$",
+      "$\\{AB,\\; BCDE\\}$"
+    ],
+    "answer": 1,
+    "explanation": "The only key of R is AC.\n\nOption 2: AB holds $A \\to B$, CD holds $C \\to D$, ACE holds $AC \\to E$, so all FDs are preserved. ACE contains the key AC, and joining AB (common A, key of AB) and CD (common C, key of CD) onto ACE is lossless. Both properties hold.\n\nOption 1: no table holds A and C together, so $AC \\to E$ is lost, and no component contains a key, so the join is lossy.\n\nOption 3: ABE and CD share no attribute, so the join is a cross product: lossy.\n\nOption 4: common attribute B is not a key of either part ($B^+ = B$): lossy."
+  },
+  {
+    "id": "db-036",
+    "topic": "normalization",
+    "type": "msq",
+    "marks": 2,
+    "q": "$R(A, B, C, D)$ has $F = \\{A \\to B,\\; B \\to C,\\; C \\to D\\}$ and is decomposed into $R_1(A, B)$, $R_2(A, C)$, $R_3(C, D)$. Which statements are true?",
+    "options": [
+      "The decomposition is lossless-join.",
+      "The decomposition is dependency-preserving.",
+      "Each of $R_1$, $R_2$, $R_3$ is in BCNF.",
+      "The original relation $R$ is in 2NF."
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "Lossless: $R_1 \\cap R_2 = A$, a key of $R_1$, so $R_1 \\bowtie R_2$ (ABC) is lossless. $ABC \\cap R_3 = C$, a key of $R_3$. Lossless overall.\n\nDependency preservation: projected FDs are $A \\to B$ on $R_1$, $A \\to C$ on $R_2$, $C \\to D$ on $R_3$. From these, $\\{B\\}^+ = \\{B\\}$, so $B \\to C$ is lost. Not preserving.\n\nBCNF: every two-attribute relation is in BCNF.\n\n2NF: R's only key is A, a single attribute, so no partial dependency exists. R is in 2NF (but not 3NF)."
+  },
+  {
+    "id": "db-037",
+    "topic": "normalization",
+    "type": "nat",
+    "marks": 1,
+    "q": "Relation $R(A, B, C, D)$ has $A$ as its only candidate key. How many superkeys does $R$ have?",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "A superkey is any attribute set that contains a candidate key. Every superkey must contain A, and each of B, C, D can be in or out independently: $2^3 = 8$."
+  },
+  {
+    "id": "db-038",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Table Ref(id, parent) has primary key id, and parent is a foreign key referencing Ref(id) with ON DELETE CASCADE. Its rows (id, parent) are (1, NULL), (2, 1), (3, 1), (4, 2), (5, 4), (6, 3), (7, NULL), (8, 7). How many rows are deleted in total by `DELETE FROM Ref WHERE id = 2;`?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "5"
+    ],
+    "answer": 2,
+    "explanation": "Deleting id 2 cascades to rows whose parent is 2, which is id 4. Deleting 4 cascades to id 5 (parent 4). No row has parent 5. Rows 1, 3, 6, 7, 8 are untouched. Deleted: 2, 4, 5, so 3 rows."
+  },
+  {
+    "id": "db-039",
+    "topic": "normalization",
+    "type": "nat",
+    "marks": 2,
+    "q": "Relation $R(A, B, C, D, E)$ has exactly two candidate keys, $AB$ and $BC$. How many superkeys does $R$ have?",
+    "answer": {
+      "min": 12,
+      "max": 12
+    },
+    "explanation": "Supersets of AB: the other 3 attributes are free, $2^3 = 8$.\nSupersets of BC: $2^3 = 8$.\nSupersets of both, that is of ABC: $2^2 = 4$.\n\nInclusion-exclusion: $8 + 8 - 4 = 12$."
+  },
+  {
+    "id": "db-040",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "With $F = \\{A \\to B,\\; B \\to C,\\; CD \\to E\\}$, what is $\\{A\\}^+$?",
+    "options": [
+      "$\\{A, B\\}$",
+      "$\\{A, B, C\\}$",
+      "$\\{A, B, C, E\\}$",
+      "$\\{A, B, C, D, E\\}$"
+    ],
+    "answer": 1,
+    "explanation": "Start with A. $A \\to B$ adds B. $B \\to C$ adds C. $CD \\to E$ needs D as well, which is not in the set, so it does not fire. $\\{A\\}^+ = \\{A, B, C\\}$."
+  },
+  {
+    "id": "db-041",
+    "topic": "normalization",
+    "type": "msq",
+    "marks": 1,
+    "q": "Relation $R(A, B, C, D, E)$ has $F = \\{AB \\to C,\\; C \\to A,\\; A \\to E\\}$. Which attributes are prime?",
+    "options": [
+      "A",
+      "C",
+      "D",
+      "E"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "B and D never appear on a right side, so both are in every key. $\\{B, D\\}^+ = \\{B, D\\}$. Adding A: $AB \\to C$, $A \\to E$, so ABD is a key. Adding C: $C \\to A$, then everything, so BCD is a key. Adding E gives only BDE. Candidate keys ABD and BCD, so prime attributes are A, B, C, D. E is non-prime."
+  },
+  {
+    "id": "db-042",
+    "topic": "normalization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Relation Order(order_id, item_id, qty, item_name) has key (order_id, item_id) and the dependency $item\\_id \\to item\\_name$. Which statement is correct?",
+    "options": [
+      "It is in 2NF because item_name depends on part of a key.",
+      "It is in BCNF because every attribute depends on the key.",
+      "It violates 1NF because it has a composite key.",
+      "It violates 2NF because the non-prime attribute item_name depends on a proper subset of the key."
+    ],
+    "answer": 3,
+    "explanation": "item_name is not part of any candidate key, and it is determined by item_id alone, a proper subset of the key (order_id, item_id). That is a partial dependency, which 2NF forbids. Fix: move (item_id, item_name) into its own table."
+  },
+  {
+    "id": "db-043",
+    "topic": "indexing",
+    "type": "nat",
+    "marks": 2,
+    "q": "A B+ tree is built on a key of 10 bytes. Disk block size is 1024 bytes and a block pointer is 8 bytes. What is the maximum number of child pointers an internal node can hold (the order $p$)?",
+    "answer": {
+      "min": 57,
+      "max": 57
+    },
+    "explanation": "An internal node with $p$ child pointers holds $p - 1$ keys:\n$$8p + 10(p - 1) \\le 1024 \\Rightarrow 18p \\le 1034 \\Rightarrow p \\le 57.44$$\nSo $p = 57$. Check: $57 \\times 8 + 56 \\times 10 = 456 + 560 = 1016 \\le 1024$, while 58 gives 1034."
+  },
+  {
+    "id": "db-044",
+    "topic": "indexing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "B+ tree leaf nodes store (key, record pointer) pairs plus one block pointer to the next leaf. Key = 12 bytes, record pointer = 8 bytes, block pointer = 6 bytes, block size = 512 bytes. What is the maximum number of keys a leaf can hold?",
+    "options": [
+      "24",
+      "25",
+      "26",
+      "29"
+    ],
+    "answer": 1,
+    "explanation": "With $q$ keys per leaf:\n$$q(12 + 8) + 6 \\le 512 \\Rightarrow 20q \\le 506 \\Rightarrow q \\le 25.3$$\nSo $q = 25$. 29 is the internal-node order for the same sizes ($6p + 12(p-1) \\le 512$), a common mix-up."
+  },
+  {
+    "id": "db-045",
+    "topic": "indexing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A file has 50,000 fixed-length records of 120 bytes each, stored unspanned in 1024-byte blocks. How many blocks does the file occupy?",
+    "options": [
+      "5860",
+      "6250",
+      "5000",
+      "6000"
+    ],
+    "answer": 1,
+    "explanation": "Blocking factor with unspanned records = $\\lfloor 1024 / 120 \\rfloor = 8$ records per block (the remaining 64 bytes are wasted). Blocks = $\\lceil 50000 / 8 \\rceil = 6250$. 5860 is what you get by wrongly assuming spanned storage."
+  },
+  {
+    "id": "db-046",
+    "topic": "indexing",
+    "type": "nat",
+    "marks": 2,
+    "q": "A data file of 30,000 records, each 100 bytes, is sorted on its key and stored unspanned in 1024-byte blocks. A single-level primary (sparse) index has one entry per data block; each entry is a 9-byte key plus a 7-byte block pointer. Using binary search on the index, how many block accesses are needed in the worst case to fetch a record by key?",
+    "answer": {
+      "min": 7,
+      "max": 7
+    },
+    "explanation": "Data blocking factor = $\\lfloor 1024/100 \\rfloor = 10$, so the file has $30000 / 10 = 3000$ blocks.\n\nIndex entries = 3000 (one per data block). Entry size 16 bytes, index blocking factor = $\\lfloor 1024/16 \\rfloor = 64$. Index blocks = $\\lceil 3000/64 \\rceil = 47$.\n\nBinary search over 47 index blocks: $\\lceil \\log_2 47 \\rceil = 6$ accesses, plus 1 data block access = 7."
+  },
+  {
+    "id": "db-047",
+    "topic": "indexing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A secondary index is built on a candidate key that is not the field the file is sorted on. Which statement is correct?",
+    "options": [
+      "It can be sparse, with one entry per block.",
+      "It cannot be built without re-sorting the file.",
+      "It must be a clustering index.",
+      "It must be dense, with one entry per record."
+    ],
+    "answer": 3,
+    "explanation": "A sparse index relies on the file being ordered by the indexed field, so that one entry per block tells you where a range of keys lives. For a non-ordering field the records are scattered, so every record needs its own index entry: the index is dense."
+  },
+  {
+    "id": "db-048",
+    "topic": "indexing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a B-tree each node has at most 4 children (and so at most 3 keys). What is the maximum number of keys stored in a B-tree with 3 levels (root at level 1)?",
+    "options": [
+      "21",
+      "48",
+      "63",
+      "84"
+    ],
+    "answer": 2,
+    "explanation": "With every node full, level 1 has 1 node, level 2 has 4, level 3 has 16: 21 nodes. Each holds 3 keys: $21 \\times 3 = 63$. Equivalently $4^3 - 1 = 63$."
+  },
+  {
+    "id": "db-049",
+    "topic": "indexing",
+    "type": "nat",
+    "marks": 2,
+    "q": "A B-tree has maximum 5 children per node. Every non-root node must have at least $\\lceil 5/2 \\rceil$ children if internal, and every non-root node must hold at least $\\lceil 5/2 \\rceil - 1$ keys. The root needs at least 1 key. What is the minimum number of keys in such a B-tree with exactly 3 levels?",
+    "answer": {
+      "min": 17,
+      "max": 17
+    },
+    "explanation": "Minimum children for internal non-root nodes = 3, minimum keys per non-root node = 2.\n\n- Level 1: root with 1 key and 2 children.\n- Level 2: 2 nodes, each with 2 keys and 3 children: 4 keys.\n- Level 3: $2 \\times 3 = 6$ leaves, each with 2 keys: 12 keys.\n\nTotal = 1 + 4 + 12 = 17."
+  },
+  {
+    "id": "db-050",
+    "topic": "indexing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which statements comparing B-trees and B+ trees are correct?",
+    "options": [
+      "In a B+ tree, every key value appears in some leaf node.",
+      "For the same block size and key size, a B+ tree internal node can usually hold more keys than a B-tree node.",
+      "In a B-tree, a successful search always ends at a leaf.",
+      "B+ tree leaves are linked, which makes range queries efficient."
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Option 1: true. Internal nodes of a B+ tree only route searches; all keys with their data pointers live in the leaves.\n\nOption 2: true. B+ tree internal nodes carry no record pointers, so more (key, child pointer) pairs fit, giving higher fan-out.\n\nOption 3: false. A B-tree stores data pointers in internal nodes too, so a search can stop at an internal node.\n\nOption 4: true. Leaves are chained, so after finding the start of a range you scan leaves sequentially."
+  },
+  {
+    "id": "db-051",
+    "topic": "indexing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The first level of a multilevel index occupies 4096 blocks, and each index block holds 64 entries. Index levels are added until the top level fits in one block. How many block accesses are needed to fetch a record (index levels plus one data block)?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "13"
+    ],
+    "answer": 1,
+    "explanation": "Level 1: 4096 blocks. Level 2: $4096/64 = 64$ blocks. Level 3: $64/64 = 1$ block. So there are 3 index levels. Searching reads one block per level plus one data block: 4. The answer 13 comes from binary search on a single level ($\\log_2 4096 = 12$, plus 1)."
+  },
+  {
+    "id": "db-052",
+    "topic": "transactions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider the schedule\n\n$S: r_2(A),\\; r_1(B),\\; w_2(A),\\; r_3(A),\\; w_1(B),\\; w_3(B),\\; w_2(C),\\; r_3(C)$\n\nWhich statement is correct?",
+    "options": [
+      "S is not conflict serializable.",
+      "S is conflict equivalent only to the serial order $T_2, T_1, T_3$.",
+      "S is conflict equivalent to both $T_1, T_2, T_3$ and $T_2, T_1, T_3$, and to no other serial order.",
+      "S is conflict equivalent to every serial order of the three transactions."
+    ],
+    "answer": 2,
+    "explanation": "Conflicting pairs (different transactions, same item, at least one write):\n\n- $w_2(A)$ before $r_3(A)$: edge $T_2 \\to T_3$.\n- $w_1(B)$ before $w_3(B)$, and $r_1(B)$ before $w_3(B)$: edge $T_1 \\to T_3$.\n- $w_2(C)$ before $r_3(C)$: edge $T_2 \\to T_3$.\n- $r_2(A)$ and $r_3(A)$ are both reads: no edge.\n\nThe graph has edges $T_1 \\to T_3$ and $T_2 \\to T_3$ and no cycle. $T_1$ and $T_2$ have no edge between them, so both topological orders $T_1 T_2 T_3$ and $T_2 T_1 T_3$ are valid."
+  },
+  {
+    "id": "db-053",
+    "topic": "transactions",
+    "type": "nat",
+    "marks": 2,
+    "q": "$T_1: r_1(A),\\; w_1(A),\\; r_1(B)$ and $T_2: r_2(A),\\; w_2(B)$. Considering all interleavings that keep each transaction's own operation order, how many are conflict serializable?",
+    "answer": {
+      "min": 7,
+      "max": 7
+    },
+    "explanation": "Total interleavings: $\\binom{5}{2} = 10$.\n\nConflicting pairs: $w_1(A)$ with $r_2(A)$, and $r_1(B)$ with $w_2(B)$. ($r_1(A)$ and $r_2(A)$ do not conflict.) A cycle needs the two pairs to point opposite ways.\n\nCase 1: $w_1(A) < r_2(A)$ ($T_1 \\to T_2$) and $w_2(B) < r_1(B)$ ($T_2 \\to T_1$). Then $w_1(A) < r_2(A) < w_2(B) < r_1(B)$ and $r_1(A)$ comes first: 1 schedule.\n\nCase 2: $r_2(A) < w_1(A)$ and $r_1(B) < w_2(B)$. Then $r_2(A) < w_1(A) < r_1(B) < w_2(B)$, and $r_1(A)$ can go before or after $r_2(A)$: 2 schedules.\n\nNon-serializable = 3, so conflict serializable = 10 - 3 = 7."
+  },
+  {
+    "id": "db-054",
+    "topic": "transactions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider $S: r_2(X),\\; w_1(X),\\; w_2(X),\\; w_3(X)$. Which statement is correct?",
+    "options": [
+      "S is conflict serializable and view serializable.",
+      "S is neither conflict serializable nor view serializable.",
+      "S is conflict serializable but not view serializable.",
+      "S is view serializable but not conflict serializable."
+    ],
+    "answer": 3,
+    "explanation": "Conflicts: $r_2(X)$ before $w_1(X)$ gives $T_2 \\to T_1$; $w_1(X)$ before $w_2(X)$ gives $T_1 \\to T_2$. That is a cycle, so S is not conflict serializable.\n\nView test against serial order $T_2, T_1, T_3$: in S, $T_2$ reads the initial X and $T_3$ does the final write. In the serial order, $T_2$ runs first so it reads the initial X, there are no other reads, and $T_3$ writes last. Same reads-from and same final writer, so S is view serializable. This is possible because $w_1(X)$ and $w_3(X)$ are blind writes."
+  },
+  {
+    "id": "db-055",
+    "topic": "transactions",
+    "type": "msq",
+    "marks": 2,
+    "q": "Schedule $S: w_1(A),\\; r_2(A),\\; w_2(B),\\; r_1(C),\\; c_1,\\; c_2$. Which properties does S have?",
+    "options": [
+      "Recoverable",
+      "Cascadeless",
+      "Strict",
+      "Conflict serializable"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "$T_2$ reads A written by $T_1$ before $T_1$ commits.\n\nRecoverable: a reader must commit after the writer it read from. $c_1$ comes before $c_2$. Yes.\n\nCascadeless: requires reading only committed data. $r_2(A)$ reads uncommitted data. No.\n\nStrict: stronger than cascadeless, so also no.\n\nConflict serializable: the only conflict is $w_1(A)$ before $r_2(A)$, edge $T_1 \\to T_2$, no cycle. Yes."
+  },
+  {
+    "id": "db-056",
+    "topic": "transactions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which ACID property is primarily enforced by the concurrency control component of a DBMS?",
+    "options": [
+      "Atomicity",
+      "Consistency",
+      "Isolation",
+      "Durability"
+    ],
+    "answer": 2,
+    "explanation": "Concurrency control (locking, timestamps) makes concurrent transactions behave as if run one at a time: isolation. Atomicity and durability are handled by the recovery manager (logs, undo/redo). Consistency is mainly the responsibility of the application and integrity constraints."
+  },
+  {
+    "id": "db-057",
+    "topic": "transactions",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which statements about two-phase locking (2PL) are true?",
+    "options": [
+      "Every schedule allowed by basic 2PL is conflict serializable.",
+      "Basic 2PL guarantees freedom from deadlock.",
+      "Schedules produced by strict 2PL are cascadeless.",
+      "Conservative (static) 2PL, which acquires all locks before starting, is deadlock-free."
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "Option 1: true. The lock point of each transaction gives an equivalent serial order.\n\nOption 2: false. Two transactions can each hold a lock the other wants.\n\nOption 3: true. Strict 2PL holds exclusive locks until commit, so nobody reads uncommitted data.\n\nOption 4: true. A transaction either gets every lock up front or waits holding none, so no hold-and-wait cycle forms."
+  },
+  {
+    "id": "db-058",
+    "topic": "transactions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Basic timestamp ordering is used with $TS(T_1) = 5$, $TS(T_2) = 10$, $TS(T_3) = 15$. All read and write timestamps start at 0. Operations arrive in this order:\n\n$r_1(A),\\; r_3(B),\\; w_2(A),\\; w_1(C),\\; r_2(C),\\; w_2(B),\\; r_1(A)$\n\nWhich is the first operation that causes a rollback?",
+    "options": [
+      "$w_2(A)$",
+      "$r_2(C)$",
+      "$w_2(B)$",
+      "$r_1(A)$"
+    ],
+    "answer": 2,
+    "explanation": "Rules: a read by T fails if $TS(T) < WTS(X)$. A write fails if $TS(T) < RTS(X)$ or $TS(T) < WTS(X)$.\n\n1. $r_1(A)$: WTS(A) = 0. OK, RTS(A) = 5.\n2. $r_3(B)$: OK, RTS(B) = 15.\n3. $w_2(A)$: 10 is not below RTS(A) = 5 or WTS(A) = 0. OK, WTS(A) = 10.\n4. $w_1(C)$: OK, WTS(C) = 5.\n5. $r_2(C)$: 10 is not below WTS(C) = 5. OK, RTS(C) = 10.\n6. $w_2(B)$: 10 < RTS(B) = 15. A younger transaction already read B, so $T_2$ is rolled back.\n\nThe last $r_1(A)$ would also fail (5 < WTS(A) = 10), but $w_2(B)$ fails first."
+  },
+  {
+    "id": "db-059",
+    "topic": "transactions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$T_1$ has 2 operations and $T_2$ has 3 operations. How many different schedules (interleavings that keep each transaction's own operation order) are possible?",
+    "options": [
+      "2",
+      "6",
+      "10",
+      "120"
+    ],
+    "answer": 2,
+    "explanation": "Choose which 2 of the 5 positions go to $T_1$; the order inside each transaction is fixed. $\\binom{5}{2} = \\frac{5!}{2!\\,3!} = 10$. Only 2 of them are serial."
+  },
+  {
+    "id": "db-060",
+    "topic": "transactions",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which statements are true for all schedules?",
+    "options": [
+      "Every conflict serializable schedule is view serializable.",
+      "A view serializable schedule with no blind writes is conflict serializable.",
+      "Every recoverable schedule is cascadeless.",
+      "Every strict schedule is cascadeless."
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Option 1: true. Conflict equivalence preserves reads-from and final writes, so it implies view equivalence.\n\nOption 2: true. A schedule that is view serializable but not conflict serializable must contain a blind write.\n\nOption 3: false. A transaction may read uncommitted data and still commit after the writer: recoverable but not cascadeless.\n\nOption 4: true. Strict forbids both reading and overwriting uncommitted data, which includes the cascadeless condition."
+  }
+]

@@ -1,0 +1,888 @@
+[
+  {
+    "id": "dl-001",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The expression $F = AB + A\\overline{B}C + \\overline{A}C$ simplifies to:",
+    "options": [
+      "$AC + B$",
+      "$AB + C$",
+      "$A + C$",
+      "$AB + \\overline{B}C$"
+    ],
+    "answer": 1,
+    "explanation": "Group the last two terms: $A\\overline{B}C + \\overline{A}C = C(A\\overline{B} + \\overline{A}) = C(\\overline{A} + \\overline{B})$, using $X + \\overline{X}Y = X + Y$ with $X = \\overline{A}$.\n\nSo $F = AB + C\\,\\overline{AB}$. Apply $X + \\overline{X}Y = X + Y$ again with $X = AB$: $F = AB + C$.\n\nCheck: $A=1, B=0, C=0$ gives $F=0$ in the original and in $AB + C$, but $A + C = 1$, so option C is wrong."
+  },
+  {
+    "id": "dl-002",
+    "topic": "boolean-algebra-minimization",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many prime implicants does $F(A,B,C) = \\Sigma m(1,2,3,4,5,6)$ have?",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "The 0s are at minterms 0 and 7 only. Every pair of adjacent 1-cells forms a 2-cell group and no 4-cell group exists (any 4-cell group in a 3-variable map contains 0 or 7).\n\nThe groups are $\\overline{A}B$ (2,3), $\\overline{A}C$ (1,3), $A\\overline{B}$ (4,5), $\\overline{B}C$ (1,5), $B\\overline{C}$ (2,6), $A\\overline{C}$ (4,6). None is contained in a larger implicant, so all 6 are prime. Every 1-cell is covered by exactly two of them, so there is no essential prime implicant (a cyclic map)."
+  },
+  {
+    "id": "dl-003",
+    "topic": "boolean-algebra-minimization",
+    "type": "nat",
+    "marks": 2,
+    "q": "For $F(A,B,C,D) = \\Sigma m(2,3,5,7,8,10,12,13,15)$, let $p$ be the number of prime implicants and $e$ the number of essential prime implicants. The value of $p + e$ is ______.",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "Prime implicants (from the K-map or the tabular method):\n\n- $BD$ = (5,7,13,15)\n- $\\overline{B}C\\overline{D}$ = (2,10)\n- $\\overline{A}CD$ = (3,7)\n- $\\overline{A}\\,\\overline{B}C$ = (2,3)\n- $A\\overline{C}\\,\\overline{D}$ = (8,12)\n- $A\\overline{B}\\,\\overline{D}$ = (8,10)\n- $AB\\overline{C}$ = (12,13)\n\nNo 4-cell group other than $BD$ exists (for example, (8,10,12,14) fails because 14 is a 0). So $p = 7$. Minterm 5 is covered only by $BD$, so $BD$ is essential. Every other 1-cell (2, 3, 8, 10, 12) lies in two prime implicants, and 7, 13, 15 lie in $BD$ plus another. Hence $e = 1$ and $p + e = 8$."
+  },
+  {
+    "id": "dl-004",
+    "topic": "boolean-algebra-minimization",
+    "type": "msq",
+    "marks": 2,
+    "q": "Let $F(A,B,C,D) = \\Sigma m(1,3,7,11,15) + d(0,2,5)$. Which of the following are minimal sum-of-products expressions for $F$?",
+    "options": [
+      "$\\overline{A}D + ACD$",
+      "$CD + \\overline{A}\\overline{C}D$",
+      "$CD + \\overline{A}D$",
+      "$CD + \\overline{A}\\overline{B}$"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "$CD$ covers 3, 7, 11, 15 and is the only prime implicant covering 11 and 15 without using cells that are 0, so it is essential. Minterm 1 is left.\n\nMinterm 1 can be covered by $\\overline{A}D$ (1,3,5,7, using don't-care 5) or by $\\overline{A}\\,\\overline{B}$ (0,1,2,3, using don't-cares 0 and 2). Both have 2 literals, giving two minimal forms with 2 terms and 4 literals: $CD + \\overline{A}D$ and $CD + \\overline{A}\\,\\overline{B}$.\n\n$\\overline{A}D + ACD$ is a valid cover but has 5 literals. $CD + \\overline{A}\\,\\overline{C}D$ is also valid but has 5 literals. Neither is minimal."
+  },
+  {
+    "id": "dl-005",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The minimal product-of-sums form of $F(A,B,C,D) = \\Sigma m(0,1,2,5,8,9,10)$ is:",
+    "options": [
+      "$(\\overline{B}+D)(\\overline{A}+\\overline{B})$",
+      "$(\\overline{C}+\\overline{D})(\\overline{B}+D)(\\overline{A}+\\overline{B})$",
+      "$(C+\\overline{D})(\\overline{B}+D)(\\overline{A}+B)$",
+      "$(\\overline{C}+\\overline{D})(B+\\overline{D})(\\overline{A}+\\overline{B})$"
+    ],
+    "answer": 1,
+    "explanation": "Work with the 0s: $\\overline{F} = \\Sigma m(3,4,6,7,11,12,13,14,15)$.\n\nGroup the 0s: $CD$ covers (3,7,11,15), $B\\overline{D}$ covers (4,6,12,14), $AB$ covers (12,13,14,15). Minterm 13 needs $AB$; 3 and 11 need $CD$; 4 and 6 need $B\\overline{D}$. So $\\overline{F} = CD + B\\overline{D} + AB$.\n\nBy De Morgan, $F = (\\overline{C} + \\overline{D})(\\overline{B} + D)(\\overline{A} + \\overline{B})$.\n\nOption A drops the factor $(\\overline{C}+\\overline{D})$, which would make minterm 3 a 1, so it is wrong."
+  },
+  {
+    "id": "dl-006",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The dual of the Boolean expression $A + \\overline{B}C + 0$ is:",
+    "options": [
+      "$A \\cdot (\\overline{B} + C) \\cdot 1$",
+      "$\\overline{A} \\cdot (B + \\overline{C}) \\cdot 1$",
+      "$A + \\overline{B}C + 1$",
+      "$A(\\overline{B} + C) + 0$"
+    ],
+    "answer": 0,
+    "explanation": "To take the dual, swap AND with OR and swap the constants 0 and 1. Literals are not complemented.\n\n$A + \\overline{B}C + 0$ becomes $A \\cdot (\\overline{B} + C) \\cdot 1$.\n\nOption B complements the literals, which gives the complement-of-dual, not the dual."
+  },
+  {
+    "id": "dl-007",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A Boolean function $f$ is self-dual if $f(\\overline{x_1}, \\ldots, \\overline{x_n}) = \\overline{f(x_1, \\ldots, x_n)}$ for every input. The number of self-dual functions of 3 variables is:",
+    "options": [
+      "256",
+      "16",
+      "8",
+      "64"
+    ],
+    "answer": 1,
+    "explanation": "The 8 input combinations of 3 variables split into 4 complementary pairs: (000,111), (001,110), (010,101), (011,100).\n\nFor a self-dual function, choosing the output on one member of a pair fixes the output on the other (it must be the complement). So there are 4 free choices, each 0 or 1: $2^4 = 16$.\n\nIn general there are $2^{2^{n-1}}$ self-dual functions of $n$ variables."
+  },
+  {
+    "id": "dl-008",
+    "topic": "boolean-algebra-minimization",
+    "type": "nat",
+    "marks": 2,
+    "q": "The number of literals in the minimal sum-of-products expression of $F(A,B,C,D) = \\Sigma m(0,1,4,6,9,12,14) + d(5,11,13)$ is ______.",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "Prime implicants (with don't-cares 5, 11, 13 usable):\n\n- $\\overline{A}\\,\\overline{C}$ = (0,1,4,5)\n- $B\\overline{D}$ = (4,6,12,14)\n- $\\overline{C}D$ = (1,5,9,13)\n- $B\\overline{C}$ = (4,5,12,13)\n- $A\\overline{B}D$ = (9,11)\n\nMinterm 0 is covered only by $\\overline{A}\\,\\overline{C}$ and minterms 6 and 14 only by $B\\overline{D}$, so both are essential. They cover 0, 1, 4, 6, 12, 14. Minterm 9 remains; $\\overline{C}D$ covers it with 2 literals (better than $A\\overline{B}D$).\n\n$F = \\overline{A}\\,\\overline{C} + B\\overline{D} + \\overline{C}D$, which has $2 + 2 + 2 = 6$ literals."
+  },
+  {
+    "id": "dl-009",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which of the following is a minimal sum-of-products expression for $F(A,B,C,D) = \\Sigma m(0,2,4,5,7,8,10,13,15)$?",
+    "options": [
+      "$\\overline{B}\\overline{D} + BD + \\overline{A}\\overline{C}D$",
+      "$\\overline{B}\\overline{D} + BD + \\overline{A}\\overline{B}$",
+      "$\\overline{B}\\overline{D} + BD$",
+      "$\\overline{B}\\overline{D} + BD + \\overline{A}B\\overline{C}$"
+    ],
+    "answer": 3,
+    "explanation": "$\\overline{B}\\,\\overline{D}$ covers the four corners (0,2,8,10) and $BD$ covers (5,7,13,15). Both are essential. The only 1-cell left is minterm 4 ($\\overline{A}B\\overline{C}\\,\\overline{D}$).\n\nMinterm 4 can be covered by $\\overline{A}B\\overline{C}$ (4,5) or $\\overline{A}\\,\\overline{C}\\,\\overline{D}$ (0,4). Option D uses the first, giving 3 terms and 7 literals, which is minimal.\n\nOption A: $\\overline{A}\\,\\overline{C}D$ covers 1 and 5; minterm 1 is a 0, so it is wrong. Option B: $\\overline{A}\\,\\overline{B}$ covers minterm 1 and 3 (both 0s), so it is wrong. Option C misses minterm 4."
+  },
+  {
+    "id": "dl-010",
+    "topic": "boolean-algebra-minimization",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following Boolean identities are valid?",
+    "options": [
+      "$A + \\overline{A}B = A + B$",
+      "$(A + B)(A + C) = A + BC$",
+      "$A  \\oplus  B  \\oplus  AB = A + B$",
+      "$AB + \\overline{A}C + B\\overline{C} = AB + \\overline{A}C$"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A: absorption-type law, $A + \\overline{A}B = (A + \\overline{A})(A + B) = A + B$. Valid.\n\nB: distributive law of OR over AND. Expanding, $(A+B)(A+C) = A + AC + AB + BC = A + BC$. Valid.\n\nC: check the four cases. $A=B=0$: $0$. $A=1,B=0$: $1 \\oplus 0 \\oplus 0 = 1$. $A=0,B=1$: $1$. $A=B=1$: $1 \\oplus 1 \\oplus 1 = 1$. This is the OR truth table. Valid.\n\nD: the term $B\\overline{C}$ is not a consensus term of $AB$ and $\\overline{A}C$ (the consensus is $BC$). Take $A=0, B=1, C=0$: left side is 1, right side is 0. Not valid."
+  },
+  {
+    "id": "dl-011",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The expression $(P + Q)(\\overline{P} + R)(Q + R)$ is equal to:",
+    "options": [
+      "$(P + Q)(\\overline{P} + R)$",
+      "$(P + Q)(Q + R)$",
+      "$Q + R$",
+      "$PR + Q$"
+    ],
+    "answer": 0,
+    "explanation": "This is the product-of-sums form of the consensus theorem: $(X + Y)(\\overline{X} + Z)(Y + Z) = (X + Y)(\\overline{X} + Z)$. With $X = P$, $Y = Q$, $Z = R$, the factor $(Q + R)$ is redundant.\n\nOption B fails at $P=1, Q=1, R=0$: the original is $(1)(0)(1) = 0$ but $(P+Q)(Q+R) = 1$."
+  },
+  {
+    "id": "dl-012",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In the Quine-McCluskey (tabular) method for a 4-variable function, which pair of implicants can be combined in the next step? (A dash marks an eliminated variable.)",
+    "options": [
+      "0110 and 1001",
+      "-101 and 1-01",
+      "0-01 and 0-11",
+      "1-0- and 10-1"
+    ],
+    "answer": 2,
+    "explanation": "Two implicants combine only if their dashes are in the same positions and they differ in exactly one remaining bit.\n\n- 0-01 and 0-11: dashes match (second position), and they differ only in the third position. They combine to 0--1.\n- 1-0- and 10-1: dashes are in different positions. Cannot combine.\n- 0110 and 1001: differ in all four bits.\n- -101 and 1-01: dashes in different positions."
+  },
+  {
+    "id": "dl-013",
+    "topic": "boolean-algebra-minimization",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following sets of operations are functionally complete? (Constants are available only if listed in the set.)",
+    "options": [
+      "$\\{\\oplus, \\lnot\\}$",
+      "$\\{\\lor, \\lnot\\}$",
+      "$\\{\\rightarrow, 0\\}$ where $\\rightarrow$ is implication",
+      "$\\{\\land, \\oplus\\}$"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "A set is functionally complete if it can produce NOT and either AND or OR.\n\nA: $\\oplus$ and $\\lnot$ only build functions of the form $c \\oplus x_{i_1} \\oplus \\cdots \\oplus x_{i_k}$ (linear functions). AND is not linear. Not complete.\n\nB: De Morgan gives $xy = \\overline{\\overline{x} + \\overline{y}}$. Complete.\n\nC: $x \\rightarrow 0 = \\overline{x}$, and $\\overline{x} \\rightarrow y = x + y$. With NOT and OR we have everything. Complete.\n\nD: $\\land$ and $\\oplus$ both output 0 when all inputs are 0, so every circuit built from them outputs 0 on the all-zero input. NOT cannot be built. Not complete."
+  },
+  {
+    "id": "dl-014",
+    "topic": "boolean-algebra-minimization",
+    "type": "nat",
+    "marks": 2,
+    "q": "The number of literals in the minimal product-of-sums expression of $F(A,B,C,D) = \\Sigma m(0,2,3,8,10,11,13,15)$ is ______.",
+    "answer": {
+      "min": 7,
+      "max": 7
+    },
+    "explanation": "Minimize the 0s: $\\overline{F} = \\Sigma m(1,4,5,6,7,9,12,14)$.\n\n- $B\\overline{D}$ = (4,6,12,14) is essential (only group for 12, 14 among the 0s).\n- $\\overline{A}B$ = (4,5,6,7) is essential (only group for 5, 7 that avoids 1-cells; 13 and 15 are 1s).\n- $\\overline{B}\\,\\overline{C}D$ = (1,9) is essential (1 and 9 have no larger group: 3, 11 are 1s).\n\nSo $\\overline{F} = B\\overline{D} + \\overline{A}B + \\overline{B}\\,\\overline{C}D$, and\n$F = (\\overline{B} + D)(A + \\overline{B})(B + C + \\overline{D})$, with $2 + 2 + 3 = 7$ literals."
+  },
+  {
+    "id": "dl-015",
+    "topic": "boolean-algebra-minimization",
+    "type": "mcq",
+    "marks": 2,
+    "q": "For $F(A,B,C,D) = \\Sigma m(0,1,5,7,8,10,14,15)$, which statement is true?",
+    "options": [
+      "It has no essential prime implicant, and its minimal SOP has 3 terms.",
+      "It has exactly 4 essential prime implicants, and its minimal SOP has 4 terms.",
+      "It has no essential prime implicant, and its minimal SOP has 4 terms.",
+      "It has exactly 2 essential prime implicants, and its minimal SOP has 4 terms."
+    ],
+    "answer": 2,
+    "explanation": "No 4-cell group exists among these 1s. The prime implicants are the 8 pairs $\\overline{B}\\,\\overline{C}\\,\\overline{D}$ (0,8), $\\overline{A}\\,\\overline{B}\\,\\overline{C}$ (0,1), $\\overline{A}\\,\\overline{C}D$ (1,5), $\\overline{A}BD$ (5,7), $BCD$ (7,15), $ABC$ (14,15), $AC\\overline{D}$ (10,14), $A\\overline{B}\\,\\overline{D}$ (8,10).\n\nThese form a single cycle 0-1-5-7-15-14-10-8-0, and every minterm lies in exactly two of them, so none is essential.\n\nThere are 8 minterms and each prime implicant covers 2, so at least 4 terms are needed. Taking alternate pairs, for example $\\overline{B}\\,\\overline{C}\\,\\overline{D} + \\overline{A}\\,\\overline{C}D + BCD + AC\\overline{D}$, covers all 8. Minimal SOP has 4 terms."
+  },
+  {
+    "id": "dl-016",
+    "topic": "combinational-circuits",
+    "type": "nat",
+    "marks": 1,
+    "q": "The minimum number of 2-input NAND gates needed to implement a 2-input XOR function, when only the uncomplemented inputs $A$ and $B$ are available, is ______.",
+    "answer": {
+      "min": 4,
+      "max": 4
+    },
+    "explanation": "Standard construction:\n\n1. $G_1 = \\overline{AB}$\n2. $G_2 = \\overline{A \\cdot G_1}$\n3. $G_3 = \\overline{B \\cdot G_1}$\n4. $G_4 = \\overline{G_2 \\cdot G_3} = A G_1 + B G_1 = (A + B)\\overline{AB} = A \\oplus B$\n\nThree gates are not enough. With 3 gates the only new signals you can form are NANDs of $A$, $B$ and earlier gate outputs; trying every such circuit shows the reachable functions never include XOR. Answer: 4."
+  },
+  {
+    "id": "dl-017",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The minimum number of 4-to-1 multiplexers (no other gates) needed to build a 32-to-1 multiplexer is:",
+    "options": [
+      "16",
+      "11",
+      "8",
+      "10"
+    ],
+    "answer": 1,
+    "explanation": "Build a tree. First level: 32 inputs need $32/4 = 8$ multiplexers. Second level: 8 outputs need $8/4 = 2$ multiplexers. Third level: the 2 remaining outputs go into one more 4-to-1 multiplexer, using two of its data inputs and tying its unused select line to 0.\n\nTotal $= 8 + 2 + 1 = 11$."
+  },
+  {
+    "id": "dl-018",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 4-to-1 multiplexer has select lines $S_1 = A$ (MSB) and $S_0 = B$. Its data inputs are $I_0 = C$, $I_1 = \\overline{C}$, $I_2 = 0$, $I_3 = 1$. The output $F(A,B,C)$ is:",
+    "options": [
+      "$\\Sigma m(1,2,4,5)$",
+      "$\\Sigma m(0,3,6,7)$",
+      "$\\Sigma m(1,3,6,7)$",
+      "$\\Sigma m(1,2,6,7)$"
+    ],
+    "answer": 3,
+    "explanation": "$F = \\overline{A}\\,\\overline{B}\\,I_0 + \\overline{A}B\\,I_1 + A\\overline{B}\\,I_2 + AB\\,I_3 = \\overline{A}\\,\\overline{B}C + \\overline{A}B\\overline{C} + AB$.\n\nMinterms (ABC): $\\overline{A}\\,\\overline{B}C$ is 001 = 1. $\\overline{A}B\\overline{C}$ is 010 = 2. $AB$ gives 110 = 6 and 111 = 7.\n\n$F = \\Sigma m(1,2,6,7)$."
+  },
+  {
+    "id": "dl-019",
+    "topic": "combinational-circuits",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 16-bit ripple-carry adder is built from full adders. In each full adder, the carry-out becomes valid 2 ns after its inputs and carry-in are valid, and the sum becomes valid 3 ns after its inputs and carry-in are valid. All operand bits and $C_0$ are applied at time 0. The time (in ns) after which all 16 sum bits and the final carry-out are guaranteed valid is ______.",
+    "answer": {
+      "min": 33,
+      "max": 33
+    },
+    "explanation": "The carry ripples through the stages. Carry into stage $i$ (stages numbered 0 to 15) is valid at $2i$ ns. Stage 15 receives its carry at $2 \\times 15 = 30$ ns.\n\n- Sum $S_{15}$ is valid at $30 + 3 = 33$ ns.\n- Final carry $C_{16}$ is valid at $30 + 2 = 32$ ns.\n\nAll outputs are valid at $\\max(33, 32) = 33$ ns."
+  },
+  {
+    "id": "dl-020",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The minimum number of 3-to-8 decoders, each with one active-high enable input and no other gates, needed to build a 6-to-64 decoder is:",
+    "options": [
+      "9",
+      "8",
+      "10",
+      "16"
+    ],
+    "answer": 0,
+    "explanation": "Use the upper 3 address bits to drive one 3-to-8 decoder. Each of its 8 outputs enables one of 8 second-level 3-to-8 decoders, which take the lower 3 address bits. The second level produces $8 \\times 8 = 64$ outputs.\n\nTotal $= 1 + 8 = 9$."
+  },
+  {
+    "id": "dl-021",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a carry-lookahead adder, $G_i = A_iB_i$, $P_i = A_i \\oplus B_i$ and $C_{i+1} = G_i + P_iC_i$. The expanded expression for $C_3$ is:",
+    "options": [
+      "$G_2 + P_2G_1 + P_2P_1G_0 + P_2P_1P_0C_0$",
+      "$G_2 + G_1 + G_0 + P_2P_1P_0C_0$",
+      "$G_3 + P_3G_2 + P_3P_2G_1 + P_3P_2P_1C_0$",
+      "$P_2 + G_2P_1 + G_2G_1P_0 + G_2G_1G_0C_0$"
+    ],
+    "answer": 0,
+    "explanation": "Expand the recurrence step by step.\n\n$C_1 = G_0 + P_0C_0$\n\n$C_2 = G_1 + P_1C_1 = G_1 + P_1G_0 + P_1P_0C_0$\n\n$C_3 = G_2 + P_2C_2 = G_2 + P_2G_1 + P_2P_1G_0 + P_2P_1P_0C_0$\n\nA carry leaves stage 2 if stage 2 generates one, or stage 1 generates and stage 2 propagates, and so on."
+  },
+  {
+    "id": "dl-022",
+    "topic": "combinational-circuits",
+    "type": "msq",
+    "marks": 1,
+    "q": "For a full adder with inputs $A$, $B$ and carry-in $C$, which of the following expressions equal the carry-out?",
+    "options": [
+      "$A  \\oplus  B  \\oplus  C$",
+      "$AB + BC + CA$",
+      "$AB + C(A  \\oplus  B)$",
+      "$AB + C(A + B)$"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "Carry-out is 1 when at least two inputs are 1 (the majority function), which is $AB + BC + CA$.\n\n$AB + C(A \\oplus B)$: if $A=B=1$ the first term is 1; if exactly one of $A,B$ is 1, the output equals $C$. That is the majority function. Valid.\n\n$AB + C(A + B) = AB + AC + BC$. Valid.\n\n$A \\oplus B \\oplus C$ is the sum output, not the carry. At $A=B=1, C=0$ it gives 0 while carry is 1."
+  },
+  {
+    "id": "dl-023",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 3-to-8 decoder has inputs $A$ (MSB), $B$, $C$ and active-high outputs $D_0$ to $D_7$. Outputs $D_1, D_2, D_4, D_7$ are connected to a 4-input OR gate. The OR gate output equals:",
+    "options": [
+      "$AB + BC + CA$",
+      "$\\overline{A}\\overline{B}C + AB\\overline{C}$",
+      "$A  \\oplus  B  \\oplus  C$",
+      "$(A  \\oplus  B  \\oplus  C)'$"
+    ],
+    "answer": 2,
+    "explanation": "The OR gate output is $\\Sigma m(1,2,4,7)$. In binary these are 001, 010, 100, 111: exactly the inputs with an odd number of 1s. That is the odd-parity function $A \\oplus B \\oplus C$.\n\nThe complement in option D would be $\\Sigma m(0,3,5,6)$. Option A is the majority function $\\Sigma m(3,5,6,7)$."
+  },
+  {
+    "id": "dl-024",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A 4-to-2 priority encoder has inputs $I_3, I_2, I_1, I_0$ with $I_3$ having the highest priority, outputs $Y_1Y_0$, and a valid bit $V$. If $I_3I_2I_1I_0 = 0110$, the outputs $Y_1Y_0$ and $V$ are:",
+    "options": [
+      "$Y_1Y_0 = 01$, $V = 1$",
+      "$Y_1Y_0 = 11$, $V = 1$",
+      "$Y_1Y_0 = 00$, $V = 0$",
+      "$Y_1Y_0 = 10$, $V = 1$"
+    ],
+    "answer": 3,
+    "explanation": "$I_3 = 0$, so the highest-priority active input is $I_2$. The encoder outputs the index 2 = $10$ in binary. At least one input is active, so $V = 1$. $I_1$ is ignored because it has lower priority."
+  },
+  {
+    "id": "dl-025",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The circuit $F = A\\overline{B} + BC$ is built with AND-OR logic, where $\\overline{B}$ comes from an inverter with nonzero delay. For which input condition can a static-1 hazard appear at $F$, and what removes it?",
+    "options": [
+      "$B = 1, C = 1$ while $A$ changes; add the term $AB$",
+      "$A = 1, C = 1$ while $B$ changes; add the term $\\overline{B}C$",
+      "$A = 1, C = 1$ while $B$ changes; add the term $AC$",
+      "$A = 0, C = 0$ while $B$ changes; add the term $\\overline{A}\\,\\overline{C}$"
+    ],
+    "answer": 2,
+    "explanation": "With $A = 1$ and $C = 1$, $F = \\overline{B} + B$, which should stay 1. When $B$ switches, one product term turns off and the other turns on. If the inverter delay makes both terms 0 for a moment, $F$ glitches to 0: a static-1 hazard.\n\nThe fix is the consensus term of $A\\overline{B}$ and $BC$, which is $AC$. It stays 1 throughout the transition. Adding it does not change the function: $A\\overline{B} + BC + AC = A\\overline{B} + BC$.\n\nWith $A = C = 0$ the output is 0 for both values of $B$, and there is no pair of adjacent 1-groups, so option D describes no static-1 hazard."
+  },
+  {
+    "id": "dl-026",
+    "topic": "combinational-circuits",
+    "type": "msq",
+    "marks": 2,
+    "q": "A single 2-to-1 multiplexer computes $Y = \\overline{S}I_0 + SI_1$. Each of $S$, $I_0$, $I_1$ may be connected to $A$, $B$, constant 0 or constant 1. Complemented variables are NOT available. Which of the following can be realized with exactly one such multiplexer?",
+    "options": [
+      "$\\overline{A}$",
+      "$A  \\oplus  B$",
+      "$AB$",
+      "$A + B$"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "AND: $S = A$, $I_0 = 0$, $I_1 = B$ gives $Y = AB$.\n\nOR: $S = A$, $I_0 = B$, $I_1 = 1$ gives $Y = \\overline{A}B + A = A + B$.\n\nNOT: $S = A$, $I_0 = 1$, $I_1 = 0$ gives $Y = \\overline{A}$.\n\nXOR: with $S = A$ we need $I_0 = B$ and $I_1 = \\overline{B}$, and $\\overline{B}$ is not available. With $S = B$ we need $\\overline{A}$ similarly. Constants on $S$ reduce $Y$ to one input. So XOR is not possible with one multiplexer here."
+  },
+  {
+    "id": "dl-027",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The 4-bit Gray code word $1101$ corresponds to which binary number?",
+    "options": [
+      "$1011$",
+      "$0110$",
+      "$1110$",
+      "$1001$"
+    ],
+    "answer": 3,
+    "explanation": "Gray to binary: the MSB is copied, and each next binary bit is the previous binary bit XOR the current Gray bit.\n\n- $b_3 = g_3 = 1$\n- $b_2 = b_3 \\oplus g_2 = 1 \\oplus 1 = 0$\n- $b_1 = b_2 \\oplus g_1 = 0 \\oplus 0 = 0$\n- $b_0 = b_1 \\oplus g_0 = 0 \\oplus 1 = 1$\n\nBinary $1001$. Check: Gray of $1001$ is $1001 \\oplus 0100 = 1101$."
+  },
+  {
+    "id": "dl-028",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 4-bit adder-subtractor feeds each $B_i$ through an XOR gate with control $M$, and connects $M$ to the carry-in. With $A = 0101$, $B = 0111$ and $M = 1$, the 4-bit sum output $S_3S_2S_1S_0$ and the carry-out $C_4$ are:",
+    "options": [
+      "$S = 1101$, $C_4 = 0$",
+      "$S = 1110$, $C_4 = 0$",
+      "$S = 1110$, $C_4 = 1$",
+      "$S = 0010$, $C_4 = 1$"
+    ],
+    "answer": 1,
+    "explanation": "With $M = 1$ the circuit computes $A + \\overline{B} + 1$, which is $A - B$ in 2's complement.\n\n$\\overline{B} = 1000$. Then $0101 + 1000 + 1 = 1110$ with no carry out of bit 3, so $C_4 = 0$.\n\n$1110$ is $-2$ in 4-bit 2's complement, and $5 - 7 = -2$. For unsigned subtraction, $C_4 = 0$ means a borrow occurred ($A < B$)."
+  },
+  {
+    "id": "dl-029",
+    "topic": "combinational-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A function $F(A,B,C,D)$ is implemented with an 8-to-1 multiplexer whose select lines are $A$ (MSB), $B$, $C$. The data inputs are $I_0 = D$, $I_1 = 0$, $I_2 = \\overline{D}$, $I_3 = 1$, $I_4 = 0$, $I_5 = D$, $I_6 = 1$, $I_7 = \\overline{D}$. Which is $F$?",
+    "options": [
+      "$\\Sigma m(1,4,6,7,10,12,13,15)$",
+      "$\\Sigma m(0,4,6,7,11,12,13,14)$",
+      "$\\Sigma m(1,5,6,7,11,12,13,14)$",
+      "$\\Sigma m(1,4,6,7,11,12,13,14)$"
+    ],
+    "answer": 3,
+    "explanation": "Each select value $ABC = k$ covers minterms $2k$ ($D=0$) and $2k+1$ ($D=1$).\n\n- $I_0 = D$: minterm 1\n- $I_1 = 0$: none\n- $I_2 = \\overline{D}$: minterm 4\n- $I_3 = 1$: minterms 6, 7\n- $I_4 = 0$: none\n- $I_5 = D$: minterm 11\n- $I_6 = 1$: minterms 12, 13\n- $I_7 = \\overline{D}$: minterm 14\n\n$F = \\Sigma m(1,4,6,7,11,12,13,14)$."
+  },
+  {
+    "id": "dl-030",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The characteristic equation of a JK flip-flop is:",
+    "options": [
+      "$Q^+ = J + \\overline{K}Q$",
+      "$Q^+ = J \\oplus K \\oplus Q$",
+      "$Q^+ = J\\overline{Q} + \\overline{K}Q$",
+      "$Q^+ = JQ + K\\overline{Q}$"
+    ],
+    "answer": 2,
+    "explanation": "From the JK table: $J=K=0$ holds, $J=1,K=0$ sets, $J=0,K=1$ resets, $J=K=1$ toggles. When $Q=0$ the next state is $J$; when $Q=1$ the next state is $\\overline{K}$. So $Q^+ = J\\overline{Q} + \\overline{K}Q$.\n\nOption A fails at $J = K = 1, Q = 1$: it gives 1, but the flip-flop toggles to 0."
+  },
+  {
+    "id": "dl-031",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An SR latch is built from two cross-coupled NOR gates. Inputs are held at $S = R = 1$ and then both are changed to 0 at the same instant. What happens?",
+    "options": [
+      "The latch sets to $Q = 1$ and stays there",
+      "The latch resets to $Q = 0$ and stays there",
+      "Both outputs are 1 throughout",
+      "While $S = R = 1$ both $Q$ and $\\overline{Q}$ are 0; after both inputs drop to 0 the final state is unpredictable"
+    ],
+    "answer": 3,
+    "explanation": "A NOR gate with any input at 1 outputs 0, so $S = R = 1$ forces $Q = \\overline{Q} = 0$, which breaks the complement relationship. When both inputs fall to 0 together, each gate sees 0, 0 and tries to output 1; the result depends on which gate is faster (a race), and the latch may even oscillate briefly. That is why $S = R = 1$ is the forbidden input for a NOR latch."
+  },
+  {
+    "id": "dl-032",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A 5-bit Johnson (twisted-ring) counter is started from 00000. How many of the 32 possible states are never reached?",
+    "options": [
+      "22",
+      "27",
+      "10",
+      "16"
+    ],
+    "answer": 0,
+    "explanation": "An $n$-bit Johnson counter cycles through $2n$ states. With $n = 5$ that is 10 states (00000, 10000, 11000, 11100, 11110, 11111, 01111, 00111, 00011, 00001). Unused states: $32 - 10 = 22$."
+  },
+  {
+    "id": "dl-033",
+    "topic": "sequential-circuits",
+    "type": "nat",
+    "marks": 2,
+    "q": "A synchronous circuit has three D flip-flops with outputs $Q_2Q_1Q_0$ and inputs\n$D_2 = Q_1$, $D_1 = Q_0$, $D_0 = \\overline{Q_2 + Q_1}$.\nStarting from $Q_2Q_1Q_0 = 000$, the number of distinct states visited before the circuit returns to 000 (including 000) is ______.",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "Compute the next state each clock (written $Q_2Q_1Q_0$):\n\n- 000: $D_2 = 0, D_1 = 0, D_0 = \\overline{0+0} = 1$, next 001\n- 001: $D_2 = 0, D_1 = 1, D_0 = 1$, next 011\n- 011: $D_2 = 1, D_1 = 1, D_0 = \\overline{0+1} = 0$, next 110\n- 110: $D_2 = 1, D_1 = 0, D_0 = 0$, next 100\n- 100: $D_2 = 0, D_1 = 0, D_0 = \\overline{1+0} = 0$, next 000\n\nCycle: 000, 001, 011, 110, 100. That is 5 states, so the circuit is a mod-5 counter."
+  },
+  {
+    "id": "dl-034",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A synchronous counter uses three JK flip-flops with outputs $Q_2Q_1Q_0$ and inputs\n$J_2 = Q_1Q_0$, $K_2 = 1$; $J_1 = K_1 = Q_0$; $J_0 = \\overline{Q_2}$, $K_0 = 1$.\nStarting from 000, the state sequence is:",
+    "options": [
+      "000, 001, 010, 011, 100, 101, 000, ...",
+      "000, 001, 011, 111, 000, ...",
+      "000, 001, 010, 100, 000, ...",
+      "000, 001, 010, 011, 100, 000, ..."
+    ],
+    "answer": 3,
+    "explanation": "Use: $J=K=1$ toggles, $J=1,K=0$ sets, $J=0,K=1$ resets, $J=K=0$ holds.\n\n- 000: $J_2=0,K_2=1 \\Rightarrow Q_2=0$. $J_1=K_1=0 \\Rightarrow Q_1=0$. $J_0=1,K_0=1 \\Rightarrow Q_0$ toggles to 1. Next 001.\n- 001: $J_2=0 \\Rightarrow 0$. $J_1=K_1=1 \\Rightarrow Q_1$ toggles to 1. $Q_0$ toggles to 0. Next 010.\n- 010: $Q_2=0$. $J_1=K_1=0$, $Q_1$ holds 1. $Q_0$ toggles to 1. Next 011.\n- 011: $J_2=1,K_2=1 \\Rightarrow Q_2$ toggles to 1. $Q_1$ toggles to 0. $Q_0$ toggles to 0. Next 100.\n- 100: $J_2=0,K_2=1 \\Rightarrow Q_2=0$. $Q_1$ holds 0. $J_0=0,K_0=1 \\Rightarrow Q_0=0$. Next 000.\n\nThis is a mod-5 up counter."
+  },
+  {
+    "id": "dl-035",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For a JK flip-flop to change from $Q = 1$ to $Q^+ = 0$, the required inputs are ($X$ = don't care):",
+    "options": [
+      "$J = 1$, $K = X$",
+      "$J = X$, $K = 0$",
+      "$J = X$, $K = 1$",
+      "$J = 0$, $K = X$"
+    ],
+    "answer": 2,
+    "explanation": "With $Q = 1$, the next state is $\\overline{K}$ (from $Q^+ = J\\overline{Q} + \\overline{K}Q$). To get 0 we need $K = 1$. $J$ does not matter: $J=0,K=1$ resets and $J=1,K=1$ toggles, and both give 0."
+  },
+  {
+    "id": "dl-036",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A T flip-flop is to be built from a D flip-flop and one gate. The D input must be driven by:",
+    "options": [
+      "$\\overline{T}Q$",
+      "$T  \\oplus  Q$",
+      "$TQ$",
+      "$T + Q$"
+    ],
+    "answer": 1,
+    "explanation": "A T flip-flop has $Q^+ = T \\oplus Q$ (hold when $T=0$, toggle when $T=1$). A D flip-flop has $Q^+ = D$. So set $D = T \\oplus Q$, using one XOR gate."
+  },
+  {
+    "id": "dl-037",
+    "topic": "sequential-circuits",
+    "type": "nat",
+    "marks": 2,
+    "q": "In a synchronous circuit, the flip-flop clock-to-Q delay is 8 ns, the longest combinational path between flip-flops is 14 ns, the setup time is 4 ns, and the hold time is 2 ns. Assuming zero clock skew, the maximum clock frequency in MHz is ______ (rounded to two decimal places).",
+    "answer": {
+      "min": 38.45,
+      "max": 38.47
+    },
+    "explanation": "The clock period must cover clock-to-Q delay, the longest combinational delay and the setup time:\n\n$$T_{min} = t_{cq} + t_{comb} + t_{setup} = 8 + 14 + 4 = 26 \\text{ ns}$$\n\nHold time limits the shortest path, not the clock period.\n\n$f_{max} = 1 / 26\\text{ ns} = 38.46$ MHz."
+  },
+  {
+    "id": "dl-038",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A Moore machine outputs 1 whenever the last four input bits are $1101$ (overlapping occurrences allowed, input is one bit per clock). The minimum number of states is:",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "5"
+    ],
+    "answer": 3,
+    "explanation": "A Moore machine must have a separate state whose output is 1, so it needs states for the prefixes matched so far: \"\" (S0), \"1\" (S1), \"11\" (S2), \"110\" (S3), and \"1101\" seen (S4, output 1). That is 5 states.\n\nTransitions: S0 on 1 to S1; S1 on 1 to S2; S2 on 0 to S3, on 1 stays S2; S3 on 1 to S4, on 0 to S0; S4 on 1 to S2 (the suffix \"1\" plus the new 1 gives \"11\"), on 0 to S0... check: \"1101\" then 0 gives suffix \"10\", which is not a prefix of 1101, and \"0\" is not either, so S0.\n\nAll 5 states are distinguishable because each needs a different minimum number of further inputs to reach output 1 (4, 3, 2, 1, and S4 already outputs 1). A Mealy machine would need only 4."
+  },
+  {
+    "id": "dl-039",
+    "topic": "sequential-circuits",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 4-bit shift register shifts right on every clock ($Q_3 \\to Q_2 \\to Q_1 \\to Q_0$). The new value entering $Q_3$ is $Q_1 \\oplus Q_0$. If the initial state $Q_3Q_2Q_1Q_0$ is $1001$, the number of clock pulses after which the register first returns to $1001$ is ______.",
+    "answer": {
+      "min": 15,
+      "max": 15
+    },
+    "explanation": "Simulate (state written $Q_3Q_2Q_1Q_0$, new $Q_3 = Q_1 \\oplus Q_0$):\n\n1001 \\u2192 1100 \\u2192 0110 \\u2192 1011 \\u2192 0101 \\u2192 1010 \\u2192 1101 \\u2192 1110 \\u2192 1111 \\u2192 0111 \\u2192 0011 \\u2192 0001 \\u2192 1000 \\u2192 0100 \\u2192 0010 \\u2192 1001\n\nIt visits all 15 nonzero states before repeating, so the period is 15. This is a maximal-length LFSR; only the all-zero state is excluded, because it maps to itself."
+  },
+  {
+    "id": "dl-040",
+    "topic": "sequential-circuits",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following statements about latches and flip-flops are correct?",
+    "options": [
+      "A positive edge-triggered D flip-flop samples D only around the rising clock edge.",
+      "A master-slave JK flip-flop built from level-sensitive latches avoids the race-around condition when J = K = 1.",
+      "A latch needs a clock edge to change state.",
+      "A gated D latch is transparent: while its enable is active, the output follows the D input."
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "A: correct. Outside the setup and hold window around the active edge, changes on D have no effect.\n\nB: correct. The master changes while the clock is high and the slave copies it while the clock is low, so the output changes at most once per clock period. This removes race-around, which occurs in a level-triggered JK with $J = K = 1$ when the pulse is wider than the propagation delay.\n\nC: wrong. A latch responds to its level-sensitive enable, not to an edge.\n\nD: correct, this is the definition of a level-sensitive latch."
+  },
+  {
+    "id": "dl-041",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 4-bit serial-in shift register shifts right on each clock: the serial input enters $Q_3$, and $Q_3 \\to Q_2 \\to Q_1 \\to Q_0$. The initial content $Q_3Q_2Q_1Q_0$ is $1011$. The serial inputs on the next three clocks are 0, 1, 1 (in that order). The content after the third clock is:",
+    "options": [
+      "$1110$",
+      "$1011$",
+      "$1101$",
+      "$0110$"
+    ],
+    "answer": 2,
+    "explanation": "Each clock: new $Q_3$ = serial input, others move right, old $Q_0$ is lost.\n\n- Start: 1011\n- Clock 1 (in 0): 0101\n- Clock 2 (in 1): 1010\n- Clock 3 (in 1): 1101\n\nContent: $1101$."
+  },
+  {
+    "id": "dl-042",
+    "topic": "sequential-circuits",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 4-bit asynchronous up counter ($Q_3$ is the MSB) has an active-low asynchronous clear driven by a 3-input NAND gate whose inputs are $Q_3$, $Q_2$ and $Q_0$. Starting from 0000, the number of stable states in its counting cycle (its modulus) is ______.",
+    "answer": {
+      "min": 13,
+      "max": 13
+    },
+    "explanation": "The NAND output goes low (clearing the counter) as soon as $Q_3 = Q_2 = Q_0 = 1$. Counting up from 0000, the first such state is $1101$ = 13.\n\nState 13 exists only for a moment before the clear acts, so it is not a stable state. The stable states are 0 to 12: 13 states, a mod-13 counter."
+  },
+  {
+    "id": "dl-043",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A Mealy machine has one T flip-flop with state $Q$, input $x$ and output $z$. The flip-flop input is $T = x$ and the output is $z = x \\oplus Q$ (computed from the present state). Starting with $Q = 0$, the input sequence $x = 1, 1, 0, 1, 0$ (one bit per clock) produces the output sequence:",
+    "options": [
+      "1, 0, 1, 1, 0",
+      "0, 1, 1, 0, 0",
+      "1, 0, 0, 1, 1",
+      "1, 1, 0, 0, 1"
+    ],
+    "answer": 2,
+    "explanation": "At each step compute $z = x \\oplus Q$ with the present $Q$, then $Q^+ = Q \\oplus x$.\n\n| Step | $Q$ | $x$ | $z$ | $Q^+$ |\n|---|---|---|---|---|\n| 1 | 0 | 1 | 1 | 1 |\n| 2 | 1 | 1 | 0 | 0 |\n| 3 | 0 | 0 | 0 | 0 |\n| 4 | 0 | 1 | 1 | 1 |\n| 5 | 1 | 0 | 1 | 1 |\n\nOutput: 1, 0, 0, 1, 1."
+  },
+  {
+    "id": "dl-044",
+    "topic": "sequential-circuits",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An $n$-bit ring counter (a single 1 circulating in a shift register) and an $n$-bit Johnson counter are compared. Which statement is correct?",
+    "options": [
+      "The ring counter has $n$ states and the Johnson counter has $2n$ states",
+      "Both have $2^n$ states",
+      "The ring counter has $2n$ states and the Johnson counter has $n$ states",
+      "The ring counter has $2^n$ states and the Johnson counter has $2n$ states"
+    ],
+    "answer": 0,
+    "explanation": "In a ring counter the single 1 takes $n$ positions, so it has $n$ states. A Johnson counter feeds back the complement of the last stage, filling with 1s and then with 0s, giving $2n$ states. Neither uses all $2^n$ states for $n \\ge 3$."
+  },
+  {
+    "id": "dl-045",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The decimal value of the 8-bit 2's complement number $10110110$ is:",
+    "options": [
+      "$-54$",
+      "$182$",
+      "$-73$",
+      "$-74$"
+    ],
+    "answer": 3,
+    "explanation": "The MSB is 1, so the number is negative. Weighted sum with MSB weight $-128$:\n\n$-128 + 32 + 16 + 4 + 2 = -74$.\n\nCheck: 2's complement of $10110110$ is $01001010 = 74$."
+  },
+  {
+    "id": "dl-046",
+    "topic": "number-representation",
+    "type": "nat",
+    "marks": 2,
+    "q": "The 32-bit pattern C1A40000 (hexadecimal) is an IEEE 754 single-precision number. Its decimal value is ______.",
+    "answer": {
+      "min": -20.5,
+      "max": -20.5
+    },
+    "explanation": "Binary: $1100\\,0001\\,1010\\,0100\\,0000 \\ldots 0$.\n\n- Sign bit: 1 (negative).\n- Exponent: next 8 bits $10000011 = 131$. Actual exponent $131 - 127 = 4$.\n- Fraction: $0100100\\ldots$, so the significand is $1.01001_2 = 1 + 0.25 + 0.03125 = 1.28125$.\n\nValue $= -1.28125 \\times 2^4 = -20.5$."
+  },
+  {
+    "id": "dl-047",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The IEEE 754 single-precision encoding of $-6.75$, in hexadecimal, is:",
+    "options": [
+      "`C1D80000`",
+      "`C0D80000`",
+      "`C0580000`",
+      "`40D80000`"
+    ],
+    "answer": 1,
+    "explanation": "$6.75 = 110.11_2 = 1.1011_2 \\times 2^2$.\n\n- Sign = 1.\n- Biased exponent $= 2 + 127 = 129 = 10000001_2$.\n- Fraction = $1011000\\ldots0$ (23 bits).\n\nBits: $1\\,10000001\\,10110000000000000000000$. Grouped in fours: $1100\\,0000\\,1101\\,1000\\,0000\\ldots$ = C0D80000.\n\nC0580000 would have exponent $128$ (value $-3.375$). 40D80000 is $+6.75$."
+  },
+  {
+    "id": "dl-048",
+    "topic": "number-representation",
+    "type": "msq",
+    "marks": 2,
+    "q": "The following 8-bit 2's complement additions are performed (operands in hexadecimal). Which of them produce an overflow?",
+    "options": [
+      "`64 + 32`",
+      "`9C + E2`",
+      "`7F + 81`",
+      "`C0 + C0`"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Overflow happens when two operands of the same sign give a result of the other sign (equivalently, carry into the MSB differs from carry out of the MSB).\n\n- 64 + 32 = $100 + 50 = 150 > 127$. Result 96 is negative. Overflow.\n- 9C + E2 = $-100 + (-30) = -130 < -128$. Result 7E is positive. Overflow.\n- 7F + 81 = $127 + (-127) = 0$. Operands have opposite signs, so no overflow.\n- C0 + C0 = $-64 + (-64) = -128$, which fits. Result 80. No overflow."
+  },
+  {
+    "id": "dl-049",
+    "topic": "number-representation",
+    "type": "nat",
+    "marks": 2,
+    "q": "The number of 1s in the binary representation of $3 \\times 8^5 + 5 \\times 4^3 + 7 \\times 2^2 - 1$ is ______.",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "Write each term as a power-of-two pattern.\n\n- $3 \\times 8^5 = 3 \\times 2^{15} = 2^{16} + 2^{15}$\n- $5 \\times 4^3 = 5 \\times 2^6 = 2^8 + 2^6$\n- $7 \\times 2^2 - 1 = 28 - 1 = 27 = 2^4 + 2^3 + 2^1 + 2^0$\n\nNo two terms share a bit position, so the total is $2^{16} + 2^{15} + 2^8 + 2^6 + 2^4 + 2^3 + 2^1 + 2^0$: 8 ones. (Value 98651 = $11000000101011011_2$.)"
+  },
+  {
+    "id": "dl-050",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$(3AF)_{16}$ in octal is:",
+    "options": [
+      "$(1647)_8$",
+      "$(1657)_8$",
+      "$(1757)_8$",
+      "$(3517)_8$"
+    ],
+    "answer": 1,
+    "explanation": "Convert through binary. $3AF = 0011\\,1010\\,1111$. Regroup in threes from the right: $001\\,110\\,101\\,111 = 1\\,6\\,5\\,7$. So $(1657)_8$. Check: both equal 943 in decimal."
+  },
+  {
+    "id": "dl-051",
+    "topic": "number-representation",
+    "type": "nat",
+    "marks": 2,
+    "q": "An 8-bit floating-point format follows IEEE 754 rules with 1 sign bit, a 4-bit biased exponent (bias 7) and a 3-bit fraction. The exponent field 1111 is reserved for infinity and NaN, and 0000 for zero and subnormals. The largest finite positive value representable is ______.",
+    "answer": {
+      "min": 240,
+      "max": 240
+    },
+    "explanation": "The largest usable exponent field is $1110 = 14$, so the actual exponent is $14 - 7 = 7$. The largest significand is $1.111_2 = 1.875$.\n\nLargest value $= 1.875 \\times 2^7 = 240$."
+  },
+  {
+    "id": "dl-052",
+    "topic": "number-representation",
+    "type": "nat",
+    "marks": 2,
+    "q": "In the same 8-bit format (1 sign bit, 4-bit exponent with bias 7, 3-bit fraction, IEEE 754 conventions including subnormals), how many distinct finite positive values can be represented?",
+    "answer": {
+      "min": 119,
+      "max": 119
+    },
+    "explanation": "Normalized values: exponent fields 1 to 14 (14 choices) times 8 fraction patterns $= 112$.\n\nSubnormals: exponent field 0 with a nonzero fraction, 7 patterns. (Fraction 0 with exponent 0 is zero, not positive.)\n\nAll these values are distinct, so the total is $112 + 7 = 119$."
+  },
+  {
+    "id": "dl-053",
+    "topic": "number-representation",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about IEEE 754 single-precision numbers are correct?",
+    "options": [
+      "The smallest positive normalized value is $2^{-127}$.",
+      "Subnormal numbers have an implicit leading 1 in the significand.",
+      "+0 and -0 have different bit patterns but compare as equal.",
+      "A NaN has all exponent bits 1 and a nonzero fraction."
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "A: wrong. The smallest normalized exponent field is 1, giving $2^{1-127} = 2^{-126}$.\n\nB: wrong. Subnormals (exponent field 0) use an implicit leading 0 and a fixed exponent of $-126$.\n\nC: correct. +0 is 00000000 and -0 is 80000000; the standard defines them as equal in comparisons.\n\nD: correct. Exponent all 1s with fraction 0 is infinity; with a nonzero fraction it is NaN."
+  },
+  {
+    "id": "dl-054",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An 8-bit signed fixed-point number uses 2's complement with 4 integer bits and 4 fraction bits. The pattern $1101.0110$ represents:",
+    "options": [
+      "$-5.375$",
+      "$-2.625$",
+      "$-2.375$",
+      "$13.375$"
+    ],
+    "answer": 1,
+    "explanation": "Treat the 8 bits $11010110$ as a 2's complement integer and divide by $2^4$.\n\n$11010110$ as 8-bit 2's complement $= -128 + 64 + 16 + 4 + 2 = -42$. Value $= -42 / 16 = -2.625$.\n\nEquivalently, integer part weights are $-8, 4, 2, 1$ and fraction weights $0.5, 0.25, 0.125, 0.0625$: $-8 + 4 + 1 + 0.25 + 0.125 = -2.625$."
+  },
+  {
+    "id": "dl-055",
+    "topic": "number-representation",
+    "type": "nat",
+    "marks": 2,
+    "q": "Booth's algorithm (radix-2) is used to multiply by the 8-bit multiplier $01101101$. Counting each addition or subtraction of the multiplicand as one operation, the total number of operations is ______.",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "Append $Q_{-1} = 0$ to the right and scan pairs $(Q_i, Q_{i-1})$ from $i = 0$ to 7. Pair 10 means subtract, 01 means add, 00 and 11 mean no operation.\n\nMultiplier bits $b_7 \\ldots b_0 = 0\\,1\\,1\\,0\\,1\\,1\\,0\\,1$, with $b_{-1} = 0$:\n\n| $i$ | $(b_i, b_{i-1})$ | action |\n|---|---|---|\n| 0 | (1, 0) | subtract |\n| 1 | (0, 1) | add |\n| 2 | (1, 0) | subtract |\n| 3 | (1, 1) | none |\n| 4 | (0, 1) | add |\n| 5 | (1, 0) | subtract |\n| 6 | (1, 1) | none |\n| 7 | (0, 1) | add |\n\nTotal: 6 operations. This equals the number of bit transitions in $01101101\\,0$."
+  },
+  {
+    "id": "dl-056",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which statement about 8-bit 1's complement representation is correct?",
+    "options": [
+      "Range is $-128$ to $+128$ and there are two representations of zero",
+      "Range is $-127$ to $+128$ and there is one representation of zero",
+      "Range is $-127$ to $+127$ and there are two representations of zero",
+      "Range is $-128$ to $+127$ and there is one representation of zero"
+    ],
+    "answer": 2,
+    "explanation": "In 1's complement, $-x$ is formed by inverting every bit of $x$. $00000000$ and $11111111$ both represent zero. The largest positive value is $01111111 = 127$ and its complement $10000000$ is $-127$. Range $-127$ to $+127$, two zeros."
+  },
+  {
+    "id": "dl-057",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Two packed BCD numbers $0111\\,1001$ and $0101\\,0110$ are added using a BCD adder (binary add per digit, then correct by adding $0110$ where needed). The result is:",
+    "options": [
+      "$0001\\;0011\\;0101$",
+      "$1100\\;1111$",
+      "$0001\\;0010\\;1111$",
+      "$0001\\;0011\\;1011$"
+    ],
+    "answer": 0,
+    "explanation": "The numbers are 79 and 56; the decimal sum is 135.\n\nUnits digit: $1001 + 0110 = 1111$ (15). This is above 9, so add $0110$: $1111 + 0110 = 1\\,0101$. Digit 5, carry 1.\n\nTens digit: $0111 + 0101 + 1 = 1101$ (13). Above 9, add $0110$: $1101 + 0110 = 1\\,0011$. Digit 3, carry 1.\n\nResult: $0001\\;0011\\;0101$ = 135."
+  },
+  {
+    "id": "dl-058",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Two $n$-bit 2's complement numbers are added. Let $C_{n-1}$ be the carry into the most significant bit and $C_n$ the carry out of it. Overflow occurs exactly when:",
+    "options": [
+      "$C_{n-1} \\oplus C_n = 1$",
+      "$C_n = 1$",
+      "$C_{n-1} = 1$",
+      "$C_{n-1} \\land C_n = 1$"
+    ],
+    "answer": 0,
+    "explanation": "Case analysis on the sign bits $a, b$ of the operands:\n\n- $a = b = 0$: carry out is 0. Overflow (result negative) happens exactly when a carry enters the MSB, so $C_{n-1} = 1, C_n = 0$.\n- $a = b = 1$: carry out is 1. Overflow (result positive) happens exactly when no carry enters, so $C_{n-1} = 0, C_n = 1$.\n- $a \\ne b$: no overflow, and $C_n = C_{n-1}$.\n\nIn every case overflow $= C_{n-1} \\oplus C_n$. A carry out alone ($C_n = 1$) is normal for adding two negatives, for example $-1 + -1$."
+  },
+  {
+    "id": "dl-059",
+    "topic": "number-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A 16-bit register holds the hexadecimal value FF9C. It is interpreted as (i) an unsigned integer and (ii) a 2's complement signed integer. The two values are:",
+    "options": [
+      "(i) $65436$, (ii) $-100$",
+      "(i) $65436$, (ii) $-99$",
+      "(i) $65435$, (ii) $-100$",
+      "(i) $63900$, (ii) $-1636$"
+    ],
+    "answer": 0,
+    "explanation": "Unsigned: $\\text{FF9C}_{16} = 15 \\cdot 16^3 + 15 \\cdot 16^2 + 9 \\cdot 16 + 12 = 61440 + 3840 + 144 + 12 = 65436$.\n\nSigned: the MSB is 1, so the value is $65436 - 65536 = -100$. Check: inverting FF9C gives 0063, plus 1 gives 0064 = 100."
+  },
+  {
+    "id": "dl-060",
+    "topic": "number-representation",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following values can be represented exactly in IEEE 754 single precision?",
+    "options": [
+      "$16777217$",
+      "$0.375$",
+      "$0.1$",
+      "$-2^{-130}$"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "A value is exact only if it is an integer multiple of a power of two whose significant bits fit in 24 bits (1 implicit + 23 stored), with the exponent in range.\n\n- $0.375 = 3/8 = 1.1_2 \\times 2^{-2}$. Exact.\n- $0.1 = 1/10$ has a factor 5 in the denominator, so its binary expansion repeats forever. Not exact.\n- $-2^{-130}$ is below the smallest normalized value $2^{-126}$ but above the smallest subnormal $2^{-149}$. As a subnormal it is $0.0001_2 \\times 2^{-126}$, a single 1 bit in the fraction. Exact.\n- $16777217 = 2^{24} + 1$ needs 25 significant bits ($1\\,000\\ldots0001$), one more than single precision holds. It rounds to $2^{24}$. Not exact."
+  }
+]

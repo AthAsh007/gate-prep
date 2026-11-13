@@ -1,0 +1,907 @@
+[
+  {
+    "id": "toc-001",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 1,
+    "q": "Let $L$ be the set of strings over $\\{a, b\\}$ whose third symbol (counting from the left) is $a$. How many states does the minimal **complete** DFA for $L$ have? Count the dead state if one is needed.",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "The DFA must remember how many symbols it has read so far, up to 2: states for 0, 1 and 2 symbols read. On the third symbol it goes to an accepting trap if the symbol is $a$, or to a dead trap if it is $b$. That gives 3 + 1 + 1 = 5 states. All five are distinguishable: the counting states need different numbers of extra symbols before the decisive one, and the accepting trap differs from the dead trap on $\\epsilon$. Answer: 5."
+  },
+  {
+    "id": "toc-002",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 2,
+    "q": "A DFA reads a binary string most significant bit first and accepts exactly the strings whose value is divisible by 6. Leading zeros are allowed and the empty string is treated as the value 0 (accepted). How many states does the minimal **complete** DFA have?",
+    "answer": {
+      "min": 4,
+      "max": 4
+    },
+    "explanation": "Start with the remainder DFA: states $r \\in \\{0,\\dots,5\\}$, transition $r \\to (2r + b) \\bmod 6$, accept $r = 0$.\n\nStates $r$ and $r + 3$ satisfy $2r \\equiv 2(r+3) \\pmod 6$, so on every bit they move to the same state. They are therefore equivalent unless one of them is accepting. That merges 1 with 4 and 2 with 5, while 0 (accepting) and 3 (not accepting) stay apart. Moore refinement confirms the classes $\\{0\\}, \\{3\\}, \\{1,4\\}, \\{2,5\\}$.\n\nAnswer: 4."
+  },
+  {
+    "id": "toc-003",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 1,
+    "q": "Let $L = \\{a^n : n \\bmod 6 \\in \\{0, 3\\}\\}$ over the one-letter alphabet $\\{a\\}$. How many states does the minimal DFA for $L$ have? (Every state is live here, so complete and partial counts agree.)",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "$n \\bmod 6 \\in \\{0, 3\\}$ is the same as $n \\bmod 3 = 0$. So $L = \\{a^n : 3 \\mid n\\}$, which needs a cycle of length 3 with one accepting state. A 6-state cycle with states 0 and 3 accepting collapses: state $i$ is equivalent to state $i+3$. Answer: 3."
+  },
+  {
+    "id": "toc-004",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 2,
+    "q": "Let $L$ be the set of strings over $\\{a, b\\}$ whose length is divisible by 2 or by 3. How many states does the minimal **complete** DFA for $L$ have?",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "Track the length modulo 6. Accepting residues are those divisible by 2 or 3: $\\{0, 2, 3, 4\\}$. Non-accepting: $\\{1, 5\\}$.\n\nCheck distinguishability. Two residues $i \\ne j$ are equivalent only if $i + k$ and $j + k$ always have the same status. The acceptance pattern over one period, starting at residue 0, is A N A A A N. No proper rotation of this pattern equals itself, so all 6 residues are pairwise distinguishable. No dead state is needed. Answer: 6."
+  },
+  {
+    "id": "toc-005",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 2,
+    "q": "Let $L$ be the set of strings over $\\{a, b\\}$ that contain $abab$ as a substring. How many states does the minimal **complete** DFA for $L$ have?",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "States record the longest prefix of $abab$ that is also a suffix of the input read so far: $\\epsilon$, $a$, $ab$, $aba$, plus an accepting trap once $abab$ has appeared.\n\n| State | a | b |\n|---|---|---|\n| $\\epsilon$ | $a$ | $\\epsilon$ |\n| $a$ | $a$ | $ab$ |\n| $ab$ | $aba$ | $\\epsilon$ |\n| $aba$ | $a$ | trap |\n| trap | trap | trap |\n\nThe four non-accepting states need at least 4, 3, 2 and 1 more symbols to reach acceptance, so they are pairwise distinct, and the trap is the only accepting state. No dead state exists because acceptance is always still reachable. Answer: 5."
+  },
+  {
+    "id": "toc-006",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 2,
+    "q": "Let $L$ be the set of binary strings whose third symbol from the right end is $1$ (strings shorter than 3 are rejected). How many states does the minimal DFA for $L$ have? (No dead state arises, so complete and partial counts agree.)",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "The DFA must remember the last three symbols. Any two different 3-bit windows $x \\ne y$ differ in some position $i$; appending $3 - i$ suitable symbols pushes that position to be the third from the end, so one string is accepted and the other is not. Hence at least $2^3 = 8$ states. Eight suffice: a state for each 3-bit window, with short prefixes identified with windows padded by 0 on the left (padding with 0 is safe because a missing symbol can never be the deciding 1). Answer: 8."
+  },
+  {
+    "id": "toc-007",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many binary strings of length 6 contain no two consecutive 1s?",
+    "answer": {
+      "min": 21,
+      "max": 21
+    },
+    "explanation": "Let $f(n)$ be the count. A valid string ends in 0 (any valid string of length $n-1$ before it) or in 01 (any valid string of length $n-2$ before it). So $f(n) = f(n-1) + f(n-2)$ with $f(0) = 1$, $f(1) = 2$. Then $f(2)=3, f(3)=5, f(4)=8, f(5)=13, f(6)=21$. Answer: 21."
+  },
+  {
+    "id": "toc-008",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many distinct strings of length 6 belong to the language of the regular expression $a^* b^* a^*$?",
+    "answer": {
+      "min": 22,
+      "max": 22
+    },
+    "explanation": "Count distinct strings, not ways of splitting. Each string has the form $a^i b^j a^k$ with $i + j + k = 6$.\n\nIf $j = 0$ the string is $a^6$, one string no matter how $i$ and $k$ split.\n\nIf $j \\ge 1$, the $b$ block is visible, so different $(i, k)$ give different strings. For fixed $j$, $i + k = 6 - j$ has $7 - j$ solutions. Sum over $j = 1..6$: $6 + 5 + 4 + 3 + 2 + 1 = 21$.\n\nTotal $= 1 + 21 = 22$. Counting all $(i,j,k)$ triples gives 28, which overcounts $a^6$ seven times."
+  },
+  {
+    "id": "toc-009",
+    "topic": "regular-languages",
+    "type": "nat",
+    "marks": 1,
+    "q": "Let $L = \\{w \\in \\{a,b\\}^* : n_a(w) \\equiv n_b(w) \\pmod 3\\}$, where $n_x(w)$ is the number of occurrences of $x$ in $w$. How many states does the minimal DFA for $L$ have? (No dead state arises.)",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "Membership depends only on $(n_a - n_b) \\bmod 3$. Each $a$ adds 1 and each $b$ subtracts 1 modulo 3, so 3 states suffice with state 0 accepting. The three residues are distinguishable: from residue $r$, the shortest string of $a$'s that leads to acceptance has length $(3 - r) \\bmod 3$, which differs for each $r$. Answer: 3."
+  },
+  {
+    "id": "toc-010",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which regular expression denotes exactly the set of strings over $\\{a, b\\}$ that contain no two consecutive $b$'s?",
+    "options": [
+      "$(a + ba)^*(\\epsilon + b)$",
+      "$(a + ba)^*$",
+      "$(a + bb)^* b^*$",
+      "$a^*(ba)^* b^*$"
+    ],
+    "answer": 0,
+    "explanation": "In a valid string every $b$ except possibly a final one is followed by $a$. So the string splits into blocks $a$ and $ba$, followed by an optional trailing $b$: $(a + ba)^*(\\epsilon + b)$.\n\n$(a+ba)^*$ misses $b$ itself. $(a+bb)^*b^*$ contains $bb$. $a^*(ba)^*b^*$ contains $bb$ and also misses $baab$."
+  },
+  {
+    "id": "toc-011",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An NFA has 5 states. Using the subset construction, what is the largest number of states the resulting DFA can have (including the empty-set state)?",
+    "options": [
+      "5",
+      "10",
+      "25",
+      "32"
+    ],
+    "answer": 3,
+    "explanation": "Each DFA state is a subset of the 5 NFA states, so there are at most $2^5 = 32$ of them, including $\\emptyset$, which acts as the dead state. Some NFAs actually need all of them, so the bound is tight in the worst case."
+  },
+  {
+    "id": "toc-012",
+    "topic": "regular-languages",
+    "type": "msq",
+    "marks": 2,
+    "q": "Over the alphabet $\\{a, b\\}$, which of the following pairs of regular expressions denote the same language?",
+    "options": [
+      "$(a^* b^*)^*$ and $(a + b)^*$",
+      "$(ab)^* a$ and $a(ba)^*$",
+      "$a^* + b^*$ and $(a + b)^*$",
+      "$(a + ab)^*$ and $(a + b)^*$"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Option 1: $(a^*b^*)^*$ contains $a$ and $b$ (take one star-block each), so its star covers every string. Equal.\n\nOption 2: both are $abab\\dots a$ strings: alternating, starting and ending with $a$. Shifting brackets, $(ab)^k a = a(ba)^k$. Equal.\n\nOption 3: $a^* + b^*$ does not contain $ab$. Not equal.\n\nOption 4: in $(a + ab)^*$ every $b$ is preceded by $a$, so it misses $b$. Not equal."
+  },
+  {
+    "id": "toc-013",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many Myhill-Nerode equivalence classes does $L = \\{w \\in \\{0,1\\}^* : w \\text{ ends with } 00\\}$ have?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "Infinitely many"
+    ],
+    "answer": 1,
+    "explanation": "What matters about a prefix is how many trailing 0s it has, capped at 2: (a) does not end in 0 (including $\\epsilon$), (b) ends in exactly one 0, (c) ends in 00. They are distinguished by suffixes: $\\epsilon$ separates (c) from the others, and $0$ separates (b) from (a). So there are 3 classes, matching a 3-state minimal DFA."
+  },
+  {
+    "id": "toc-014",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following languages is **not** regular?",
+    "options": [
+      "$\\{a^n b^m : n, m \\ge 0\\}$",
+      "$\\{a^p : p \\text{ is prime}\\}$",
+      "$\\{w \\in \\{a,b\\}^* : |w| \\bmod 3 = 1\\}$",
+      "$\\{a^n b^n : 0 \\le n \\le 1000\\}$"
+    ],
+    "answer": 1,
+    "explanation": "$a^*b^*$ is regular. Length mod 3 needs a 3-state DFA. The bounded $a^n b^n$ language is finite, and every finite language is regular.\n\nThe primes are not regular. Suppose pumping length $k$, take a prime $p > k$ and split $a^p = xyz$ with $|y| = m \\ge 1$. Then $xy^iz$ has length $p + (i-1)m$. With $i = p + 1$ the length is $p(1 + m)$, which is not prime, a contradiction."
+  },
+  {
+    "id": "toc-015",
+    "topic": "regular-languages",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following statements are true?",
+    "options": [
+      "Every NFA (with or without $\\epsilon$-moves) has an equivalent DFA.",
+      "An $\\epsilon$-NFA can accept some non-regular languages.",
+      "The minimal DFA of a regular language is unique up to renaming of states.",
+      "The minimal NFA of a regular language is unique up to renaming of states."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "$\\epsilon$-closure plus the subset construction turns any $\\epsilon$-NFA into a DFA, so $\\epsilon$-moves add no power and statement 2 is false. The minimal DFA is unique up to isomorphism (it is the Myhill-Nerode quotient). Minimal NFAs are not unique in general; different non-isomorphic NFAs with the same smallest number of states can accept the same language."
+  },
+  {
+    "id": "toc-016",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider the DFA over $\\{0, 1\\}$ with start state $q_0$ and accepting set $\\{q_0\\}$:\n\n| State | 0 | 1 |\n|---|---|---|\n| $q_0$ | $q_0$ | $q_1$ |\n| $q_1$ | $q_2$ | $q_0$ |\n| $q_2$ | $q_1$ | $q_2$ |\n\nWhich language does it accept? (Read strings as binary numbers, most significant bit first; $\\epsilon$ counts as 0.)",
+    "options": [
+      "Binary numbers divisible by 3",
+      "Strings with a number of 1s divisible by 3",
+      "Binary numbers divisible by 4",
+      "Strings with an even number of 0s and an even number of 1s"
+    ],
+    "answer": 0,
+    "explanation": "Treat $q_r$ as remainder $r$ mod 3 and check $r \\to (2r + b) \\bmod 3$:\n\n- $r=0$: $b=0 \\to 0$, $b=1 \\to 1$. Matches.\n- $r=1$: $b=0 \\to 2$, $b=1 \\to 0$. Matches.\n- $r=2$: $b=0 \\to 4 \\bmod 3 = 1$, $b=1 \\to 5 \\bmod 3 = 2$. Matches.\n\nAccepting $q_0$ means remainder 0. Counting 1s fails: $11$ has two 1s but is accepted (value 3)."
+  },
+  {
+    "id": "toc-017",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which regular expression denotes the set of binary strings in which every $1$ is immediately followed by a $0$?",
+    "options": [
+      "$(0 + 10)^*$",
+      "$(0 + 01)^*$",
+      "$0^*(10)^*$",
+      "$(10)^* 0^*$"
+    ],
+    "answer": 0,
+    "explanation": "Break a valid string into pieces: each 1 is glued to the 0 after it, giving blocks $10$, and every other 0 is a block on its own. So the set is $(0 + 10)^*$.\n\n$(0+01)^*$ contains $01$, where the 1 is last. $0^*(10)^*$ misses $10010$ (a 0 between two $10$ blocks). $(10)^*0^*$ misses $010$."
+  },
+  {
+    "id": "toc-018",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "DFA $M_1$ has 3 states and DFA $M_2$ has 4 states, both complete, over the same alphabet. Using the product construction, at most how many states are needed for a DFA accepting $L(M_1) \\cap L(M_2)$?",
+    "options": [
+      "7",
+      "12",
+      "16",
+      "64"
+    ],
+    "answer": 1,
+    "explanation": "Product states are pairs $(p, q)$ with $p$ from $M_1$ and $q$ from $M_2$, so at most $3 \\times 4 = 12$. The same bound works for union and difference; only the accepting set changes."
+  },
+  {
+    "id": "toc-019",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider the DFA over $\\{0, 1\\}$ with start state $A$ and accepting set $\\{C, D\\}$:\n\n| State | 0 | 1 |\n|---|---|---|\n| $A$ | $B$ | $C$ |\n| $B$ | $A$ | $D$ |\n| $C$ | $E$ | $C$ |\n| $D$ | $E$ | $D$ |\n| $E$ | $E$ | $E$ |\n| $F$ | $C$ | $A$ |\n\nHow many states does the minimal **complete** DFA for the same language have (dead state included)?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 1,
+    "explanation": "Step 1: remove unreachable states. Nothing enters $F$, so drop it.\n\nStep 2: partition $\\{C, D\\}$ (accepting) and $\\{A, B, E\\}$.\n\nStep 3: refine. $C$ and $D$ both go to $E$ on 0 and stay in $\\{C,D\\}$ on 1: same block. $A$ and $B$ go to $\\{A,B,E\\}$ on 0 and to $\\{C,D\\}$ on 1, but $E$ goes to $\\{A,B,E\\}$ on 1, so $E$ splits off. Next round: $A, B$ still agree. Final classes $\\{A,B\\}, \\{C,D\\}, \\{E\\}$.\n\nThe language is $0^* 1 1^*$ and the minimal complete DFA has 3 states ($E$ is the dead state)."
+  },
+  {
+    "id": "toc-020",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Over $\\{a, b\\}$, what is the smallest language $X$ satisfying the equation $X = aX + b$?",
+    "options": [
+      "$a^* b$",
+      "$b a^*$",
+      "$(a + b)^*$",
+      "$a b^*$"
+    ],
+    "answer": 0,
+    "explanation": "By Arden's rule, $X = PX + Q$ with $\\epsilon \\notin P$ has the unique solution $X = P^* Q$. Here $P = a$, $Q = b$, so $X = a^* b$. Unrolling confirms it: $X = b + ab + aab + \\dots$"
+  },
+  {
+    "id": "toc-021",
+    "topic": "regular-languages",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which of the following languages over $\\{a, b\\}$ is regular? Here $\\#_{xy}(w)$ is the number of positions where the substring $xy$ occurs in $w$.",
+    "options": [
+      "$\\{a^n b^n : n \\ge 0\\}$",
+      "$\\{w : n_a(w) = n_b(w)\\}$",
+      "$\\{w : \\#_{ab}(w) = \\#_{ba}(w)\\}$",
+      "$\\{ww : w \\in \\{a,b\\}^*\\}$"
+    ],
+    "answer": 2,
+    "explanation": "Scanning left to right, occurrences of $ab$ and $ba$ alternate (each marks a switch between an $a$-run and a $b$-run). So the counts are equal exactly when the number of switches is even, which happens exactly when $w$ is empty or its first and last symbols are the same. That is a simple regular language: $\\epsilon + a + b + a(a+b)^*a + b(a+b)^*b$.\n\nThe other three need unbounded counting or copying and are not regular."
+  },
+  {
+    "id": "toc-022",
+    "topic": "regular-languages",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following languages are regular?",
+    "options": [
+      "$\\{a^m b^n : m + n \\text{ is even}\\}$",
+      "$\\{a^n b^n c^n : n \\ge 0\\}$",
+      "$\\{x y x^R : x, y \\in \\{a,b\\}^+\\}$",
+      "$\\{a^{n^2} : n \\ge 0\\}$"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Option 1: $a^*b^*$ intersected with even-length strings. Regular.\n\nOption 3: take $x$ of length 1. Any string of length at least 3 whose first and last symbols agree fits $x\\,y\\,x^R$ with $x$ a single symbol. Conversely any $x y x^R$ starts and ends with the same symbol and has length at least 3. So the language is $a(a+b)^+a + b(a+b)^+b$. Regular.\n\nOption 2 is not even context-free. Option 4: gaps between consecutive squares grow without bound, so the pumping lemma fails it."
+  },
+  {
+    "id": "toc-023",
+    "topic": "context-free",
+    "type": "nat",
+    "marks": 2,
+    "q": "Consider the grammar $S \\to aSb \\mid SS \\mid \\epsilon$. How many distinct strings of length 8 does it generate?",
+    "answer": {
+      "min": 14,
+      "max": 14
+    },
+    "explanation": "Read $a$ as an opening bracket and $b$ as a closing bracket. The grammar generates exactly the balanced bracket strings: $aSb$ wraps a balanced string, $SS$ concatenates two. Balanced strings with 4 pairs are counted by the Catalan number $C_4 = \\frac{1}{5}\\binom{8}{4} = 14$. (Check: length 4 gives $C_2 = 2$: $aabb$ and $abab$.)"
+  },
+  {
+    "id": "toc-024",
+    "topic": "context-free",
+    "type": "nat",
+    "marks": 1,
+    "q": "A grammar is in Chomsky Normal Form and has no $\\epsilon$-productions. How many derivation steps are needed to derive any string of length 7?",
+    "answer": {
+      "min": 13,
+      "max": 13
+    },
+    "explanation": "Each $A \\to BC$ step increases the number of symbols by one; going from 1 symbol ($S$) to 7 variables takes 6 such steps. Each $A \\to a$ step turns one variable into a terminal; 7 such steps are needed. Total $6 + 7 = 13 = 2n - 1$."
+  },
+  {
+    "id": "toc-025",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following grammars is ambiguous?",
+    "options": [
+      "$S \\to aSb \\mid \\epsilon$",
+      "$S \\to aS \\mid b$",
+      "$S \\to SS \\mid a$",
+      "$S \\to aSa \\mid bSb \\mid a \\mid b \\mid \\epsilon$"
+    ],
+    "answer": 2,
+    "explanation": "For $S \\to SS \\mid a$, the string $aaa$ has two parse trees: split as $(aa)(a)$ or $(a)(aa)$. The other grammars force a unique choice of production at each step from the next unread symbols or the string length, so each string has one parse tree."
+  },
+  {
+    "id": "toc-026",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What language does the grammar $S \\to aSbb \\mid \\epsilon$ generate?",
+    "options": [
+      "$\\{a^n b^n : n \\ge 0\\}$",
+      "$\\{a^n b^{2n} : n \\ge 0\\}$",
+      "$\\{a^{2n} b^n : n \\ge 0\\}$",
+      "$\\{a^m b^n : n \\ge 2m\\}$"
+    ],
+    "answer": 1,
+    "explanation": "Each use of $S \\to aSbb$ adds one $a$ on the left and two $b$'s on the right; $S \\to \\epsilon$ stops. After $n$ uses: $a^n b^{2n}$."
+  },
+  {
+    "id": "toc-027",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which of the following languages is context-free but **not** deterministic context-free?",
+    "options": [
+      "$\\{w w^R : w \\in \\{a,b\\}^*\\}$",
+      "$\\{w c w^R : w \\in \\{a,b\\}^*\\}$",
+      "$\\{a^n b^n : n \\ge 0\\}$",
+      "$\\{a^n b^n c^n : n \\ge 0\\}$"
+    ],
+    "answer": 0,
+    "explanation": "Even-length palindromes need the PDA to guess the middle, and no deterministic PDA can do it. With a centre marker $c$, the DPDA knows exactly when to switch from pushing to popping, so $wcw^R$ is a DCFL. $a^nb^n$ is a DCFL. $a^nb^nc^n$ is not context-free at all."
+  },
+  {
+    "id": "toc-028",
+    "topic": "context-free",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following languages are context-free?",
+    "options": [
+      "$\\{a^n b^m c^n : n, m \\ge 0\\}$",
+      "$\\{a^n b^n c^m d^m : n, m \\ge 0\\}$",
+      "$\\{a^n b^m c^n d^m : n, m \\ge 0\\}$",
+      "$\\{a^i b^j c^k : i = j \\text{ or } j = k\\}$"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Option 1: push $a$'s, skip $b$'s, match $c$'s. Nested, so CFL.\n\nOption 2: two independent matched blocks, one after the other. Concatenation of two CFLs.\n\nOption 3: the matched pairs cross ($a$ with $c$, $b$ with $d$). A single stack cannot do it; the CFL pumping lemma on $a^p b^p c^p d^p$ rules it out.\n\nOption 4: union of $\\{a^i b^i c^k\\}$ and $\\{a^i b^j c^j\\}$, both CFL, and CFLs are closed under union."
+  },
+  {
+    "id": "toc-029",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which of the following languages over $\\{a, b\\}$ is **not** context-free?",
+    "options": [
+      "$\\{w w : w \\in \\{a,b\\}^*\\}$",
+      "The complement of $\\{w w : w \\in \\{a,b\\}^*\\}$",
+      "$\\{a^n b^m : n \\ne m\\}$",
+      "$\\{w : n_a(w) = n_b(w)\\}$"
+    ],
+    "answer": 0,
+    "explanation": "$ww$ needs the first half compared in the same order with the second half, which a stack cannot do. Intersect with $a^*b^*a^*b^*$ to get $\\{a^n b^m a^n b^m\\}$, which fails the CFL pumping lemma.\n\nThe complement of $ww$ is a known CFL: odd-length strings, plus even-length strings with a mismatch at some position $i$ in the two halves, which a PDA can guess. $a^n b^m$ with $n \\ne m$ and equal counts are both CFL."
+  },
+  {
+    "id": "toc-030",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which statement about pushdown automata is true?",
+    "options": [
+      "Deterministic and nondeterministic PDAs accept the same class of languages.",
+      "For nondeterministic PDAs, acceptance by final state and acceptance by empty stack give the same class of languages.",
+      "Every context-free language is accepted by some deterministic PDA.",
+      "A PDA with two stacks accepts exactly the context-free languages."
+    ],
+    "answer": 1,
+    "explanation": "For NPDAs, the two acceptance modes convert into each other, and both give the CFLs. DPDAs are strictly weaker ($ww^R$ is a CFL but not a DCFL). A two-stack PDA can simulate a Turing machine tape, so it accepts all RE languages."
+  },
+  {
+    "id": "toc-031",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A grammar is in Greibach Normal Form (every production is $A \\to a\\alpha$ with $a$ a terminal and $\\alpha$ a string of variables). How many steps does a derivation of a string of length $n \\ge 1$ take?",
+    "options": [
+      "$n$",
+      "$2n - 1$",
+      "$n + 1$",
+      "$2n$"
+    ],
+    "answer": 0,
+    "explanation": "Every GNF production puts exactly one terminal into the sentential form, and terminals are never removed. So a string of $n$ terminals needs exactly $n$ steps."
+  },
+  {
+    "id": "toc-032",
+    "topic": "context-free",
+    "type": "msq",
+    "marks": 2,
+    "q": "Consider the grammar $G$: $S \\to aSb \\mid aS \\mid \\epsilon$. Which statements are true?",
+    "options": [
+      "$L(G) = \\{a^m b^n : m \\ge n \\ge 0\\}$",
+      "$G$ is ambiguous.",
+      "$L(G)$ is a deterministic context-free language.",
+      "$L(G)$ is regular."
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Each $aSb$ adds a matched pair, each $aS$ adds an extra $a$, so the number of $a$'s is at least the number of $b$'s and all $a$'s come first: option 1 holds.\n\n$aab$ has two parse trees: $S \\Rightarrow aS \\Rightarrow aaSb \\Rightarrow aab$ and $S \\Rightarrow aSb \\Rightarrow aaSb \\Rightarrow aab$. Ambiguous.\n\nA DPDA pushes each $a$, pops one per $b$, and rejects if the stack bottom is reached on a $b$. It accepts in every non-rejecting state. So the language is a DCFL.\n\nIt is not regular: $a^n b^n \\in L$ but $a^{n-1} b^n \\notin L$, and pumping $a$'s down breaks it."
+  },
+  {
+    "id": "toc-033",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the time complexity of the CYK membership algorithm for a fixed grammar in Chomsky Normal Form, on an input of length $n$?",
+    "options": [
+      "$O(n)$",
+      "$O(n^2)$",
+      "$O(n^3)$",
+      "$O(2^n)$"
+    ],
+    "answer": 2,
+    "explanation": "CYK fills a table of $O(n^2)$ substrings. For each substring it tries $O(n)$ split points. With the grammar fixed, the total is $O(n^3)$."
+  },
+  {
+    "id": "toc-034",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which of the following context-free languages is inherently ambiguous?",
+    "options": [
+      "$\\{a^i b^j c^k : i = j \\text{ or } j = k\\}$",
+      "$\\{a^n b^n : n \\ge 0\\}$",
+      "$\\{w w^R : w \\in \\{a,b\\}^*\\}$",
+      "$\\{a^n b^m c^{n+m} : n, m \\ge 0\\}$"
+    ],
+    "answer": 0,
+    "explanation": "Strings $a^n b^n c^n$ belong to both halves of the union, and it is a standard result that every grammar for this language gives some of them two parse trees. The others have unambiguous grammars: $S \\to aSb \\mid \\epsilon$; $S \\to aSa \\mid bSb \\mid \\epsilon$; $S \\to aSc \\mid T$, $T \\to bTc \\mid \\epsilon$."
+  },
+  {
+    "id": "toc-035",
+    "topic": "context-free",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A PDA has states $q_0$ (start), $q_1$, $q_2$ (the only accepting state), initial stack symbol $Z_0$, and accepts by final state. Its transitions are:\n\n- $\\delta(q_0, a, Z_0) = (q_0, AZ_0)$\n- $\\delta(q_0, a, A) = (q_0, AA)$\n- $\\delta(q_0, b, A) = (q_1, \\epsilon)$\n- $\\delta(q_1, b, A) = (q_1, \\epsilon)$\n- $\\delta(q_1, \\epsilon, Z_0) = (q_2, Z_0)$\n\nWhich language does it accept?",
+    "options": [
+      "$\\{a^n b^n : n \\ge 0\\}$",
+      "$\\{a^n b^n : n \\ge 1\\}$",
+      "$\\{a^m b^n : m \\ge n \\ge 1\\}$",
+      "$\\{a^n b^{2n} : n \\ge 1\\}$"
+    ],
+    "answer": 1,
+    "explanation": "Each $a$ pushes one $A$. The first $b$ moves to $q_1$ and pops; each further $b$ pops. Only when the stack is back to $Z_0$ can it move to $q_2$, so the counts must match. $\\epsilon$ is rejected because $q_0$ is not accepting and no move leaves it without reading $b$. If there are more $a$'s than $b$'s, $Z_0$ is never exposed. Language: $a^n b^n$ with $n \\ge 1$."
+  },
+  {
+    "id": "toc-036",
+    "topic": "context-free",
+    "type": "msq",
+    "marks": 2,
+    "q": "For a context-free grammar $G$ (and a string $w$, where needed), which of the following problems are decidable?",
+    "options": [
+      "Is $L(G) = \\emptyset$?",
+      "Is $w \\in L(G)$?",
+      "Is $L(G)$ finite?",
+      "Given a second CFG $G'$, is $L(G) = L(G')$?"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Emptiness: mark generating variables and check $S$. Membership: CYK. Finiteness: after removing useless symbols, convert to CNF and check the variable-dependency graph for a cycle. Equivalence of two CFGs is undecidable (so is $L(G) = \\Sigma^*$)."
+  },
+  {
+    "id": "toc-037",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The pumping lemma for regular languages is mainly used to:",
+    "options": [
+      "prove that a language is regular",
+      "prove that a language is not regular",
+      "minimize a DFA",
+      "convert an NFA into a DFA"
+    ],
+    "answer": 1,
+    "explanation": "The lemma states a property every regular language has. Showing a language lacks it proves non-regularity. Some non-regular languages still satisfy it, so passing the test proves nothing."
+  },
+  {
+    "id": "toc-038",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 2,
+    "q": "To show $L = \\{a^n b^n : n \\ge 0\\}$ is not regular, assume pumping length $p$ and pick $s = a^p b^p$. For any split $s = xyz$ with $|xy| \\le p$ and $|y| \\ge 1$, which conclusion is correct?",
+    "options": [
+      "$y$ consists only of $a$'s, so $xy^2z$ has more $a$'s than $b$'s",
+      "$y$ must contain both $a$ and $b$",
+      "$y$ consists only of $b$'s",
+      "$y$ may be empty, so pumping gives nothing"
+    ],
+    "answer": 0,
+    "explanation": "The first $p$ symbols of $s$ are all $a$, and $xy$ sits within them. So $y = a^k$ with $k \\ge 1$. Then $xy^2z = a^{p+k}b^p \\notin L$, contradiction. $|y| \\ge 1$ is part of the lemma, so $y$ cannot be empty."
+  },
+  {
+    "id": "toc-039",
+    "topic": "pumping-lemma",
+    "type": "msq",
+    "marks": 2,
+    "q": "Regular languages are closed under which of the following operations?",
+    "options": [
+      "Homomorphism",
+      "Inverse homomorphism",
+      "Union of infinitely many languages",
+      "Reversal"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Homomorphism: apply it to the regex. Inverse homomorphism: on symbol $c$, the new DFA runs the old DFA on $h(c)$. Reversal: reverse all edges and swap start and accepting states (an NFA results). Infinite union fails: every language is the union of its single-string subsets, each regular, so closure would make every language regular."
+  },
+  {
+    "id": "toc-040",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Context-free languages are **not** closed under which operation?",
+    "options": [
+      "Union",
+      "Concatenation",
+      "Kleene star",
+      "Intersection"
+    ],
+    "answer": 3,
+    "explanation": "$\\{a^n b^n c^m\\}$ and $\\{a^m b^n c^n\\}$ are both CFL, but their intersection is $\\{a^n b^n c^n\\}$, which is not. Union, concatenation and star are handled by new start productions."
+  },
+  {
+    "id": "toc-041",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $L$ be a context-free language and $R$ a regular language. Which of the following is **not necessarily** context-free?",
+    "options": [
+      "$L \\cap R$",
+      "$L - R$",
+      "$R - L$",
+      "$L \\cup R$"
+    ],
+    "answer": 2,
+    "explanation": "$L \\cap R$: product of a PDA with a DFA, CFL. $L - R = L \\cap \\overline{R}$, and $\\overline{R}$ is regular, so CFL. $L \\cup R$: union of CFLs. $R - L = R \\cap \\overline{L}$, and $\\overline{L}$ need not be CFL. With $R = \\Sigma^*$ this is just the complement of $L$, which can fail to be CFL."
+  },
+  {
+    "id": "toc-042",
+    "topic": "pumping-lemma",
+    "type": "msq",
+    "marks": 2,
+    "q": "Deterministic context-free languages are closed under which of the following?",
+    "options": [
+      "Complement",
+      "Union",
+      "Intersection with a regular language",
+      "Reversal"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Complement: after making the DPDA always finish reading its input, swap accepting and non-accepting states (with care about $\\epsilon$-moves). Intersection with regular: run a DFA alongside the DPDA. Union fails: by De Morgan, closure under complement and union would give closure under intersection, but $\\{a^nb^nc^m\\} \\cap \\{a^mb^nc^n\\}$ is not even a CFL. Reversal also fails: $\\{c\\,a^nb^n\\} \\cup \\{d\\,a^nb^{2n}\\}$ is a DCFL (the first symbol tells the DPDA which rule to use), but in its reversal the deciding marker comes last, and that language is not a DCFL."
+  },
+  {
+    "id": "toc-043",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which statement is **false**?",
+    "options": [
+      "Recursive languages are closed under complement.",
+      "Recursively enumerable languages are closed under union.",
+      "Recursively enumerable languages are closed under complement.",
+      "Recursive languages are closed under intersection."
+    ],
+    "answer": 2,
+    "explanation": "If RE were closed under complement, every RE language would have an RE complement and so would be recursive. But the halting language is RE and not recursive. The other three are standard closure results."
+  },
+  {
+    "id": "toc-044",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $L = \\{a^i b^j : i \\ne j\\}$. Which statement is correct?",
+    "options": [
+      "$L$ is regular.",
+      "$L$ is context-free but not regular.",
+      "$L$ is not context-free.",
+      "$L$ is not context-free, but its complement is."
+    ],
+    "answer": 1,
+    "explanation": "CFL: $L = \\{a^i b^j : i > j\\} \\cup \\{a^i b^j : i < j\\}$, each generated by a simple grammar.\n\nNot regular: if $L$ were regular, $\\overline{L} \\cap a^*b^* = \\{a^n b^n\\}$ would be regular, which it is not. Using closure like this is often quicker than pumping $L$ directly."
+  },
+  {
+    "id": "toc-045",
+    "topic": "pumping-lemma",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For which language does the pumping lemma for context-free languages show that it is **not** context-free?",
+    "options": [
+      "$\\{a^n b^n c^n : n \\ge 0\\}$",
+      "$\\{a^n b^n : n \\ge 0\\}$",
+      "$\\{a^n b^m c^m : n, m \\ge 0\\}$",
+      "$\\{w w^R : w \\in \\{a,b\\}^*\\}$"
+    ],
+    "answer": 0,
+    "explanation": "In $a^p b^p c^p$, the pumped window $vxy$ has length at most $p$, so it touches at most two of the three letter blocks. Pumping changes at most two counts, breaking equality. The other three languages are context-free."
+  },
+  {
+    "id": "toc-046",
+    "topic": "pumping-lemma",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which statements are true for all languages $L, L_1, L_2$ over a finite alphabet?",
+    "options": [
+      "If $L_1$ and $L_2$ are regular, then $L_1 \\cap L_2$ is regular.",
+      "If $L_1 \\cup L_2$ is regular, then $L_1$ and $L_2$ are regular.",
+      "If $L$ is regular, then $L^R$ is regular.",
+      "If $L^*$ is regular, then $L$ is regular."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Options 1 and 3 are closure properties.\n\nOption 2 fails: take $L_1 = \\{a^nb^n\\}$ and $L_2 = \\overline{L_1}$; their union is $\\Sigma^*$.\n\nOption 4 fails: $L = \\{a^p : p \\text{ prime}\\}$ is not regular, but every $n \\ge 2$ is a sum of primes (of 2s and 3s), so $L^* = \\{\\epsilon\\} \\cup \\{a^n : n \\ge 2\\}$, which is regular."
+  },
+  {
+    "id": "toc-047",
+    "topic": "turing-machines",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many of the following problems are decidable?\n\n1. Does a given DFA accept a given string?\n2. Does a given CFG generate the empty language?\n3. Do two given CFGs generate the same language?\n4. Does a given Turing machine halt on the blank tape?\n5. Do two given DFAs accept the same language?\n6. Is a given CFG ambiguous?\n7. Is the language of a given Turing machine regular?\n8. Does a given CFG over $\\Sigma$ generate all of $\\Sigma^*$?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "Decidable: (1) simulate the DFA; (2) check whether $S$ is a generating variable; (5) minimize both DFAs and compare, or check emptiness of the symmetric difference.\n\nUndecidable: (3) CFG equivalence; (4) blank-tape halting (reduce from the halting problem); (6) CFG ambiguity (reduce from PCP); (7) a non-trivial property of RE languages, so Rice's theorem applies; (8) CFG universality.\n\nCount: 3."
+  },
+  {
+    "id": "toc-048",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Given a Turing machine $M$, which question is decidable?",
+    "options": [
+      "Is $L(M)$ empty?",
+      "Is $L(M)$ finite?",
+      "Does $M$ have more than 10 states?",
+      "Is $L(M) = \\Sigma^*$?"
+    ],
+    "answer": 2,
+    "explanation": "The number of states is read off the description of $M$; it is a property of the machine, not of its language, so Rice's theorem does not apply. The other three are non-trivial properties of $L(M)$ and are undecidable by Rice's theorem."
+  },
+  {
+    "id": "toc-049",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which statement is true?",
+    "options": [
+      "If $L$ is recursively enumerable but not recursive, then $\\overline{L}$ is not recursively enumerable.",
+      "If $L$ is recursively enumerable, then $\\overline{L}$ is recursively enumerable.",
+      "If $\\overline{L}$ is recursively enumerable, then $L$ is recursive.",
+      "Every co-RE language is recursively enumerable."
+    ],
+    "answer": 0,
+    "explanation": "If both $L$ and $\\overline{L}$ are RE, run both recognizers in parallel; one must accept, so $L$ is decidable. Taking the contrapositive: if $L$ is RE but not recursive, $\\overline{L}$ cannot be RE. The halting language is a counterexample to options 2, 3 and 4."
+  },
+  {
+    "id": "toc-050",
+    "topic": "turing-machines",
+    "type": "msq",
+    "marks": 2,
+    "q": "For a Turing machine $M$ and input $w$, which of the following problems are undecidable?",
+    "options": [
+      "Does $M$ halt on $w$ within 100 steps?",
+      "Does $L(M)$ contain the string $ab$?",
+      "Does $M$ ever move its head left while running on $w$?",
+      "Is $L(M)$ finite?"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "Option 1: simulate for 100 steps. Decidable.\n\nOption 3: decidable. While $M$ moves only right, after it passes the end of $w$ it sees only blanks, so its behaviour depends only on its state. If no left move happens within $|w| + |Q| + 1$ steps, some state repeats on blanks and it will never move left.\n\nOptions 2 and 4 are non-trivial properties of $L(M)$, undecidable by Rice's theorem."
+  },
+  {
+    "id": "toc-051",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The halting problem $HALT = \\{\\langle M, w \\rangle : M \\text{ halts on } w\\}$ is:",
+    "options": [
+      "recursive",
+      "recursively enumerable but not recursive",
+      "co-RE but not RE",
+      "neither RE nor co-RE"
+    ],
+    "answer": 1,
+    "explanation": "A universal machine simulates $M$ on $w$ and accepts when it halts, so $HALT$ is RE. The diagonal argument shows no machine decides it."
+  },
+  {
+    "id": "toc-052",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The complement of the halting problem, $\\overline{HALT} = \\{\\langle M, w \\rangle : M \\text{ does not halt on } w\\}$, is:",
+    "options": [
+      "recursive",
+      "RE but not recursive",
+      "co-RE but not RE",
+      "neither RE nor co-RE"
+    ],
+    "answer": 2,
+    "explanation": "Its complement $HALT$ is RE, so $\\overline{HALT}$ is co-RE. If $\\overline{HALT}$ were also RE, $HALT$ would be both RE and co-RE and hence decidable, which it is not."
+  },
+  {
+    "id": "toc-053",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which model is **not** equivalent in power to a standard single-tape Turing machine?",
+    "options": [
+      "Multi-tape Turing machine",
+      "Nondeterministic Turing machine",
+      "Pushdown automaton with two stacks",
+      "Pushdown automaton with one stack"
+    ],
+    "answer": 3,
+    "explanation": "Multi-tape and nondeterministic TMs can be simulated by a single-tape deterministic TM (slower, but same languages). Two stacks can simulate a tape (left and right halves). A single stack only gives the context-free languages."
+  },
+  {
+    "id": "toc-054",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Suppose $A \\le_m B$ (a many-one reduction from $A$ to $B$). Which statement is always true?",
+    "options": [
+      "If $B$ is undecidable, then $A$ is undecidable.",
+      "If $A$ is undecidable, then $B$ is undecidable.",
+      "If $B$ is RE, then $A$ is recursive.",
+      "If $A$ is RE, then $B$ is RE."
+    ],
+    "answer": 1,
+    "explanation": "A reduction transfers easiness from $B$ to $A$: if $B$ is decidable (or RE), so is $A$. The contrapositive transfers hardness from $A$ to $B$: if $A$ is undecidable, $B$ is undecidable. Option 1 has the direction backwards: any decidable $A$ reduces to an undecidable $B$. Options 3 and 4 also misuse the direction."
+  },
+  {
+    "id": "toc-055",
+    "topic": "turing-machines",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements are true?",
+    "options": [
+      "$\\{\\langle M \\rangle : L(M) \\ne \\emptyset\\}$ is recursively enumerable.",
+      "$\\{\\langle M \\rangle : L(M) = \\emptyset\\}$ is co-RE.",
+      "$\\{\\langle M \\rangle : L(M) = \\Sigma^*\\}$ is recursively enumerable.",
+      "$\\{\\langle M \\rangle : M \\text{ accepts } \\epsilon\\}$ is decidable."
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Option 1: dovetail $M$ over all inputs and steps; accept as soon as $M$ accepts something. RE.\n\nOption 2: it is the complement of option 1, so co-RE.\n\nOption 3: universality is neither RE nor co-RE.\n\nOption 4: this is RE (simulate on $\\epsilon$) but undecidable by Rice's theorem, since containing $\\epsilon$ is a non-trivial language property."
+  },
+  {
+    "id": "toc-056",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which chain of proper inclusions between language classes is correct?",
+    "options": [
+      "Regular $\\subset$ DCFL $\\subset$ CFL $\\subset$ CSL $\\subset$ Recursive $\\subset$ RE",
+      "Regular $\\subset$ CFL $\\subset$ DCFL $\\subset$ CSL $\\subset$ Recursive $\\subset$ RE",
+      "Regular $\\subset$ DCFL $\\subset$ CFL $\\subset$ Recursive $\\subset$ CSL $\\subset$ RE",
+      "Regular $\\subset$ DCFL $\\subset$ CFL $\\subset$ CSL $\\subset$ RE $\\subset$ Recursive"
+    ],
+    "answer": 0,
+    "explanation": "DCFLs are a proper subclass of CFLs. Context-sensitive languages are decided by linear bounded automata, so every CSL is recursive, and some recursive languages are not context-sensitive. Every recursive language is RE, but not conversely."
+  },
+  {
+    "id": "toc-057",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which of the following problems is undecidable?",
+    "options": [
+      "Given a context-sensitive grammar $G$ and a string $w$, is $w \\in L(G)$?",
+      "Given a context-sensitive grammar $G$, is $L(G) = \\emptyset$?",
+      "Given a DFA $D$ and a string $w$, does $D$ accept $w$?",
+      "Given a CFG $G$ and a string $w$, is $w \\in L(G)$?"
+    ],
+    "answer": 1,
+    "explanation": "CSG membership is decidable because productions never shrink the sentential form, so only finitely many forms of length at most $|w|$ need checking. Emptiness for CSGs (equivalently LBAs) is undecidable. DFA and CFG membership are decidable."
+  },
+  {
+    "id": "toc-058",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which statement about the Post Correspondence Problem (PCP) is correct?",
+    "options": [
+      "PCP is decidable.",
+      "PCP is undecidable in general, but decidable when the alphabet has only one symbol.",
+      "PCP is undecidable even when the alphabet has only one symbol.",
+      "PCP is co-RE but not RE."
+    ],
+    "answer": 1,
+    "explanation": "General PCP is undecidable (reduction from TM acceptance). It is RE: enumerate index sequences and check each. Over a one-letter alphabet only lengths matter: a solution exists iff some tile has top and bottom of equal length, or there are two tiles whose length differences have opposite signs. That check is easy, so the unary case is decidable."
+  },
+  {
+    "id": "toc-059",
+    "topic": "turing-machines",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which of the following sets is uncountable?",
+    "options": [
+      "The set of all Turing machines over a fixed alphabet",
+      "The set of all recursively enumerable languages over $\\{a\\}$",
+      "The set of all regular languages over $\\{a, b\\}$",
+      "The set of all languages over $\\{a\\}$"
+    ],
+    "answer": 3,
+    "explanation": "Turing machines have finite descriptions, so there are countably many, and therefore countably many RE (and regular) languages. Languages over $\\{a\\}$ are subsets of the countably infinite set $\\{a\\}^*$, so they correspond to subsets of $\\mathbb{N}$, which are uncountable. So some languages are not RE."
+  },
+  {
+    "id": "toc-060",
+    "topic": "turing-machines",
+    "type": "msq",
+    "marks": 2,
+    "q": "Let $L_1$ be recursively enumerable and $L_2$ be recursive. Which of the following are necessarily recursively enumerable?",
+    "options": [
+      "$L_1 \\cup L_2$",
+      "$L_1 \\cap L_2$",
+      "$L_1 - L_2$",
+      "$L_2 - L_1$"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "RE is closed under union and intersection, and $L_2$ is RE. $L_1 - L_2 = L_1 \\cap \\overline{L_2}$, and $\\overline{L_2}$ is recursive, so this is RE. $L_2 - L_1 = L_2 \\cap \\overline{L_1}$ fails: with $L_2 = \\Sigma^*$ it is $\\overline{L_1}$, which is not RE when $L_1$ is the halting language."
+  }
+]

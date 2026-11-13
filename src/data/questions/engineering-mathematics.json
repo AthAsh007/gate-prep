@@ -1,0 +1,886 @@
+[
+  {
+    "id": "em-001",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following propositional formulas is a tautology?",
+    "options": [
+      "$(p \\to q) \\to (q \\to p)$",
+      "$((p \\to q) \\land (q \\to r)) \\to (p \\to r)$",
+      "$(p \\lor q) \\to (p \\land q)$",
+      "$(p \\to q) \\to (\\lnot p \\to \\lnot q)$"
+    ],
+    "answer": 1,
+    "explanation": "Option B is hypothetical syllogism. Suppose it is false: then $p \\to r$ is false, so $p = T$, $r = F$, and both $p \\to q$ and $q \\to r$ are true. From $p = T$ we get $q = T$, and then $q \\to r$ forces $r = T$, a contradiction. So B can never be false.\n\nThe others fail on one row each:\n- A: $p = F, q = T$ makes $p \\to q$ true but $q \\to p$ false (this is the converse error).\n- C: $p = T, q = F$ makes the antecedent true and the consequent false.\n- D: $p = F, q = T$ makes $\\lnot p \\to \\lnot q$ false (this is the inverse error)."
+  },
+  {
+    "id": "em-002",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is logically equivalent to $\\lnot \\forall x\\,\\big(P(x) \\to \\exists y\\, Q(x,y)\\big)$?",
+    "options": [
+      "$\\exists x\\,\\big(P(x) \\land \\forall y\\, \\lnot Q(x,y)\\big)$",
+      "$\\exists x\\,\\big(\\lnot P(x) \\land \\forall y\\, \\lnot Q(x,y)\\big)$",
+      "$\\exists x\\,\\big(P(x) \\to \\forall y\\, \\lnot Q(x,y)\\big)$",
+      "$\\forall x\\,\\big(P(x) \\land \\exists y\\, \\lnot Q(x,y)\\big)$"
+    ],
+    "answer": 0,
+    "explanation": "Push the negation inward one step at a time.\n\n1. $\\lnot \\forall x\\, \\varphi \\equiv \\exists x\\, \\lnot \\varphi$, giving $\\exists x\\, \\lnot\\big(P(x) \\to \\exists y\\, Q(x,y)\\big)$.\n2. $\\lnot(a \\to b) \\equiv a \\land \\lnot b$, giving $\\exists x\\,\\big(P(x) \\land \\lnot \\exists y\\, Q(x,y)\\big)$.\n3. $\\lnot \\exists y\\, Q \\equiv \\forall y\\, \\lnot Q$, giving $\\exists x\\,\\big(P(x) \\land \\forall y\\, \\lnot Q(x,y)\\big)$.\n\nOption C keeps an implication inside $\\exists$, which is made true by any $x$ with $\\lnot P(x)$, so it is much weaker. Option D wrongly keeps the outer $\\forall$."
+  },
+  {
+    "id": "em-003",
+    "topic": "logic",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following first order formulas is/are valid (true in every interpretation)? $P$ and $Q$ are predicate symbols of the arity shown.",
+    "options": [
+      "$\\exists x\\, \\forall y\\, P(x,y) \\to \\forall y\\, \\exists x\\, P(x,y)$",
+      "$\\forall x\\,\\big(P(x) \\lor Q(x)\\big) \\to \\big(\\forall x\\, P(x) \\lor \\forall x\\, Q(x)\\big)$",
+      "$\\exists x\\,\\big(P(x) \\lor Q(x)\\big) \\to \\big(\\exists x\\, P(x) \\lor \\exists x\\, Q(x)\\big)$",
+      "$\\big(\\exists x\\, P(x) \\land \\exists x\\, Q(x)\\big) \\to \\exists x\\,\\big(P(x) \\land Q(x)\\big)$"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "**A (valid).** If one fixed $x_0$ satisfies $P(x_0, y)$ for every $y$, then for each $y$ that same $x_0$ is a witness, so $\\forall y\\, \\exists x\\, P(x,y)$ holds. (The converse is not valid.)\n\n**B (not valid).** Domain $\\{1, 2\\}$ with $P = \\{1\\}$, $Q = \\{2\\}$. Every element is in $P$ or $Q$, but neither $P$ nor $Q$ covers the whole domain. $\\forall$ distributes over $\\land$, not over $\\lor$.\n\n**C (valid).** $\\exists$ distributes over $\\lor$ in both directions: a witness for $P(x) \\lor Q(x)$ is a witness for $P$ or for $Q$.\n\n**D (not valid).** Same domain and predicates as in B: some element is in $P$, some element is in $Q$, but no element is in both. $\\exists$ distributes over $\\lor$, not over $\\land$."
+  },
+  {
+    "id": "em-004",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many of the 8 truth assignments to $p, q, r$ satisfy $(p \\lor q) \\land (\\lnot p \\lor r) \\land (\\lnot q \\lor \\lnot r)$?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "Split on $p$.\n\n- $p = F$: the first clause needs $q = T$. The third clause then needs $r = F$. The second clause is true because $\\lnot p$ is true. Assignment $(F, T, F)$ works.\n- $p = T$: the second clause needs $r = T$. The third clause then needs $q = F$. The first clause is true because $p$ is true. Assignment $(T, F, T)$ works.\n\nEach branch gives exactly one assignment, so the count is 2."
+  },
+  {
+    "id": "em-005",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Let the domain be all people. $G(x)$: $x$ is a graduate, $C(x)$: $x$ knows C, $P(x)$: $x$ knows Python. Which formula expresses \"Not every graduate who knows C knows Python\"?",
+    "options": [
+      "$\\exists x\\,\\big(G(x) \\land C(x) \\land \\lnot P(x)\\big)$",
+      "$\\forall x\\,\\big((G(x) \\land C(x)) \\to \\lnot P(x)\\big)$",
+      "$\\exists x\\,\\big((G(x) \\land C(x)) \\to \\lnot P(x)\\big)$",
+      "$\\lnot \\exists x\\,\\big(G(x) \\land C(x) \\land P(x)\\big)$"
+    ],
+    "answer": 0,
+    "explanation": "\"Every graduate who knows C knows Python\" is $\\forall x\\,\\big((G(x) \\land C(x)) \\to P(x)\\big)$. Negating it gives $\\exists x\\,\\lnot\\big((G(x) \\land C(x)) \\to P(x)\\big) \\equiv \\exists x\\,\\big(G(x) \\land C(x) \\land \\lnot P(x)\\big)$, which is option A.\n\n- B says no C-knowing graduate knows Python, which is far stronger.\n- C uses $\\to$ under $\\exists$; it is true as soon as one person is not a graduate, so it says almost nothing.\n- D says no graduate knows both C and Python, which again is stronger than the sentence."
+  },
+  {
+    "id": "em-006",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 2,
+    "q": "From the premises $p \\to (q \\lor r)$, $\\lnot q$, $r \\to s$ and $\\lnot s$, which one of the following can be validly concluded?",
+    "options": [
+      "$p$",
+      "$\\lnot p$",
+      "$r$",
+      "$q \\lor s$"
+    ],
+    "answer": 1,
+    "explanation": "1. From $r \\to s$ and $\\lnot s$, modus tollens gives $\\lnot r$.\n2. With $\\lnot q$ and $\\lnot r$ we get $\\lnot (q \\lor r)$.\n3. From $p \\to (q \\lor r)$ and $\\lnot(q \\lor r)$, modus tollens gives $\\lnot p$.\n\nSo $\\lnot p$ follows. Check the others against the only model of the premises, $p = q = r = s = F$: $p$, $r$ and $q \\lor s$ are all false there, so none of them follows."
+  },
+  {
+    "id": "em-007",
+    "topic": "logic",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many truth assignments to the Boolean variables $x_1, x_2, x_3, x_4, x_5$ make the formula\n$$(x_1 \\to x_2) \\land (x_2 \\to x_3) \\land (x_3 \\to x_4) \\land (x_4 \\to x_5)$$\ntrue?",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "The chain of implications says that once some $x_i$ is true, every later variable must be true. So a satisfying assignment looks like $F \\dots F\\, T \\dots T$: a block of falses followed by a block of trues.\n\nThe block of trues can start at position 1, 2, 3, 4 or 5, or be empty (all false). That is $5 + 1 = 6$ assignments:\n$FFFFF, FFFFT, FFFTT, FFTTT, FTTTT, TTTTT$."
+  },
+  {
+    "id": "em-008",
+    "topic": "logic",
+    "type": "msq",
+    "marks": 2,
+    "q": "The domain of discourse is the set of all integers $\\mathbb{Z}$. Which of the following statements is/are true?",
+    "options": [
+      "$\\forall x\\, \\exists y\\, (x + y = 0)$",
+      "$\\exists y\\, \\forall x\\, (x + y = x)$",
+      "$\\forall x\\, \\exists y\\, (x = 2y)$",
+      "$\\forall x\\, \\exists y\\, (y < x)$"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "- **A true.** For each $x$ pick $y = -x$.\n- **B true.** $y = 0$ works for every $x$. Here one $y$ must serve all $x$, and $0$ does.\n- **C false.** For $x = 1$ there is no integer $y$ with $2y = 1$.\n- **D true.** For each $x$ pick $y = x - 1$. (Compare $\\exists y\\, \\forall x\\, (y < x)$, which is false because $\\mathbb{Z}$ has no least element.)"
+  },
+  {
+    "id": "em-009",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many binary relations on a set with 4 elements are both reflexive and symmetric?",
+    "options": [
+      "16",
+      "64",
+      "1024",
+      "4096"
+    ],
+    "answer": 1,
+    "explanation": "A relation on 4 elements is a subset of the $16$ ordered pairs.\n\n- Reflexive: the 4 diagonal pairs $(a, a)$ must all be present, so they give no choice.\n- Symmetric: the $12$ off-diagonal pairs group into $\\binom{4}{2} = 6$ unordered pairs $\\{(a,b), (b,a)\\}$, and each group is either fully in or fully out.\n\nCount $= 2^{6} = 64$. (1024 counts only symmetric relations, $2^{4+6}$; 4096 counts only reflexive ones, $2^{12}$.)"
+  },
+  {
+    "id": "em-010",
+    "topic": "sets-relations-functions",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many equivalence relations on the set $\\{1, 2, 3, 4, 5, 6\\}$ have exactly 3 equivalence classes?",
+    "answer": {
+      "min": 90,
+      "max": 90
+    },
+    "explanation": "Equivalence relations correspond one to one with partitions, so we need the Stirling number of the second kind $S(6, 3)$.\n\nUse $S(n, k) = k\\,S(n-1, k) + S(n-1, k-1)$ with $S(n,1) = 1$ and $S(n,n) = 1$:\n- $S(4,2) = 7$, $S(4,3) = 6$\n- $S(5,2) = 15$, $S(5,3) = 3 \\cdot 6 + 7 = 25$\n- $S(6,3) = 3 \\cdot 25 + 15 = 90$\n\nCheck by block sizes: $\\{4,1,1\\}$: $\\binom{6}{4} = 15$; $\\{3,2,1\\}$: $\\binom{6}{3}\\binom{3}{2} = 60$; $\\{2,2,2\\}$: $\\frac{1}{3!}\\binom{6}{2}\\binom{4}{2} = 15$. Total $90$."
+  },
+  {
+    "id": "em-011",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $D_{36}$ be the set of positive divisors of 36, ordered by divisibility. Which one of the following is true?",
+    "options": [
+      "$D_{36}$ is a Boolean algebra",
+      "$D_{36}$ is a complemented lattice but not distributive",
+      "$D_{36}$ is a distributive lattice but not complemented",
+      "$D_{36}$ is not a lattice"
+    ],
+    "answer": 2,
+    "explanation": "Meet is $\\gcd$ and join is $\\operatorname{lcm}$, both of which stay inside $D_{36}$, so it is a lattice. Since $\\gcd$ and $\\operatorname{lcm}$ distribute over each other, every divisor lattice is distributive. Bounds: $0 = 1$, $1 = 36$.\n\nComplement of $6$: we need $c$ with $\\gcd(6, c) = 1$ and $\\operatorname{lcm}(6, c) = 36$. The lcm condition forces $4 \\mid c$ and $9 \\mid c$, so $c = 36$, but $\\gcd(6, 36) = 6 \\ne 1$. So $6$ has no complement.\n\nIn general $D_n$ is complemented (and then a Boolean algebra) exactly when $n$ is square free; $36 = 2^2 \\cdot 3^2$ is not."
+  },
+  {
+    "id": "em-012",
+    "topic": "sets-relations-functions",
+    "type": "msq",
+    "marks": 1,
+    "q": "On the set of nonzero integers, define $a\\,R\\,b$ if and only if $a$ divides $b$ (that is, $b = ka$ for some integer $k$). Which of the following properties does $R$ have?",
+    "options": [
+      "Reflexive",
+      "Symmetric",
+      "Antisymmetric",
+      "Transitive"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "- **Reflexive:** $a = 1 \\cdot a$. Yes.\n- **Symmetric:** $2 \\mid 4$ but $4 \\nmid 2$. No.\n- **Antisymmetric:** $2 \\mid -2$ and $-2 \\mid 2$ but $2 \\ne -2$. No. (Divisibility is antisymmetric on positive integers only.)\n- **Transitive:** $b = ka$ and $c = mb$ give $c = (mk)a$. Yes."
+  },
+  {
+    "id": "em-013",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Let $f: A \\to B$ and $g: B \\to C$ be functions. Which one of the following is always true?",
+    "options": [
+      "If $g \\circ f$ is one to one, then $g$ is one to one",
+      "If $g \\circ f$ is onto, then $f$ is onto",
+      "If $g \\circ f$ is one to one, then $f$ is one to one",
+      "If $g \\circ f$ is a bijection, then both $f$ and $g$ are bijections"
+    ],
+    "answer": 2,
+    "explanation": "If $f(a_1) = f(a_2)$ then $g(f(a_1)) = g(f(a_2))$, and injectivity of $g \\circ f$ gives $a_1 = a_2$. So $f$ is one to one.\n\nCounterexample for A, B and D at once: $A = \\{1\\}$, $B = \\{x, y\\}$, $C = \\{z\\}$, $f(1) = x$, $g(x) = g(y) = z$. Then $g \\circ f$ is a bijection, $g$ is not one to one, and $f$ is not onto."
+  },
+  {
+    "id": "em-014",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "How many distinct partial order relations can be defined on the set $\\{a, b, c\\}$?",
+    "options": [
+      "13",
+      "19",
+      "29",
+      "6"
+    ],
+    "answer": 1,
+    "explanation": "Count partial orders by the shape of the Hasse diagram, then count labelings.\n\n| Shape | Labelings |\n|---|---|\n| Antichain (no relations) | 1 |\n| One comparable pair, third element isolated | $3 \\cdot 2 = 6$ |\n| One element below both others (\"V\") | 3 |\n| One element above both others (\"$\\Lambda$\") | 3 |\n| Chain of 3 | $3! = 6$ |\n\nTotal $= 1 + 6 + 3 + 3 + 6 = 19$. (6 counts only total orders; 29 is the number of preorders.) A brute force check over all $2^9$ relations also gives 19."
+  },
+  {
+    "id": "em-015",
+    "topic": "groups",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is a group? ($\\times_n$ denotes multiplication modulo $n$.)",
+    "options": [
+      "$(\\mathbb{Z}, -)$",
+      "$(\\{1, 2, 3, 4, 5\\}, \\times_6)$",
+      "$(\\{1, 3, 5, 7\\}, \\times_8)$",
+      "$(\\mathbb{N}, +)$ where $\\mathbb{N} = \\{1, 2, 3, \\dots\\}$"
+    ],
+    "answer": 2,
+    "explanation": "For $\\{1,3,5,7\\}$ under $\\times_8$: $3 \\cdot 3 = 9 \\equiv 1$, $5 \\cdot 5 = 25 \\equiv 1$, $7 \\cdot 7 = 49 \\equiv 1$, $3 \\cdot 5 = 15 \\equiv 7$, $3 \\cdot 7 = 21 \\equiv 5$, $5 \\cdot 7 = 35 \\equiv 3$. It is closed, associative, has identity $1$ and every element is its own inverse. It is a group (the Klein four group).\n\n- $(\\mathbb{Z}, -)$: subtraction is not associative, $(1-2)-3 \\ne 1-(2-3)$.\n- $\\{1,\\dots,5\\}$ under $\\times_6$: $2 \\times_6 3 = 0$, not closed.\n- $(\\mathbb{N}, +)$ with $\\mathbb{N}$ starting at 1: no identity."
+  },
+  {
+    "id": "em-016",
+    "topic": "groups",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many elements of the cyclic group $(\\mathbb{Z}_{36}, +_{36})$ are generators of the group?",
+    "options": [
+      "12",
+      "11",
+      "18",
+      "6"
+    ],
+    "answer": 0,
+    "explanation": "In $\\mathbb{Z}_n$, the element $k$ generates the group exactly when $\\gcd(k, n) = 1$. The count is Euler's totient:\n$$\\varphi(36) = 36\\left(1 - \\tfrac{1}{2}\\right)\\left(1 - \\tfrac{1}{3}\\right) = 12.$$"
+  },
+  {
+    "id": "em-017",
+    "topic": "groups",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$G$ is a finite group with $|G| = 42$. Which one of the following can never be the order of an element of $G$?",
+    "options": [
+      "6",
+      "7",
+      "14",
+      "4"
+    ],
+    "answer": 3,
+    "explanation": "By Lagrange's theorem the order of every element divides $|G| = 42 = 2 \\cdot 3 \\cdot 7$. Since $4 \\nmid 42$, no element has order 4. Orders 6, 7 and 14 all occur, for example in the cyclic group $\\mathbb{Z}_{42}$ (elements 7, 6 and 3 respectively)."
+  },
+  {
+    "id": "em-018",
+    "topic": "groups",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about groups is/are true?",
+    "options": [
+      "Every group of prime order is cyclic",
+      "Every abelian group is cyclic",
+      "Every cyclic group is abelian",
+      "If $a^2 = e$ for every element $a$ of a group $G$, then $G$ is abelian"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "- **A true.** Take $a \\ne e$ in a group of prime order $p$. The order of $a$ divides $p$ and is not 1, so it is $p$, and $a$ generates $G$.\n- **B false.** The Klein four group $\\mathbb{Z}_2 \\times \\mathbb{Z}_2$ is abelian but every non-identity element has order 2, so nothing generates all 4 elements.\n- **C true.** If $x = g^i$ and $y = g^j$ then $xy = g^{i+j} = yx$.\n- **D true.** Every element is its own inverse. For any $a, b$: $ab = (ab)^{-1} = b^{-1}a^{-1} = ba$."
+  },
+  {
+    "id": "em-019",
+    "topic": "groups",
+    "type": "nat",
+    "marks": 2,
+    "q": "On $S = \\mathbb{R} \\setminus \\{-1\\}$ define $a * b = a + b + ab$. $(S, *)$ is a group. What is the inverse of the element $4$?",
+    "answer": {
+      "min": -0.8,
+      "max": -0.8
+    },
+    "explanation": "**Identity.** $a * e = a + e + ae = a$ gives $e(1 + a) = 0$, so $e = 0$ (since $a \\ne -1$).\n\n**Inverse of 4.** Solve $4 * b = 0$: $4 + b + 4b = 0$, so $5b = -4$ and $b = -0.8$.\n\nIn general $a^{-1} = -\\dfrac{a}{1 + a}$. Check: $4 + (-0.8) + 4(-0.8) = 4 - 0.8 - 3.2 = 0$."
+  },
+  {
+    "id": "em-020",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the maximum number of edges in a simple undirected graph with 10 vertices and exactly 3 connected components?",
+    "options": [
+      "28",
+      "36",
+      "45",
+      "21"
+    ],
+    "answer": 0,
+    "explanation": "To maximize edges, make two components single vertices and put the remaining $10 - 2 = 8$ vertices in one complete graph. In general the maximum for $n$ vertices and $k$ components is $\\binom{n-k+1}{2}$.\n$$\\binom{8}{2} = 28.$$\n(36 would need 9 vertices in one clique, which leaves only 1 vertex for two more components.)"
+  },
+  {
+    "id": "em-021",
+    "topic": "graph-theory",
+    "type": "nat",
+    "marks": 2,
+    "q": "In how many ways can the vertices of the cycle $C_5$ (vertices labelled $1$ to $5$) be coloured using at most 3 given colours so that adjacent vertices get different colours?",
+    "answer": {
+      "min": 30,
+      "max": 30
+    },
+    "explanation": "The chromatic polynomial of the cycle $C_n$ is\n$$P(C_n, k) = (k-1)^n + (-1)^n (k-1).$$\nFor $n = 5$, $k = 3$: $2^5 - 2 = 30$.\n\nDirect check: colour vertex 1 in 3 ways and walk around the cycle. A proper colouring of the path $1,2,3,4,5$ has $3 \\cdot 2^4 = 48$ colourings. Subtract those where vertex 5 matches vertex 1; merging 5 into 1 gives a proper colouring of $C_4$, which has $2^4 + 2 = 18$. So $48 - 18 = 30$."
+  },
+  {
+    "id": "em-022",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 2,
+    "q": "How many perfect matchings does the complete graph $K_8$ have?",
+    "options": [
+      "105",
+      "210",
+      "2520",
+      "35"
+    ],
+    "answer": 0,
+    "explanation": "Take the lowest numbered unmatched vertex and choose its partner. Vertex 1 has 7 choices, then the next free vertex has 5, then 3, then 1:\n$$7 \\cdot 5 \\cdot 3 \\cdot 1 = 105.$$\nEquivalently $\\dfrac{8!}{2^4 \\cdot 4!} = \\dfrac{40320}{384} = 105$. Forgetting to divide by $4!$ (order of the pairs) gives 2520."
+  },
+  {
+    "id": "em-023",
+    "topic": "graph-theory",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following sequences is/are degree sequences of some simple undirected graph?",
+    "options": [
+      "$(3, 3, 3, 1)$",
+      "$(4, 4, 3, 2, 1)$",
+      "$(4, 3, 3, 2, 2)$",
+      "$(5, 3, 2, 2, 1, 1)$"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "Use Havel-Hakimi: remove the largest degree $d$ and subtract 1 from the next $d$ entries; the sequence is graphic iff this reaches all zeros without a negative entry.\n\n- **A:** $(3,3,3,1) \\to (2,2,0) \\to (1,-1)$. Not graphic.\n- **B:** $(4,4,3,2,1) \\to (3,2,1,0) \\to (1,0,-1)$. Not graphic. (Two vertices of degree 4 in a 5 vertex graph are adjacent to everything, so no vertex can have degree 1.)\n- **C:** $(4,3,3,2,2) \\to (2,2,1,1) \\to (1,0,1) = (1,1,0) \\to (0,0)$. Graphic.\n- **D:** $(5,3,2,2,1,1) \\to (2,1,1,0,0) \\to (0,0,0,0)$. Graphic."
+  },
+  {
+    "id": "em-024",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following graphs always has chromatic number exactly 2?",
+    "options": [
+      "The cycle $C_7$",
+      "The complete graph $K_4$",
+      "Any tree with at least 2 vertices",
+      "The wheel $W_6$ (a 6 cycle plus a hub joined to all 6 cycle vertices)"
+    ],
+    "answer": 2,
+    "explanation": "A tree has no cycles, so it has no odd cycle and is bipartite. With at least one edge it needs 2 colours, so $\\chi = 2$.\n\n- $C_7$ is an odd cycle: $\\chi = 3$.\n- $K_4$: $\\chi = 4$.\n- $W_6$: the even rim takes 2 colours and the hub needs a third, $\\chi = 3$."
+  },
+  {
+    "id": "em-025",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A graph $G$ is formed by taking two copies of $K_4$ and identifying one vertex of the first copy with one vertex of the second, so $G$ has 7 vertices. Let $\\kappa(G)$, $\\lambda(G)$ and $\\delta(G)$ denote its vertex connectivity, edge connectivity and minimum degree. Then $(\\kappa, \\lambda, \\delta)$ is",
+    "options": [
+      "$(1, 3, 3)$",
+      "$(1, 1, 3)$",
+      "$(3, 3, 3)$",
+      "$(2, 3, 3)$"
+    ],
+    "answer": 0,
+    "explanation": "- **$\\delta$:** the 6 non-shared vertices each have degree 3; the shared vertex has degree 6. So $\\delta = 3$.\n- **$\\kappa$:** deleting the shared vertex leaves two disjoint triangles, so it is a cut vertex and $\\kappa = 1$.\n- **$\\lambda$:** to separate the graph by deleting edges we must cut off some set of vertices. The cheapest cut isolates the three non-shared vertices of one $K_4$ from the shared vertex, which needs the 3 edges joining them to it. Isolating a single vertex also costs 3. No 2 edges disconnect $G$, because each $K_4$ is 3-edge-connected. So $\\lambda = 3$.\n\nThis matches Whitney's inequality $\\kappa \\le \\lambda \\le \\delta$, and shows that $\\kappa$ can be strictly less than $\\lambda$."
+  },
+  {
+    "id": "em-026",
+    "topic": "graph-theory",
+    "type": "nat",
+    "marks": 2,
+    "q": "Let $G$ be the graph obtained by deleting one edge from the complete graph $K_5$. How many spanning trees does $G$ have?",
+    "answer": {
+      "min": 75,
+      "max": 75
+    },
+    "explanation": "By Cayley's formula $K_5$ has $5^{3} = 125$ spanning trees. Each spanning tree has 4 edges, so summed over all trees there are $125 \\cdot 4 = 500$ (tree, edge) incidences. $K_5$ has $10$ edges and by symmetry each lies in the same number of trees: $500 / 10 = 50$.\n\nThe spanning trees of $G$ are exactly the trees of $K_5$ that avoid the deleted edge: $125 - 50 = 75$.\n\n(The matrix tree theorem on the Laplacian of $G$ gives the same value.)"
+  },
+  {
+    "id": "em-027",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A tree has exactly 4 vertices of degree 3, exactly 2 vertices of degree 2, and every other vertex is a leaf. How many leaves does it have?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "answer": 2,
+    "explanation": "Let $L$ be the number of leaves. Then $n = 6 + L$ and a tree has $n - 1$ edges. Handshaking lemma:\n$$4 \\cdot 3 + 2 \\cdot 2 + L \\cdot 1 = 2(n - 1) = 2(5 + L).$$\nSo $16 + L = 10 + 2L$, giving $L = 6$. (Degree 2 vertices never affect the leaf count: $L = 2 + \\sum_{d \\ge 3}(d - 2)\\,n_d = 2 + 4 = 6$.)"
+  },
+  {
+    "id": "em-028",
+    "topic": "graph-theory",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements is/are true for finite simple undirected graphs?",
+    "options": [
+      "A graph is bipartite if and only if it has no cycle of odd length",
+      "If the chromatic number of a connected graph is 2, then the graph is a tree",
+      "Every $k$-regular bipartite graph with $k \\ge 1$ has a perfect matching",
+      "The number of vertices of odd degree can be odd"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "- **A true.** This is Konig's characterization of bipartite graphs.\n- **B false.** $C_4$ is connected with $\\chi = 2$ but has a cycle.\n- **C true.** In a $k$-regular bipartite graph both sides have the same size, and for any set $S$ on one side the $k|S|$ edges leaving $S$ land on at least $|S|$ vertices, so Hall's condition holds.\n- **D false.** The degree sum is $2|E|$, which is even, so the number of odd degree vertices is even."
+  },
+  {
+    "id": "em-029",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many solutions in non-negative integers does $x_1 + x_2 + x_3 + x_4 = 10$ have?",
+    "options": [
+      "286",
+      "220",
+      "1001",
+      "84"
+    ],
+    "answer": 0,
+    "explanation": "Stars and bars: distribute 10 identical units into 4 bins, i.e. arrange 10 stars and 3 bars.\n$$\\binom{10 + 4 - 1}{4 - 1} = \\binom{13}{3} = 286.$$\n84 is $\\binom{9}{3}$, the count for positive integers."
+  },
+  {
+    "id": "em-030",
+    "topic": "combinatorics",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many integer solutions does $x_1 + x_2 + x_3 = 15$ have with $0 \\le x_i \\le 6$ for each $i$?",
+    "answer": {
+      "min": 10,
+      "max": 10
+    },
+    "explanation": "Inclusion-exclusion on the bad events $x_i \\ge 7$.\n\n- No restriction: $\\binom{17}{2} = 136$.\n- One fixed $x_i \\ge 7$: substitute $x_i' = x_i - 7$, sum becomes 8: $\\binom{10}{2} = 45$. Three choices: $135$.\n- Two fixed variables $\\ge 7$: sum becomes 1: $\\binom{3}{2} = 3$. Three pairs: $9$.\n- All three $\\ge 7$: impossible (sum would be at least 21).\n\nTotal $= 136 - 135 + 9 = 10$. Check by listing: $(6,6,3)$ in 3 orders, $(6,5,4)$ in 6 orders, $(5,5,5)$ once, total 10."
+  },
+  {
+    "id": "em-031",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "How many permutations of $\\{1, 2, 3, 4, 5, 6\\}$ have exactly 2 fixed points?",
+    "options": [
+      "135",
+      "265",
+      "90",
+      "180"
+    ],
+    "answer": 0,
+    "explanation": "Choose the 2 fixed points in $\\binom{6}{2} = 15$ ways. The other 4 elements must form a derangement:\n$$D_4 = 4!\\left(1 - 1 + \\tfrac{1}{2} - \\tfrac{1}{6} + \\tfrac{1}{24}\\right) = 9.$$\nTotal $= 15 \\cdot 9 = 135$. (265 is $D_6$, the count with no fixed points.)"
+  },
+  {
+    "id": "em-032",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The sequence $a_n$ satisfies $a_n = 5a_{n-1} - 6a_{n-2}$ for $n \\ge 2$, with $a_0 = 1$ and $a_1 = 4$. Which one of the following is a closed form for $a_n$?",
+    "options": [
+      "$2 \\cdot 3^n - 2^n$",
+      "$3^n + 2^n - 1$",
+      "$3^n + n\\,2^{n-1}$",
+      "$2^{n+1} - 3^n$"
+    ],
+    "answer": 0,
+    "explanation": "Characteristic equation $t^2 - 5t + 6 = 0$ has roots $2$ and $3$, so $a_n = A\\,2^n + B\\,3^n$.\n\n- $n = 0$: $A + B = 1$\n- $n = 1$: $2A + 3B = 4$\n\nSubtracting twice the first from the second: $B = 2$, then $A = -1$. So $a_n = 2 \\cdot 3^n - 2^n$.\n\nOptions B and C also give $a_0 = 1$, $a_1 = 4$, which is why checking only the initial values is not enough. The recurrence gives $a_2 = 5 \\cdot 4 - 6 \\cdot 1 = 14$; option A gives $18 - 4 = 14$, option B gives $12$, option C gives $13$."
+  },
+  {
+    "id": "em-033",
+    "topic": "combinatorics",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many binary strings of length 10 contain no two consecutive 1s?",
+    "answer": {
+      "min": 144,
+      "max": 144
+    },
+    "explanation": "Let $f(n)$ be the count for length $n$. A valid string either ends in 0 (any valid string of length $n-1$ before it) or ends in 01 (any valid string of length $n-2$ before it):\n$$f(n) = f(n-1) + f(n-2), \\quad f(1) = 2, \\; f(2) = 3.$$\nThen $f(3..10) = 5, 8, 13, 21, 34, 55, 89, 144$. So $f(10) = 144$."
+  },
+  {
+    "id": "em-034",
+    "topic": "combinatorics",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following statements about ordinary generating functions is/are correct?",
+    "options": [
+      "The coefficient of $x^5$ in $\\dfrac{1}{(1-x)^3}$ is 21",
+      "$\\dfrac{1}{1-2x}$ is the generating function of $a_n = 2^n$",
+      "$\\dfrac{x}{(1-x)^2}$ is the generating function of $a_n = n + 1$",
+      "$\\dfrac{1}{1-x^2}$ is the generating function of $a_n = 1$ for all $n \\ge 0$"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "- **A true.** $[x^k]\\,(1-x)^{-m} = \\binom{k + m - 1}{m - 1}$, so $\\binom{7}{2} = 21$.\n- **B true.** Geometric series: $\\sum (2x)^n$.\n- **C false.** $\\frac{1}{(1-x)^2} = \\sum (n+1)x^n$; multiplying by $x$ shifts it to $\\sum n\\,x^n$, so the sequence is $a_n = n$.\n- **D false.** $\\frac{1}{1-x^2} = 1 + x^2 + x^4 + \\cdots$, so $a_n = 1$ for even $n$ and $0$ for odd $n$."
+  },
+  {
+    "id": "em-035",
+    "topic": "combinatorics",
+    "type": "nat",
+    "marks": 2,
+    "q": "What is the coefficient of $x^{12}$ in the expansion of $(x^2 + x^3 + x^4)^4$?",
+    "answer": {
+      "min": 19,
+      "max": 19
+    },
+    "explanation": "Factor out $x^8$: $(x^2 + x^3 + x^4)^4 = x^8(1 + x + x^2)^4$. We need $[x^4]\\,(1 + x + x^2)^4$, i.e. the number of ways to write 4 as an ordered sum of 4 terms each in $\\{0, 1, 2\\}$.\n\nGroup by how many 2s are used:\n- Two 2s, rest 0: $\\binom{4}{2} = 6$\n- One 2, two 1s, one 0: $\\frac{4!}{1!\\,2!\\,1!} = 12$\n- No 2, four 1s: $1$\n\nTotal $= 6 + 12 + 1 = 19$."
+  },
+  {
+    "id": "em-036",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the minimum number of people needed to guarantee that at least 3 of them were born in the same calendar month?",
+    "options": [
+      "24",
+      "25",
+      "36",
+      "37"
+    ],
+    "answer": 1,
+    "explanation": "Generalized pigeonhole: with 12 months, 24 people can be spread as exactly 2 per month with no month having 3. One more person forces some month to have 3. Minimum $= 2 \\cdot 12 + 1 = 25$."
+  },
+  {
+    "id": "em-037",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $t_n$ be the number of ways to tile a $2 \\times n$ board using $1 \\times 2$ dominoes (in either orientation) and $2 \\times 2$ squares. Which one of the following holds for all $n \\ge 1$?",
+    "options": [
+      "$t_n = \\dfrac{2^{n+1} + (-1)^n}{3}$",
+      "$t_n = 2^n - 1$",
+      "$t_n = \\dfrac{2^{n} + (-1)^{n+1}}{3}$",
+      "$t_n = F_{n+1}$, the $(n+1)$th Fibonacci number"
+    ],
+    "answer": 0,
+    "explanation": "Look at the left end of the board. It is covered either by one vertical domino (leaving $2 \\times (n-1)$), or by two stacked horizontal dominoes or one $2 \\times 2$ square (each leaving $2 \\times (n-2)$). So\n$$t_n = t_{n-1} + 2t_{n-2}, \\quad t_1 = 1, \\; t_2 = 3.$$\nRoots of $r^2 = r + 2$ are $2$ and $-1$. Fitting the initial values gives $t_n = \\frac{2^{n+1} + (-1)^n}{3}$: $t_1 = 1$, $t_2 = 3$, $t_3 = 5$, $t_4 = 11$.\n\nOption B matches $t_1, t_2$ but gives $t_3 = 7 \\ne 5$. Option C gives $t_2 = 1$. Option D ignores the square tile."
+  },
+  {
+    "id": "em-038",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the determinant of\n$$A = \\begin{bmatrix} 2 & -1 & 3 \\\\ 0 & 4 & 1 \\\\ 1 & 2 & -2 \\end{bmatrix}?$$",
+    "options": [
+      "-33",
+      "33",
+      "-21",
+      "-27"
+    ],
+    "answer": 0,
+    "explanation": "Expand along the first row:\n$$\\det A = 2\\begin{vmatrix} 4 & 1 \\\\ 2 & -2 \\end{vmatrix} - (-1)\\begin{vmatrix} 0 & 1 \\\\ 1 & -2 \\end{vmatrix} + 3\\begin{vmatrix} 0 & 4 \\\\ 1 & 2 \\end{vmatrix}$$\n$$= 2(-8 - 2) + 1(0 - 1) + 3(0 - 4) = -20 - 1 - 12 = -33.$$"
+  },
+  {
+    "id": "em-039",
+    "topic": "linear-algebra",
+    "type": "nat",
+    "marks": 2,
+    "q": "Let $A = \\begin{bmatrix} 4 & 1 \\\\ 2 & 3 \\end{bmatrix}$. What is the largest eigenvalue of $A^3 - 2A$?",
+    "answer": {
+      "min": 115,
+      "max": 115
+    },
+    "explanation": "Eigenvalues of $A$: trace $7$, determinant $10$, so $\\lambda^2 - 7\\lambda + 10 = 0$ gives $\\lambda = 5, 2$.\n\nIf $Av = \\lambda v$ then $(A^3 - 2A)v = (\\lambda^3 - 2\\lambda)v$. So the eigenvalues of $A^3 - 2A$ are\n- $\\lambda = 5$: $125 - 10 = 115$\n- $\\lambda = 2$: $8 - 4 = 4$\n\nThe largest is $115$."
+  },
+  {
+    "id": "em-040",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider the system\n$$x + y + z = 6, \\quad x + 2y + 3z = 10, \\quad x + 2y + \\lambda z = \\mu.$$\nWhich one of the following is true?",
+    "options": [
+      "For $\\lambda = 3$ and $\\mu = 10$ the system has infinitely many solutions",
+      "For $\\lambda = 3$ and $\\mu = 12$ the system has a unique solution",
+      "For $\\lambda = 2$ the system has no solution for some value of $\\mu$",
+      "For $\\lambda = 3$ and $\\mu = 10$ the system has no solution"
+    ],
+    "answer": 0,
+    "explanation": "Row reduce the augmented matrix. $R_2 - R_1$ gives $y + 2z = 4$; $R_3 - R_1$ gives $y + (\\lambda - 1)z = \\mu - 6$; subtracting these gives\n$$(\\lambda - 3)z = \\mu - 10.$$\n\n- $\\lambda \\ne 3$: rank of $A$ = rank of $[A \\mid b]$ = 3, unique solution for every $\\mu$. So C is false.\n- $\\lambda = 3$, $\\mu \\ne 10$: the last row reads $0 = \\mu - 10 \\ne 0$, so no solution. B is false.\n- $\\lambda = 3$, $\\mu = 10$: rank 2 for both, with 3 unknowns, so infinitely many solutions (one free variable). A is true and D is false."
+  },
+  {
+    "id": "em-041",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the rank of\n$$M = \\begin{bmatrix} 1 & 2 & 3 & 4 \\\\ 2 & 4 & 6 & 8 \\\\ 1 & 0 & 1 & 0 \\\\ 3 & 4 & 7 & 8 \\end{bmatrix}?$$",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "Row 2 is $2 \\times$ row 1. Row 4 equals row 2 + row 3: $(2,4,6,8) + (1,0,1,0) = (3,4,7,8)$. Rows 1 and 3 are not multiples of each other, so they are independent. Every row lies in the span of rows 1 and 3, so the rank is 2."
+  },
+  {
+    "id": "em-042",
+    "topic": "linear-algebra",
+    "type": "msq",
+    "marks": 1,
+    "q": "Let $A$ be an $n \\times n$ real matrix. Which of the following statements is/are always true?",
+    "options": [
+      "If $A$ is symmetric, all eigenvalues of $A$ are real",
+      "$A$ and $A^T$ have the same eigenvectors",
+      "$A$ is singular if and only if $0$ is an eigenvalue of $A$",
+      "The product of the eigenvalues of $A$ equals its trace"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "- **A true.** Real symmetric matrices have real eigenvalues (spectral theorem).\n- **B false.** $A$ and $A^T$ have the same characteristic polynomial, hence the same eigenvalues, but not the same eigenvectors in general. Example: $A = \\begin{bmatrix}1 & 1 \\\\ 0 & 2\\end{bmatrix}$ has eigenvector $(1, 0)^T$ for $\\lambda = 1$, while $A^T$ has $(1, -1)^T$.\n- **C true.** $\\det A = \\prod \\lambda_i$, which is zero iff some $\\lambda_i = 0$.\n- **D false.** The product equals the determinant; the sum equals the trace."
+  },
+  {
+    "id": "em-043",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let\n$$A = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 3 \\\\ 8 & 7 & 9 \\end{bmatrix} = LU$$\nwhere $L$ is lower triangular with 1s on the diagonal (Doolittle form) and $U$ is upper triangular. The entries $(l_{32}, u_{33})$ are",
+    "options": [
+      "$(3, 2)$",
+      "$(2, 3)$",
+      "$(4, 2)$",
+      "$(3, -2)$"
+    ],
+    "answer": 0,
+    "explanation": "Gaussian elimination without row swaps; the multipliers become the entries of $L$.\n\n1. $l_{21} = 4/2 = 2$: $R_2 - 2R_1 = (0, 1, 1)$.\n2. $l_{31} = 8/2 = 4$: $R_3 - 4R_1 = (0, 3, 5)$.\n3. $l_{32} = 3/1 = 3$: $(0, 3, 5) - 3(0, 1, 1) = (0, 0, 2)$, so $u_{33} = 2$.\n\n$$L = \\begin{bmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ 4 & 3 & 1 \\end{bmatrix}, \\quad U = \\begin{bmatrix} 2 & 1 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 2 \\end{bmatrix}.$$\nCheck: $\\det A = \\det U = 2 \\cdot 1 \\cdot 2 = 4$. Option C uses $l_{31}$ by mistake."
+  },
+  {
+    "id": "em-044",
+    "topic": "linear-algebra",
+    "type": "nat",
+    "marks": 2,
+    "q": "Let $A = \\begin{bmatrix} 2 & 0 & 0 \\\\ 1 & 3 & 0 \\\\ 4 & 5 & 6 \\end{bmatrix}$ and let $I$ be the $3 \\times 3$ identity matrix. What is $\\det(A^{-1} + I)$? Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 2.32,
+      "max": 2.34
+    },
+    "explanation": "$A$ is lower triangular, so its eigenvalues are the diagonal entries $2, 3, 6$ (all nonzero, so $A$ is invertible).\n\nIf $Av = \\lambda v$ then $(A^{-1} + I)v = \\left(\\frac{1}{\\lambda} + 1\\right)v$. The eigenvalues of $A^{-1} + I$ are $\\frac{3}{2}, \\frac{4}{3}, \\frac{7}{6}$, and the determinant is their product:\n$$\\frac{3}{2} \\cdot \\frac{4}{3} \\cdot \\frac{7}{6} = \\frac{84}{36} = \\frac{7}{3} \\approx 2.33.$$"
+  },
+  {
+    "id": "em-045",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many linearly independent eigenvectors does $\\begin{bmatrix} 3 & 1 \\\\ 0 & 3 \\end{bmatrix}$ have?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "answer": 1,
+    "explanation": "The only eigenvalue is $3$, with algebraic multiplicity 2. $A - 3I = \\begin{bmatrix} 0 & 1 \\\\ 0 & 0 \\end{bmatrix}$ has rank 1, so its null space has dimension $2 - 1 = 1$. The geometric multiplicity is 1: only multiples of $(1, 0)^T$ are eigenvectors, and the matrix is not diagonalizable."
+  },
+  {
+    "id": "em-046",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$. Using the Cayley-Hamilton theorem, $A^{-1}$ equals",
+    "options": [
+      "$\\dfrac{1}{2}(A - 5I)$",
+      "$\\dfrac{1}{2}(5I - A)$",
+      "$\\dfrac{1}{2}(A + 5I)$",
+      "$\\dfrac{1}{5}(A - 2I)$"
+    ],
+    "answer": 0,
+    "explanation": "Characteristic polynomial: $\\lambda^2 - (\\text{tr} A)\\lambda + \\det A = \\lambda^2 - 5\\lambda - 2$. By Cayley-Hamilton,\n$$A^2 - 5A - 2I = 0 \\implies A(A - 5I) = 2I \\implies A^{-1} = \\tfrac{1}{2}(A - 5I).$$\nCheck: $\\frac{1}{2}(A - 5I) = \\begin{bmatrix} -2 & 1 \\\\ 1.5 & -0.5 \\end{bmatrix}$, and $A$ times this is $I$. Option B has the sign flipped, which is what you get if you take $\\det A = +2$."
+  },
+  {
+    "id": "em-047",
+    "topic": "calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is $\\displaystyle \\lim_{x \\to 0} \\frac{1 - \\cos 2x}{x^2}$?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "4"
+    ],
+    "answer": 2,
+    "explanation": "Use $1 - \\cos 2x = 2\\sin^2 x$:\n$$\\lim_{x \\to 0} \\frac{2 \\sin^2 x}{x^2} = 2 \\left(\\lim_{x \\to 0} \\frac{\\sin x}{x}\\right)^2 = 2.$$\nL'Hospital twice gives the same: $\\frac{2\\sin 2x}{2x} \\to \\frac{4 \\cos 2x}{2} \\to 2$."
+  },
+  {
+    "id": "em-048",
+    "topic": "calculus",
+    "type": "nat",
+    "marks": 2,
+    "q": "Evaluate $\\displaystyle \\int_0^{\\pi/2} \\sin^3 x \\cos^2 x \\, dx$. Give the answer rounded to three decimal places.",
+    "answer": {
+      "min": 0.132,
+      "max": 0.134
+    },
+    "explanation": "Write $\\sin^3 x = \\sin x\\,(1 - \\cos^2 x)$ and substitute $u = \\cos x$, $du = -\\sin x\\,dx$. The limits $x = 0 \\to \\pi/2$ become $u = 1 \\to 0$:\n$$\\int_0^{1} (1 - u^2)\\,u^2 \\, du = \\frac{1}{3} - \\frac{1}{5} = \\frac{2}{15} \\approx 0.133.$$"
+  },
+  {
+    "id": "em-049",
+    "topic": "calculus",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $f(x) = x^3 - 6x^2 + 9x + 1$ on the closed interval $[0, 5]$. What is the difference between the absolute maximum and the absolute minimum of $f$ on this interval?",
+    "options": [
+      "4",
+      "20",
+      "21",
+      "24"
+    ],
+    "answer": 1,
+    "explanation": "$f'(x) = 3x^2 - 12x + 9 = 3(x - 1)(x - 3)$, critical points $x = 1, 3$. Evaluate at critical points and endpoints:\n\n| $x$ | 0 | 1 | 3 | 5 |\n|---|---|---|---|---|\n| $f(x)$ | 1 | 5 | 1 | 21 |\n\nAbsolute max $= 21$ (at the endpoint $x = 5$), absolute min $= 1$. Difference $= 20$. Comparing only the local extremum values $5$ and $1$ gives the wrong answer 4."
+  },
+  {
+    "id": "em-050",
+    "topic": "calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For $f(x) = x^3$ on $[0, 3]$, the value of $c \\in (0, 3)$ given by Lagrange's mean value theorem is",
+    "options": [
+      "$\\sqrt{3}$",
+      "$\\dfrac{3}{2}$",
+      "$\\dfrac{3}{\\sqrt{2}}$",
+      "$2$"
+    ],
+    "answer": 0,
+    "explanation": "The theorem gives $c$ with $f'(c) = \\dfrac{f(3) - f(0)}{3 - 0} = \\dfrac{27}{3} = 9$. Since $f'(c) = 3c^2$, we get $c^2 = 3$, so $c = \\sqrt{3} \\approx 1.732$, which lies in $(0, 3)$."
+  },
+  {
+    "id": "em-051",
+    "topic": "calculus",
+    "type": "msq",
+    "marks": 2,
+    "q": "In each case below, $f(0) = 0$ and the formula holds for $x \\ne 0$. Which of the functions is/are differentiable at $x = 0$?",
+    "options": [
+      "$f(x) = |x|$",
+      "$f(x) = x\\,|x|$",
+      "$f(x) = x \\sin(1/x)$",
+      "$f(x) = x^2 \\sin(1/x)$"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "Compute $\\lim_{h \\to 0} \\frac{f(h) - f(0)}{h} = \\lim_{h \\to 0} \\frac{f(h)}{h}$ in each case.\n\n- **A:** $\\frac{|h|}{h} = \\pm 1$ depending on side. Limit does not exist. Not differentiable (though continuous).\n- **B:** $\\frac{h|h|}{h} = |h| \\to 0$. Differentiable, $f'(0) = 0$.\n- **C:** $\\frac{h \\sin(1/h)}{h} = \\sin(1/h)$, which oscillates. Not differentiable (though continuous, since $|x \\sin(1/x)| \\le |x|$).\n- **D:** $\\frac{h^2 \\sin(1/h)}{h} = h \\sin(1/h) \\to 0$. Differentiable, $f'(0) = 0$."
+  },
+  {
+    "id": "em-052",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 1,
+    "q": "Two fair six-sided dice are rolled. Given that at least one die shows 3, what is the probability that the sum is 8? Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 0.17,
+      "max": 0.19
+    },
+    "explanation": "Outcomes with at least one 3: $36 - 25 = 11$ (all outcomes minus those with no 3).\n\nAmong them, sum 8: $(3, 5)$ and $(5, 3)$, so 2 outcomes.\n$$P = \\frac{2}{11} \\approx 0.18.$$"
+  },
+  {
+    "id": "em-053",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 2,
+    "q": "A disease affects 2% of a population. A test detects the disease in 95% of people who have it, and gives a positive result for 4% of people who do not have it. A randomly chosen person tests positive. What is the probability that the person has the disease? Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 0.32,
+      "max": 0.34
+    },
+    "explanation": "Let $D$ = has disease, $+$ = tests positive.\n\n- $P(D)P(+ \\mid D) = 0.02 \\times 0.95 = 0.019$\n- $P(\\bar D)P(+ \\mid \\bar D) = 0.98 \\times 0.04 = 0.0392$\n- $P(+) = 0.019 + 0.0392 = 0.0582$\n\nBayes' theorem:\n$$P(D \\mid +) = \\frac{0.019}{0.0582} \\approx 0.326 \\approx 0.33.$$\nEven with a fairly accurate test, most positives are false positives because the disease is rare."
+  },
+  {
+    "id": "em-054",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The lifetime of a component is exponentially distributed with mean 5 years. Given that it has already worked for 3 years, what is the probability that its total lifetime exceeds 8 years?",
+    "options": [
+      "$e^{-1}$",
+      "$e^{-8/5}$",
+      "$1 - e^{-1}$",
+      "$e^{-3/5}$"
+    ],
+    "answer": 0,
+    "explanation": "Rate $\\lambda = 1/5$ and $P(X > t) = e^{-t/5}$. By the memoryless property,\n$$P(X > 8 \\mid X > 3) = \\frac{e^{-8/5}}{e^{-3/5}} = e^{-5/5} = e^{-1} \\approx 0.368.$$\nOnly the extra 5 years matter, not the 3 already survived."
+  },
+  {
+    "id": "em-055",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For the data set $3, 5, 5, 7, 8, 8, 8, 10$, which one of the following orderings of the mean, median and mode is correct?",
+    "options": [
+      "mean < median < mode",
+      "median < mean < mode",
+      "mean = median < mode",
+      "mode < mean < median"
+    ],
+    "answer": 0,
+    "explanation": "- Mean $= \\frac{3 + 5 + 5 + 7 + 8 + 8 + 8 + 10}{8} = \\frac{54}{8} = 6.75$\n- Median (8 values, average of the 4th and 5th) $= \\frac{7 + 8}{2} = 7.5$\n- Mode $= 8$ (appears three times)\n\nSo $6.75 < 7.5 < 8$: mean < median < mode. This is the typical order for data with a long left tail."
+  },
+  {
+    "id": "em-056",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A binomial random variable $X$ has mean 6 and variance 4.2. What is $P(X = 0)$?",
+    "options": [
+      "$(0.7)^{20}$",
+      "$(0.3)^{20}$",
+      "$(0.7)^{6}$",
+      "$(0.3)^{14}$"
+    ],
+    "answer": 0,
+    "explanation": "For $X \\sim \\text{Bin}(n, p)$: mean $np = 6$, variance $np(1-p) = 4.2$.\n\n1. Divide: $1 - p = 4.2 / 6 = 0.7$, so $p = 0.3$.\n2. $n = 6 / 0.3 = 20$.\n3. $P(X = 0) = (1 - p)^n = (0.7)^{20}$.\n\nOption B mixes up $p$ and $1 - p$."
+  },
+  {
+    "id": "em-057",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 2,
+    "q": "$X$ and $Y$ are independent and each uniformly distributed on $[0, 1]$. What is $P\\left(|X - Y| < \\tfrac{1}{3}\\right)$? Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 0.55,
+      "max": 0.57
+    },
+    "explanation": "$(X, Y)$ is uniform on the unit square, so probability equals area. The complement $|X - Y| \\ge \\frac{1}{3}$ consists of two right triangles, one above the line $y = x + \\frac{1}{3}$ and one below $y = x - \\frac{1}{3}$, each with legs $\\frac{2}{3}$.\n\nArea of the complement $= 2 \\cdot \\frac{1}{2} \\cdot \\left(\\frac{2}{3}\\right)^2 = \\frac{4}{9}$.\n$$P = 1 - \\frac{4}{9} = \\frac{5}{9} \\approx 0.56.$$"
+  },
+  {
+    "id": "em-058",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$X$ is normally distributed with mean 10 and variance 4. What is the distribution of $Y = 3X - 5$?",
+    "options": [
+      "Normal with mean 25 and variance 36",
+      "Normal with mean 25 and variance 12",
+      "Normal with mean 30 and variance 36",
+      "Normal with mean 25 and variance 31"
+    ],
+    "answer": 0,
+    "explanation": "A linear function of a normal variable is normal. $E[Y] = 3 \\cdot 10 - 5 = 25$ and $\\operatorname{Var}(Y) = 3^2 \\cdot 4 = 36$. The constant $-5$ shifts the mean but does not change the variance, and the factor 3 is squared in the variance."
+  },
+  {
+    "id": "em-059",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 2,
+    "q": "A continuous random variable $X$ has density $f(x) = kx^2$ for $0 \\le x \\le 3$ and $f(x) = 0$ otherwise. What is $E[X]$?",
+    "answer": {
+      "min": 2.25,
+      "max": 2.25
+    },
+    "explanation": "**Find $k$.** $\\int_0^3 kx^2\\,dx = k \\cdot \\frac{27}{3} = 9k = 1$, so $k = \\frac{1}{9}$.\n\n**Mean.**\n$$E[X] = \\int_0^3 x \\cdot \\frac{x^2}{9}\\,dx = \\frac{1}{9} \\cdot \\frac{3^4}{4} = \\frac{81}{36} = 2.25.$$"
+  },
+  {
+    "id": "em-060",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A Poisson random variable $X$ satisfies $P(X = 1) = P(X = 2)$. What is $P(X = 0)$?",
+    "options": [
+      "$e^{-2}$",
+      "$2e^{-2}$",
+      "$e^{-1}$",
+      "$e^{-4}$"
+    ],
+    "answer": 0,
+    "explanation": "$P(X = k) = \\frac{e^{-\\lambda}\\lambda^k}{k!}$. Setting $e^{-\\lambda}\\lambda = e^{-\\lambda}\\frac{\\lambda^2}{2}$ gives $\\lambda = 2$ (since $\\lambda > 0$). Then $P(X = 0) = e^{-2} \\approx 0.135$."
+  }
+]

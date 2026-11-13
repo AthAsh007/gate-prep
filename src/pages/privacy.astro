@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="Privacy policy" description="What GATE 2027 CS Prep stores, where, and how to delete it.">
+  <article class="page">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy policy</h1>
+    <p class="updated">Last updated: 13 November 2026</p>
+
+    <h2>The short version</h2>
+    <p>There are no accounts, no sign-up forms, no advertising and no tracking scripts. Your study progress stays in your own browser.</p>
+
+    <h2>What is stored in your browser</h2>
+    <p>The site uses your browser's local storage and a service worker cache. Nothing in them is sent to us.</p>
+    <ul>
+      <li>Topics you mark as done, the last page you read, and where you stopped on each page.</li>
+      <li>Test attempts in progress (answers and the end time), so a reload does not lose your work.</li>
+      <li>Your test scores, so the tests page can show your best score.</li>
+      <li>Your light or dark theme choice.</li>
+      <li>Copies of pages you have visited, so the site loads faster and works offline.</li>
+    </ul>
+    <p>To delete all of it, clear this site's data in your browser settings, or use the button below.</p>
+    <p><button class="btn secondary" type="button" id="reset">Delete my progress on this device</button> <span id="reset-msg" class="updated"></span></p>
+
+    <h2>Hosting</h2>
+    <p>The site is served by Cloudflare. Like any web host, Cloudflare processes technical request data such as IP addresses to deliver pages and block attacks. See the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy policy</a>.</p>
+
+    <h2>Links to other sites</h2>
+    <p>Notes link to outside sources such as Wikipedia, NPTEL and GATE Overflow. Those sites have their own privacy policies.</p>
+
+    <h2>Children</h2>
+    <p>The site is meant for students preparing for a postgraduate entrance exam and collects no personal data from anyone.</p>
+
+    <h2>Changes and contact</h2>
+    <p>If this policy changes, the date at the top changes too. Questions go through the contact section on <a href="https://athash.in/#contact">athash.in</a>.</p>
+  </article>
+</Base>
+
+<script>
+  import { resetAll } from "../scripts/progress";
+  document.getElementById("reset")!.addEventListener("click", async () => {
+    resetAll();
+    try {
+      for (const k of await caches.keys()) await caches.delete(k);
+    } catch {}
+    document.getElementById("reset-msg")!.textContent = "Done. Your progress on this device is deleted.";
+  });
+</script>
