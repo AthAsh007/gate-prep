@@ -1,0 +1,135 @@
+// GATE 2027 CS syllabus (IIT Madras), split into study topics.
+export type Topic = { slug: string; title: string; covers: string };
+export type Section = { slug: string; n: number; title: string; topics: Topic[] };
+
+export const SECTIONS: Section[] = [
+  {
+    slug: "engineering-mathematics",
+    n: 1,
+    title: "Engineering Mathematics",
+    topics: [
+      { slug: "logic", title: "Propositional and first order logic", covers: "Propositional and first order logic." },
+      { slug: "sets-relations-functions", title: "Sets, relations, functions, partial orders and lattices", covers: "Sets, relations, functions, partial orders and lattices." },
+      { slug: "groups", title: "Monoids and groups", covers: "Monoids, groups." },
+      { slug: "graph-theory", title: "Graph theory", covers: "Graphs: connectivity, matching, colouring." },
+      { slug: "combinatorics", title: "Combinatorics", covers: "Counting, recurrence relations, generating functions." },
+      { slug: "linear-algebra", title: "Linear algebra", covers: "Matrices, determinants, system of linear equations, eigenvalues and eigenvectors, LU decomposition." },
+      { slug: "calculus", title: "Calculus", covers: "Limits, continuity and differentiability, maxima and minima, mean value theorem, integration." },
+      { slug: "probability-statistics", title: "Probability and statistics", covers: "Random variables, uniform, normal, exponential, Poisson and binomial distributions. Mean, median, mode and standard deviation. Conditional probability and Bayes theorem." },
+    ],
+  },
+  {
+    slug: "digital-logic",
+    n: 2,
+    title: "Digital Logic",
+    topics: [
+      { slug: "boolean-algebra-minimization", title: "Boolean algebra and minimization", covers: "Algebraic technique, Karnaugh map, tabular method." },
+      { slug: "combinational-circuits", title: "Combinational circuits", covers: "Design of combinational circuits." },
+      { slug: "sequential-circuits", title: "Sequential circuits", covers: "Design of sequential circuits." },
+      { slug: "number-representation", title: "Number representation and arithmetic", covers: "Fixed and floating point." },
+    ],
+  },
+  {
+    slug: "computer-organization",
+    n: 3,
+    title: "Computer Organization and Architecture",
+    topics: [
+      { slug: "instruction-set-addressing", title: "Instruction set and addressing modes", covers: "Instruction set and addressing modes." },
+      { slug: "alu-control-unit", title: "ALU and control unit design", covers: "Design of ALU. Design of control unit: hardwired and microprogrammed." },
+      { slug: "memory-hierarchy-cache", title: "Memory hierarchy and cache", covers: "Memory interfacing and hierarchy: performance, cache memory mapping." },
+      { slug: "io-interrupt-dma", title: "I/O interface: interrupts and DMA", covers: "I/O interface (interrupt and DMA)." },
+      { slug: "pipelining", title: "Instruction pipelining and hazards", covers: "Instruction pipelining, pipeline hazards." },
+    ],
+  },
+  {
+    slug: "programming-data-structures",
+    n: 4,
+    title: "Programming and Data Structures",
+    topics: [
+      { slug: "c-programming", title: "Programming in C", covers: "Programming in C." },
+      { slug: "recursion", title: "Recursion", covers: "Recursion." },
+      { slug: "arrays-stacks-queues", title: "Arrays, stacks and queues", covers: "Arrays, stacks, queues." },
+      { slug: "linked-lists", title: "Linked lists", covers: "Linked lists." },
+      { slug: "trees-bst", title: "Trees and binary search trees", covers: "Trees, binary search trees." },
+      { slug: "binary-heaps", title: "Binary heaps", covers: "Binary heaps." },
+      { slug: "graphs-representation", title: "Graphs as a data structure", covers: "Graphs." },
+    ],
+  },
+  {
+    slug: "algorithms",
+    n: 5,
+    title: "Algorithms",
+    topics: [
+      { slug: "asymptotic-analysis", title: "Asymptotic complexity", covers: "Asymptotic worst case time and space complexity." },
+      { slug: "searching-sorting", title: "Searching and sorting", covers: "Searching, sorting." },
+      { slug: "hashing", title: "Hashing", covers: "Hashing." },
+      { slug: "greedy", title: "Greedy algorithms", covers: "Greedy design technique." },
+      { slug: "dynamic-programming", title: "Dynamic programming", covers: "Dynamic programming." },
+      { slug: "divide-and-conquer", title: "Divide and conquer", covers: "Divide-and-conquer." },
+      { slug: "graph-algorithms", title: "Graph traversals, MST and shortest paths", covers: "Graph traversals, minimum spanning trees, shortest paths." },
+    ],
+  },
+  {
+    slug: "theory-of-computation",
+    n: 6,
+    title: "Theory of Computation",
+    topics: [
+      { slug: "regular-languages", title: "Regular expressions and finite automata", covers: "Regular expressions and finite automata. Regular languages." },
+      { slug: "context-free", title: "Context-free grammars and PDAs", covers: "Context-free grammars and push-down automata. Context-free languages." },
+      { slug: "pumping-lemma", title: "Pumping lemma and closure properties", covers: "Pumping lemma." },
+      { slug: "turing-machines", title: "Turing machines and undecidability", covers: "Turing machines and undecidability." },
+    ],
+  },
+  {
+    slug: "compiler-design",
+    n: 7,
+    title: "Compiler Design",
+    topics: [
+      { slug: "lexical-analysis", title: "Lexical analysis", covers: "Lexical analysis." },
+      { slug: "parsing", title: "Parsing", covers: "Parsing." },
+      { slug: "syntax-directed-translation", title: "Syntax-directed translation", covers: "Syntax-directed translation." },
+      { slug: "runtime-environments", title: "Runtime environments", covers: "Runtime environments." },
+      { slug: "intermediate-code", title: "Intermediate code generation", covers: "Intermediate code generation." },
+      { slug: "optimization-dataflow", title: "Local optimisation and data flow analysis", covers: "Local optimisation, data flow analyses: constant propagation, liveness analysis, common subexpression elimination." },
+    ],
+  },
+  {
+    slug: "operating-systems",
+    n: 8,
+    title: "Operating Systems",
+    topics: [
+      { slug: "processes-threads", title: "System calls, processes and threads", covers: "System calls, processes, threads, inter-process communication." },
+      { slug: "synchronization", title: "Concurrency and synchronization", covers: "Concurrency and synchronization." },
+      { slug: "deadlock", title: "Deadlock", covers: "Deadlock." },
+      { slug: "scheduling", title: "CPU and I/O scheduling", covers: "CPU and I/O scheduling." },
+      { slug: "memory-management", title: "Memory management and virtual memory", covers: "Memory management and virtual memory." },
+      { slug: "file-systems", title: "File systems", covers: "File systems." },
+    ],
+  },
+  {
+    slug: "databases",
+    n: 9,
+    title: "Databases",
+    topics: [
+      { slug: "er-model", title: "ER model", covers: "ER-model." },
+      { slug: "relational-algebra-calculus", title: "Relational algebra and tuple calculus", covers: "Relational model: relational algebra, tuple calculus." },
+      { slug: "sql", title: "SQL", covers: "SQL." },
+      { slug: "normalization", title: "Integrity constraints and normal forms", covers: "Integrity constraints, normal forms." },
+      { slug: "indexing", title: "File organization and indexing", covers: "File organization, indexing (B and B+ trees)." },
+      { slug: "transactions", title: "Transactions and concurrency control", covers: "Transactions and concurrency control." },
+    ],
+  },
+  {
+    slug: "computer-networks",
+    n: 10,
+    title: "Computer Networks",
+    topics: [
+      { slug: "layering-switching", title: "Layering, switching and performance", covers: "Principles of layering; circuit, packet and virtual circuit switching; performance metrics." },
+      { slug: "data-link-layer", title: "Data link layer", covers: "Error detection, medium access control, Ethernet." },
+      { slug: "routing", title: "Routing", covers: "Distance vector and link state routing." },
+      { slug: "ipv4", title: "IPv4", covers: "Fragmentation, CIDR notation, network address translation." },
+      { slug: "tcp", title: "TCP and sockets", covers: "TCP flow control and congestion control, socket API." },
+      { slug: "dns-http", title: "DNS and HTTP", covers: "DNS and HTTP." },
+    ],
+  },
+];

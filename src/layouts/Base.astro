@@ -1,0 +1,83 @@
+---
+import "../styles/global.css";
+import { EXAM_DATE, EXAM_LABEL } from "../config";
+
+interface Props {
+  title: string;
+  description?: string;
+  bare?: boolean;
+}
+const { title, description = "GATE 2027 CS study notes and timed mock tests.", bare = false } = Astro.props;
+const fullTitle = title === "GATE 2027 CS Prep" ? title : `${title} | GATE 2027 CS Prep`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem("theme");
+        if (t) document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <a class="brand" href="/">GATE CS <span>2027</span></a>
+        <nav class="nav" aria-label="Main">
+          <a href="/notes/">Notes</a>
+          <a href="/tests/">Tests</a>
+        </nav>
+        <div class="countdown" id="countdown" data-target={EXAM_DATE} title={`${EXAM_LABEL}: ${new Date(EXAM_DATE).toDateString()}`}>
+          <span class="countdown-label">{EXAM_LABEL} in</span>
+          <span class="countdown-value" id="countdown-value">--</span>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">◐</button>
+      </div>
+    </header>
+    <main class={bare ? "" : "wrap main"}>
+      <slot />
+    </main>
+    {!bare && (
+      <footer class="site-footer wrap">
+        <p>Syllabus: GATE 2027 CS, IIT Madras. Exam dates are from the GATE 2027 announcement; check gate2027.iitm.ac.in for the paper-wise schedule.</p>
+      </footer>
+    )}
+    <script>
+      const el = document.getElementById("countdown")!;
+      const out = document.getElementById("countdown-value")!;
+      const target = new Date(el.dataset.target!).getTime();
+      const pad = (n: number) => String(n).padStart(2, "0");
+      function tick() {
+        const ms = target - Date.now();
+        if (ms <= 0) {
+          out.textContent = "exam day";
+          return;
+        }
+        const s = Math.floor(ms / 1000);
+        const d = Math.floor(s / 86400);
+        const h = Math.floor((s % 86400) / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        out.textContent = `${d}d ${pad(h)}h ${pad(m)}m ${pad(s % 60)}s`;
+      }
+      tick();
+      setInterval(tick, 1000);
+
+      document.getElementById("theme-toggle")!.addEventListener("click", () => {
+        const root = document.documentElement;
+        const dark = root.dataset.theme
+          ? root.dataset.theme === "dark"
+          : matchMedia("(prefers-color-scheme: dark)").matches;
+        root.dataset.theme = dark ? "light" : "dark";
+        try {
+          localStorage.setItem("theme", root.dataset.theme);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

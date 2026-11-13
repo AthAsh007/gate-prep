@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SECTIONS } from "../../data/syllabus";
+---
+<Base title="Notes" description="Study notes for every topic in the GATE 2027 CS syllabus.">
+  <h1>Notes</h1>
+  <p class="lead">Ten sections, one page per syllabus topic.</p>
+  <div class="grid">
+    {SECTIONS.map((s) => (
+      <a class="card" href={`/notes/${s.slug}/`}>
+        <span class="tag">Section {s.n}</span>
+        <h3>{s.title}</h3>
+        <p>{s.topics.length} topics</p>
+      </a>
+    ))}
+  </div>
+</Base>

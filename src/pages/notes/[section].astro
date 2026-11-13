@@ -1,0 +1,21 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SECTIONS } from "../../data/syllabus";
+
+export function getStaticPaths() {
+  return SECTIONS.map((s) => ({ params: { section: s.slug }, props: { section: s } }));
+}
+const { section } = Astro.props;
+---
+<Base title={section.title}>
+  <p><a href="/notes/">Notes</a> / Section {section.n}</p>
+  <h1>{section.title}</h1>
+  <div class="grid">
+    {section.topics.map((t) => (
+      <div class="card">
+        <h3>{t.title}</h3>
+        <p>{t.covers}</p>
+      </div>
+    ))}
+  </div>
+</Base>

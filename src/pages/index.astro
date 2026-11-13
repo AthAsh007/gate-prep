@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import { SECTIONS } from "../data/syllabus";
+---
+<Base title="GATE 2027 CS Prep">
+  <h1>GATE 2027 Computer Science</h1>
+  <p class="lead">
+    Notes for every topic in the IIT Madras syllabus, and timed tests that work like the real exam:
+    65 questions, 180 minutes, negative marking on MCQs.
+  </p>
+  <p><a class="btn" href="/tests/">Start a test</a> <a class="btn secondary" href="/notes/">Read notes</a></p>
+
+  <h2>Syllabus</h2>
+  <div class="grid">
+    {SECTIONS.map((s) => (
+      <a class="card" href={`/notes/${s.slug}/`}>
+        <span class="tag">Section {s.n}</span>
+        <h3>{s.title}</h3>
+        <p>{s.topics.map((t) => t.title).join(" · ")}</p>
+      </a>
+    ))}
+  </div>
+</Base>
