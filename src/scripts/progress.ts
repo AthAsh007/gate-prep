@@ -58,6 +58,6 @@ export const getResults = (testId?: string) => (testId ? read().results[testId] 
 export function resetAll() {
   try {
     localStorage.removeItem(KEY);
-    for (const k of Object.keys(localStorage)) if (k.startsWith("gate27:attempt:")) localStorage.removeItem(k);
+    for (const k of Object.keys(localStorage)) if (k.startsWith("gate27:")) localStorage.removeItem(k);
   } catch {}
 }

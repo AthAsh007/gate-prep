@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { SECTIONS } from "../../data/syllabus";
+
+const sheets = await getCollection("sheets");
+const byId = new Map(sheets.map((s) => [s.id, s]));
+---
+<Base title="Formula sheets" description="One printable formula and revision sheet for each GATE 2027 CS section.">
+  <p class="eyebrow">Revision</p>
+  <h1>Formula sheets</h1>
+  <p class="lead">One dense page per section: formulas, standard results, complexities and the conventions GATE expects. Read them in the last weeks, or print them.</p>
+  <div class="grid" style="margin-top: 28px">
+    {SECTIONS.map((s) => {
+      const sheet = byId.get(s.slug);
+      return sheet ? (
+        <a class="card" href={`/sheets/${s.slug}/`}>
+          <span class="card-num">{String(s.n).padStart(2, "0")}</span>
+          <h3>{s.title}</h3>
+          <p>{sheet.data.summary}</p>
+          <div class="card-foot"><span>Formula sheet</span><span class="go">Open →</span></div>
+        </a>
+      ) : (
+        <div class="card">
+          <span class="card-num">{String(s.n).padStart(2, "0")}</span>
+          <h3>{s.title}</h3>
+          <p>Coming soon.</p>
+        </div>
+      );
+    })}
+  </div>
+</Base>

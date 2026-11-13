@@ -66,6 +66,23 @@ for (const slug of targets) {
     }
   }
 
+  // formula sheet
+  if (section) {
+    const f = join(root, "src/content/sheets", `${slug}.md`);
+    const where = `sheets/${slug}.md`;
+    if (!existsSync(f)) fail(where, "missing");
+    else {
+      const raw = readFileSync(f, "utf8");
+      const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      if (!fm || !fm[1].includes("title:") || !fm[1].includes("summary:")) fail(where, "front matter needs title and summary");
+      const body = fm ? raw.slice(fm[0].length) : raw;
+      const words = body.split(/\s+/).filter(Boolean).length;
+      if (words < 700) fail(where, `only ${words} words`);
+      checkMath(where, body.replace(/```[\s\S]*?```/g, ""));
+      checkProse(where, raw);
+    }
+  }
+
   // questions
   const qf = join(root, "src/data/questions", `${slug}.json`);
   if (!existsSync(qf)) {
@@ -106,6 +123,12 @@ for (const slug of targets) {
     const text = [q.q, q.explanation, ...(q.options ?? [])].join("\n");
     checkMath(where, text.replace(/```[\s\S]*?```/g, ""));
     checkProse(where, text);
+  }
+  const texts = new Map<string, string>();
+  for (const q of qs) {
+    const key = [q.q, ...(q.options ?? [])].join("|").replace(/\s+/g, " ").trim().toLowerCase();
+    if (texts.has(key)) fail(`questions/${slug}.json`, `${q.id} repeats the text of ${texts.get(key)}`);
+    texts.set(key, q.id);
   }
   const covered = new Set(qs.map((q) => q.topic));
   for (const t of topics) if (!covered.has(t)) fail(`questions/${slug}.json`, `no question for topic ${t}`);

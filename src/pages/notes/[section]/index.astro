@@ -54,7 +54,10 @@ const next = SECTIONS[idx + 1];
         {prev ? <a href={`/notes/${prev.slug}/`}><small>Previous section</small>{prev.title}</a> : <span></span>}
         {next ? <a class="next" href={`/notes/${next.slug}/`}><small>Next section</small>{next.title}</a> : <span></span>}
       </div>
-      <p><a class="btn secondary" href={`/tests/subject-${section.slug}/`}>Take the {section.title} test <span class="arrow">→</span></a></p>
+      <div class="btn-row">
+        <a class="btn secondary" href={`/tests/subject-${section.slug}/`}>Take the {section.title} test <span class="arrow">→</span></a>
+        <a class="btn secondary" href={`/sheets/${section.slug}/`}>Formula sheet</a>
+      </div>
     </div>
   </div>
 </Base>

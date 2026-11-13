@@ -1,0 +1,108 @@
+---
+import Base from "../layouts/Base.astro";
+import { SECTIONS } from "../data/syllabus";
+import { EXAM_DATE } from "../config";
+import { getPapers } from "../lib/tests";
+
+const papers = getPapers();
+const has = new Set(papers.map((p) => p.id));
+const sec = (slug: string) => SECTIONS.find((s) => s.slug === slug)!;
+const topics = (slug: string, from = 0, to?: number) =>
+  sec(slug).topics.slice(from, to).map((t) => ({ label: t.title, href: `/notes/${slug}/${t.slug}/`, key: `note:${slug}/${t.slug}` }));
+const test = (id: string, label: string) => (has.has(id) ? [{ label, href: `/tests/${id}/`, key: `test:${id}` }] : []);
+const mock = (n: number) => test(`full-mock-${String(n).padStart(2, "0")}`, `Full mock ${n} (3 hours, then review every wrong answer)`);
+const sheet = (slug: string) => [{ label: `${sec(slug).title} formula sheet`, href: `/sheets/${slug}/`, key: `sheet:${slug}` }];
+
+type Item = { label: string; href: string; key: string };
+const weeks: { focus: string; why: string; items: Item[] }[] = [
+  { focus: "Discrete mathematics", why: "Logic, sets and graphs show up in almost every paper and feed into TOC and algorithms later.", items: [...topics("engineering-mathematics", 0, 5)] },
+  { focus: "Linear algebra, calculus, probability, digital logic", why: "Quick marks if the formulas are automatic. Finish Engineering Mathematics and all of Digital Logic.", items: [...topics("engineering-mathematics", 5), ...topics("digital-logic"), ...test("subject-engineering-mathematics", "Engineering Mathematics test, Set A"), ...test("subject-digital-logic", "Digital Logic test, Set A")] },
+  { focus: "Programming and data structures", why: "C output tracing and tree/heap questions are high-frequency and need practice, not just reading.", items: [...topics("programming-data-structures"), ...test("subject-programming-data-structures", "Programming and DS test, Set A")] },
+  { focus: "Algorithms", why: "The largest single subject by marks in most recent papers.", items: [...topics("algorithms"), ...test("subject-algorithms", "Algorithms test, Set A")] },
+  { focus: "Computer organization", why: "Cache and pipeline numericals reward a fixed method; learn it once and drill it.", items: [...topics("computer-organization"), ...test("subject-computer-organization", "Computer Organization test, Set A")] },
+  { focus: "Operating systems", why: "Scheduling, paging and synchronization are near-certain questions.", items: [...topics("operating-systems"), ...test("subject-operating-systems", "Operating Systems test, Set A"), ...mock(1)] },
+  { focus: "Theory of computation", why: "Short, scoring questions once closure and decidability facts are memorised.", items: [...topics("theory-of-computation"), ...test("subject-theory-of-computation", "Theory of Computation test, Set A"), ...mock(2)] },
+  { focus: "Databases", why: "Normalization and SQL output questions are mechanical with practice.", items: [...topics("databases"), ...test("subject-databases", "Databases test, Set A"), ...mock(3)] },
+  { focus: "Computer networks", why: "Mostly numericals: subnetting, sliding window, TCP windows, CRC.", items: [...topics("computer-networks"), ...test("subject-computer-networks", "Computer Networks test, Set A"), ...mock(4)] },
+  { focus: "Compiler design, then mocks", why: "The smallest subject. Finish it, then switch to full mocks.", items: [...topics("compiler-design"), ...test("subject-compiler-design", "Compiler Design test, Set A"), ...mock(5), ...mock(6), ...mock(7)] },
+  { focus: "Revision and Set B tests", why: "Fix weak subjects using your mock results. Read every formula sheet once.", items: [...SECTIONS.flatMap((s) => sheet(s.slug)), ...SECTIONS.flatMap((s) => test(`subject-${s.slug}-b`, `${s.title} test, Set B`)), ...mock(8), ...mock(9), ...mock(10)] },
+  { focus: "Final mocks", why: "Exam conditions: same start time as your session, calculator only, no breaks. Keep the last two days light.", items: [...mock(11), ...mock(12), ...mock(13), ...mock(14), ...mock(15), ...mock(16)] },
+];
+const total = weeks.reduce((n, w) => n + w.items.length, 0);
+---
+<Base title="Study plan" description="A 12-week GATE 2027 CS study plan that ends on exam day, with every topic, subject test and mock scheduled.">
+  <p class="eyebrow">12 weeks to the exam</p>
+  <h1>Study plan</h1>
+  <p class="lead">One subject at a time in the order that builds on itself, a subject test at the end of each week, then full mocks once the syllabus is done. Tick items off as you go; your ticks stay in this browser.</p>
+
+  <div class="plan-summary">
+    <div class="progress-line"><div class="progress-track"><i id="plan-bar"></i></div><span id="plan-count">0 of {total} done</span></div>
+  </div>
+
+  <ol class="plan" id="plan" data-exam={EXAM_DATE}>
+    {weeks.map((w, i) => (
+      <li class="plan-week" data-week={i}>
+        <div class="plan-head">
+          <span class="card-num">WEEK {String(i + 1).padStart(2, "0")}</span>
+          <span class="plan-dates" data-dates></span>
+          <span class="tag plan-now" hidden>This week</span>
+        </div>
+        <h2>{w.focus}</h2>
+        <p class="plan-why">{w.why}</p>
+        <ul class="plan-items">
+          {w.items.map((it) => (
+            <li>
+              <label>
+                <input type="checkbox" data-key={it.key} />
+                <a href={it.href}>{it.label}</a>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ol>
+</Base>
+
+<script>
+  const KEY = "gate27:plan";
+  const plan = document.getElementById("plan")!;
+  const exam = new Date(plan.dataset.exam!);
+  const weeks = [...plan.querySelectorAll<HTMLElement>(".plan-week")];
+  const fmt = (d: Date) => d.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+  const now = Date.now();
+  weeks.forEach((w, i) => {
+    const start = new Date(exam.getTime() - (weeks.length - i) * 7 * 86400000);
+    const end = new Date(start.getTime() + 6 * 86400000);
+    w.querySelector("[data-dates]")!.textContent = `${fmt(start)} to ${fmt(end)}`;
+    const before = i === 0 && now < start.getTime();
+    if (before || (now >= start.getTime() && now < start.getTime() + 7 * 86400000)) {
+      w.classList.add("current");
+      (w.querySelector(".plan-now") as HTMLElement).hidden = false;
+    }
+  });
+
+  let ticks: Record<string, number> = {};
+  try {
+    ticks = JSON.parse(localStorage.getItem(KEY) ?? "{}");
+  } catch {}
+  const boxes = [...plan.querySelectorAll<HTMLInputElement>("input[data-key]")];
+  const paint = () => {
+    const n = boxes.filter((b) => b.checked).length;
+    document.getElementById("plan-count")!.textContent = `${n} of ${boxes.length} done`;
+    document.getElementById("plan-bar")!.style.width = `${(n / boxes.length) * 100}%`;
+  };
+  boxes.forEach((b) => {
+    b.checked = !!ticks[b.dataset.key!];
+    b.addEventListener("change", () => {
+      if (b.checked) ticks[b.dataset.key!] = Date.now();
+      else delete ticks[b.dataset.key!];
+      try {
+        localStorage.setItem(KEY, JSON.stringify(ticks));
+      } catch {}
+      paint();
+    });
+  });
+  paint();
+  document.querySelector(".plan-week.current")?.scrollIntoView({ block: "start" });
+</script>

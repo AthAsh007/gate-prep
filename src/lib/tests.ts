@@ -66,7 +66,7 @@ function take<T>(pool: T[], offset: number, n: number): T[] {
   return Array.from({ length: Math.min(n, pool.length) }, (_, i) => pool[(offset + i) % pool.length]);
 }
 
-const FULL_MOCKS = 10;
+const MAX_FULL_MOCKS = 20;
 // 1-mark questions per section in a mock (sums to 25); rotated each mock so
 // every section gets the same total across the series. 2-mark: 3 each (30).
 const ONE_MARK_SPLIT = [3, 2, 3, 3, 3, 2, 2, 3, 2, 2];
@@ -83,9 +83,17 @@ export function getPapers(): Paper[] {
 
   const used1 = banks.map(() => 0);
   const used2 = banks.map(() => 0);
-  // A full mock needs every subject and General Aptitude.
-  const complete = ga.length > 0 && banks.every((b) => b.qs.length > 0);
-  for (let m = 0; complete && m < FULL_MOCKS; m++) {
+  // As many full mocks as the banks allow without reusing a question: per mock
+  // each section gives 2.5 one-mark (on average) and 3 two-mark questions, and
+  // General Aptitude gives 5 of each.
+  const count = (qs: RawQuestion[], m: 1 | 2) => qs.filter((q) => q.marks === m).length;
+  const fullMocks = Math.min(
+    MAX_FULL_MOCKS,
+    Math.floor(ga1.length / 5),
+    Math.floor(ga2.length / 5),
+    ...banks.map((b) => Math.min(Math.floor(count(b.qs, 1) / 2.5), Math.floor(count(b.qs, 2) / 3))),
+  );
+  for (let m = 0; m < fullMocks; m++) {
     const qs: PaperQuestion[] = [
       ...take(ga1, m * 5, 5).map((q) => toPaper(q, GA)),
       ...take(ga2, m * 5, 5).map((q) => toPaper(q, GA)),
@@ -113,20 +121,26 @@ export function getPapers(): Paper[] {
     });
   }
 
+  // Subject tests: Set A and Set B, 25 questions each (10 one-mark, 15 two-mark),
+  // taken from the end of each bank so they overlap the early mocks least.
   for (const b of banks) {
-    if (b.qs.length < 10) continue;
     const p1 = b.qs.filter((q) => q.marks === 1);
     const p2 = b.qs.filter((q) => q.marks === 2);
-    // Later questions in each bank, so the subject test overlaps the first mocks least.
-    const qs = [...p1.slice(-10), ...p2.slice(-15)].map((q) => toPaper(q, b.slug));
-    papers.push({
-      id: `subject-${b.slug}`,
-      kind: "subject",
-      title: b.title,
-      blurb: `${qs.length} questions on ${b.title} only.`,
-      minutes: 75,
-      questions: qs,
-    });
+    const sets = [
+      { id: `subject-${b.slug}`, name: "Set A", qs: [...p1.slice(-20, -10), ...p2.slice(-30, -15)] },
+      { id: `subject-${b.slug}-b`, name: "Set B", qs: [...p1.slice(-10), ...p2.slice(-15)] },
+    ];
+    for (const s of sets) {
+      if (s.qs.length < 25) continue;
+      papers.push({
+        id: s.id,
+        kind: "subject",
+        title: `${b.title}: ${s.name}`,
+        blurb: `${s.qs.length} questions on ${b.title} only.`,
+        minutes: 75,
+        questions: s.qs.map((q) => toPaper(q, b.slug)),
+      });
+    }
   }
 
   cache = papers;

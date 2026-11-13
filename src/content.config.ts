@@ -11,4 +11,9 @@ const notes = defineCollection({
   }),
 });
 
-export const collections = { notes };
+const sheets = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/sheets" }),
+  schema: z.object({ title: z.string(), summary: z.string() }),
+});
+
+export const collections = { notes, sheets };

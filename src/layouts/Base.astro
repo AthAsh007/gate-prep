@@ -55,7 +55,9 @@ const canonical = new URL(path, Astro.site).href;
         </a>
         <nav class="nav" aria-label="Main">
           <a href="/notes/" aria-current={current("/notes")}>Notes</a>
+          <a href="/sheets/" aria-current={current("/sheets")}>Sheets</a>
           <a href="/tests/" aria-current={current("/tests")}>Tests</a>
+          <a href="/plan/" aria-current={current("/plan")}>Plan</a>
         </nav>
         <div class="countdown" id="countdown" data-target={EXAM_DATE} title={`${EXAM_LABEL} ${new Date(EXAM_DATE).toDateString()}`}>
           <span class="countdown-dot" aria-hidden="true"></span>
@@ -76,6 +78,8 @@ const canonical = new URL(path, Astro.site).href;
         <div class="wrap footer-row">
           <p>Syllabus: GATE 2027 CS, IIT Madras. The countdown targets the first exam day; check gate2027.iitm.ac.in for the CS paper's date and session. Not affiliated with IIT Madras or the GATE organising committee.</p>
           <nav class="footer-links" aria-label="Footer">
+            <a href="/plan/">Study plan</a>
+            <a href="/sheets/">Formula sheets</a>
             <a href="/about/">About</a>
             <a href="/privacy/">Privacy</a>
             <a href="/disclaimer/">Disclaimer</a>

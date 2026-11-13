@@ -31,6 +31,17 @@ export const GET: APIRoute = async () => {
     lines.push("");
   }
 
+  const sheets = await getCollection("sheets");
+  if (sheets.length) {
+    lines.push("## Formula sheets", "");
+    for (const s of SECTIONS) {
+      const sh = sheets.find((x) => x.id === s.slug);
+      if (sh) lines.push(`- [${sh.data.title}](${SITE}/sheets/${s.slug}/): ${sh.data.summary}`);
+    }
+    lines.push("");
+  }
+  lines.push("## Study plan", "", `- [12-week study plan](${SITE}/plan/): every topic, subject test and mock scheduled up to exam day`, "");
+
   lines.push("## Tests", "");
   for (const p of papers) lines.push(`- [${p.title}](${SITE}/tests/${p.id}/): ${p.questions.length} questions, ${p.minutes} minutes`);
   lines.push("", "## Optional", "", `- [About](${SITE}/about/)`, `- [Disclaimer](${SITE}/disclaimer/)`, `- [Privacy](${SITE}/privacy/)`, "");

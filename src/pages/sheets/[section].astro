@@ -1,0 +1,52 @@
+---
+import "katex/dist/katex.min.css";
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { SECTIONS } from "../../data/syllabus";
+
+export async function getStaticPaths() {
+  const sheets = await getCollection("sheets");
+  return sheets
+    .map((sheet) => {
+      const section = SECTIONS.find((s) => s.slug === sheet.id);
+      return section ? { params: { section: section.slug }, props: { sheet, section } } : null;
+    })
+    .filter((p) => p !== null);
+}
+
+const { sheet, section } = Astro.props;
+const { Content, headings } = await render(sheet);
+const toc = headings.filter((h) => h.depth === 2);
+---
+<Base title={sheet.data.title} description={sheet.data.summary}>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/sheets/">Formula sheets</a><span>/</span><span>{section.title}</span></nav>
+  <div class="layout-note">
+    <aside class="side-nav" aria-label="Formula sheets">
+      <p>Formula sheets</p>
+      {SECTIONS.map((s) => (
+        <a href={`/sheets/${s.slug}/`} aria-current={s.slug === section.slug ? "page" : undefined}>
+          <span>{String(s.n).padStart(2, "0")}</span>{s.title}
+        </a>
+      ))}
+    </aside>
+    <article class="note sheet">
+      <p class="eyebrow">Section {section.n} · Revision</p>
+      <h1>{sheet.data.title}</h1>
+      <p class="lead">{sheet.data.summary}</p>
+      <div class="btn-row no-print" style="margin-bottom: 24px">
+        <button class="btn secondary" type="button" onclick="window.print()">Print or save as PDF</button>
+        <a class="btn secondary" href={`/notes/${section.slug}/`}>Full notes</a>
+        <a class="btn secondary" href={`/tests/subject-${section.slug}/`}>Section test</a>
+      </div>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+    {toc.length > 0 && (
+      <aside class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+      </aside>
+    )}
+  </div>
+</Base>
