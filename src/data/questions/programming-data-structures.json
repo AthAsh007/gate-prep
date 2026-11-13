@@ -4,7 +4,7 @@
     "topic": "c-programming",
     "type": "mcq",
     "marks": 1,
-    "q": "What does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint main(void) {\n    int a[] = {3, 8, 1, 9, 4, 7};\n    int *p = a, *q = a + 5;\n    int s = 0;\n    while (p < q) {\n        s += *q - *p;\n        p++;\n        q--;\n    }\n    printf(\"%d\\n\", s);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\nint main(void) {\n    int a[] = {3, 8, 1, 9, 4, 7};\n    int *p = a, *q = a + 5;\n    int s = 0;\n    while (p < q) {\n        s += *q - *p;\n        p++;\n        q--;\n    }\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```",
     "options": [
       "4",
       "12",
@@ -12,19 +12,19 @@
       "8"
     ],
     "answer": 3,
-    "explanation": "The pointers walk inward from both ends.\n\n- \\u00A7p\\u00A7 at \\u00A7a[0] = 3\\u00A7, \\u00A7q\\u00A7 at \\u00A7a[5] = 7\\u00A7: \\u00A7s = 7 - 3 = 4\\u00A7.\n- \\u00A7p\\u00A7 at \\u00A7a[1] = 8\\u00A7, \\u00A7q\\u00A7 at \\u00A7a[4] = 4\\u00A7: \\u00A7s = 4 + (4 - 8) = 0\\u00A7.\n- \\u00A7p\\u00A7 at \\u00A7a[2] = 1\\u00A7, \\u00A7q\\u00A7 at \\u00A7a[3] = 9\\u00A7: \\u00A7s = 0 + 8 = 8\\u00A7.\n- Now \\u00A7p\\u00A7 points to \\u00A7a[3]\\u00A7 and \\u00A7q\\u00A7 to \\u00A7a[2]\\u00A7, so \\u00A7p < q\\u00A7 is false.\n\nThe program prints 8."
+    "explanation": "The pointers walk inward from both ends.\n\n- `p` at `a[0] = 3`, `q` at `a[5] = 7`: `s = 7 - 3 = 4`.\n- `p` at `a[1] = 8`, `q` at `a[4] = 4`: `s = 4 + (4 - 8) = 0`.\n- `p` at `a[2] = 1`, `q` at `a[3] = 9`: `s = 0 + 8 = 8`.\n- Now `p` points to `a[3]` and `q` to `a[2]`, so `p < q` is false.\n\nThe program prints 8."
   },
   {
     "id": "pds-002",
     "topic": "c-programming",
     "type": "nat",
     "marks": 1,
-    "q": "What value does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint f(void) {\n    static int c = 5;\n    c = c + 2;\n    return c;\n}\nint main(void) {\n    int s = 0;\n    for (int i = 0; i < 3; i++)\n        s += f();\n    printf(\"%d\\n\", s);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does the following program print?\n\n```c\n#include <stdio.h>\nint f(void) {\n    static int c = 5;\n    c = c + 2;\n    return c;\n}\nint main(void) {\n    int s = 0;\n    for (int i = 0; i < 3; i++)\n        s += f();\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```",
     "answer": {
       "min": 27,
       "max": 27
     },
-    "explanation": "A \\u00A7static\\u00A7 local is initialised once, before the program starts, and keeps its value between calls.\n\n- First call: \\u00A7c\\u00A7 becomes 7, returns 7.\n- Second call: \\u00A7c\\u00A7 becomes 9, returns 9.\n- Third call: \\u00A7c\\u00A7 becomes 11, returns 11.\n\n\\u00A7s = 7 + 9 + 11 = 27\\u00A7."
+    "explanation": "A `static` local is initialised once, before the program starts, and keeps its value between calls.\n\n- First call: `c` becomes 7, returns 7.\n- Second call: `c` becomes 9, returns 9.\n- Third call: `c` becomes 11, returns 11.\n\n`s = 7 + 9 + 11 = 27`."
   },
   {
     "id": "pds-003",
@@ -39,26 +39,26 @@
       "A register variable can have its address taken with the & operator"
     ],
     "answer": 2,
-    "explanation": "- Option 1 is false: a static local is initialised once only.\n- Option 2 is false: \\u00A7static\\u00A7 at file scope gives internal linkage, so the name is invisible to other source files.\n- Option 3 is true: objects with static storage duration (globals and statics) are zero-initialised by default; automatic locals are not.\n- Option 4 is false: taking the address of a \\u00A7register\\u00A7 variable is not allowed."
+    "explanation": "- Option 1 is false: a static local is initialised once only.\n- Option 2 is false: `static` at file scope gives internal linkage, so the name is invisible to other source files.\n- Option 3 is true: objects with static storage duration (globals and statics) are zero-initialised by default; automatic locals are not.\n- Option 4 is false: taking the address of a `register` variable is not allowed."
   },
   {
     "id": "pds-004",
     "topic": "c-programming",
     "type": "nat",
     "marks": 2,
-    "q": "What value does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nvoid f(int *x, int y) {\n    *x = *x + y;\n    y = *x * 2;\n}\nint main(void) {\n    int a = 3, b = 4;\n    f(&a, b);\n    f(&b, a);\n    printf(\"%d\\n\", a * 100 + b);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does the following program print?\n\n```c\n#include <stdio.h>\nvoid f(int *x, int y) {\n    *x = *x + y;\n    y = *x * 2;\n}\nint main(void) {\n    int a = 3, b = 4;\n    f(&a, b);\n    f(&b, a);\n    printf(\"%d\\n\", a * 100 + b);\n    return 0;\n}\n```",
     "answer": {
       "min": 711,
       "max": 711
     },
-    "explanation": "\\u00A7x\\u00A7 is a pointer, so writes through \\u00A7*x\\u00A7 change the caller's variable. \\u00A7y\\u00A7 is a copy, so the assignment \\u00A7y = *x * 2\\u00A7 has no effect outside \\u00A7f\\u00A7.\n\n- \\u00A7f(&a, b)\\u00A7: \\u00A7a = 3 + 4 = 7\\u00A7.\n- \\u00A7f(&b, a)\\u00A7: \\u00A7a\\u00A7 is now 7, so \\u00A7b = 4 + 7 = 11\\u00A7.\n\nOutput: \\u00A77 * 100 + 11 = 711\\u00A7."
+    "explanation": "`x` is a pointer, so writes through `*x` change the caller's variable. `y` is a copy, so the assignment `y = *x * 2` has no effect outside `f`.\n\n- `f(&a, b)`: `a = 3 + 4 = 7`.\n- `f(&b, a)`: `a` is now 7, so `b = 4 + 7 = 11`.\n\nOutput: `7 * 100 + 11 = 711`."
   },
   {
     "id": "pds-005",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 2,
-    "q": "What does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\n#include <string.h>\nint main(void) {\n    char s[] = \"PROGRAM\";\n    char *p = s + 2;\n    p[2] = '\\0';\n    printf(\"%s %d\\n\", p, (int)strlen(s));\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#include <string.h>\nint main(void) {\n    char s[] = \"PROGRAM\";\n    char *p = s + 2;\n    p[2] = '\\0';\n    printf(\"%s %d\\n\", p, (int)strlen(s));\n    return 0;\n}\n```",
     "options": [
       "OGRAM 7",
       "OG 2",
@@ -66,14 +66,14 @@
       "OG 4"
     ],
     "answer": 3,
-    "explanation": "\\u00A7s\\u00A7 holds the characters P, R, O, G, R, A, M and a terminating null at indices 0 to 7. \\u00A7p = s + 2\\u00A7 points at 'O', so \\u00A7p[2]\\u00A7 is \\u00A7s[4]\\u00A7 (the second 'R'). Writing the null character there cuts the string.\n\n- \\u00A7s\\u00A7 now reads \"PROG\", so \\u00A7strlen(s)\\u00A7 is 4.\n- \\u00A7p\\u00A7 starts at index 2 and reads \"OG\".\n\nOutput: \\u00A7OG 4\\u00A7."
+    "explanation": "`s` holds the characters P, R, O, G, R, A, M and a terminating null at indices 0 to 7. `p = s + 2` points at 'O', so `p[2]` is `s[4]` (the second 'R'). Writing the null character there cuts the string.\n\n- `s` now reads \"PROG\", so `strlen(s)` is 4.\n- `p` starts at index 2 and reads \"OG\".\n\nOutput: `OG 4`."
   },
   {
     "id": "pds-006",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 1,
-    "q": "What is the value of \\u00A7c\\u00A7 after this code runs?\n\n\\u00A7\\u00A7\\u00A7c\nint a = 10, b = 3;\nint c = a / b * b + a % b << 1;\n\\u00A7\\u00A7\\u00A7",
+    "q": "What is the value of `c` after this code runs?\n\n```c\nint a = 10, b = 3;\nint c = a / b * b + a % b << 1;\n```",
     "options": [
       "12",
       "10",
@@ -81,14 +81,14 @@
       "11"
     ],
     "answer": 2,
-    "explanation": "\\u00A7/\\u00A7, \\u00A7*\\u00A7 and \\u00A7%\\u00A7 bind tighter than \\u00A7+\\u00A7, and \\u00A7+\\u00A7 binds tighter than \\u00A7<<\\u00A7.\n\n- \\u00A7a / b * b\\u00A7 is \\u00A7(10 / 3) * 3 = 3 * 3 = 9\\u00A7 (integer division).\n- \\u00A7a % b = 1\\u00A7.\n- \\u00A79 + 1 = 10\\u00A7.\n- \\u00A710 << 1 = 20\\u00A7.\n\nA common wrong answer is 11, from reading it as \\u00A79 + (1 << 1)\\u00A7."
+    "explanation": "`/`, `*` and `%` bind tighter than `+`, and `+` binds tighter than `<<`.\n\n- `a / b * b` is `(10 / 3) * 3 = 3 * 3 = 9` (integer division).\n- `a % b = 1`.\n- `9 + 1 = 10`.\n- `10 << 1 = 20`.\n\nA common wrong answer is 11, from reading it as `9 + (1 << 1)`."
   },
   {
     "id": "pds-007",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 1,
-    "q": "What does the following code print?\n\n\\u00A7\\u00A7\\u00A7c\nint i = 0, j = 5;\nif (i++ && j++)\n    j += 10;\nprintf(\"%d %d\\n\", i, j);\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following code print?\n\n```c\nint i = 0, j = 5;\nif (i++ && j++)\n    j += 10;\nprintf(\"%d %d\\n\", i, j);\n```",
     "options": [
       "0 5",
       "1 5",
@@ -96,26 +96,26 @@
       "1 16"
     ],
     "answer": 1,
-    "explanation": "\\u00A7i++\\u00A7 yields the old value 0 and then sets \\u00A7i\\u00A7 to 1. Since the left operand of \\u00A7&&\\u00A7 is false, the right operand \\u00A7j++\\u00A7 is never evaluated (short-circuit). The \\u00A7if\\u00A7 body is skipped, so \\u00A7i = 1\\u00A7 and \\u00A7j = 5\\u00A7."
+    "explanation": "`i++` yields the old value 0 and then sets `i` to 1. Since the left operand of `&&` is false, the right operand `j++` is never evaluated (short-circuit). The `if` body is skipped, so `i = 1` and `j = 5`."
   },
   {
     "id": "pds-008",
     "topic": "c-programming",
     "type": "nat",
     "marks": 2,
-    "q": "What value does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint main(void) {\n    int a[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};\n    int (*p)[4] = a;\n    printf(\"%d\\n\", *(*(p + 2) + 1) + **(p + 1) + *(a[0] + 3));\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does the following program print?\n\n```c\n#include <stdio.h>\nint main(void) {\n    int a[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};\n    int (*p)[4] = a;\n    printf(\"%d\\n\", *(*(p + 2) + 1) + **(p + 1) + *(a[0] + 3));\n    return 0;\n}\n```",
     "answer": {
       "min": 19,
       "max": 19
     },
-    "explanation": "\\u00A7p\\u00A7 is a pointer to a row of 4 ints, so \\u00A7p + i\\u00A7 moves by whole rows.\n\n- \\u00A7*(*(p + 2) + 1)\\u00A7 is \\u00A7a[2][1] = 10\\u00A7.\n- \\u00A7**(p + 1)\\u00A7 is \\u00A7a[1][0] = 5\\u00A7.\n- \\u00A7*(a[0] + 3)\\u00A7 is \\u00A7a[0][3] = 4\\u00A7.\n\nSum: \\u00A710 + 5 + 4 = 19\\u00A7."
+    "explanation": "`p` is a pointer to a row of 4 ints, so `p + i` moves by whole rows.\n\n- `*(*(p + 2) + 1)` is `a[2][1] = 10`.\n- `**(p + 1)` is `a[1][0] = 5`.\n- `*(a[0] + 3)` is `a[0][3] = 4`.\n\nSum: `10 + 5 + 4 = 19`."
   },
   {
     "id": "pds-009",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 1,
-    "q": "Assume \\u00A7int\\u00A7 is 4 bytes and pointers are 8 bytes. What does the program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nvoid g(int b[]) {\n    printf(\"%zu\\n\", sizeof(b));\n}\nint main(void) {\n    int a[10];\n    printf(\"%zu \", sizeof(a) / sizeof(a[0]));\n    g(a);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "Assume `int` is 4 bytes and pointers are 8 bytes. What does the program print?\n\n```c\n#include <stdio.h>\nvoid g(int b[]) {\n    printf(\"%zu\\n\", sizeof(b));\n}\nint main(void) {\n    int a[10];\n    printf(\"%zu \", sizeof(a) / sizeof(a[0]));\n    g(a);\n    return 0;\n}\n```",
     "options": [
       "10 40",
       "40 8",
@@ -123,7 +123,7 @@
       "10 8"
     ],
     "answer": 3,
-    "explanation": "Inside \\u00A7main\\u00A7, \\u00A7a\\u00A7 is a real array: \\u00A7sizeof(a) = 40\\u00A7 and \\u00A7sizeof(a[0]) = 4\\u00A7, giving 10.\n\nA parameter declared as \\u00A7int b[]\\u00A7 is adjusted to \\u00A7int *b\\u00A7. So inside \\u00A7g\\u00A7, \\u00A7sizeof(b)\\u00A7 is the size of a pointer, 8.\n\nOutput: \\u00A710 8\\u00A7."
+    "explanation": "Inside `main`, `a` is a real array: `sizeof(a) = 40` and `sizeof(a[0]) = 4`, giving 10.\n\nA parameter declared as `int b[]` is adjusted to `int *b`. So inside `g`, `sizeof(b)` is the size of a pointer, 8.\n\nOutput: `10 8`."
   },
   {
     "id": "pds-010",
@@ -142,14 +142,14 @@
       1,
       2
     ],
-    "explanation": "Read declarations from the name outward, with \\u00A7[]\\u00A7 and \\u00A7()\\u00A7 binding tighter than \\u00A7*\\u00A7.\n\n- \\u00A7int *p[5]\\u00A7: \\u00A7p[5]\\u00A7 first, so an array of 5, each element \\u00A7int *\\u00A7. Correct.\n- \\u00A7int (*p)[5]\\u00A7: parentheses make \\u00A7p\\u00A7 a pointer first, to an array of 5 ints. Correct.\n- \\u00A7int *f(int)\\u00A7: \\u00A7f(int)\\u00A7 first, a function returning \\u00A7int *\\u00A7. Correct.\n- \\u00A7int (*f)(int)\\u00A7: \\u00A7f\\u00A7 is a pointer to a function taking int and returning int. The description is wrong."
+    "explanation": "Read declarations from the name outward, with `[]` and `()` binding tighter than `*`.\n\n- `int *p[5]`: `p[5]` first, so an array of 5, each element `int *`. Correct.\n- `int (*p)[5]`: parentheses make `p` a pointer first, to an array of 5 ints. Correct.\n- `int *f(int)`: `f(int)` first, a function returning `int *`. Correct.\n- `int (*f)(int)`: `f` is a pointer to a function taking int and returning int. The description is wrong."
   },
   {
     "id": "pds-011",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 2,
-    "q": "What does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint x = 10;\nint f(int y) {\n    x = x + y;\n    return x;\n}\nint main(void) {\n    int x = 3;\n    int r = f(x);\n    {\n        int x = 7;\n        r = r + f(x);\n    }\n    printf(\"%d\\n\", r + x);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\nint x = 10;\nint f(int y) {\n    x = x + y;\n    return x;\n}\nint main(void) {\n    int x = 3;\n    int r = f(x);\n    {\n        int x = 7;\n        r = r + f(x);\n    }\n    printf(\"%d\\n\", r + x);\n    return 0;\n}\n```",
     "options": [
       "43",
       "36",
@@ -157,14 +157,14 @@
       "33"
     ],
     "answer": 1,
-    "explanation": "Inside \\u00A7f\\u00A7 the name \\u00A7x\\u00A7 refers to the global. Inside \\u00A7main\\u00A7 the local \\u00A7x\\u00A7 hides the global.\n\n- \\u00A7f(3)\\u00A7: global \\u00A7x = 10 + 3 = 13\\u00A7, returns 13. \\u00A7r = 13\\u00A7.\n- In the inner block, local \\u00A7x = 7\\u00A7; \\u00A7f(7)\\u00A7: global \\u00A7x = 13 + 7 = 20\\u00A7, returns 20. \\u00A7r = 33\\u00A7.\n- After the block, \\u00A7x\\u00A7 in \\u00A7main\\u00A7 is the outer local, 3.\n\nOutput: \\u00A733 + 3 = 36\\u00A7."
+    "explanation": "Inside `f` the name `x` refers to the global. Inside `main` the local `x` hides the global.\n\n- `f(3)`: global `x = 10 + 3 = 13`, returns 13. `r = 13`.\n- In the inner block, local `x = 7`; `f(7)`: global `x = 13 + 7 = 20`, returns 20. `r = 33`.\n- After the block, `x` in `main` is the outer local, 3.\n\nOutput: `33 + 3 = 36`."
   },
   {
     "id": "pds-012",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 2,
-    "q": "What does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint main(void) {\n    int s = 0;\n    for (int i = 1; i <= 4; i++) {\n        switch (i % 3) {\n            case 0: s += 1;\n            case 1: s += 10; break;\n            case 2: s += 100;\n            default: s += 1000;\n        }\n    }\n    printf(\"%d\\n\", s);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\nint main(void) {\n    int s = 0;\n    for (int i = 1; i <= 4; i++) {\n        switch (i % 3) {\n            case 0: s += 1;\n            case 1: s += 10; break;\n            case 2: s += 100;\n            default: s += 1000;\n        }\n    }\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```",
     "options": [
       "1131",
       "121",
@@ -172,14 +172,14 @@
       "2131"
     ],
     "answer": 0,
-    "explanation": "Without \\u00A7break\\u00A7, control falls through to the next case.\n\n- \\u00A7i = 1\\u00A7 (case 1): \\u00A7+10\\u00A7, break. \\u00A7s = 10\\u00A7.\n- \\u00A7i = 2\\u00A7 (case 2): \\u00A7+100\\u00A7, falls into default \\u00A7+1000\\u00A7. \\u00A7s = 1110\\u00A7.\n- \\u00A7i = 3\\u00A7 (case 0): \\u00A7+1\\u00A7, falls into case 1 \\u00A7+10\\u00A7, break. \\u00A7s = 1121\\u00A7.\n- \\u00A7i = 4\\u00A7 (case 1): \\u00A7+10\\u00A7. \\u00A7s = 1131\\u00A7."
+    "explanation": "Without `break`, control falls through to the next case.\n\n- `i = 1` (case 1): `+10`, break. `s = 10`.\n- `i = 2` (case 2): `+100`, falls into default `+1000`. `s = 1110`.\n- `i = 3` (case 0): `+1`, falls into case 1 `+10`, break. `s = 1121`.\n- `i = 4` (case 1): `+10`. `s = 1131`."
   },
   {
     "id": "pds-013",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 1,
-    "q": "What does this code print? (Assume 32-bit \\u00A7int\\u00A7.)\n\n\\u00A7\\u00A7\\u00A7c\nunsigned int u = 1;\nint i = -1;\nif (i < u) printf(\"less\\n\");\nelse printf(\"greater\\n\");\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does this code print? (Assume 32-bit `int`.)\n\n```c\nunsigned int u = 1;\nint i = -1;\nif (i < u) printf(\"less\\n\");\nelse printf(\"greater\\n\");\n```",
     "options": [
       "less",
       "Compilation error",
@@ -187,14 +187,14 @@
       "greater"
     ],
     "answer": 3,
-    "explanation": "When an \\u00A7int\\u00A7 and an \\u00A7unsigned int\\u00A7 meet in a comparison, the \\u00A7int\\u00A7 is converted to \\u00A7unsigned int\\u00A7. -1 becomes $2^{32} - 1 = 4294967295$, which is larger than 1. The condition is false, so the program prints \"greater\"."
+    "explanation": "When an `int` and an `unsigned int` meet in a comparison, the `int` is converted to `unsigned int`. -1 becomes $2^{32} - 1 = 4294967295$, which is larger than 1. The condition is false, so the program prints \"greater\"."
   },
   {
     "id": "pds-014",
     "topic": "c-programming",
     "type": "mcq",
     "marks": 2,
-    "q": "What does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\n#define SQ(x) x * x\nint main(void) {\n    printf(\"%d %d\\n\", SQ(2 + 3), 100 / SQ(5));\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#define SQ(x) x * x\nint main(void) {\n    printf(\"%d %d\\n\", SQ(2 + 3), 100 / SQ(5));\n    return 0;\n}\n```",
     "options": [
       "25 100",
       "11 4",
@@ -202,14 +202,14 @@
       "25 4"
     ],
     "answer": 2,
-    "explanation": "Macros substitute text, not values.\n\n- \\u00A7SQ(2 + 3)\\u00A7 becomes \\u00A72 + 3 * 2 + 3 = 2 + 6 + 3 = 11\\u00A7.\n- \\u00A7100 / SQ(5)\\u00A7 becomes \\u00A7100 / 5 * 5\\u00A7, evaluated left to right: \\u00A720 * 5 = 100\\u00A7.\n\nThe safe definition is \\u00A7#define SQ(x) ((x) * (x))\\u00A7."
+    "explanation": "Macros substitute text, not values.\n\n- `SQ(2 + 3)` becomes `2 + 3 * 2 + 3 = 2 + 6 + 3 = 11`.\n- `100 / SQ(5)` becomes `100 / 5 * 5`, evaluated left to right: `20 * 5 = 100`.\n\nThe safe definition is `#define SQ(x) ((x) * (x))`."
   },
   {
     "id": "pds-015",
     "topic": "recursion",
     "type": "mcq",
     "marks": 1,
-    "q": "Consider the function below. What is \\u00A7f(5)\\u00A7?\n\n\\u00A7\\u00A7\\u00A7c\nint f(int n) {\n    if (n <= 1) return 1;\n    return f(n - 1) + 2 * f(n - 2);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "Consider the function below. What is `f(5)`?\n\n```c\nint f(int n) {\n    if (n <= 1) return 1;\n    return f(n - 1) + 2 * f(n - 2);\n}\n```",
     "options": [
       "15",
       "21",
@@ -224,7 +224,7 @@
     "topic": "recursion",
     "type": "mcq",
     "marks": 2,
-    "q": "What does the call \\u00A7p(13)\\u00A7 print?\n\n\\u00A7\\u00A7\\u00A7c\nvoid p(int n) {\n    if (n > 0) {\n        p(n / 2);\n        printf(\"%d\", n % 2);\n    }\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the call `p(13)` print?\n\n```c\nvoid p(int n) {\n    if (n > 0) {\n        p(n / 2);\n        printf(\"%d\", n % 2);\n    }\n}\n```",
     "options": [
       "1101",
       "1011",
@@ -232,38 +232,38 @@
       "11010"
     ],
     "answer": 0,
-    "explanation": "The recursive call happens before the print, so the deepest call prints first.\n\nCalls: \\u00A7p(13)\\u00A7, \\u00A7p(6)\\u00A7, \\u00A7p(3)\\u00A7, \\u00A7p(1)\\u00A7, \\u00A7p(0)\\u00A7. On the way back the prints are \\u00A71 % 2 = 1\\u00A7, \\u00A73 % 2 = 1\\u00A7, \\u00A76 % 2 = 0\\u00A7, \\u00A713 % 2 = 1\\u00A7.\n\nOutput: 1101, the binary form of 13."
+    "explanation": "The recursive call happens before the print, so the deepest call prints first.\n\nCalls: `p(13)`, `p(6)`, `p(3)`, `p(1)`, `p(0)`. On the way back the prints are `1 % 2 = 1`, `3 % 2 = 1`, `6 % 2 = 0`, `13 % 2 = 1`.\n\nOutput: 1101, the binary form of 13."
   },
   {
     "id": "pds-017",
     "topic": "recursion",
     "type": "nat",
     "marks": 2,
-    "q": "What value does \\u00A7g(3)\\u00A7 return?\n\n\\u00A7\\u00A7\\u00A7c\nint g(int n) {\n    static int c = 0;\n    int t;\n    if (n == 0) return c;\n    c += n;\n    t = g(n - 1);\n    return t + c;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does `g(3)` return?\n\n```c\nint g(int n) {\n    static int c = 0;\n    int t;\n    if (n == 0) return c;\n    c += n;\n    t = g(n - 1);\n    return t + c;\n}\n```",
     "answer": {
       "min": 24,
       "max": 24
     },
-    "explanation": "There is only one \\u00A7c\\u00A7, shared by every activation.\n\nGoing down: \\u00A7g(3)\\u00A7 sets \\u00A7c = 3\\u00A7, \\u00A7g(2)\\u00A7 sets \\u00A7c = 5\\u00A7, \\u00A7g(1)\\u00A7 sets \\u00A7c = 6\\u00A7, \\u00A7g(0)\\u00A7 returns 6.\n\nComing back, \\u00A7c\\u00A7 stays 6 the whole time:\n\n- \\u00A7g(1) = 6 + 6 = 12\\u00A7\n- \\u00A7g(2) = 12 + 6 = 18\\u00A7\n- \\u00A7g(3) = 18 + 6 = 24\\u00A7"
+    "explanation": "There is only one `c`, shared by every activation.\n\nGoing down: `g(3)` sets `c = 3`, `g(2)` sets `c = 5`, `g(1)` sets `c = 6`, `g(0)` returns 6.\n\nComing back, `c` stays 6 the whole time:\n\n- `g(1) = 6 + 6 = 12`\n- `g(2) = 12 + 6 = 18`\n- `g(3) = 18 + 6 = 24`"
   },
   {
     "id": "pds-018",
     "topic": "recursion",
     "type": "nat",
     "marks": 2,
-    "q": "How many times is \\u00A7fib\\u00A7 called in total (including the first call) when \\u00A7main\\u00A7 runs?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint cnt = 0;\nint fib(int n) {\n    cnt++;\n    if (n < 2) return n;\n    return fib(n - 1) + fib(n - 2);\n}\nint main(void) {\n    fib(5);\n    printf(\"%d\\n\", cnt);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "How many times is `fib` called in total (including the first call) when `main` runs?\n\n```c\n#include <stdio.h>\nint cnt = 0;\nint fib(int n) {\n    cnt++;\n    if (n < 2) return n;\n    return fib(n - 1) + fib(n - 2);\n}\nint main(void) {\n    fib(5);\n    printf(\"%d\\n\", cnt);\n    return 0;\n}\n```",
     "answer": {
       "min": 15,
       "max": 15
     },
-    "explanation": "Let $C(n)$ be the number of calls made by \\u00A7fib(n)\\u00A7. Then $C(0) = C(1) = 1$ and $C(n) = 1 + C(n-1) + C(n-2)$.\n\n- $C(2) = 1 + 1 + 1 = 3$\n- $C(3) = 1 + 3 + 1 = 5$\n- $C(4) = 1 + 5 + 3 = 9$\n- $C(5) = 1 + 9 + 5 = 15$"
+    "explanation": "Let $C(n)$ be the number of calls made by `fib(n)`. Then $C(0) = C(1) = 1$ and $C(n) = 1 + C(n-1) + C(n-2)$.\n\n- $C(2) = 1 + 1 + 1 = 3$\n- $C(3) = 1 + 3 + 1 = 5$\n- $C(4) = 1 + 5 + 3 = 9$\n- $C(5) = 1 + 9 + 5 = 15$"
   },
   {
     "id": "pds-019",
     "topic": "recursion",
     "type": "mcq",
     "marks": 1,
-    "q": "What does \\u00A7h(84, 36)\\u00A7 return?\n\n\\u00A7\\u00A7\\u00A7c\nint h(int a, int b) {\n    if (b == 0) return a;\n    return h(b, a % b);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does `h(84, 36)` return?\n\n```c\nint h(int a, int b) {\n    if (b == 0) return a;\n    return h(b, a % b);\n}\n```",
     "options": [
       "36",
       "12",
@@ -271,26 +271,26 @@
       "4"
     ],
     "answer": 1,
-    "explanation": "This is Euclid's algorithm for the greatest common divisor.\n\n\\u00A7h(84, 36)\\u00A7 calls \\u00A7h(36, 12)\\u00A7, which calls \\u00A7h(12, 0)\\u00A7, which returns 12."
+    "explanation": "This is Euclid's algorithm for the greatest common divisor.\n\n`h(84, 36)` calls `h(36, 12)`, which calls `h(12, 0)`, which returns 12."
   },
   {
     "id": "pds-020",
     "topic": "recursion",
     "type": "nat",
     "marks": 2,
-    "q": "What value does \\u00A7A(4)\\u00A7 return?\n\n\\u00A7\\u00A7\\u00A7c\nint B(int n);\nint A(int n) {\n    if (n <= 0) return 1;\n    return n + B(n - 1);\n}\nint B(int n) {\n    if (n <= 0) return 2;\n    return n * A(n - 1);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does `A(4)` return?\n\n```c\nint B(int n);\nint A(int n) {\n    if (n <= 0) return 1;\n    return n + B(n - 1);\n}\nint B(int n) {\n    if (n <= 0) return 2;\n    return n * A(n - 1);\n}\n```",
     "answer": {
       "min": 13,
       "max": 13
     },
-    "explanation": "Expand the mutual recursion:\n\n- \\u00A7A(4) = 4 + B(3)\\u00A7\n- \\u00A7B(3) = 3 * A(2)\\u00A7\n- \\u00A7A(2) = 2 + B(1)\\u00A7\n- \\u00A7B(1) = 1 * A(0) = 1 * 1 = 1\\u00A7\n\nSo \\u00A7A(2) = 3\\u00A7, \\u00A7B(3) = 9\\u00A7, \\u00A7A(4) = 13\\u00A7."
+    "explanation": "Expand the mutual recursion:\n\n- `A(4) = 4 + B(3)`\n- `B(3) = 3 * A(2)`\n- `A(2) = 2 + B(1)`\n- `B(1) = 1 * A(0) = 1 * 1 = 1`\n\nSo `A(2) = 3`, `B(3) = 9`, `A(4) = 13`."
   },
   {
     "id": "pds-021",
     "topic": "recursion",
     "type": "mcq",
     "marks": 1,
-    "q": "What is the time complexity of the following function in terms of \\u00A7n\\u00A7?\n\n\\u00A7\\u00A7\\u00A7c\nint f(int n) {\n    if (n <= 1) return 1;\n    return f(n / 2) + f(n / 2);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What is the time complexity of the following function in terms of `n`?\n\n```c\nint f(int n) {\n    if (n <= 1) return 1;\n    return f(n / 2) + f(n / 2);\n}\n```",
     "options": [
       "$\\Theta(\\log n)$",
       "$\\Theta(n \\log n)$",
@@ -298,14 +298,14 @@
       "$\\Theta(n)$"
     ],
     "answer": 3,
-    "explanation": "Both calls are made, so $T(n) = 2T(n/2) + c$. With $a = 2, b = 2$, the term $n^{\\log_2 2} = n$ dominates the constant work, so $T(n) = \\Theta(n)$. Writing \\u00A7return 2 * f(n / 2);\\u00A7 instead would make it $\\Theta(\\log n)$."
+    "explanation": "Both calls are made, so $T(n) = 2T(n/2) + c$. With $a = 2, b = 2$, the term $n^{\\log_2 2} = n$ dominates the constant work, so $T(n) = \\Theta(n)$. Writing `return 2 * f(n / 2);` instead would make it $\\Theta(\\log n)$."
   },
   {
     "id": "pds-022",
     "topic": "recursion",
     "type": "msq",
     "marks": 2,
-    "q": "Consider the function below. Which statements are true?\n\n\\u00A7\\u00A7\\u00A7c\nint f(int n) {\n    if (n == 0) return 0;\n    return n % 10 + f(n / 10);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "Consider the function below. Which statements are true?\n\n```c\nint f(int n) {\n    if (n == 0) return 0;\n    return n % 10 + f(n / 10);\n}\n```",
     "options": [
       "`f(4096)` returns 19",
       "The call `f(4096)` results in 5 calls of `f` in total",
@@ -317,14 +317,14 @@
       1,
       3
     ],
-    "explanation": "\\u00A7f\\u00A7 returns the sum of decimal digits.\n\n- $4 + 0 + 9 + 6 = 19$. True.\n- Calls: \\u00A7f(4096)\\u00A7, \\u00A7f(409)\\u00A7, \\u00A7f(40)\\u00A7, \\u00A7f(4)\\u00A7, \\u00A7f(0)\\u00A7, which is 5. True.\n- The addition happens after the recursive call returns, so it is not tail recursive. False.\n- Each call strips one digit, so a $d$-digit number gives $d + 1$ frames. True."
+    "explanation": "`f` returns the sum of decimal digits.\n\n- $4 + 0 + 9 + 6 = 19$. True.\n- Calls: `f(4096)`, `f(409)`, `f(40)`, `f(4)`, `f(0)`, which is 5. True.\n- The addition happens after the recursive call returns, so it is not tail recursive. False.\n- Each call strips one digit, so a $d$-digit number gives $d + 1$ frames. True."
   },
   {
     "id": "pds-023",
     "topic": "recursion",
     "type": "mcq",
     "marks": 2,
-    "q": "What does \\u00A7r(5)\\u00A7 print?\n\n\\u00A7\\u00A7\\u00A7c\nvoid r(int n) {\n    if (n <= 0) return;\n    printf(\"%d\", n);\n    r(n - 2);\n    printf(\"%d\", n);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does `r(5)` print?\n\n```c\nvoid r(int n) {\n    if (n <= 0) return;\n    printf(\"%d\", n);\n    r(n - 2);\n    printf(\"%d\", n);\n}\n```",
     "options": [
       "5311",
       "531135",
@@ -332,26 +332,26 @@
       "135531"
     ],
     "answer": 1,
-    "explanation": "Each active call prints \\u00A7n\\u00A7 once before recursing and once after.\n\n\\u00A7r(5)\\u00A7 prints 5 and calls \\u00A7r(3)\\u00A7, which prints 3 and calls \\u00A7r(1)\\u00A7, which prints 1 and calls \\u00A7r(-1)\\u00A7, which returns at once. Then \\u00A7r(1)\\u00A7 prints 1, \\u00A7r(3)\\u00A7 prints 3, \\u00A7r(5)\\u00A7 prints 5.\n\nOutput: 531135."
+    "explanation": "Each active call prints `n` once before recursing and once after.\n\n`r(5)` prints 5 and calls `r(3)`, which prints 3 and calls `r(1)`, which prints 1 and calls `r(-1)`, which returns at once. Then `r(1)` prints 1, `r(3)` prints 3, `r(5)` prints 5.\n\nOutput: 531135."
   },
   {
     "id": "pds-024",
     "topic": "arrays-stacks-queues",
     "type": "nat",
     "marks": 1,
-    "q": "Evaluate the postfix expression below using a stack. All operators are binary and \\u00A7/\\u00A7 is integer division.\n\n\\u00A78 3 2 * - 4 2 / 5 * +\\u00A7",
+    "q": "Evaluate the postfix expression below using a stack. All operators are binary and `/` is integer division.\n\n`8 3 2 * - 4 2 / 5 * +`",
     "answer": {
       "min": 12,
       "max": 12
     },
-    "explanation": "Scan left to right; push operands, and on an operator pop the right operand first, then the left.\n\n- \\u00A73 2 *\\u00A7 gives 6; \\u00A78 6 -\\u00A7 gives 2. Stack: 2.\n- \\u00A74 2 /\\u00A7 gives 2; \\u00A72 5 *\\u00A7 gives 10. Stack: 2, 10.\n- \\u00A7+\\u00A7 gives 12."
+    "explanation": "Scan left to right; push operands, and on an operator pop the right operand first, then the left.\n\n- `3 2 *` gives 6; `8 6 -` gives 2. Stack: 2.\n- `4 2 /` gives 2; `2 5 *` gives 10. Stack: 2, 10.\n- `+` gives 12."
   },
   {
     "id": "pds-025",
     "topic": "arrays-stacks-queues",
     "type": "mcq",
     "marks": 2,
-    "q": "Convert the infix expression \\u00A7a + b * (c - d) / e ^ f ^ g\\u00A7 to postfix. \\u00A7^\\u00A7 has the highest precedence and is right associative; \\u00A7*\\u00A7 and \\u00A7/\\u00A7 are next and left associative; \\u00A7+\\u00A7 and \\u00A7-\\u00A7 are lowest and left associative.",
+    "q": "Convert the infix expression `a + b * (c - d) / e ^ f ^ g` to postfix. `^` has the highest precedence and is right associative; `*` and `/` are next and left associative; `+` and `-` are lowest and left associative.",
     "options": [
       "`a b c d - * e f ^ g ^ / +`",
       "`a b c d - e f g ^ ^ / * +`",
@@ -359,14 +359,14 @@
       "`a b c d - * e f g ^ ^ / +`"
     ],
     "answer": 3,
-    "explanation": "Parenthesise fully: \\u00A7^\\u00A7 is right associative, so \\u00A7e ^ f ^ g = e ^ (f ^ g)\\u00A7, postfix \\u00A7e f g ^ ^\\u00A7. \\u00A7*\\u00A7 and \\u00A7/\\u00A7 are left associative: \\u00A7(b * (c - d)) / (e ^ (f ^ g))\\u00A7, postfix \\u00A7b c d - * e f g ^ ^ /\\u00A7. Finally \\u00A7a + (...)\\u00A7 gives \\u00A7a b c d - * e f g ^ ^ / +\\u00A7.\n\nThe choice with \\u00A7e f ^ g ^\\u00A7 treats \\u00A7^\\u00A7 as left associative. The choice ending \\u00A7/ * +\\u00A7 groups \\u00A7b * ((c - d) / ...)\\u00A7, which breaks left associativity. The choice with \\u00A7+\\u00A7 before \\u00A7e f g\\u00A7 adds before dividing."
+    "explanation": "Parenthesise fully: `^` is right associative, so `e ^ f ^ g = e ^ (f ^ g)`, postfix `e f g ^ ^`. `*` and `/` are left associative: `(b * (c - d)) / (e ^ (f ^ g))`, postfix `b c d - * e f g ^ ^ /`. Finally `a + (...)` gives `a b c d - * e f g ^ ^ / +`.\n\nThe choice with `e f ^ g ^` treats `^` as left associative. The choice ending `/ * +` groups `b * ((c - d) / ...)`, which breaks left associativity. The choice with `+` before `e f g` adds before dividing."
   },
   {
     "id": "pds-026",
     "topic": "arrays-stacks-queues",
     "type": "mcq",
     "marks": 2,
-    "q": "The infix expression \\u00A7a + b * (c - d) / e ^ f ^ g\\u00A7 is converted to postfix with the standard operator-stack algorithm (\\u00A7^\\u00A7 right associative and highest, then \\u00A7*\\u00A7 \\u00A7/\\u00A7, then \\u00A7+\\u00A7 \\u00A7-\\u00A7). Left parentheses are pushed on the stack. What is the maximum number of symbols on the stack at any time?",
+    "q": "The infix expression `a + b * (c - d) / e ^ f ^ g` is converted to postfix with the standard operator-stack algorithm (`^` right associative and highest, then `*` `/`, then `+` `-`). Left parentheses are pushed on the stack. What is the maximum number of symbols on the stack at any time?",
     "options": [
       "5",
       "2",
@@ -374,14 +374,14 @@
       "3"
     ],
     "answer": 2,
-    "explanation": "Track the operator stack (bottom on the left):\n\n- \\u00A7+\\u00A7, then \\u00A7*\\u00A7: \\u00A7[+, *]\\u00A7.\n- \\u00A7(\\u00A7 and \\u00A7-\\u00A7: \\u00A7[+, *, (, -]\\u00A7, size 4.\n- \\u00A7)\\u00A7 pops \\u00A7-\\u00A7 and \\u00A7(\\u00A7: \\u00A7[+, *]\\u00A7.\n- \\u00A7/\\u00A7 pops \\u00A7*\\u00A7 (equal precedence, left associative), pushes \\u00A7/\\u00A7: \\u00A7[+, /]\\u00A7.\n- \\u00A7^\\u00A7: \\u00A7[+, /, ^]\\u00A7. Second \\u00A7^\\u00A7 does not pop the first (right associative): \\u00A7[+, /, ^, ^]\\u00A7, size 4.\n\nMaximum is 4."
+    "explanation": "Track the operator stack (bottom on the left):\n\n- `+`, then `*`: `[+, *]`.\n- `(` and `-`: `[+, *, (, -]`, size 4.\n- `)` pops `-` and `(`: `[+, *]`.\n- `/` pops `*` (equal precedence, left associative), pushes `/`: `[+, /]`.\n- `^`: `[+, /, ^]`. Second `^` does not pop the first (right associative): `[+, /, ^, ^]`, size 4.\n\nMaximum is 4."
   },
   {
     "id": "pds-027",
     "topic": "arrays-stacks-queues",
     "type": "mcq",
     "marks": 1,
-    "q": "A circular queue is stored in an array of size \\u00A7n\\u00A7. \\u00A7front\\u00A7 is the index of the first element and \\u00A7rear\\u00A7 is the index where the next element will be inserted. One slot is always kept empty so that a full queue can be told apart from an empty one. Which condition means the queue is full?",
+    "q": "A circular queue is stored in an array of size `n`. `front` is the index of the first element and `rear` is the index where the next element will be inserted. One slot is always kept empty so that a full queue can be told apart from an empty one. Which condition means the queue is full?",
     "options": [
       "`rear == n - 1`",
       "`(rear + 1) % n == front`",
@@ -389,7 +389,7 @@
       "`(front + 1) % n == rear`"
     ],
     "answer": 1,
-    "explanation": "With this convention the queue is empty when \\u00A7rear == front\\u00A7. It is full when advancing \\u00A7rear\\u00A7 would make it equal to \\u00A7front\\u00A7, that is \\u00A7(rear + 1) % n == front\\u00A7. The queue then holds \\u00A7n - 1\\u00A7 elements. \\u00A7rear == n - 1\\u00A7 ignores wrap-around."
+    "explanation": "With this convention the queue is empty when `rear == front`. It is full when advancing `rear` would make it equal to `front`, that is `(rear + 1) % n == front`. The queue then holds `n - 1` elements. `rear == n - 1` ignores wrap-around."
   },
   {
     "id": "pds-028",
@@ -404,7 +404,7 @@
       "10"
     ],
     "answer": 0,
-    "explanation": "The number of stack permutations of \\u00A7n\\u00A7 items is the Catalan number $C_n = \\frac{1}{n+1}\\binom{2n}{n}$. For $n = 4$: $\\frac{1}{5}\\binom{8}{4} = \\frac{70}{5} = 14$. Not all $4! = 24$ orders are reachable; for example 3, 1, 2, 4 is impossible, because once 3 is popped, 2 sits above 1 on the stack."
+    "explanation": "The number of stack permutations of `n` items is the Catalan number $C_n = \\frac{1}{n+1}\\binom{2n}{n}$. For $n = 4$: $\\frac{1}{5}\\binom{8}{4} = \\frac{70}{5} = 14$. Not all $4! = 24$ orders are reachable; for example 3, 1, 2, 4 is impossible, because once 3 is popped, 2 sits above 1 on the stack."
   },
   {
     "id": "pds-029",
@@ -429,7 +429,7 @@
     "topic": "arrays-stacks-queues",
     "type": "nat",
     "marks": 2,
-    "q": "A two-dimensional array \\u00A7A[-2..5][3..10]\\u00A7 of 4-byte integers is stored in row-major order starting at address 1000. What is the address of \\u00A7A[3][7]\\u00A7?",
+    "q": "A two-dimensional array `A[-2..5][3..10]` of 4-byte integers is stored in row-major order starting at address 1000. What is the address of `A[3][7]`?",
     "answer": {
       "min": 1176,
       "max": 1176
@@ -441,19 +441,19 @@
     "topic": "arrays-stacks-queues",
     "type": "nat",
     "marks": 2,
-    "q": "What value does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint st[10], top = -1;\nvoid push(int x) { st[++top] = x; }\nint pop(void) { return st[top--]; }\nint main(void) {\n    for (int i = 1; i <= 5; i++) {\n        push(i);\n        if (i % 2 == 0) {\n            int a = pop();\n            int b = pop();\n            push(a * b);\n        }\n    }\n    int s = 0;\n    while (top >= 0) s += pop();\n    printf(\"%d\\n\", s);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does the following program print?\n\n```c\n#include <stdio.h>\nint st[10], top = -1;\nvoid push(int x) { st[++top] = x; }\nint pop(void) { return st[top--]; }\nint main(void) {\n    for (int i = 1; i <= 5; i++) {\n        push(i);\n        if (i % 2 == 0) {\n            int a = pop();\n            int b = pop();\n            push(a * b);\n        }\n    }\n    int s = 0;\n    while (top >= 0) s += pop();\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```",
     "answer": {
       "min": 19,
       "max": 19
     },
-    "explanation": "Track the stack (bottom on the left):\n\n- \\u00A7i = 1\\u00A7: [1]\n- \\u00A7i = 2\\u00A7: push 2, then pop 2 and 1, push 2: [2]\n- \\u00A7i = 3\\u00A7: [2, 3]\n- \\u00A7i = 4\\u00A7: push 4, pop 4 and 3, push 12: [2, 12]\n- \\u00A7i = 5\\u00A7: [2, 12, 5]\n\nSum: $2 + 12 + 5 = 19$."
+    "explanation": "Track the stack (bottom on the left):\n\n- `i = 1`: [1]\n- `i = 2`: push 2, then pop 2 and 1, push 2: [2]\n- `i = 3`: [2, 3]\n- `i = 4`: push 4, pop 4 and 3, push 12: [2, 12]\n- `i = 5`: [2, 12, 5]\n\nSum: $2 + 12 + 5 = 19$."
   },
   {
     "id": "pds-032",
     "topic": "linked-lists",
     "type": "mcq",
     "marks": 2,
-    "q": "What does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\n#include <stdlib.h>\nstruct node { int v; struct node *next; };\nstruct node *push(struct node *h, int v) {\n    struct node *n = malloc(sizeof *n);\n    n->v = v;\n    n->next = h;\n    return n;\n}\nint main(void) {\n    struct node *h = NULL;\n    for (int i = 1; i <= 6; i++) h = push(h, i * i);\n    struct node *p = h;\n    int s = 0;\n    while (p && p->next) {\n        s += p->v - p->next->v;\n        p = p->next->next;\n    }\n    printf(\"%d\\n\", s);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#include <stdlib.h>\nstruct node { int v; struct node *next; };\nstruct node *push(struct node *h, int v) {\n    struct node *n = malloc(sizeof *n);\n    n->v = v;\n    n->next = h;\n    return n;\n}\nint main(void) {\n    struct node *h = NULL;\n    for (int i = 1; i <= 6; i++) h = push(h, i * i);\n    struct node *p = h;\n    int s = 0;\n    while (p && p->next) {\n        s += p->v - p->next->v;\n        p = p->next->next;\n    }\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```",
     "options": [
       "21",
       "35",
@@ -461,14 +461,14 @@
       "11"
     ],
     "answer": 0,
-    "explanation": "\\u00A7push\\u00A7 inserts at the head, so the list is 36, 25, 16, 9, 4, 1.\n\nThe loop takes the nodes in pairs:\n\n- \\u00A736 - 25 = 11\\u00A7\n- \\u00A716 - 9 = 7\\u00A7\n- \\u00A74 - 1 = 3\\u00A7\n\n\\u00A7p\\u00A7 becomes \\u00A7NULL\\u00A7 and the loop stops. Sum: $11 + 7 + 3 = 21$."
+    "explanation": "`push` inserts at the head, so the list is 36, 25, 16, 9, 4, 1.\n\nThe loop takes the nodes in pairs:\n\n- `36 - 25 = 11`\n- `16 - 9 = 7`\n- `4 - 1 = 3`\n\n`p` becomes `NULL` and the loop stops. Sum: $11 + 7 + 3 = 21$."
   },
   {
     "id": "pds-033",
     "topic": "linked-lists",
     "type": "mcq",
     "marks": 1,
-    "q": "What does the function below do to a singly linked list whose head is passed in?\n\n\\u00A7\\u00A7\\u00A7c\nstruct node *f(struct node *h) {\n    struct node *p = NULL, *q;\n    while (h) {\n        q = h->next;\n        h->next = p;\n        p = h;\n        h = q;\n    }\n    return p;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What does the function below do to a singly linked list whose head is passed in?\n\n```c\nstruct node *f(struct node *h) {\n    struct node *p = NULL, *q;\n    while (h) {\n        q = h->next;\n        h->next = p;\n        p = h;\n        h = q;\n    }\n    return p;\n}\n```",
     "options": [
       "Returns the last node without changing the list",
       "Deletes every second node",
@@ -476,14 +476,14 @@
       "Reverses the list and returns the new head"
     ],
     "answer": 3,
-    "explanation": "Each iteration detaches the current node \\u00A7h\\u00A7, points its \\u00A7next\\u00A7 back at the already reversed part \\u00A7p\\u00A7, and moves on. When \\u00A7h\\u00A7 becomes \\u00A7NULL\\u00A7, \\u00A7p\\u00A7 is the old last node, now the head of the reversed list. Time is $\\Theta(n)$ and extra space is $O(1)$."
+    "explanation": "Each iteration detaches the current node `h`, points its `next` back at the already reversed part `p`, and moves on. When `h` becomes `NULL`, `p` is the old last node, now the head of the reversed list. Time is $\\Theta(n)$ and extra space is $O(1)$."
   },
   {
     "id": "pds-034",
     "topic": "linked-lists",
     "type": "mcq",
     "marks": 1,
-    "q": "A singly linked list of \\u00A7n\\u00A7 nodes is accessed only through a head pointer (no tail pointer). Which operation cannot be done in $O(1)$ worst-case time?",
+    "q": "A singly linked list of `n` nodes is accessed only through a head pointer (no tail pointer). Which operation cannot be done in $O(1)$ worst-case time?",
     "options": [
       "Deleting the first node",
       "Reading the value of the first node",
@@ -491,14 +491,14 @@
       "Inserting a node at the front"
     ],
     "answer": 2,
-    "explanation": "To delete the last node you must set the second-to-last node's \\u00A7next\\u00A7 to \\u00A7NULL\\u00A7, and finding that node needs a walk from the head: $\\Theta(n)$. The other three operations touch only the head."
+    "explanation": "To delete the last node you must set the second-to-last node's `next` to `NULL`, and finding that node needs a walk from the head: $\\Theta(n)$. The other three operations touch only the head."
   },
   {
     "id": "pds-035",
     "topic": "linked-lists",
     "type": "msq",
     "marks": 2,
-    "q": "\\u00A7X\\u00A7 points to a node in the middle of a doubly linked list (it has both a previous and a next node). Each node has fields \\u00A7prev\\u00A7 and \\u00A7next\\u00A7. Which of the following code fragments correctly unlink \\u00A7X\\u00A7 from the list?",
+    "q": "`X` points to a node in the middle of a doubly linked list (it has both a previous and a next node). Each node has fields `prev` and `next`. Which of the following code fragments correctly unlink `X` from the list?",
     "options": [
       "`X->prev->next = X->next; X->next->prev = X->prev;`",
       "`X->next->prev = X->prev; X->prev->next = X->next;`",
@@ -509,14 +509,14 @@
       0,
       1
     ],
-    "explanation": "Let \\u00A7P\\u00A7 be the previous node and \\u00A7N\\u00A7 the next node. We need \\u00A7P->next = N\\u00A7 and \\u00A7N->prev = P\\u00A7.\n\n- Fragments 1 and 2 set exactly these two links; the order does not matter because neither statement changes \\u00A7X\\u00A7's own fields.\n- Fragment 3: after the first statement \\u00A7X->prev->next\\u00A7 is \\u00A7N\\u00A7, so the second sets \\u00A7N->prev = N\\u00A7. Wrong.\n- Fragment 4: after the first statement \\u00A7X->next->prev\\u00A7 is \\u00A7P\\u00A7, so the right side is \\u00A7P->next\\u00A7, which is still \\u00A7X\\u00A7. Wrong."
+    "explanation": "Let `P` be the previous node and `N` the next node. We need `P->next = N` and `N->prev = P`.\n\n- Fragments 1 and 2 set exactly these two links; the order does not matter because neither statement changes `X`'s own fields.\n- Fragment 3: after the first statement `X->prev->next` is `N`, so the second sets `N->prev = N`. Wrong.\n- Fragment 4: after the first statement `X->next->prev` is `P`, so the right side is `P->next`, which is still `X`. Wrong."
   },
   {
     "id": "pds-036",
     "topic": "linked-lists",
     "type": "mcq",
     "marks": 1,
-    "q": "A singly linked list holds 1, 2, 3, 4, 5 in that order. What does \\u00A7g(head)\\u00A7 return?\n\n\\u00A7\\u00A7\\u00A7c\nint g(struct node *p) {\n    if (p == NULL) return 0;\n    return p->v - g(p->next);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "A singly linked list holds 1, 2, 3, 4, 5 in that order. What does `g(head)` return?\n\n```c\nint g(struct node *p) {\n    if (p == NULL) return 0;\n    return p->v - g(p->next);\n}\n```",
     "options": [
       "3",
       "-3",
@@ -531,24 +531,24 @@
     "topic": "linked-lists",
     "type": "nat",
     "marks": 1,
-    "q": "A singly linked list has 10 nodes holding 1, 2, ..., 10 in order. What value is in the node that \\u00A7slow\\u00A7 points to when the loop ends?\n\n\\u00A7\\u00A7\\u00A7c\nstruct node *slow = head, *fast = head;\nwhile (fast && fast->next) {\n    slow = slow->next;\n    fast = fast->next->next;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "A singly linked list has 10 nodes holding 1, 2, ..., 10 in order. What value is in the node that `slow` points to when the loop ends?\n\n```c\nstruct node *slow = head, *fast = head;\nwhile (fast && fast->next) {\n    slow = slow->next;\n    fast = fast->next->next;\n}\n```",
     "answer": {
       "min": 6,
       "max": 6
     },
-    "explanation": "After \\u00A7k\\u00A7 iterations, \\u00A7slow\\u00A7 is at node \\u00A7k + 1\\u00A7 and \\u00A7fast\\u00A7 is at node \\u00A72k + 1\\u00A7.\n\n- \\u00A7k = 4\\u00A7: \\u00A7fast\\u00A7 is at node 9, which has a next node, so the loop runs again.\n- \\u00A7k = 5\\u00A7: \\u00A7fast\\u00A7 moves past node 10 to \\u00A7NULL\\u00A7 and the loop stops. \\u00A7slow\\u00A7 is at node 6.\n\nFor an even length this idiom stops at the second of the two middle nodes."
+    "explanation": "After `k` iterations, `slow` is at node `k + 1` and `fast` is at node `2k + 1`.\n\n- `k = 4`: `fast` is at node 9, which has a next node, so the loop runs again.\n- `k = 5`: `fast` moves past node 10 to `NULL` and the loop stops. `slow` is at node 6.\n\nFor an even length this idiom stops at the second of the two middle nodes."
   },
   {
     "id": "pds-038",
     "topic": "linked-lists",
     "type": "nat",
     "marks": 2,
-    "q": "A circular singly linked list holds 1, 2, 3, 4, 5, 6, 7, and \\u00A7p\\u00A7 initially points to the node holding 7. What value does the program print?\n\n\\u00A7\\u00A7\\u00A7c\nwhile (p->next != p) {\n    for (int k = 1; k < 3; k++)\n        p = p->next;\n    struct node *d = p->next;\n    p->next = d->next;\n    free(d);\n}\nprintf(\"%d\\n\", p->v);\n\\u00A7\\u00A7\\u00A7",
+    "q": "A circular singly linked list holds 1, 2, 3, 4, 5, 6, 7, and `p` initially points to the node holding 7. What value does the program print?\n\n```c\nwhile (p->next != p) {\n    for (int k = 1; k < 3; k++)\n        p = p->next;\n    struct node *d = p->next;\n    p->next = d->next;\n    free(d);\n}\nprintf(\"%d\\n\", p->v);\n```",
     "answer": {
       "min": 4,
       "max": 4
     },
-    "explanation": "Each round moves \\u00A7p\\u00A7 forward twice and deletes the node after it, so every third node is removed (the Josephus problem with step 3).\n\nTrace (p moves two steps, then the next node is deleted):\n\n- p at 7, moves to 2, deletes 3.\n- p moves to 5, deletes 6.\n- p moves to 1, deletes 2.\n- p moves to 5, deletes 7.\n- p moves to 4, deletes 5.\n- p moves to 4 (around the two-node loop), deletes 1.\n\nOnly 4 is left.\n\nCheck with the Josephus recurrence $J(1) = 0$, $J(n) = (J(n-1) + 3) \\bmod n$: values 0, 1, 1, 0, 3, 0, 3 for $n = 1..7$; the survivor is position $3 + 1 = 4$."
+    "explanation": "Each round moves `p` forward twice and deletes the node after it, so every third node is removed (the Josephus problem with step 3).\n\nTrace (p moves two steps, then the next node is deleted):\n\n- p at 7, moves to 2, deletes 3.\n- p moves to 5, deletes 6.\n- p moves to 1, deletes 2.\n- p moves to 5, deletes 7.\n- p moves to 4, deletes 5.\n- p moves to 4 (around the two-node loop), deletes 1.\n\nOnly 4 is left.\n\nCheck with the Josephus recurrence $J(1) = 0$, $J(n) = (J(n-1) + 3) \\bmod n$: values 0, 1, 1, 0, 3, 0, 3 for $n = 1..7$; the survivor is position $3 + 1 = 4$."
   },
   {
     "id": "pds-039",
@@ -589,7 +589,7 @@
     "topic": "trees-bst",
     "type": "mcq",
     "marks": 2,
-    "q": "A binary tree has preorder traversal \\u00A7A B D E H C F G I\\u00A7 and inorder traversal \\u00A7D B H E A F C I G\\u00A7. What is its postorder traversal?",
+    "q": "A binary tree has preorder traversal `A B D E H C F G I` and inorder traversal `D B H E A F C I G`. What is its postorder traversal?",
     "options": [
       "D E H B F G I C A",
       "H D E B I F G C A",
@@ -597,7 +597,7 @@
       "D H E B F I G C A"
     ],
     "answer": 3,
-    "explanation": "The first preorder symbol is the root; split the inorder sequence around it.\n\n- Root \\u00A7A\\u00A7. Inorder left: \\u00A7D B H E\\u00A7; right: \\u00A7F C I G\\u00A7.\n- Left subtree, preorder \\u00A7B D E H\\u00A7: root \\u00A7B\\u00A7, left \\u00A7D\\u00A7, right part \\u00A7H E\\u00A7 with preorder \\u00A7E H\\u00A7, so \\u00A7E\\u00A7 has left child \\u00A7H\\u00A7.\n- Right subtree, preorder \\u00A7C F G I\\u00A7: root \\u00A7C\\u00A7, left \\u00A7F\\u00A7, right part \\u00A7I G\\u00A7 with preorder \\u00A7G I\\u00A7, so \\u00A7G\\u00A7 has left child \\u00A7I\\u00A7.\n\nPostorder: left subtree \\u00A7D H E B\\u00A7, right subtree \\u00A7F I G C\\u00A7, then \\u00A7A\\u00A7."
+    "explanation": "The first preorder symbol is the root; split the inorder sequence around it.\n\n- Root `A`. Inorder left: `D B H E`; right: `F C I G`.\n- Left subtree, preorder `B D E H`: root `B`, left `D`, right part `H E` with preorder `E H`, so `E` has left child `H`.\n- Right subtree, preorder `C F G I`: root `C`, left `F`, right part `I G` with preorder `G I`, so `G` has left child `I`.\n\nPostorder: left subtree `D H E B`, right subtree `F I G C`, then `A`."
   },
   {
     "id": "pds-042",
@@ -616,7 +616,7 @@
     "topic": "trees-bst",
     "type": "mcq",
     "marks": 2,
-    "q": "The postorder traversal of a binary search tree with distinct keys is \\u00A75 12 9 18 15 30 26 20\\u00A7. What is its preorder traversal?",
+    "q": "The postorder traversal of a binary search tree with distinct keys is `5 12 9 18 15 30 26 20`. What is its preorder traversal?",
     "options": [
       "20 15 18 9 5 12 26 30",
       "20 15 9 5 12 18 26 30",
@@ -624,7 +624,7 @@
       "20 9 5 12 15 18 26 30"
     ],
     "answer": 1,
-    "explanation": "The last postorder key is the root: 20. Keys below 20 (\\u00A75 12 9 18 15\\u00A7) form the left subtree, keys above (\\u00A730 26\\u00A7) the right.\n\n- Left subtree: root 15; smaller keys \\u00A75 12 9\\u00A7 form its left part with root 9 (children 5 and 12); 18 is its right child.\n- Right subtree: root 26 with right child 30.\n\nPreorder: \\u00A720, 15, 9, 5, 12, 18, 26, 30\\u00A7."
+    "explanation": "The last postorder key is the root: 20. Keys below 20 (`5 12 9 18 15`) form the left subtree, keys above (`30 26`) the right.\n\n- Left subtree: root 15; smaller keys `5 12 9` form its left part with root 9 (children 5 and 12); 18 is its right child.\n- Right subtree: root 26 with right child 30.\n\nPreorder: `20, 15, 9, 5, 12, 18, 26, 30`."
   },
   {
     "id": "pds-044",
@@ -658,19 +658,19 @@
       1,
       3
     ],
-    "explanation": "Inorder tells you, for a known root, which keys are on the left and which on the right. Preorder, postorder and level order each tell you the root of every subtree, so pairing any of them with inorder rebuilds the tree.\n\nPreorder and postorder alone fail when a node has one child: a root \\u00A7A\\u00A7 with only a left child \\u00A7B\\u00A7 and a root \\u00A7A\\u00A7 with only a right child \\u00A7B\\u00A7 both give preorder \\u00A7A B\\u00A7 and postorder \\u00A7B A\\u00A7."
+    "explanation": "Inorder tells you, for a known root, which keys are on the left and which on the right. Preorder, postorder and level order each tell you the root of every subtree, so pairing any of them with inorder rebuilds the tree.\n\nPreorder and postorder alone fail when a node has one child: a root `A` with only a left child `B` and a root `A` with only a right child `B` both give preorder `A B` and postorder `B A`."
   },
   {
     "id": "pds-046",
     "topic": "trees-bst",
     "type": "nat",
     "marks": 2,
-    "q": "The keys 42, 17, 63, 8, 25, 51, 90, 21, 30, 58, 55 are inserted in this order into an empty binary search tree, and \\u00A7f\\u00A7 below is called on the root. What value does it return?\n\n\\u00A7\\u00A7\\u00A7c\nstruct t { int key; struct t *l, *r; };\nint f(struct t *p) {\n    if (p == NULL) return 0;\n    if (p->l == NULL && p->r == NULL) return 1;\n    return f(p->l) + f(p->r) + (p->l != NULL && p->r != NULL);\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "The keys 42, 17, 63, 8, 25, 51, 90, 21, 30, 58, 55 are inserted in this order into an empty binary search tree, and `f` below is called on the root. What value does it return?\n\n```c\nstruct t { int key; struct t *l, *r; };\nint f(struct t *p) {\n    if (p == NULL) return 0;\n    if (p->l == NULL && p->r == NULL) return 1;\n    return f(p->l) + f(p->r) + (p->l != NULL && p->r != NULL);\n}\n```",
     "answer": {
       "min": 9,
       "max": 9
     },
-    "explanation": "\\u00A7f\\u00A7 counts leaves plus nodes with two children.\n\nThe tree: 42 has children 17 and 63; 17 has 8 and 25; 25 has 21 and 30; 63 has 51 and 90; 51 has only a right child 58; 58 has only a left child 55.\n\n- Leaves: 8, 21, 30, 90, 55, so 5.\n- Two-child nodes: 42, 17, 25, 63, so 4.\n\nTotal: 9."
+    "explanation": "`f` counts leaves plus nodes with two children.\n\nThe tree: 42 has children 17 and 63; 17 has 8 and 25; 25 has 21 and 30; 63 has 51 and 90; 51 has only a right child 58; 58 has only a left child 55.\n\n- Leaves: 8, 21, 30, 90, 55, so 5.\n- Two-child nodes: 42, 17, 25, 63, so 4.\n\nTotal: 9."
   },
   {
     "id": "pds-047",
@@ -700,7 +700,7 @@
       "55 20 10 30 25 35 60 50 70 65"
     ],
     "answer": 0,
-    "explanation": "The inorder successor of 40 is the smallest key in its right subtree: go to 60, then left to 50, which has no left child. Copy 50 into the root and delete 50 from its old place; 50 had only a right child 55, which moves up to be the left child of 60.\n\nTree: 50 with children 20 and 60; 20 has 10 and 30; 30 has 25 and 35; 60 has 55 and 70; 70 has left child 65.\n\nPreorder: \\u00A750 20 10 30 25 35 60 55 70 65\\u00A7. The choice starting with 35 is what you get with the inorder predecessor instead."
+    "explanation": "The inorder successor of 40 is the smallest key in its right subtree: go to 60, then left to 50, which has no left child. Copy 50 into the root and delete 50 from its old place; 50 had only a right child 55, which moves up to be the left child of 60.\n\nTree: 50 with children 20 and 60; 20 has 10 and 30; 30 has 25 and 35; 60 has 55 and 70; 70 has left child 65.\n\nPreorder: `50 20 10 30 25 35 60 55 70 65`. The choice starting with 35 is what you get with the inorder predecessor instead."
   },
   {
     "id": "pds-049",
@@ -734,12 +734,12 @@
     "topic": "binary-heaps",
     "type": "nat",
     "marks": 2,
-    "q": "The bottom-up build-heap procedure (call sift-down on indices $\\lfloor n/2 \\rfloor - 1$ down to 0) is run on the array below to make a max-heap. Index 0 is the root. How many swaps are performed in total?\n\n\\u00A74, 9, 2, 14, 7, 16, 3, 10, 8, 1\\u00A7",
+    "q": "The bottom-up build-heap procedure (call sift-down on indices $\\lfloor n/2 \\rfloor - 1$ down to 0) is run on the array below to make a max-heap. Index 0 is the root. How many swaps are performed in total?\n\n`4, 9, 2, 14, 7, 16, 3, 10, 8, 1`",
     "answer": {
       "min": 4,
       "max": 4
     },
-    "explanation": "$n = 10$, so sift-down runs on indices 4, 3, 2, 1, 0.\n\n- Index 4 (7): child 1. No swap.\n- Index 3 (14): children 10, 8. No swap.\n- Index 2 (2): children 16, 3. Swap with 16. (1)\n- Index 1 (9): children 14, 7. Swap with 14 (2); now at index 3, children 10, 8, swap with 10 (3).\n- Index 0 (4): children 14, 16. Swap with 16 (4); at index 2, children 2, 3, no swap.\n\nTotal 4 swaps. Final heap: \\u00A716, 14, 4, 10, 7, 2, 3, 9, 8, 1\\u00A7."
+    "explanation": "$n = 10$, so sift-down runs on indices 4, 3, 2, 1, 0.\n\n- Index 4 (7): child 1. No swap.\n- Index 3 (14): children 10, 8. No swap.\n- Index 2 (2): children 16, 3. Swap with 16. (1)\n- Index 1 (9): children 14, 7. Swap with 14 (2); now at index 3, children 10, 8, swap with 10 (3).\n- Index 0 (4): children 14, 16. Swap with 16 (4); at index 2, children 2, 3, no swap.\n\nTotal 4 swaps. Final heap: `16, 14, 4, 10, 7, 2, 3, 9, 8, 1`."
   },
   {
     "id": "pds-052",
@@ -764,12 +764,12 @@
     "topic": "binary-heaps",
     "type": "nat",
     "marks": 2,
-    "q": "The max-heap \\u00A750, 42, 38, 30, 41, 12, 36, 7, 25, 33\\u00A7 (index 0 is the root) undergoes two delete-max operations. Each moves the last element to the root and sifts it down, swapping with the larger child. After both deletions, what is the sum of the elements at index 1 and index 4?",
+    "q": "The max-heap `50, 42, 38, 30, 41, 12, 36, 7, 25, 33` (index 0 is the root) undergoes two delete-max operations. Each moves the last element to the root and sifts it down, swapping with the larger child. After both deletions, what is the sum of the elements at index 1 and index 4?",
     "answer": {
       "min": 58,
       "max": 58
     },
-    "explanation": "First delete-max (removes 50): 33 goes to the root. It swaps with 42 (larger of 42, 38), then at index 1 with 41 (larger of 30, 41). Array: \\u00A742, 41, 38, 30, 33, 12, 36, 7, 25\\u00A7.\n\nSecond delete-max (removes 42): 25 goes to the root. It swaps with 41, then at index 1 with 33 (larger of 30, 33). Array: \\u00A741, 33, 38, 30, 25, 12, 36, 7\\u00A7.\n\nIndex 1 holds 33 and index 4 holds 25. Sum: 58."
+    "explanation": "First delete-max (removes 50): 33 goes to the root. It swaps with 42 (larger of 42, 38), then at index 1 with 41 (larger of 30, 41). Array: `42, 41, 38, 30, 33, 12, 36, 7, 25`.\n\nSecond delete-max (removes 42): 25 goes to the root. It swaps with 41, then at index 1 with 33 (larger of 30, 33). Array: `41, 33, 38, 30, 25, 12, 36, 7`.\n\nIndex 1 holds 33 and index 4 holds 25. Sum: 58."
   },
   {
     "id": "pds-054",
@@ -815,7 +815,7 @@
       "100"
     ],
     "answer": 0,
-    "explanation": "Each undirected edge $\\{u, v\\}$ appears twice: \\u00A7v\\u00A7 in the list of \\u00A7u\\u00A7 and \\u00A7u\\u00A7 in the list of \\u00A7v\\u00A7. So the total is $2 \\times 15 = 30$, which also equals the sum of the degrees."
+    "explanation": "Each undirected edge $\\{u, v\\}$ appears twice: `v` in the list of `u` and `u` in the list of `v`. So the total is $2 \\times 15 = 30$, which also equals the sum of the degrees."
   },
   {
     "id": "pds-057",
@@ -830,7 +830,7 @@
       "$O(1)$ with an adjacency matrix and $O(\\deg(u))$ with adjacency lists"
     ],
     "answer": 3,
-    "explanation": "The matrix entry \\u00A7A[u][v]\\u00A7 is read directly. With adjacency lists you must scan the list of \\u00A7u\\u00A7, which has $\\deg(u)$ entries and can be as long as $V - 1$."
+    "explanation": "The matrix entry `A[u][v]` is read directly. With adjacency lists you must scan the list of `u`, which has $\\deg(u)$ entries and can be as long as $V - 1$."
   },
   {
     "id": "pds-058",
@@ -856,12 +856,12 @@
     "topic": "graphs-representation",
     "type": "nat",
     "marks": 2,
-    "q": "What value does the following program print?\n\n\\u00A7\\u00A7\\u00A7c\n#include <stdio.h>\nint main(void) {\n    int a[5][5] = {\n        {0, 1, 1, 0, 1},\n        {1, 0, 1, 1, 0},\n        {1, 1, 0, 1, 1},\n        {0, 1, 1, 0, 1},\n        {1, 0, 1, 1, 0}\n    };\n    int c = 0;\n    for (int i = 0; i < 5; i++)\n        for (int j = i + 1; j < 5; j++)\n            for (int k = j + 1; k < 5; k++)\n                if (a[i][j] && a[j][k] && a[i][k]) c++;\n    printf(\"%d\\n\", c);\n    return 0;\n}\n\\u00A7\\u00A7\\u00A7",
+    "q": "What value does the following program print?\n\n```c\n#include <stdio.h>\nint main(void) {\n    int a[5][5] = {\n        {0, 1, 1, 0, 1},\n        {1, 0, 1, 1, 0},\n        {1, 1, 0, 1, 1},\n        {0, 1, 1, 0, 1},\n        {1, 0, 1, 1, 0}\n    };\n    int c = 0;\n    for (int i = 0; i < 5; i++)\n        for (int j = i + 1; j < 5; j++)\n            for (int k = j + 1; k < 5; k++)\n                if (a[i][j] && a[j][k] && a[i][k]) c++;\n    printf(\"%d\\n\", c);\n    return 0;\n}\n```",
     "answer": {
       "min": 4,
       "max": 4
     },
-    "explanation": "The loops visit each set of three vertices $i < j < k$ once and count it when all three edges are present, so \\u00A7c\\u00A7 is the number of triangles.\n\nEdges: 0-1, 0-2, 0-4, 1-2, 1-3, 2-3, 2-4, 3-4. Triangles: {0, 1, 2}, {0, 2, 4}, {1, 2, 3}, {2, 3, 4}. No other triple works (for example {0, 1, 4} lacks 1-4). The program prints 4."
+    "explanation": "The loops visit each set of three vertices $i < j < k$ once and count it when all three edges are present, so `c` is the number of triangles.\n\nEdges: 0-1, 0-2, 0-4, 1-2, 1-3, 2-3, 2-4, 3-4. Triangles: {0, 1, 2}, {0, 2, 4}, {1, 2, 3}, {2, 3, 4}. No other triple works (for example {0, 1, 4} lacks 1-4). The program prints 4."
   },
   {
     "id": "pds-060",
@@ -874,5 +874,879 @@
       "max": 36
     },
     "explanation": "A disconnected graph has at least two components. The edge count is largest when one component is a single isolated vertex and the other 9 vertices form a complete graph: $\\binom{9}{2} = 36$ edges."
+  },
+  {
+    "id": "pds-061",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\nint main(void) {\n    int a[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};\n    printf(\"%d\\n\", *(*(a + 2) + 1) + *(a[1] + 3));\n    return 0;\n}\n```",
+    "options": [
+      "15",
+      "17",
+      "18",
+      "14"
+    ],
+    "answer": 2,
+    "explanation": "`a + 2` points to row 2, so `*(a + 2)` is that row and `*(*(a + 2) + 1)` is `a[2][1] = 10`. `a[1] + 3` points to `a[1][3] = 8`. The sum is $10 + 8 = 18$."
+  },
+  {
+    "id": "pds-062",
+    "topic": "c-programming",
+    "type": "msq",
+    "marks": 2,
+    "q": "Consider the declarations below (inside `main`).\n\n```c\nint a[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};\nint (*p)[4] = a;\np++;\n```\n\nWhich of the following expressions have the value 7?",
+    "options": [
+      "`(*p)[2]`",
+      "`**p + 2`",
+      "`*p[1]`",
+      "`*(*(p - 1) + 3) + 3`"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "`p` is a pointer to a whole row of 4 ints. After `p++` it points to row 1, `{5, 6, 7, 8}`.\n\n- `(*p)[2]` is `a[1][2] = 7`. True.\n- `**p` is `a[1][0] = 5`, plus 2 gives 7. True.\n- `[]` binds tighter than `*`, so `*p[1]` is `*(p[1])`, the first element of row 2, which is 9. False.\n- `*(p - 1)` is row 0, so `*(*(p - 1) + 3)` is `a[0][3] = 4`, plus 3 gives 7. True."
+  },
+  {
+    "id": "pds-063",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#include <string.h>\nint main(void) {\n    char s[20] = \"GATE2027\";\n    printf(\"%zu %zu\\n\", sizeof(s), strlen(s));\n    return 0;\n}\n```",
+    "options": [
+      "20 8",
+      "9 8",
+      "20 9",
+      "8 8"
+    ],
+    "answer": 0,
+    "explanation": "`sizeof(s)` is the size of the whole array as declared, 20 bytes, no matter what string is stored in it. `strlen(s)` counts characters up to the terminating `'\\0'`, which is 8 for `\"GATE2027\"`. Output: `20 8`."
+  },
+  {
+    "id": "pds-064",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#include <string.h>\nint main(void) {\n    char a[20] = \"data\", b[20] = \"struct\";\n    strcat(a, b);\n    strcpy(b, a + 4);\n    int r = strcmp(a, b);\n    printf(\"%zu %d\\n\", strlen(a) + strlen(b), r < 0);\n    return 0;\n}\n```",
+    "options": [
+      "16 0",
+      "16 1",
+      "10 1",
+      "20 0"
+    ],
+    "answer": 1,
+    "explanation": "- `strcat(a, b)` makes `a = \"datastruct\"` (length 10).\n- `a + 4` points to `\"struct\"`, so `strcpy` writes `\"struct\"` into `b` (length 6).\n- `strcmp(\"datastruct\", \"struct\")` compares `'d'` with `'s'` first. `'d' < 's'`, so the result is negative and `r < 0` is 1.\n\nOutput: `16 1`."
+  },
+  {
+    "id": "pds-065",
+    "topic": "c-programming",
+    "type": "nat",
+    "marks": 2,
+    "q": "What value does the following program print?\n\n```c\n#include <stdio.h>\nint x = 4;\nint f(void) {\n    static int x = 1;\n    x = x * 2;\n    return x;\n}\nint g(void) {\n    x = x + f();\n    return x;\n}\nint main(void) {\n    int x = 10;\n    {\n        extern int x;\n        int t = g();\n        x = x + t;\n    }\n    printf(\"%d\\n\", x + f());\n    return 0;\n}\n```",
+    "answer": {
+      "min": 14,
+      "max": 14
+    },
+    "explanation": "There are three different `x` objects: the global (starts at 4), the `static` local in `f` (starts at 1), and the local in `main` (10).\n\n- Inside the inner block, `extern int x;` hides `main`'s local and names the global.\n- `g()` calls `f()`, whose static `x` becomes 2. The global becomes $4 + 2 = 6$ and `g` returns 6.\n- `x = x + t` updates the global to $6 + 6 = 12$.\n- After the block, `x` is `main`'s local again, still 10. `f()` now returns 4.\n\nThe program prints $10 + 4 = 14$."
+  },
+  {
+    "id": "pds-066",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#define MAX(a, b) ((a) > (b) ? (a) : (b))\nint main(void) {\n    int i = 5, j = 3;\n    int z = MAX(i++, j);\n    printf(\"%d %d\\n\", z, i);\n    return 0;\n}\n```",
+    "options": [
+      "6 7",
+      "5 6",
+      "6 6",
+      "5 7"
+    ],
+    "answer": 0,
+    "explanation": "The macro expands to `((i++) > (j) ? (i++) : (j))`. The condition uses `i++`: it compares 5 with 3 and makes `i = 6`. The `?:` operator has a sequence point after the condition, so the chosen branch `i++` then yields 6 and makes `i = 7`. Output: `6 7`. The argument with a side effect is evaluated twice, which is the classic macro trap."
+  },
+  {
+    "id": "pds-067",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\n#define A(x) x + 1\n#define B(x) A(x) * A(x)\nint main(void) {\n    printf(\"%d\\n\", B(3) + 10 / A(1));\n    return 0;\n}\n```",
+    "options": [
+      "21",
+      "18",
+      "32",
+      "26"
+    ],
+    "answer": 1,
+    "explanation": "Macros substitute text, not values. The expression becomes\n\n`3 + 1 * 3 + 1 + 10 / 1 + 1`\n\nWith normal precedence: $3 + 3 + 1 + 10 + 1 = 18$. If both macros were fully parenthesised the result would be $16 + 10/2 = 21$, which is the trap."
+  },
+  {
+    "id": "pds-068",
+    "topic": "c-programming",
+    "type": "nat",
+    "marks": 1,
+    "q": "What value does the following code print?\n\n```c\nint a = 0, b = 1, c = 2;\nint r = a++ || b-- && ++c;\nprintf(\"%d\\n\", a + b + c + r);\n```",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "`&&` binds tighter than `||`, so this is `a++ || (b-- && ++c)`.\n\n- `a++` yields 0 (false) and sets `a = 1`, so the right side must be evaluated.\n- `b--` yields 1 (true) and sets `b = 0`, so `++c` runs: `c = 3`, true.\n- `r = 1`.\n\nSum: $1 + 0 + 3 + 1 = 5$."
+  },
+  {
+    "id": "pds-069",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\nvoid s1(int a, int b)   { int t = a; a = b; b = t; }\nvoid s2(int *a, int *b) { int *t = a; a = b; b = t; }\nvoid s3(int *a, int *b) { int t = *a; *a = *b; *b = t; }\nint main(void) {\n    int x = 1, y = 2, z = 3;\n    s1(x, y);\n    s2(&y, &z);\n    s3(&x, &z);\n    s3(&y, &x);\n    printf(\"%d %d %d\\n\", x, y, z);\n    return 0;\n}\n```",
+    "options": [
+      "2 3 1",
+      "3 2 1",
+      "3 1 2",
+      "1 2 3"
+    ],
+    "answer": 0,
+    "explanation": "- `s1` swaps its own copies of the values: no effect on the caller.\n- `s2` swaps its own copies of the pointers, never touching the pointed-to ints: no effect.\n- `s3(&x, &z)` swaps through the pointers: `x = 3, z = 1`.\n- `s3(&y, &x)`: `y = 3, x = 2`.\n\nOutput: `2 3 1`."
+  },
+  {
+    "id": "pds-070",
+    "topic": "c-programming",
+    "type": "msq",
+    "marks": 2,
+    "q": "Assume `int` is 4 bytes and `int a[10];` is declared at block scope. Which statements are correct?",
+    "options": [
+      "`a + 1` and `&a + 1` differ by 36 bytes",
+      "Inside `void f(int p[])`, `sizeof(p)` gives the size of the whole array passed in",
+      "After `char *s = \"abc\";`, the statement `s[0] = 'x';` is a well-defined way to change the string",
+      "`a[3]`, `*(a + 3)` and `3[a]` all denote the same element"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "- `a + 1` is 4 bytes past the start (one `int`); `&a` has type `int (*)[10]`, so `&a + 1` is 40 bytes past it. The difference is 36. True.\n- An array parameter is adjusted to a pointer, so `sizeof(p)` is the size of a pointer. False.\n- String literals may be stored in read-only memory; modifying one is undefined behaviour. False.\n- `a[i]` is defined as `*(a + i)`, and addition commutes, so `3[a]` is `*(3 + a)`. True."
+  },
+  {
+    "id": "pds-071",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In C99 and later, what does `printf(\"%d %d\\n\", -7 / 2, -7 % 2);` print?",
+    "options": [
+      "-4 1",
+      "-3 1",
+      "-4 -1",
+      "-3 -1"
+    ],
+    "answer": 3,
+    "explanation": "Since C99, integer division truncates toward zero, so `-7 / 2` is -3. The remainder satisfies `(a / b) * b + a % b == a`, so `-7 % 2` is $-7 - (-3)(2) = -1$. The remainder takes the sign of the dividend."
+  },
+  {
+    "id": "pds-072",
+    "topic": "c-programming",
+    "type": "nat",
+    "marks": 1,
+    "q": "What value does the following code print?\n\n```c\nchar s[] = \"programming\";\nchar *p = s;\nint n = 0;\nwhile (*p) {\n    if (*p == *(p + 1)) n += 10;\n    else if (*p > 'm') n++;\n    p++;\n}\nprintf(\"%d\\n\", n);\n```",
+    "answer": {
+      "min": 15,
+      "max": 15
+    },
+    "explanation": "Walk the characters `p r o g r a m m i n g`.\n\n- Only the first `m` of `mm` equals its successor: +10.\n- Characters greater than `'m'` that are not followed by an equal character: `p, r, o, r, n`: +5. (The second `m` is not greater than `'m'`.)\n\nTotal: 15."
+  },
+  {
+    "id": "pds-073",
+    "topic": "c-programming",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What does the following program print?\n\n```c\n#include <stdio.h>\nint main(void) {\n    char *w[] = {\"tree\", \"heap\", \"graph\", \"stack\"};\n    char **p = w + 1;\n    printf(\"%c%c%c \", **p, *(*(p + 1) + 2), *(p[-1] + 3));\n    ++p;\n    printf(\"%s\\n\", *p + 1);\n    return 0;\n}\n```",
+    "options": [
+      "hae aph",
+      "hre raph",
+      "tae graph",
+      "hae raph"
+    ],
+    "answer": 3,
+    "explanation": "`p` points to `w[1]` (`\"heap\"`).\n\n- `**p` is `'h'`.\n- `*(p + 1)` is `\"graph\"`; index 2 is `'a'`.\n- `p[-1]` is `\"tree\"`; index 3 is `'e'`.\n- After `++p`, `*p` is `\"graph\"` and `*p + 1` starts at `'r'`, printing `raph`.\n\nOutput: `hae raph`."
+  },
+  {
+    "id": "pds-074",
+    "topic": "c-programming",
+    "type": "nat",
+    "marks": 2,
+    "q": "What value does the following code print?\n\n```c\nunsigned int x = 0xB6;\nint c = 0;\nwhile (x) {\n    x &= x - 1;\n    c++;\n}\nprintf(\"%d\\n\", c * 10 + (0xB6 >> 3 & 7));\n```",
+    "answer": {
+      "min": 56,
+      "max": 56
+    },
+    "explanation": "`x &= x - 1` clears the lowest set bit, so the loop counts set bits. $\\text{B6}_{16} = 10110110_2$ has 5 ones, so `c = 5`.\n\n`>>` has higher precedence than `&`, so the second term is `(0xB6 >> 3) & 7`. $10110110_2 \\gg 3 = 10110_2$, and its low three bits are $110_2 = 6$.\n\nResult: $5 \\cdot 10 + 6 = 56$."
+  },
+  {
+    "id": "pds-075",
+    "topic": "recursion",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What does the call `f(6)` print?\n\n```c\nvoid f(int n) {\n    if (n == 0) return;\n    printf(\"%d\", n % 2);\n    f(n / 2);\n    printf(\"%d\", n % 3);\n}\n```",
+    "options": [
+      "001110",
+      "011001",
+      "110100",
+      "011100"
+    ],
+    "answer": 3,
+    "explanation": "Each call prints `n % 2` on the way down and `n % 3` on the way back up. The calls are `f(6)`, `f(3)`, `f(1)`, `f(0)`.\n\n- Down: $6 \\% 2 = 0$, $3 \\% 2 = 1$, $1 \\% 2 = 1$.\n- Up (reverse order): $1 \\% 3 = 1$, $3 \\% 3 = 0$, $6 \\% 3 = 0$.\n\nOutput: `011100`."
+  },
+  {
+    "id": "pds-076",
+    "topic": "recursion",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many times is `c` called in total (including the first call) when `c(6, 3)` is evaluated?\n\n```c\nint c(int n, int k) {\n    if (k == 0 || k == n) return 1;\n    return c(n - 1, k - 1) + c(n - 1, k);\n}\n```",
+    "answer": {
+      "min": 39,
+      "max": 39
+    },
+    "explanation": "The recursion tree is a full binary tree: every call either returns 1 (a leaf) or makes exactly two calls. The returned value is the number of leaves, since only leaves contribute 1s. So there are $\\binom{6}{3} = 20$ leaves.\n\nA full binary tree with $L$ leaves has $L - 1$ internal nodes, so the total number of calls is $2 \\cdot 20 - 1 = 39$."
+  },
+  {
+    "id": "pds-077",
+    "topic": "recursion",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What does `f(10)` return?\n\n```c\nint f(int n) {\n    if (n < 3) return 1;\n    return f(n / 2) + f(n - 2);\n}\n```",
+    "options": [
+      "9",
+      "8",
+      "11",
+      "7"
+    ],
+    "answer": 0,
+    "explanation": "Build up from the base case $f(0) = f(1) = f(2) = 1$:\n\n| $n$ | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |\n|---|---|---|---|---|---|---|---|---|\n| $f(n/2) + f(n-2)$ | 1+1 | 1+1 | 1+2 | 2+2 | 2+3 | 2+4 | 2+5 | 3+6 |\n| $f(n)$ | 2 | 2 | 3 | 4 | 5 | 6 | 7 | 9 |\n\nSo $f(10) = f(5) + f(8) = 3 + 6 = 9$."
+  },
+  {
+    "id": "pds-078",
+    "topic": "recursion",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the running time of `f(n)`?\n\n```c\nvoid f(int n) {\n    if (n <= 1) return;\n    for (int i = 0; i < n; i++)\n        work();          /* constant time */\n    f(n / 2);\n    f(n / 2);\n}\n```",
+    "options": [
+      "$\\Theta(n \\log n)$",
+      "$\\Theta(n)$",
+      "$\\Theta(n^2)$",
+      "$\\Theta(\\log n)$"
+    ],
+    "answer": 0,
+    "explanation": "$T(n) = 2T(n/2) + \\Theta(n)$. Here $a = 2$, $b = 2$, $n^{\\log_2 2} = n$ matches the extra work, so by the master theorem (case 2) $T(n) = \\Theta(n \\log n)$. Each of the $\\log_2 n$ levels of the recursion tree does $\\Theta(n)$ work in total."
+  },
+  {
+    "id": "pds-079",
+    "topic": "recursion",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What does the call `p(\"ABCDEF\", 0)` print?\n\n```c\nvoid p(char *s, int i) {\n    if (s[i] == '\\0') return;\n    if (i % 2 == 0) putchar(s[i]);\n    p(s, i + 1);\n    if (i % 2 == 1) putchar(s[i]);\n}\n```",
+    "options": [
+      "ACEBDF",
+      "ACEFDB",
+      "FDBACE",
+      "ABCDEF"
+    ],
+    "answer": 1,
+    "explanation": "Characters at even indices are printed before the recursive call, so they come out in forward order on the way down: `A C E`. Characters at odd indices are printed after the call, so they come out in reverse order on the way back: `F D B`. Output: `ACEFDB`."
+  },
+  {
+    "id": "pds-080",
+    "topic": "recursion",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For integers `a` and `b >= 0` (with no overflow), what does `g(a, b)` return?\n\n```c\nint g(int a, int b) {\n    if (b == 0) return 0;\n    if (b % 2 == 0) return g(a + a, b / 2);\n    return g(a + a, b / 2) + a;\n}\n```",
+    "options": [
+      "$a \\cdot b$",
+      "$a^b$",
+      "$a + b$",
+      "$a \\cdot 2^b$"
+    ],
+    "answer": 0,
+    "explanation": "This is shift-and-add multiplication. If $b$ is even, $a \\cdot b = (2a)(b/2)$. If $b$ is odd, $a \\cdot b = (2a)\\lfloor b/2 \\rfloor + a$. With $g(a, 0) = 0$, induction on $b$ gives $g(a, b) = a \\cdot b$. For example $g(13, 11) = 143$."
+  },
+  {
+    "id": "pds-081",
+    "topic": "recursion",
+    "type": "msq",
+    "marks": 2,
+    "q": "Consider the function below, called with `n >= 1`. Which statements are true?\n\n```c\nint f(int n) {\n    if (n < 10) return n;\n    return f(f(n / 10) + n % 10);\n}\n```",
+    "options": [
+      "$f(9875) = 2$",
+      "$1 \\le f(n) \\le 9$ for every $n \\ge 1$",
+      "$f(n) = n \\bmod 9$ for every $n \\ge 1$",
+      "Evaluating $f(99)$ makes exactly 3 calls of $f$, including the first"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "`f` computes the digital root: the digit sum is taken repeatedly until one digit is left. The digit sum of $n$ is at most $n$ and the inner call shrinks the number, so it always terminates.\n\n- $9875 \\to 29 \\to 11 \\to 2$. True.\n- A positive number has a positive digital root of one digit. True.\n- False: $f(9) = 9$ but $9 \\bmod 9 = 0$. The digital root equals $n \\bmod 9$ only when that is non-zero.\n- $f(99)$ calls $f(9)$, then $f(18)$, which calls $f(1)$ and then $f(9)$: 5 calls in all. False."
+  },
+  {
+    "id": "pds-082",
+    "topic": "recursion",
+    "type": "nat",
+    "marks": 2,
+    "q": "The global array is `int a[] = {3, -1, 4, -1, 5, -9, 2, 6};`. What does `m(0, 7)` return?\n\n```c\nint m(int i, int j) {\n    if (i == j) return a[i];\n    int k = (i + j) / 2;\n    int l = m(i, k), r = m(k + 1, j);\n    return l > r ? l - r : r - l;\n}\n```",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "Each internal call returns the absolute difference of its two halves.\n\n- Pairs: $m(0,1) = |3 - (-1)| = 4$, $m(2,3) = 5$, $m(4,5) = 14$, $m(6,7) = 4$.\n- Quarters: $m(0,3) = |4 - 5| = 1$, $m(4,7) = |14 - 4| = 10$.\n- Root: $m(0,7) = |1 - 10| = 9$."
+  },
+  {
+    "id": "pds-083",
+    "topic": "recursion",
+    "type": "nat",
+    "marks": 1,
+    "q": "What does `f(5)` return?\n\n```c\nint f(int n) {\n    if (n <= 1) return n + 1;\n    return f(n - 1) * f(n - 2) + 1;\n}\n```",
+    "answer": {
+      "min": 155,
+      "max": 155
+    },
+    "explanation": "$f(0) = 1$, $f(1) = 2$, $f(2) = 2 \\cdot 1 + 1 = 3$, $f(3) = 3 \\cdot 2 + 1 = 7$, $f(4) = 7 \\cdot 3 + 1 = 22$, $f(5) = 22 \\cdot 7 + 1 = 155$."
+  },
+  {
+    "id": "pds-084",
+    "topic": "arrays-stacks-queues",
+    "type": "nat",
+    "marks": 1,
+    "q": "A circular queue uses an array of size 12 (indices 0 to 11). `front` is the index of the first element, `rear` is the index where the next element will be inserted, and one slot is always left empty. If `front = 9` and `rear = 4`, how many elements are in the queue?",
+    "answer": {
+      "min": 7,
+      "max": 7
+    },
+    "explanation": "The count is $(\\text{rear} - \\text{front} + n) \\bmod n = (4 - 9 + 12) \\bmod 12 = 7$. The elements sit at indices 9, 10, 11, 0, 1, 2, 3."
+  },
+  {
+    "id": "pds-085",
+    "topic": "arrays-stacks-queues",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A double-ended queue is initially empty. The following operations are done in order:\n\n`pushFront(1)`, `pushBack(2)`, `pushFront(3)`, `popBack()`, `pushBack(4)`, `pushFront(5)`, `popFront()`, `pushBack(6)`, `popFront()`\n\nWhat does the deque hold afterwards, from front to back?",
+    "options": [
+      "3 1 4 6",
+      "4 6 1",
+      "1 4",
+      "1 4 6"
+    ],
+    "answer": 3,
+    "explanation": "Track the contents front to back:\n\n| Operation | Deque |\n|---|---|\n| pushFront(1) | 1 |\n| pushBack(2) | 1 2 |\n| pushFront(3) | 3 1 2 |\n| popBack() | 3 1 |\n| pushBack(4) | 3 1 4 |\n| pushFront(5) | 5 3 1 4 |\n| popFront() | 3 1 4 |\n| pushBack(6) | 3 1 4 6 |\n| popFront() | 1 4 6 |"
+  },
+  {
+    "id": "pds-086",
+    "topic": "arrays-stacks-queues",
+    "type": "nat",
+    "marks": 2,
+    "q": "The postfix expression below is evaluated with a stack of operands. Operands are pushed; each binary operator pops two operands and pushes the result.\n\n`5 3 2 * + 8 4 2 / - 3 * -`\n\nWhat is the largest number of operands on the stack at any moment?",
+    "answer": {
+      "min": 4,
+      "max": 4
+    },
+    "explanation": "- `5 3 2` pushes three values; `*` leaves `5 6`; `+` leaves `11`.\n- `8 4 2` makes the stack `11 8 4 2`: 4 values, the maximum.\n- `/` leaves `11 8 2`; `-` leaves `11 6`; `3` gives `11 6 3`; `*` leaves `11 18`; `-` leaves `-7`.\n\nThe maximum depth is 4 (the value of the expression is -7)."
+  },
+  {
+    "id": "pds-087",
+    "topic": "arrays-stacks-queues",
+    "type": "nat",
+    "marks": 1,
+    "q": "Evaluate the prefix expression below. `^` is exponentiation and `/` is integer division.\n\n`- * + 4 3 2 / 8 ^ 2 2`",
+    "answer": {
+      "min": 12,
+      "max": 12
+    },
+    "explanation": "Scan right to left with an operand stack; on an operator pop the first operand, then the second, and push the result.\n\n- `^ 2 2` gives 4; `/ 8 4` gives 2.\n- `+ 4 3` gives 7; `* 7 2` gives 14.\n- `- 14 2` gives 12.\n\nIn infix: $(4 + 3) \\cdot 2 - 8 / 2^2 = 12$."
+  },
+  {
+    "id": "pds-088",
+    "topic": "arrays-stacks-queues",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A queue is built from two stacks `S1` and `S2`. Enqueue pushes onto `S1`. Dequeue pops from `S2`; if `S2` is empty, it first pops every element of `S1` and pushes it onto `S2`. Starting empty, the operations are:\n\nenqueue 1, 2, 3, 4, 5; dequeue; dequeue; enqueue 6; enqueue 7; dequeue four times.\n\nCounting every single push and every single pop on either stack, how many stack operations are performed?",
+    "options": [
+      "25",
+      "23",
+      "27",
+      "31"
+    ],
+    "answer": 2,
+    "explanation": "- Five enqueues: 5 pushes.\n- First dequeue: `S2` is empty, so 5 pops and 5 pushes move the elements, then 1 pop: 11.\n- Second dequeue: 1 pop.\n- Two enqueues: 2 pushes.\n- Next three dequeues pop 3, 4, 5 from `S2`: 3 pops.\n- Last dequeue: `S2` is empty, move 6 and 7 (4 operations), then 1 pop: 5.\n\nTotal: $5 + 11 + 1 + 2 + 3 + 5 = 27$. The output order is 1 to 6 as expected."
+  },
+  {
+    "id": "pds-089",
+    "topic": "arrays-stacks-queues",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A $10 \\times 10$ lower triangular matrix (all entries with $i < j$ are zero) is stored compactly: only the entries with $i \\ge j$ are kept, row by row, in a one-dimensional array. Indices start at 1, each element takes 2 bytes, and the array starts at address 1000. What is the address of $A[7][4]$?",
+    "options": [
+      "1046",
+      "1062",
+      "1066",
+      "1048"
+    ],
+    "answer": 3,
+    "explanation": "Rows 1 to 6 hold $1 + 2 + \\dots + 6 = 21$ elements. In row 7, the entry in column 4 has 3 elements before it. So $A[7][4]$ is element number 24 (counting from 0), and its address is $1000 + 24 \\cdot 2 = 1048$.\n\nIn general the offset is $\\frac{i(i-1)}{2} + (j - 1)$ elements."
+  },
+  {
+    "id": "pds-090",
+    "topic": "arrays-stacks-queues",
+    "type": "msq",
+    "marks": 2,
+    "q": "The numbers 1, 2, 3, 4 arrive in that order at an input-restricted deque: insertion is allowed only at the rear, but deletion is allowed at both the front and the rear. Insertions and deletions may be interleaved. Which output sequences can be produced?",
+    "options": [
+      "4 1 3 2",
+      "4 2 1 3",
+      "3 1 4 2",
+      "2 4 1 3"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "- `4 1 3 2`: insert all four (deque 1 2 3 4), delete rear 4, front 1, rear 3, then 2. Possible.\n- `4 2 1 3`: to output 4 first, all four must be inside as 1 2 3 4. After removing 4 the ends are 1 and 3, so 2 cannot come next. Impossible.\n- `3 1 4 2`: insert 1, 2, 3; delete rear 3, front 1; insert 4; delete rear 4, then 2. Possible.\n- `2 4 1 3`: insert 1, 2; delete rear 2; insert 3, 4; delete rear 4, front 1, then 3. Possible."
+  },
+  {
+    "id": "pds-091",
+    "topic": "arrays-stacks-queues",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An array `A[1..8][1..6]` of 4-byte integers is stored in column-major order starting at address 0. What is the address of `A[5][3]`?",
+    "options": [
+      "80",
+      "104",
+      "76",
+      "84"
+    ],
+    "answer": 0,
+    "explanation": "In column-major order each column holds 8 elements. Columns 1 and 2 come before column 3 (16 elements), and 4 elements precede row 5 within column 3. Offset $= (3 - 1) \\cdot 8 + (5 - 1) = 20$ elements, so the address is $20 \\cdot 4 = 80$. Row-major order would give 104."
+  },
+  {
+    "id": "pds-092",
+    "topic": "arrays-stacks-queues",
+    "type": "nat",
+    "marks": 2,
+    "q": "The infix expression below is converted to postfix with the usual operator-stack algorithm. `^` has the highest precedence and is right-associative; `*` and `/` come next; `+` and `-` are lowest; the others are left-associative. A left parenthesis is pushed on the stack and counts as one entry.\n\n`a + b * c ^ d ^ e - f / ( g + h * i )`\n\nWhat is the largest number of entries on the operator stack at any moment?",
+    "answer": {
+      "min": 5,
+      "max": 5
+    },
+    "explanation": "- After `a + b * c ^ d ^ e` the stack is `+ * ^ ^` (the second `^` does not pop the first, because `^` is right-associative): 4 entries.\n- `-` pops all four and is pushed: `-`.\n- `/` is pushed: `- /`. Then `(`: `- / (`.\n- Inside: `+` gives `- / ( +`, then `*` gives `- / ( + *`: 5 entries, the maximum.\n\nThe postfix result is `a b c d e ^ ^ * + f g h i * + / -`."
+  },
+  {
+    "id": "pds-093",
+    "topic": "linked-lists",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A singly linked list holds 1, 2, 3, 4, 5, 6, 7 in that order. After `head = f(head);`, what does the list hold from the head?\n\n```c\nstruct node *f(struct node *h) {\n    if (h == NULL || h->next == NULL) return h;\n    struct node *r = h->next;\n    h->next = f(r->next);\n    r->next = h;\n    return r;\n}\n```",
+    "options": [
+      "7 6 5 4 3 2 1",
+      "2 1 4 3 6 5 7",
+      "1 3 2 5 4 7 6",
+      "2 1 3 4 6 5 7"
+    ],
+    "answer": 1,
+    "explanation": "Each call takes the first two nodes `h` and `r`, recursively processes the rest of the list after them, links `h` to that result, and puts `r` in front of `h`. So adjacent pairs are swapped: (1,2), (3,4), (5,6), and the odd node 7 is left alone. Result: `2 1 4 3 6 5 7`."
+  },
+  {
+    "id": "pds-094",
+    "topic": "linked-lists",
+    "type": "nat",
+    "marks": 1,
+    "q": "Two sorted linked lists, `1 4 7 10 13` and `2 3 5 15`, are merged into one sorted list by the standard method: compare the two front keys, move the smaller one, and when one list becomes empty attach the rest of the other without further comparisons. How many key comparisons are made?",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "Comparisons: 1:2, 4:2, 4:3, 4:5, 7:5, 7:15, 10:15, 13:15. After the eighth, the first list is empty and 15 is attached without comparing. Total 8 (in general at most $m + n - 1$)."
+  },
+  {
+    "id": "pds-095",
+    "topic": "linked-lists",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The loop below reverses a singly linked list in place. `prev` starts as `NULL` and `cur` as `head`; afterwards `head = prev`. Which statement fills the blank?\n\n```c\nwhile (cur != NULL) {\n    next = cur->next;\n    ________;\n    prev = cur;\n    cur = next;\n}\n```",
+    "options": [
+      "`prev->next = cur`",
+      "`next->next = cur`",
+      "`cur->next = next`",
+      "`cur->next = prev`"
+    ],
+    "answer": 3,
+    "explanation": "Each step must turn the current node's link around to point back at the already-reversed part. `next` was saved first so the rest of the list is not lost. `prev->next = cur` would fail on the first step (`prev` is `NULL`), and `cur->next = next` changes nothing."
+  },
+  {
+    "id": "pds-096",
+    "topic": "linked-lists",
+    "type": "nat",
+    "marks": 2,
+    "q": "A singly linked list holds 1, 2, 3, ..., 11 in order. The function `g` below is called twice on it: `g(head); g(head);`. What is the sum of the values left in the list?\n\n```c\nvoid g(struct node *p) {\n    while (p != NULL && p->next != NULL) {\n        struct node *q = p->next;\n        p->next = q->next;\n        free(q);\n        p = p->next;\n    }\n}\n```",
+    "answer": {
+      "min": 15,
+      "max": 15
+    },
+    "explanation": "`g` keeps a node, deletes the one after it, and moves to the next survivor, so it deletes every second node.\n\n- After the first call: `1 3 5 7 9 11`.\n- After the second call: `1 5 9`.\n\nSum: 15."
+  },
+  {
+    "id": "pds-097",
+    "topic": "linked-lists",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A singly linked list of $n$ nodes keeps both a head pointer and a tail pointer. Which operation needs $\\Theta(n)$ time in the worst case?",
+    "options": [
+      "Inserting a node at the front",
+      "Inserting a node at the end",
+      "Deleting the first node",
+      "Deleting the last node"
+    ],
+    "answer": 3,
+    "explanation": "To delete the last node, the second-last node's `next` must become `NULL` and the tail must move to it. Without back pointers, finding that node means walking from the head: $\\Theta(n)$. The other three operations touch only the head or tail node: $O(1)$."
+  },
+  {
+    "id": "pds-098",
+    "topic": "linked-lists",
+    "type": "msq",
+    "marks": 2,
+    "q": "A singly linked list has nodes numbered 0, 1, ..., 7 in order from the head, and node 7's `next` points back to node 3. Floyd's cycle detection is run: `slow` and `fast` both start at node 0; in each round `slow` moves 1 step and `fast` moves 2 steps, and the rounds stop when they are at the same node. Then one pointer is reset to node 0 and both move 1 step at a time until they meet again. Which statements are true?",
+    "options": [
+      "The first meeting happens at node 5",
+      "The first meeting happens after 8 rounds",
+      "The second meeting happens at node 3",
+      "The cycle contains 4 nodes"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "The tail before the cycle has $\\mu = 3$ nodes (0, 1, 2) and the cycle 3 to 7 has $\\lambda = 5$ nodes, so the last statement is false.\n\nPositions after each round (slow, fast): (1,2), (2,4), (3,6), (4,3), (5,5). They meet at node 5 after 5 rounds, so the second statement is false.\n\nFrom the meeting point, moving $\\mu = 3$ steps around the cycle lands on the entry: 5, 6, 7, 3. The pointer from the head also reaches node 3 after 3 steps, so the second meeting is at node 3, the start of the cycle."
+  },
+  {
+    "id": "pds-099",
+    "topic": "linked-lists",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A singly linked list holds 10, 20, 30, 40, 50, 60, 70, 80. What does it hold from the head after `f(head)`?\n\n```c\nstruct node *f(struct node *h) {\n    if (h == NULL) return h;\n    struct node *o = h, *e = h->next, *eh = e;\n    while (e != NULL && e->next != NULL) {\n        o->next = e->next;\n        o = o->next;\n        e->next = o->next;\n        e = e->next;\n    }\n    o->next = eh;\n    return h;\n}\n```",
+    "options": [
+      "20 40 60 80 10 30 50 70",
+      "10 30 50 70 80 60 40 20",
+      "10 30 50 70 20 40 60 80",
+      "10 20 30 40 50 60 70 80"
+    ],
+    "answer": 2,
+    "explanation": "`o` walks the nodes at odd positions (1st, 3rd, ...) and `e` the nodes at even positions; each round links `o` to the next odd node and `e` to the next even node. When the loop ends, `o` is the last odd-position node (70) and it is linked to `eh`, the first even-position node. Result: odd positions in order, then even positions in order: `10 30 50 70 20 40 60 80`."
+  },
+  {
+    "id": "pds-100",
+    "topic": "trees-bst",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The keys 30, 20, 10, 25, 28, 27 are inserted in this order into an initially empty AVL tree, with the usual rotations after each insertion. What is the preorder traversal of the final tree?",
+    "options": [
+      "20 10 28 25 27 30",
+      "25 20 10 28 27 30",
+      "28 20 10 25 27 30",
+      "25 20 10 27 28 30"
+    ],
+    "answer": 1,
+    "explanation": "- 30, 20, 10: left-left case at 30, single right rotation. Tree: 20 (10, 30).\n- 25 goes left of 30; 28 goes right of 25. Node 30 is now left-right heavy: double rotation makes 28 the parent of 25 and 30. Tree: 20 (10, 28 (25, 30)).\n- 27 goes right of 25. Node 20 has left height 0 and right height 2, and the new key went into the left subtree of its right child: right-left case. Rotate right at 28, then left at 20.\n\nFinal tree: 25 with children 20 (left child 10) and 28 (children 27, 30). Preorder: `25 20 10 28 27 30`."
+  },
+  {
+    "id": "pds-101",
+    "topic": "trees-bst",
+    "type": "msq",
+    "marks": 2,
+    "q": "The keys 50, 40, 30, 45, 47, 46, 20, 10 are inserted in this order into an initially empty AVL tree. Height is the number of edges on the longest root-to-leaf path. Which statements about the process and the final tree are true?",
+    "options": [
+      "The root of the final tree is 45",
+      "The final tree has height 3",
+      "Exactly two of the eight insertions trigger a double rotation",
+      "The final tree has exactly 3 leaves"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "- 30: left-left at 50, single rotation. Tree 40 (30, 50).\n- 45 goes left of 50. 47: left-right at 50, double rotation. Tree 40 (30, 47 (45, 50)).\n- 46 goes right of 45. Node 40 is right-left heavy, double rotation. Tree 45 (40 (30), 47 (46, 50)).\n- 20 goes left of 30: left-left at 40, single rotation. Tree 45 (30 (20, 40), 47 (46, 50)).\n- 10 goes left of 20; no node becomes unbalanced.\n\nFinal tree: root 45, height 3 (path 45, 30, 20, 10), two double rotations (for 47 and 46), and four leaves: 10, 40, 46, 50."
+  },
+  {
+    "id": "pds-102",
+    "topic": "trees-bst",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Height is the number of edges on the longest root-to-leaf path. What is the minimum number of nodes in an AVL tree of height 5?",
+    "options": [
+      "12",
+      "33",
+      "20",
+      "32"
+    ],
+    "answer": 2,
+    "explanation": "The sparsest AVL tree of height $h$ has subtrees of heights $h - 1$ and $h - 2$, so $N(h) = N(h-1) + N(h-2) + 1$ with $N(0) = 1$, $N(1) = 2$. Then $N(2) = 4$, $N(3) = 7$, $N(4) = 12$, $N(5) = 20$."
+  },
+  {
+    "id": "pds-103",
+    "topic": "trees-bst",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The preorder traversal of a binary search tree with distinct keys is\n\n`50 30 20 25 40 35 45 70 60 65 80`\n\nWhat is its postorder traversal?",
+    "options": [
+      "20 25 35 45 40 30 60 65 80 70 50",
+      "25 20 35 40 45 30 65 60 80 70 50",
+      "25 20 45 35 40 30 65 60 80 70 50",
+      "25 20 35 45 40 30 65 60 80 70 50"
+    ],
+    "answer": 3,
+    "explanation": "In preorder the first key is the root; the following keys smaller than it form the left subtree and the rest form the right subtree. Apply this recursively.\n\n- Root 50; left part `30 20 25 40 35 45`, right part `70 60 65 80`.\n- 30 has left subtree 20 (right child 25) and right subtree 40 (children 35, 45).\n- 70 has left subtree 60 (right child 65) and right child 80.\n\nPostorder (left, right, root): `25 20 35 45 40 30 65 60 80 70 50`."
+  },
+  {
+    "id": "pds-104",
+    "topic": "trees-bst",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A complete binary tree (every level full except possibly the last, which is filled from the left) has 37 nodes. How many leaves does it have?",
+    "options": [
+      "18",
+      "20",
+      "19",
+      "16"
+    ],
+    "answer": 2,
+    "explanation": "In a complete binary tree with $n$ nodes stored level by level, nodes $1 .. \\lfloor n/2 \\rfloor$ (1-based) are internal and the rest are leaves. Leaves $= n - \\lfloor n/2 \\rfloor = \\lceil n/2 \\rceil = \\lceil 37/2 \\rceil = 19$."
+  },
+  {
+    "id": "pds-105",
+    "topic": "trees-bst",
+    "type": "nat",
+    "marks": 2,
+    "q": "Height is the number of edges on the longest root-to-leaf path. How many structurally different binary trees with 5 nodes have height exactly 3?",
+    "answer": {
+      "min": 20,
+      "max": 20
+    },
+    "explanation": "Let $H(n, h)$ count binary trees with $n$ nodes and height at most $h$. There are $C_5 = 42$ binary trees with 5 nodes in all.\n\n- Height 4: the tree is a path, with a left/right choice at each of 4 edges: $2^4 = 16$.\n- Height 2: a tree of height 2 holds at most 7 nodes. With 5 nodes the root needs both children (one child allows at most 4 nodes), plus 2 of the 4 grandchild slots: $\\binom{4}{2} = 6$.\n- Heights 0 and 1 cannot hold 5 nodes.\n\nHeight exactly 3: $42 - 16 - 6 = 20$."
+  },
+  {
+    "id": "pds-106",
+    "topic": "trees-bst",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A binary tree with $n \\ge 1$ nodes is stored with a left and a right child pointer in every node. How many of these $2n$ pointers are `NULL`?",
+    "options": [
+      "$n - 1$",
+      "$n + 1$",
+      "$n$",
+      "$2n - 1$"
+    ],
+    "answer": 1,
+    "explanation": "There are $2n$ pointer fields. Every node except the root is pointed to by exactly one of them, so $n - 1$ pointers are non-null. The remaining $2n - (n - 1) = n + 1$ are `NULL`. Threaded binary trees reuse these pointers."
+  },
+  {
+    "id": "pds-107",
+    "topic": "trees-bst",
+    "type": "msq",
+    "marks": 2,
+    "q": "The keys 60, 30, 80, 20, 45, 70, 90, 40, 50, 48 are inserted in this order into an empty binary search tree. The root is then deleted; because it has two children, it is replaced by its inorder successor, which is removed from its old place. Height is the number of edges on the longest root-to-leaf path. Which statements about the tree after the deletion are true?",
+    "options": [
+      "The new root is 70",
+      "Node 80 has exactly one child",
+      "The height of the tree drops from 4 to 3",
+      "The tree still has 5 leaves"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Before deletion: 60 has left subtree 30 (20, 45 (40, 50 (48, -))) and right subtree 80 (70, 90). Leaves: 20, 40, 48, 70, 90. Height 4 (path 60, 30, 45, 50, 48).\n\nThe inorder successor of 60 is the smallest key in its right subtree, 70, a leaf. 70 moves to the root and 80 is left with only the child 90.\n\n- New root 70: true.\n- 80 has one child (90): true.\n- The left subtree is unchanged, so the height stays 4: false.\n- Leaves are now 20, 40, 48, 90, only 4: false."
+  },
+  {
+    "id": "pds-108",
+    "topic": "trees-bst",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many structurally different binary search trees with the keys 1, 2, 3, 4, 5, 6 have 3 at the root?",
+    "answer": {
+      "min": 10,
+      "max": 10
+    },
+    "explanation": "With root 3, the left subtree holds {1, 2} and the right subtree holds {4, 5, 6}. They are chosen independently, so the count is $C_2 \\cdot C_3 = 2 \\cdot 5 = 10$, where $C_k$ is the $k$-th Catalan number."
+  },
+  {
+    "id": "pds-109",
+    "topic": "trees-bst",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A binary tree with distinct labels has level-order traversal `A B C D E F G H` and inorder traversal `D B H E A F C G`. What is its postorder traversal?",
+    "options": [
+      "D H E B G F C A",
+      "H D E B F G C A",
+      "D H E B F G C A",
+      "D E H B F G C A"
+    ],
+    "answer": 2,
+    "explanation": "The first label in level order is the root: A. In the inorder sequence, `D B H E` is the left subtree and `F C G` the right subtree. For each part, the root is the label that comes first in level order.\n\n- Left part `D B H E`: root B, left D, right part `H E` with root E and left child H.\n- Right part `F C G`: root C, children F and G.\n\nPostorder: `D H E B F G C A`."
+  },
+  {
+    "id": "pds-110",
+    "topic": "binary-heaps",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A binary min-heap holds 100 distinct keys. The root is at depth 0. At which depths can the third smallest key be?",
+    "options": [
+      "Only depth 1",
+      "Depth 1 or depth 2",
+      "Only depth 2",
+      "Any depth from 1 to 6"
+    ],
+    "answer": 1,
+    "explanation": "Every ancestor of a key is smaller than it. The third smallest key has at most two smaller keys, so it has at most two ancestors: depth at most 2. It is not the minimum, so its depth is at least 1. Both are possible: it can be the root's other child (depth 1), or the child of the second smallest (depth 2). In general the $k$-th smallest lies at depth between 1 and $k - 1$ (for $k \\ge 2$, and limited by the height)."
+  },
+  {
+    "id": "pds-111",
+    "topic": "binary-heaps",
+    "type": "nat",
+    "marks": 2,
+    "q": "The keys 9, 7, 5, 3, 1, 8, 2, 6, 4 are inserted one at a time into an initially empty binary min-heap. Each insertion places the key at the end of the array and swaps it with its parent while it is smaller than the parent. How many swaps are made in total?",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "Swaps per insertion (array shown after each step):\n\n| Insert | Swaps | Heap |\n|---|---|---|\n| 9 | 0 | 9 |\n| 7 | 1 | 7 9 |\n| 5 | 1 | 5 9 7 |\n| 3 | 2 | 3 5 7 9 |\n| 1 | 2 | 1 3 7 9 5 |\n| 8 | 0 | 1 3 7 9 5 8 |\n| 2 | 1 | 1 3 2 9 5 8 7 |\n| 6 | 1 | 1 3 2 6 5 8 7 9 |\n| 4 | 1 | 1 3 2 4 5 8 7 9 6 |\n\nTotal: 9."
+  },
+  {
+    "id": "pds-112",
+    "topic": "binary-heaps",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The array below is a max-heap with the root at index 0:\n\n`70, 50, 65, 30, 45, 40, 60, 10, 25, 35`\n\nThe key at index 7 is increased from 10 to 68, and the heap property is restored by moving it up. What is the resulting array?",
+    "options": [
+      "68, 70, 65, 50, 45, 40, 60, 30, 25, 35",
+      "70, 68, 65, 30, 45, 40, 60, 50, 25, 35",
+      "70, 68, 65, 50, 45, 40, 60, 30, 25, 35",
+      "70, 65, 68, 50, 45, 40, 60, 30, 25, 35"
+    ],
+    "answer": 2,
+    "explanation": "The parent of index $i$ is $\\lfloor (i - 1)/2 \\rfloor$.\n\n- Index 7 (68) vs parent index 3 (30): swap.\n- Index 3 (68) vs parent index 1 (50): swap.\n- Index 1 (68) vs parent index 0 (70): stop.\n\nResult: `70, 68, 65, 50, 45, 40, 60, 30, 25, 35`."
+  },
+  {
+    "id": "pds-113",
+    "topic": "binary-heaps",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many different arrays of the keys 1, 2, 3, 4, 5 are valid binary max-heaps (root at index 0)?",
+    "answer": {
+      "min": 8,
+      "max": 8
+    },
+    "explanation": "5 must be at the root. With 5 nodes the left subtree of the root has 3 nodes and the right subtree has 1. Choose which 3 of the remaining 4 keys go left: $\\binom{4}{3} = 4$. A 3-node subtree has its largest key on top and 2 orders for the children; a 1-node subtree has 1. Total $4 \\cdot 2 \\cdot 1 = 8$."
+  },
+  {
+    "id": "pds-114",
+    "topic": "binary-heaps",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A binary max-heap of $n \\ge 2$ distinct keys is stored in an array with the root at index 0. Where can the minimum key be?",
+    "options": [
+      "At any index from $\\lfloor n/2 \\rfloor$ to $n - 1$",
+      "Only at index $n - 1$",
+      "Only at an index from $\\lceil n/2 \\rceil$ to $n - 1$ that is odd",
+      "At any index from 1 to $n - 1$"
+    ],
+    "answer": 0,
+    "explanation": "A node with a child is larger than that child, so the minimum has no children: it is a leaf. With the root at index 0, the leaves are exactly the indices $\\lfloor n/2 \\rfloor$ to $n - 1$, and the minimum can be at any of them. So finding the minimum needs to check about $n/2$ keys, which is $\\Theta(n)$."
+  },
+  {
+    "id": "pds-115",
+    "topic": "binary-heaps",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which statements about binary heaps are true? Height is the number of edges on the longest root-to-leaf path.",
+    "options": [
+      "A binary heap with 1000 elements has height 9",
+      "Heapsort is a stable sorting algorithm",
+      "Searching for an arbitrary key in a binary heap takes $O(\\log n)$ time in the worst case",
+      "An array sorted in ascending order is always a valid min-heap"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "- Height is $\\lfloor \\log_2 1000 \\rfloor = 9$ ($2^9 = 512 \\le 1000 < 1024$). True.\n- Heapsort moves equal keys past each other when it swaps the root with the last element, so it is not stable. False.\n- The heap order says nothing about which subtree holds a key, so a search may have to look at every node: $\\Theta(n)$. False.\n- In a sorted array every parent index is smaller than its child's index, so every parent key is at most the child's key. True."
+  },
+  {
+    "id": "pds-116",
+    "topic": "graphs-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An undirected graph with $V$ vertices and $E$ edges is stored only as an adjacency matrix. What is the time needed to count its edges?",
+    "options": [
+      "$\\Theta(E)$",
+      "$\\Theta(V + E)$",
+      "$\\Theta(V^2)$",
+      "$\\Theta(V)$"
+    ],
+    "answer": 2,
+    "explanation": "Without any extra bookkeeping, every entry of the matrix (or at least half of it) has to be read to find the 1s, so the time is $\\Theta(V^2)$ even if the graph is sparse. With adjacency lists the same count takes $\\Theta(V + E)$."
+  },
+  {
+    "id": "pds-117",
+    "topic": "graphs-representation",
+    "type": "nat",
+    "marks": 1,
+    "q": "The adjacency matrix of a simple undirected graph with 9 vertices has exactly 37 zero entries (the diagonal included). How many edges does the graph have?",
+    "answer": {
+      "min": 22,
+      "max": 22
+    },
+    "explanation": "The matrix has $9 \\times 9 = 81$ entries, so it has $81 - 37 = 44$ ones. Each edge contributes two ones, $A[u][v]$ and $A[v][u]$, and the diagonal is all zero. So $E = 44 / 2 = 22$."
+  },
+  {
+    "id": "pds-118",
+    "topic": "graphs-representation",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A simple undirected graph on 64 vertices is stored as a bit array holding only the entries strictly above the diagonal of its adjacency matrix. How many bits does the array need?",
+    "options": [
+      "2080",
+      "2016",
+      "4032",
+      "4096"
+    ],
+    "answer": 1,
+    "explanation": "The matrix is symmetric with a zero diagonal, so only the $\\binom{64}{2} = \\frac{64 \\cdot 63}{2} = 2016$ entries above the diagonal carry information. Including the diagonal would give 2080; the full matrix needs 4096."
+  },
+  {
+    "id": "pds-119",
+    "topic": "graphs-representation",
+    "type": "msq",
+    "marks": 2,
+    "q": "A directed graph with $V$ vertices and $E$ edges is stored either as an adjacency matrix or as unsorted adjacency lists that hold only outgoing edges. Which statements are true?",
+    "options": [
+      "The out-degree of a given vertex takes $\\Theta(V)$ time with the matrix and $\\Theta(\\text{out-degree})$ time with the lists",
+      "The in-degree of a given vertex takes $\\Theta(V + E)$ time with the lists in the worst case",
+      "Building the transpose graph takes $\\Theta(V^2)$ time with the matrix and $\\Theta(V + E)$ time with the lists",
+      "Deciding whether the graph has a universal sink (in-degree $V - 1$, out-degree 0) needs $\\Omega(V^2)$ time with the matrix"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "- Out-degree: a full row of the matrix must be scanned; the list is walked once. True.\n- In-degree: the lists hold only outgoing edges, so every list must be scanned to find edges into the vertex. True.\n- Transpose: every matrix entry is copied; with lists, each edge is appended to a new list once. True.\n- False. With the matrix a universal sink can be found in $O(V)$: start at vertex 0; if $A[i][j] = 1$ then $i$ is not a sink, move to $j$, else $j$ is not a sink. Each step rules out one vertex, and checking the one candidate left takes $O(V)$."
+  },
+  {
+    "id": "pds-120",
+    "topic": "graphs-representation",
+    "type": "nat",
+    "marks": 2,
+    "q": "A directed graph on vertices 0 to 4 is stored in compressed sparse row form: the out-neighbours of vertex $u$ are `col[rowptr[u]]` to `col[rowptr[u+1] - 1]`.\n\n`rowptr = {0, 2, 5, 5, 8, 10}`\n`col = {1, 3, 0, 2, 4, 0, 1, 2, 3, 1}`\n\nHow many unordered pairs of vertices $\\{u, v\\}$ have edges in both directions, $u \\to v$ and $v \\to u$?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "Decode the out-lists:\n\n| Vertex | Out-neighbours |\n|---|---|\n| 0 | 1, 3 |\n| 1 | 0, 2, 4 |\n| 2 | none |\n| 3 | 0, 1, 2 |\n| 4 | 3, 1 |\n\nPairs in both directions: $\\{0, 1\\}$, $\\{0, 3\\}$, $\\{1, 4\\}$. The edge $3 \\to 1$ has no reverse ($1$ does not list 3), and $4 \\to 3$ has no reverse either. Answer: 3."
   }
 ]

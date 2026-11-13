@@ -874,5 +874,882 @@
     ],
     "answer": 0,
     "explanation": "Write the pairs from $q_0$ upward with $q_{-1} = 0$:\n\n$(q_0,q_{-1}) = (0,0)$ none; $(q_1,q_0) = (1,0)$ subtract; $(q_2,q_1) = (1,1)$ none; $(q_3,q_2) = (0,1)$ add; $(q_4,q_3) = (1,0)$ subtract; $(q_5,q_4) = (1,1)$ none; $(q_6,q_5) = (1,1)$ none; $(q_7,q_6) = (0,1)$ add.\n\nSo 2 additions and 2 subtractions. Each run of 1s costs one subtraction at its low end and one addition just above its high end."
+  },
+  {
+    "id": "co-061",
+    "topic": "instruction-set-addressing",
+    "type": "nat",
+    "marks": 2,
+    "q": "A processor has 16-bit instructions and 6-bit address fields, with an expanding opcode. Two-address instructions use a 4-bit opcode followed by two address fields. Unused two-address opcode patterns are extended into one-address instructions (10-bit opcode, one address field), and unused one-address patterns are extended into zero-address instructions (16-bit opcode). The instruction set must contain exactly 120 one-address instructions and 256 zero-address instructions. What is the maximum number of two-address instructions?",
+    "answer": {
+      "min": 14,
+      "max": 14
+    },
+    "explanation": "With $X$ two-address instructions, $16 - X$ patterns are free, each giving $2^6 = 64$ one-address patterns. 120 are used as one-address instructions, and the zero-address instructions need $256 / 2^6 = 4$ more one-address patterns to expand. So $(16 - X) \\times 64 \\ge 124$, which means $16 - X \\ge 2$ and $X \\le 14$. With $X = 14$: 128 one-address patterns, 120 used, 8 left, giving $8 \\times 64 = 512 \\ge 256$ zero-address codes."
+  },
+  {
+    "id": "co-062",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A zero-address (stack) machine runs the code below. Each binary operation pops the top element $y$, then pops the next element $x$, and pushes $x \\text{ op } y$.\n\n```\nPUSH 6\nPUSH 4\nPUSH 3\nSUB\nMUL\nPUSH 8\nPUSH 2\nDIV\nADD\n```\n\nWhat value is on top of the stack at the end?",
+    "options": [
+      "10",
+      "-5.75",
+      "14",
+      "6"
+    ],
+    "answer": 0,
+    "explanation": "SUB computes $4 - 3 = 1$, MUL gives $6 \\times 1 = 6$, DIV gives $8 / 2 = 4$, ADD gives $6 + 4 = 10$. Taking the operands in the wrong order ($y \\text{ op } x$) gives $-1$, $-6$, $0.25$ and finally $-5.75$."
+  },
+  {
+    "id": "co-063",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "An accumulator (one-address) machine has the instructions LOAD X, STORE X, ADD X, SUB X and MUL X, where each arithmetic instruction computes $\\text{ACC} \\leftarrow \\text{ACC} \\text{ op } M[X]$. Variables A, B, C and D must not be modified; one temporary location T may be used. What is the minimum number of instructions needed to compute $Z = (A + B) \\times (C - D)$ and store it in Z?",
+    "options": [
+      "5",
+      "7",
+      "6",
+      "8"
+    ],
+    "answer": 1,
+    "explanation": "One possible sequence: LOAD C, SUB D, STORE T, LOAD A, ADD B, MUL T, STORE Z, which is 7 instructions. Fewer is impossible: A, B, C and D each need one instruction, MUL needs one, the result needs a STORE, and since MUL takes its second operand from memory, one of the two computed factors must first be stored, which costs one more STORE."
+  },
+  {
+    "id": "co-064",
+    "topic": "instruction-set-addressing",
+    "type": "msq",
+    "marks": 2,
+    "q": "Memory is word-addressable. Register R1 holds 200 and register R2 holds 4. Some memory words hold:\n\n| Address | 200 | 204 | 300 | 320 | 500 |\n|---|---|---|---|---|---|\n| Contents | 500 | 320 | 204 | 700 | 300 |\n\nAn instruction has an address field containing 300. Which statements about the operand fetched are correct?",
+    "options": [
+      "In direct (absolute) mode using the address field, the operand is 204.",
+      "In memory indirect mode using the address field, the operand is 204.",
+      "In register indirect mode through R1, the operand is 500.",
+      "In based-indexed mode with effective address R1 + R2, the operand is 320."
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "A: correct, operand $= M[300] = 204$.\nB: wrong, indirect mode goes one more step: $M[M[300]] = M[204] = 320$.\nC: correct, operand $= M[R1] = M[200] = 500$.\nD: correct, $EA = 200 + 4 = 204$ and $M[204] = 320$."
+  },
+  {
+    "id": "co-065",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The 32-bit word $\\texttt{0x1A2B3C4D}$ is stored at byte address $\\texttt{0x100}$ on a little-endian, byte-addressable machine. Which byte is at address $\\texttt{0x102}$?",
+    "options": [
+      "$\\texttt{0x1A}$",
+      "$\\texttt{0x3C}$",
+      "$\\texttt{0x2B}$",
+      "$\\texttt{0x4D}$"
+    ],
+    "answer": 2,
+    "explanation": "Little-endian stores the least significant byte at the lowest address: 0x100 holds 4D, 0x101 holds 3C, 0x102 holds 2B, 0x103 holds 1A. A big-endian machine would put 3C at 0x102."
+  },
+  {
+    "id": "co-066",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For which of these addressing modes is the operand available without any memory access beyond fetching the instruction itself?",
+    "options": [
+      "Direct (absolute)",
+      "Register indirect",
+      "Memory indirect",
+      "Immediate"
+    ],
+    "answer": 3,
+    "explanation": "In immediate mode the operand is a field of the instruction. Direct and register indirect modes need one data memory access, and memory indirect needs two (one for the pointer, one for the operand)."
+  },
+  {
+    "id": "co-067",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Memory is word-addressable and words 1000 to 1004 hold 5, $-2$, 7, 3 and 9. Initially R1 = 1000, R2 = 0 and R3 = 4. The program below runs. In auto-increment mode $(R)+$ the operand is $M[R]$ and then $R \\leftarrow R + 1$; in auto-decrement mode $-(R)$, first $R \\leftarrow R - 1$ and then the operand is $M[R]$.\n\n```\nLOOP: ADD R2, (R1)+     ; R2 = R2 + operand\n      DEC R3            ; R3 = R3 - 1\n      BNZ LOOP          ; branch if R3 != 0\n      ADD R2, -(R1)\n```\n\nWhat is the final value of R2?",
+    "options": [
+      "16",
+      "13",
+      "22",
+      "25"
+    ],
+    "answer": 0,
+    "explanation": "The loop runs 4 times and adds $5 - 2 + 7 + 3 = 13$, leaving R1 = 1004. The last instruction first decrements R1 to 1003, then adds $M[1003] = 3$, so R2 = 16. Using post-decrement (reading $M[1004] = 9$) would give 22."
+  },
+  {
+    "id": "co-068",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Memory addresses are 24 bits and every opcode is 8 bits. Three machines compute $X = (A + B) \\times C$, where only X may be modified:\n\n- 3-address: OP dst, src1, src2 (dst = src1 op src2), all memory operands.\n- 2-address: OP dst, src (dst = dst op src) and MOV dst, src, all memory operands.\n- 1-address: LOAD, STORE, ADD, MUL with an accumulator.\n\nEach machine uses the minimum number of instructions. How many instruction bits must be fetched on the 3-address, 2-address and 1-address machines respectively?",
+    "options": [
+      "160, 112, 128",
+      "160, 168, 128",
+      "80, 168, 96",
+      "160, 168, 160"
+    ],
+    "answer": 1,
+    "explanation": "3-address: ADD X, A, B and MUL X, X, C, so $2 \\times (8 + 3 \\times 24) = 160$ bits.\n2-address: MOV X, A, then ADD X, B, then MUL X, C, so $3 \\times (8 + 2 \\times 24) = 168$ bits.\n1-address: LOAD A, ADD B, MUL C, STORE X, so $4 \\times (8 + 24) = 128$ bits."
+  },
+  {
+    "id": "co-069",
+    "topic": "instruction-set-addressing",
+    "type": "nat",
+    "marks": 1,
+    "q": "A processor has 48 instructions, 5 addressing modes and 32 registers. Every instruction is 32 bits long and holds, in order, an opcode, an addressing-mode field, a register field and an address field. Each of the first three fields uses the minimum number of bits. How many bits are left for the address field?",
+    "answer": {
+      "min": 18,
+      "max": 18
+    },
+    "explanation": "Opcode $\\lceil \\log_2 48 \\rceil = 6$ bits, mode $\\lceil \\log_2 5 \\rceil = 3$ bits, register $\\log_2 32 = 5$ bits. Address field $= 32 - 6 - 3 - 5 = 18$ bits."
+  },
+  {
+    "id": "co-070",
+    "topic": "instruction-set-addressing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A compiler accesses a local variable stored at a fixed offset from the frame pointer of the current stack frame. Which addressing mode fits this access best?",
+    "options": [
+      "Immediate",
+      "Direct (absolute)",
+      "Base register plus displacement",
+      "Memory indirect"
+    ],
+    "answer": 2,
+    "explanation": "The frame's location is only known at run time and is held in the frame pointer register, while the offset is fixed at compile time. Base plus displacement computes $EA = \\text{FP} + \\text{offset}$ in one access. A direct address would need the frame at a fixed location, which breaks recursion."
+  },
+  {
+    "id": "co-071",
+    "topic": "alu-control-unit",
+    "type": "nat",
+    "marks": 2,
+    "q": "A microprogrammed control unit drives 48 control signals and its control memory holds 512 microinstructions. Each microinstruction has a control field, a 3-bit condition-select field and a next-address field just wide enough to address the control memory.\n\n- Horizontal format: the control field has one bit per control signal.\n- Vertical format: the control field holds one binary code that activates at most one signal, with one extra code meaning \"no signal\".\n\nHow many bits of control memory does the vertical format save in total compared with the horizontal format?",
+    "answer": {
+      "min": 21504,
+      "max": 21504
+    },
+    "explanation": "Next-address field: $\\log_2 512 = 9$ bits.\nHorizontal word: $48 + 3 + 9 = 60$ bits.\nVertical control field: $\\lceil \\log_2 49 \\rceil = 6$ bits, so the word is $6 + 3 + 9 = 18$ bits.\nSaving: $(60 - 18) \\times 512 = 42 \\times 512 = 21504$ bits."
+  },
+  {
+    "id": "co-072",
+    "topic": "alu-control-unit",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which statements about a microprogrammed control unit are correct?",
+    "options": [
+      "The control address register (microprogram counter) holds the address of the next microinstruction to be read.",
+      "Mapping logic converts the opcode of a machine instruction into the starting address of its microroutine.",
+      "A microprogrammed control unit cannot branch on status flags such as zero or carry.",
+      "Each machine instruction is always executed by exactly one microinstruction."
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "A and B: correct, they describe microinstruction sequencing.\nC: wrong, the condition-select field lets a microinstruction branch on status flags.\nD: wrong, a machine instruction is normally a routine of several microinstructions (fetch, decode, execute steps)."
+  },
+  {
+    "id": "co-073",
+    "topic": "alu-control-unit",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 16-bit carry-select adder has four 4-bit blocks. Block 0 (bits 0 to 3) is a ripple-carry adder with carry-in $c_0$. Blocks 1, 2 and 3 each contain two 4-bit ripple-carry adders, one with carry-in 0 and one with carry-in 1, and 2-to-1 multiplexers that use the block's real carry-in to select its sum bits and carry-out. In every full adder the carry-out is valid 2 ns and the sum 3 ns after its last input is valid. A multiplexer output is valid 1 ns after both its data inputs and its select input are valid. All operand bits and $c_0$ are valid at time 0. When are all 16 sum bits and $c_{16}$ valid?",
+    "options": [
+      "9 ns",
+      "14 ns",
+      "33 ns",
+      "11 ns"
+    ],
+    "answer": 3,
+    "explanation": "Block 0: $c_4$ is valid at $4 \\times 2 = 8$ ns and its top sum bit at $6 + 3 = 9$ ns.\nIn blocks 1 to 3 both candidate adders start at time 0, so candidate carry-outs are ready at 8 ns and candidate sums at 9 ns.\n$c_8 = \\max(8, 8) + 1 = 9$, $c_{12} = \\max(9, 8) + 1 = 10$, $c_{16} = \\max(10, 8) + 1 = 11$ ns.\nBlock 3 sums are selected by $c_{12}$: $\\max(10, 9) + 1 = 11$ ns. So everything is valid at 11 ns. A plain 16-bit ripple adder would need $15 \\times 2 + 3 = 33$ ns."
+  },
+  {
+    "id": "co-074",
+    "topic": "alu-control-unit",
+    "type": "msq",
+    "marks": 1,
+    "q": "An 8-bit ALU adds 01101100 and 01010011, treating them as two's complement numbers. Which flags are set (equal to 1) after the addition?",
+    "options": [
+      "Carry flag C",
+      "Overflow flag V",
+      "Sign flag N",
+      "Zero flag Z"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "$108 + 83 = 191$, giving the 8-bit result 10111111. No carry leaves bit 7, so C = 0. Two positive operands gave a result with sign bit 1, so V = 1 and N = 1. The result is not zero, so Z = 0."
+  },
+  {
+    "id": "co-075",
+    "topic": "alu-control-unit",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 32-bit adder is built from eight 4-bit carry-lookahead blocks connected in ripple fashion (the carry-out of each block is the carry-in of the next). In every block, the $P$ and $G$ signals are ready 1 gate delay after the operands, and the block's carry-out is ready 2 gate delays after both its $P$, $G$ signals and its carry-in are ready. Operands and $c_0$ are ready at time 0. After how many gate delays is $c_{32}$ ready?",
+    "options": [
+      "17",
+      "16",
+      "19",
+      "33"
+    ],
+    "answer": 0,
+    "explanation": "$c_4 = \\max(1, 0) + 2 = 3$. Every later block already has $P$, $G$ ready at time 1, so each adds 2: $c_{32} = 3 + 7 \\times 2 = 17$ gate delays."
+  },
+  {
+    "id": "co-076",
+    "topic": "alu-control-unit",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A hardwired control unit times each instruction with a step counter whose output drives a decoder producing the timing signals $T_0, T_1, \\ldots$. The longest instruction needs 12 time steps. What is the minimum counter width and the matching decoder?",
+    "options": [
+      "3-bit counter, 3-to-8 decoder",
+      "4-bit counter, 4-to-16 decoder",
+      "12-bit counter, no decoder",
+      "5-bit counter, 5-to-32 decoder"
+    ],
+    "answer": 1,
+    "explanation": "12 distinct steps need $\\lceil \\log_2 12 \\rceil = 4$ counter bits, decoded by a 4-to-16 decoder (outputs $T_0$ to $T_{11}$ used). 3 bits only give 8 steps. A 12-bit one-hot ring counter could avoid the decoder, but it is not a minimum-width binary counter."
+  },
+  {
+    "id": "co-077",
+    "topic": "alu-control-unit",
+    "type": "nat",
+    "marks": 2,
+    "q": "A microprogrammed processor runs one microinstruction per clock cycle at 400 MHz. Every machine instruction first executes a common fetch-and-decode microroutine of 3 microinstructions, then an execute microroutine whose length depends on the class:\n\n| Class | Fraction | Execute microinstructions |\n|---|---|---|\n| ALU | 40% | 2 |\n| Load | 25% | 4 |\n| Store | 15% | 3 |\n| Branch | 20% | 1 |\n\nWhat is the processor's speed in MIPS? (Round to two decimal places.)",
+    "answer": {
+      "min": 73.2,
+      "max": 73.6
+    },
+    "explanation": "Average cycles per instruction $= 3 + 0.4(2) + 0.25(4) + 0.15(3) + 0.2(1) = 3 + 0.8 + 1.0 + 0.45 + 0.2 = 5.45$.\nMIPS $= 400 / 5.45 \\approx 73.39$."
+  },
+  {
+    "id": "co-078",
+    "topic": "alu-control-unit",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The 8-bit two's complement value $\\texttt{0xF3}$ is sign-extended to 16 bits. What is the result?",
+    "options": [
+      "$\\texttt{0x00F3}$, value $243$",
+      "$\\texttt{0xF300}$, value $-3328$",
+      "$\\texttt{0xFFF3}$, value $-13$",
+      "$\\texttt{0x80F3}$, value $-32525$"
+    ],
+    "answer": 2,
+    "explanation": "Sign extension copies the sign bit (1 here) into all new high bits: 0xFFF3. Its value is $-(\\texttt{0x000D}) = -13$, the same as the 8-bit value 0xF3. Zero extension (0x00F3) would change the value to 243."
+  },
+  {
+    "id": "co-079",
+    "topic": "memory-hierarchy-cache",
+    "type": "nat",
+    "marks": 2,
+    "q": "A processor has L1, L2 and main memory, accessed hierarchically: a request goes to L2 only after missing in L1, and to memory only after missing in L2, and each level visited adds its full access time. L1 takes 1 ns and has a miss rate of 4%. L2 takes 8 ns. The global miss rate of L2 (the fraction of all processor references that miss in both L1 and L2) is 1%. Main memory takes 120 ns. What is the average memory access time in ns?",
+    "answer": {
+      "min": 2.5,
+      "max": 2.54
+    },
+    "explanation": "$T = t_1 + m_1 t_2 + m_{\\text{global}}\\, t_m = 1 + 0.04 \\times 8 + 0.01 \\times 120 = 1 + 0.32 + 1.2 = 2.52$ ns.\nEquivalently, the L2 local miss rate is $0.01 / 0.04 = 0.25$ and $T = 1 + 0.04\\,(8 + 0.25 \\times 120)$. Multiplying the global rate by 0.04 again is the common mistake."
+  },
+  {
+    "id": "co-080",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A system has an L1 cache (2 ns, hit rate 0.9) and main memory (100 ns), accessed hierarchically, so a miss costs the L1 time plus the memory time. An L2 cache with access time 10 ns is added between them, still hierarchical. What is the minimum local hit rate of L2 (hits among requests that reach L2) that brings the average access time down to 5 ns?",
+    "options": [
+      "0.6",
+      "0.75",
+      "0.9",
+      "0.8"
+    ],
+    "answer": 3,
+    "explanation": "$T = 2 + 0.1\\,[10 + (1 - h_2) \\times 100] \\le 5$ gives $10 + 100(1 - h_2) \\le 30$, so $1 - h_2 \\le 0.2$ and $h_2 \\ge 0.8$. Without L2 the average is $2 + 0.1 \\times 100 = 12$ ns."
+  },
+  {
+    "id": "co-081",
+    "topic": "memory-hierarchy-cache",
+    "type": "nat",
+    "marks": 2,
+    "q": "A cache uses write-through with no-write-allocate and 32-byte blocks. 75% of memory references are reads and 25% are writes. Every write, hit or miss, sends exactly 4 bytes to main memory, and a write miss does not bring the block into the cache. The read miss rate is 5%, and each read miss fetches one block. Ignoring addresses and control signals, how many bytes cross the memory bus per memory reference on average?",
+    "answer": {
+      "min": 2.19,
+      "max": 2.21
+    },
+    "explanation": "Reads: $0.75 \\times 0.05 \\times 32 = 1.2$ bytes. Writes: $0.25 \\times 4 = 1.0$ byte. Total 2.2 bytes per reference."
+  },
+  {
+    "id": "co-082",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A write-back, write-allocate cache has 32-byte blocks and a miss rate of 5% over all references. Every miss replaces a valid block, and 30% of replaced blocks are dirty and must be written back. Each miss reads one block from memory. Ignoring addresses and control signals, how many bytes cross the memory bus per memory reference on average?",
+    "options": [
+      "2.08",
+      "1.60",
+      "2.20",
+      "3.20"
+    ],
+    "answer": 0,
+    "explanation": "Block fetches: $0.05 \\times 32 = 1.6$ bytes. Write-backs: $0.05 \\times 0.3 \\times 32 = 0.48$ bytes. Total $2.08$ bytes. Write hits create no bus traffic at all, which is why write-back usually beats write-through on traffic."
+  },
+  {
+    "id": "co-083",
+    "topic": "memory-hierarchy-cache",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which statements about victim caches and multi-level inclusion are correct?",
+    "options": [
+      "A victim cache holds blocks recently evicted from L1, so a later miss on such a block can be served without going to L2.",
+      "In an inclusive hierarchy, every block present in L1 is also present in L2.",
+      "In an inclusive hierarchy, evicting a block from L2 never requires any action in L1.",
+      "In an exclusive hierarchy, the total distinct data held equals the size of L2 alone."
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "A and B: correct by definition.\nC: wrong, to keep inclusion, a block evicted from L2 must also be invalidated in L1 (back-invalidation).\nD: wrong, an exclusive hierarchy keeps no block in both levels, so it can hold up to L1 size plus L2 size."
+  },
+  {
+    "id": "co-084",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "`int A[32][64]` (4-byte elements, row-major, starting at address 0) is read once in column order: `j` in the outer loop from 0 to 63, `i` in the inner loop from 0 to 31. Only accesses to A use the cache, which is direct-mapped with 64-byte blocks and starts empty. How many misses occur if the cache is (i) 8 KB and (ii) 4 KB?",
+    "options": [
+      "(i) 2048, (ii) 2048",
+      "(i) 128, (ii) 2048",
+      "(i) 128, (ii) 1024",
+      "(i) 128, (ii) 128"
+    ],
+    "answer": 1,
+    "explanation": "A is $32 \\times 64 \\times 4 = 8$ KB, which is 128 blocks; each row is 256 bytes, or 4 blocks.\n(i) The 8 KB cache has 128 lines and A's 128 consecutive blocks map to distinct lines, so only the 128 compulsory misses occur.\n(ii) The 4 KB cache has 64 lines. $A[i][j]$ is in block $4i + \\lfloor j/16 \\rfloor$, so rows $i$ and $i + 16$ map to the same line. In each column, rows 16 to 31 evict the blocks loaded by rows 0 to 15, and the next column needs those again, so every one of the 2048 accesses misses."
+  },
+  {
+    "id": "co-085",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Each memory reference first goes through a TLB (1 ns, hit rate 95%). On a TLB miss, a two-level page table walk makes 2 main memory accesses of 50 ns each (page table entries are not cached), after which translation is complete with no further TLB time. The physical address then goes to a cache (2 ns, hit rate 90%); on a cache miss, main memory is accessed for a further 50 ns. There are no page faults. What is the average time per memory reference?",
+    "options": [
+      "8 ns",
+      "12 ns",
+      "13 ns",
+      "15.5 ns"
+    ],
+    "answer": 2,
+    "explanation": "Translation: $1 + 0.05 \\times 2 \\times 50 = 6$ ns. Data access: $2 + 0.1 \\times 50 = 7$ ns. Total $6 + 7 = 13$ ns. Forgetting the page table walk gives 8 ns."
+  },
+  {
+    "id": "co-086",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A virtually indexed, physically tagged L1 cache is 32 KB with 64-byte blocks, and pages are 4 KB. To avoid aliasing, the index and block-offset bits must lie entirely inside the page offset. What is the minimum associativity?",
+    "options": [
+      "2-way",
+      "4-way",
+      "16-way",
+      "8-way"
+    ],
+    "answer": 3,
+    "explanation": "Index plus offset bits address one way of the cache, so each way may be at most one page: $32\\text{ KB} / k \\le 4\\text{ KB}$, giving $k \\ge 8$."
+  },
+  {
+    "id": "co-087",
+    "topic": "memory-hierarchy-cache",
+    "type": "nat",
+    "marks": 1,
+    "q": "A cache has an access time of 4 ns and main memory 80 ns. On a miss, the cache is checked first and then memory is accessed, so a miss costs $4 + 80$ ns. What is the minimum hit ratio needed for an average access time of at most 8 ns?",
+    "answer": {
+      "min": 0.95,
+      "max": 0.95
+    },
+    "explanation": "$T = 4 + (1 - h) \\times 80 \\le 8$ gives $1 - h \\le 0.05$, so $h \\ge 0.95$."
+  },
+  {
+    "id": "co-088",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A 16-bit address bus connects a $4\\text{K} \\times 8$ memory chip. Address lines $A_{11}$ to $A_0$ go to the chip, and the chip-select logic enables it exactly when $A_{15} A_{14} A_{13} A_{12} = 1010$. Which address range (hexadecimal) does the chip occupy?",
+    "options": [
+      "A000 to AFFF",
+      "0A00 to 0AFF",
+      "A000 to A3FF",
+      "5000 to 5FFF"
+    ],
+    "answer": 0,
+    "explanation": "The top hex digit is fixed at $1010_2 = \\text{A}$ and the low 12 bits run over all 4096 values, from 000 to FFF. So the range is A000 to AFFF."
+  },
+  {
+    "id": "co-089",
+    "topic": "memory-hierarchy-cache",
+    "type": "msq",
+    "marks": 2,
+    "q": "Misses are classified as compulsory, capacity and conflict. Which statements are correct?",
+    "options": [
+      "A fully associative cache with the same capacity and block size has no conflict misses, by definition.",
+      "Raising associativity with capacity and block size fixed can reduce conflict misses but cannot reduce compulsory misses.",
+      "Doubling capacity with block size and associativity fixed reduces compulsory misses.",
+      "For every reference string, a fully associative LRU cache has at most as many misses as a direct-mapped cache of the same capacity and block size."
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "A: correct, conflict misses are defined as the extra misses over a fully associative cache of the same size.\nB: correct, compulsory misses depend only on the number of distinct blocks touched, which depends on block size.\nC: wrong, the first touch of each block misses whatever the capacity.\nD: wrong. With 2 lines and block $b$ mapped to line $b \\bmod 2$, the string 1, 0, 2, 1 gives 3 misses direct-mapped (block 1 stays in line 1) but 4 misses fully associative with LRU (block 2 evicts block 1)."
+  },
+  {
+    "id": "co-090",
+    "topic": "memory-hierarchy-cache",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 2-way set-associative cache has 4 sets and 16-byte blocks, uses FIFO replacement within each set, and starts empty. Block number = $\\lfloor \\text{address} / 16 \\rfloor$ and set = block mod 4. The processor reads these byte addresses (decimal), in order:\n\n0, 68, 4, 136, 20, 8, 72, 140, 24, 36, 0, 28\n\nHow many of the 12 references are hits?",
+    "answer": {
+      "min": 3,
+      "max": 3
+    },
+    "explanation": "Blocks: 0, 4, 0, 8, 1, 0, 4, 8, 1, 2, 0, 1. Blocks 0, 4 and 8 all map to set 0; block 1 to set 1; block 2 to set 2.\nSet 0 (FIFO): 0 miss, 4 miss, 0 hit, 8 miss (evicts 0), 0 miss (evicts 4), 4 miss (evicts 8), 8 miss (evicts 0), 0 miss. One hit.\nSet 1: block 1 miss, then hit, hit. Two hits. Set 2: one miss.\nTotal hits = 3. LRU would give 4, because it keeps block 0 after its reuse."
+  },
+  {
+    "id": "co-091",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A cache with fixed capacity has a hit time of 1 ns. The miss penalty is 40 ns plus 2 ns for every 8 bytes of the block. The measured miss rates are:\n\n| Block size | 16 B | 32 B | 64 B | 128 B |\n|---|---|---|---|---|\n| Miss rate | 8% | 5% | 4% | 3.8% |\n\nWhich block size gives the lowest average memory access time ($t_{hit} + m \\times \\text{penalty}$)?",
+    "options": [
+      "16 B",
+      "64 B",
+      "32 B",
+      "128 B"
+    ],
+    "answer": 1,
+    "explanation": "Penalties: 44, 48, 56 and 72 ns. AMAT: $1 + 0.08 \\times 44 = 4.52$, $1 + 0.05 \\times 48 = 3.40$, $1 + 0.04 \\times 56 = 3.24$, $1 + 0.038 \\times 72 = 3.736$ ns. 64 B is best; at 128 B the longer transfer outweighs the small drop in miss rate."
+  },
+  {
+    "id": "co-092",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A 4-way set-associative cache uses exact LRU replacement. What is the minimum number of bits per set that can record the complete recency order of its 4 lines?",
+    "options": [
+      "2",
+      "4",
+      "5",
+      "8"
+    ],
+    "answer": 2,
+    "explanation": "The 4 lines can be in any of $4! = 24$ recency orders, so $\\lceil \\log_2 24 \\rceil = 5$ bits are needed. A 2-bit age counter per line (8 bits) also works but is not minimal."
+  },
+  {
+    "id": "co-093",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A cache block is 4 words. Sending the address to memory takes 1 bus cycle, each DRAM access takes 15 bus cycles, and transferring one word over the one-word-wide bus takes 1 bus cycle. What is the miss penalty in bus cycles for (i) a single non-interleaved memory that handles one word at a time, and (ii) a 4-way low-order interleaved memory where the 4 banks access their words in parallel and then send them one after another?",
+    "options": [
+      "(i) 61, (ii) 20",
+      "(i) 65, (ii) 19",
+      "(i) 68, (ii) 23",
+      "(i) 65, (ii) 20"
+    ],
+    "answer": 3,
+    "explanation": "(i) $1 + 4 \\times 15 + 4 \\times 1 = 65$ cycles, since each word waits for its own DRAM access.\n(ii) $1 + 15 + 4 \\times 1 = 20$ cycles, since the four accesses overlap and only the transfers are serial."
+  },
+  {
+    "id": "co-094",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 2,
+    "q": "`float A[1024]` starts at address 0 and `float B[1024]` at address 8192 (4-byte elements). The loop `for (i = 0; i < 1024; i++) s += A[i] * B[i];` reads A[i] and then B[i] in each iteration. Only these reads use the cache, which is 8 KB with 32-byte blocks and starts empty. How many misses occur if the cache is (i) direct-mapped and (ii) 2-way set-associative with LRU?",
+    "options": [
+      "(i) 2048, (ii) 256",
+      "(i) 256, (ii) 256",
+      "(i) 2048, (ii) 2048",
+      "(i) 1024, (ii) 256"
+    ],
+    "answer": 0,
+    "explanation": "The two arrays are exactly 8 KB apart, so $A[i]$ and $B[i]$ always fall in the same set.\n(i) Direct-mapped: each read of A[i] evicts B's block and vice versa, so all 2048 reads miss.\n(ii) 2-way: both blocks fit in the same set, so only the first touch of each block misses: $2 \\times 4096 / 32 = 256$ misses."
+  },
+  {
+    "id": "co-095",
+    "topic": "memory-hierarchy-cache",
+    "type": "nat",
+    "marks": 1,
+    "q": "In a two-level cache hierarchy, the L1 local miss rate is 5% and the L2 local miss rate (misses among requests that reach L2) is 20%. Out of 10,000 processor memory references, how many reach main memory?",
+    "answer": {
+      "min": 100,
+      "max": 100
+    },
+    "explanation": "Global miss rate $= 0.05 \\times 0.2 = 0.01$, so $10000 \\times 0.01 = 100$ references reach memory."
+  },
+  {
+    "id": "co-096",
+    "topic": "memory-hierarchy-cache",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In the loop `for (i = 0; i < n; i++) sum += a[i];` the repeated use of `sum` and `i`, and the reading of `a[0], a[1], a[2], ...`, are examples of which kinds of locality, respectively?",
+    "options": [
+      "Spatial, temporal",
+      "Temporal, spatial",
+      "Temporal, temporal",
+      "Spatial, spatial"
+    ],
+    "answer": 1,
+    "explanation": "The same variables `sum` and `i` are reused again and again over time (temporal locality). Consecutive array elements sit at neighbouring addresses, often in the same block (spatial locality)."
+  },
+  {
+    "id": "co-097",
+    "topic": "io-interrupt-dma",
+    "type": "nat",
+    "marks": 2,
+    "q": "A device delivers data at 4 MB/s (1 MB = $10^6$ bytes) in 16-byte units, and the CPU must poll it once for every unit so that no data is lost. Each poll, including the transfer of the unit, takes 500 clock cycles on a 1 GHz CPU. What percentage of CPU time goes to polling this device?",
+    "answer": {
+      "min": 12.4,
+      "max": 12.6
+    },
+    "explanation": "Polls per second $= 4 \\times 10^6 / 16 = 250000$. Cycles per second $= 250000 \\times 500 = 1.25 \\times 10^8$. Fraction $= 1.25 \\times 10^8 / 10^9 = 12.5\\%$."
+  },
+  {
+    "id": "co-098",
+    "topic": "io-interrupt-dma",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Devices D1 (highest priority), D2 and D3 (lowest) raise interrupt requests at the same instant, just after the CPU has started an instruction that needs 2 µs more to finish. The CPU recognises interrupts only at the end of an instruction and serves pending requests in priority order. Service routines are not nested. For each interrupt, the entry sequence (saving state and vectoring) takes 1 µs and the return takes 1 µs, and a pending request is recognised immediately after a return. The routine bodies of D1 and D2 take 10 µs and 15 µs. What is the time from the request to the first instruction of D3's service routine?",
+    "options": [
+      "28 µs",
+      "30 µs",
+      "32 µs",
+      "29 µs"
+    ],
+    "answer": 2,
+    "explanation": "Finish the current instruction: 2. Serve D1: $1 + 10 + 1 = 12$. Serve D2: $1 + 15 + 1 = 17$. Entry for D3: 1. Total $2 + 12 + 17 + 1 = 32$ µs."
+  },
+  {
+    "id": "co-099",
+    "topic": "io-interrupt-dma",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A DMA controller moves data over a 32-bit bus whose bus cycle is 100 ns. (i) In burst mode it transfers a 2 KB block (1 KB = 1024 bytes); for how long is the CPU kept off the bus? (ii) In cycle-stealing mode it serves a device delivering 1 MB/s (1 MB = $10^6$ bytes), taking one bus cycle per 4-byte word; what fraction of bus cycles does it steal?",
+    "options": [
+      "(i) 204.8 µs, (ii) 2.5%",
+      "(i) 51.2 µs, (ii) 10%",
+      "(i) 20.48 µs, (ii) 0.25%",
+      "(i) 51.2 µs, (ii) 2.5%"
+    ],
+    "answer": 3,
+    "explanation": "(i) $2048 / 4 = 512$ bus cycles, $512 \\times 100$ ns $= 51.2$ µs.\n(ii) $10^6 / 4 = 250000$ stolen cycles per second, each 100 ns, so $0.025$ s of every second: 2.5%. 204.8 µs counts one bus cycle per byte."
+  },
+  {
+    "id": "co-100",
+    "topic": "io-interrupt-dma",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which statements about I/O transfer methods are correct?",
+    "options": [
+      "With programmed I/O and busy waiting, the CPU keeps testing a status flag until the device is ready.",
+      "Interrupt-driven I/O removes all CPU work from moving each data word.",
+      "When software polling identifies which device interrupted, the order in which devices are polled sets their priority.",
+      "A maskable interrupt is serviced in the middle of the current instruction, as soon as it arrives."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "A: correct, that is the cost of busy waiting.\nB: wrong, the CPU still moves each word inside the service routine; only DMA takes that work away.\nC: correct, the first device checked that has its flag set is served first.\nD: wrong, interrupts are normally recognised at the end of an instruction cycle."
+  },
+  {
+    "id": "co-101",
+    "topic": "io-interrupt-dma",
+    "type": "nat",
+    "marks": 1,
+    "q": "A serial line runs at 9600 bits per second. Each character is sent as 10 bits (start bit, 8 data bits, stop bit), and the receiver raises one interrupt per character. How many interrupts per second does the CPU handle when the line is fully loaded?",
+    "answer": {
+      "min": 960,
+      "max": 960
+    },
+    "explanation": "$9600 / 10 = 960$ characters per second, one interrupt each."
+  },
+  {
+    "id": "co-102",
+    "topic": "io-interrupt-dma",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 500 MHz CPU serves a device delivering 2 MB/s (1 MB = $10^6$ bytes). Two options: (i) interrupt-driven I/O with one interrupt per 4 bytes, each costing 100 cycles; (ii) DMA with blocks of 4000 bytes, where the CPU spends 1500 cycles per block on setup and the completion interrupt, and the transfers themselves do not slow the CPU. What fraction of CPU time does each option use?",
+    "options": [
+      "(i) 10%, (ii) 0.15%",
+      "(i) 10%, (ii) 1.5%",
+      "(i) 2.5%, (ii) 0.15%",
+      "(i) 40%, (ii) 0.6%"
+    ],
+    "answer": 0,
+    "explanation": "(i) $2 \\times 10^6 / 4 = 5 \\times 10^5$ interrupts/s, $\\times 100 = 5 \\times 10^7$ cycles/s, out of $5 \\times 10^8$: 10%.\n(ii) $2 \\times 10^6 / 4000 = 500$ blocks/s, $\\times 1500 = 7.5 \\times 10^5$ cycles/s: 0.15%."
+  },
+  {
+    "id": "co-103",
+    "topic": "io-interrupt-dma",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which statement describes memory-mapped I/O?",
+    "options": [
+      "The CPU uses special IN and OUT instructions and a separate I/O address space.",
+      "Device registers occupy part of the memory address space and are read and written with ordinary load and store instructions.",
+      "Devices transfer data to memory without CPU involvement.",
+      "Every device gets its own private bus that is not shared with memory."
+    ],
+    "answer": 1,
+    "explanation": "Memory-mapped I/O assigns device registers addresses in the normal address space. Separate IN/OUT instructions describe isolated (port-mapped) I/O, and transfers without the CPU describe DMA."
+  },
+  {
+    "id": "co-104",
+    "topic": "io-interrupt-dma",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which statements about DMA transfer modes are correct?",
+    "options": [
+      "In transparent (hidden) DMA, the controller uses the bus only in cycles when the CPU does not need it, so the CPU is never slowed.",
+      "For a block of the same size, cycle stealing moves the data in fewer bus cycles than burst mode.",
+      "Before the DMA controller drives the address bus, the CPU must grant it the bus (bus request and bus grant handshake).",
+      "At the end of a block transfer, the DMA controller usually raises an interrupt to inform the CPU."
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "A: correct, that is the defining property, at the cost of a slow transfer.\nB: wrong, both modes move the same number of words; cycle stealing adds bus arbitration for every word, so it is never faster.\nC: correct, the controller becomes bus master only after the grant.\nD: correct, this is how the CPU learns the block is done."
+  },
+  {
+    "id": "co-105",
+    "topic": "io-interrupt-dma",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 1 GHz CPU handles a device by interrupts. Each interrupt moves 8 bytes, and the whole handling (entry, service routine and return) takes 2500 cycles. The CPU may spend at most 40% of its time on this device. What is the highest data rate the device can sustain, in MB/s (1 MB = $10^6$ bytes)?",
+    "answer": {
+      "min": 1.27,
+      "max": 1.29
+    },
+    "explanation": "Cycles available per second: $0.4 \\times 10^9 = 4 \\times 10^8$. Interrupts per second: $4 \\times 10^8 / 2500 = 160000$. Data rate: $160000 \\times 8 = 1.28 \\times 10^6$ bytes/s $= 1.28$ MB/s."
+  },
+  {
+    "id": "co-106",
+    "topic": "pipelining",
+    "type": "nat",
+    "marks": 1,
+    "q": "An instruction needs 20 ns of logic, which can be split into any number $k$ of equal pipeline stages. Each stage adds a 1 ns latch delay. What is the minimum $k$ for a clock period of at most 3 ns?",
+    "answer": {
+      "min": 10,
+      "max": 10
+    },
+    "explanation": "Clock $= 20/k + 1 \\le 3$, so $20/k \\le 2$ and $k \\ge 10$."
+  },
+  {
+    "id": "co-107",
+    "topic": "pipelining",
+    "type": "nat",
+    "marks": 2,
+    "q": "In a pipeline with base CPI 1, 20% of instructions are conditional branches and 65% of branches are taken. Scheme S predicts every branch not-taken: a taken branch costs 3 stall cycles and a not-taken branch costs none. Scheme D uses a dynamic predictor that is right 90% of the time: a mispredicted branch costs 3 stall cycles and a correctly predicted branch (taken or not) costs none. The clock is the same. What is the speedup of D over S? (Round to two decimal places.)",
+    "answer": {
+      "min": 1.3,
+      "max": 1.32
+    },
+    "explanation": "$\\text{CPI}_S = 1 + 0.2 \\times 0.65 \\times 3 = 1.39$.\n$\\text{CPI}_D = 1 + 0.2 \\times 0.1 \\times 3 = 1.06$.\nSpeedup $= 1.39 / 1.06 \\approx 1.31$."
+  },
+  {
+    "id": "co-108",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Machine M1 is a pipeline with one memory port shared by instruction fetch and data access. Loads and stores are 30% of instructions, and each causes one stall cycle; otherwise CPI is 1. Machine M2 is the same pipeline with separate instruction and data memories, so it has no such stalls, but its clock period is 1.05 times that of M1. For the same program, which machine is faster and by what factor?",
+    "options": [
+      "M1, by about 1.05 times",
+      "M2, by about 1.30 times",
+      "M2, by about 1.24 times",
+      "M1, by about 1.24 times"
+    ],
+    "answer": 2,
+    "explanation": "Time per instruction: M1 $= 1.3\\,t$, M2 $= 1.0 \\times 1.05\\,t = 1.05\\,t$. M2 is faster by $1.3 / 1.05 \\approx 1.24$. Removing the structural hazard is worth more than the 5% slower clock."
+  },
+  {
+    "id": "co-109",
+    "topic": "pipelining",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 5-stage pipeline has full forwarding and base CPI 1. Loads are 25% of instructions, and 40% of loads are immediately followed by an instruction that uses the loaded value, which costs 1 stall cycle. Branches are 15% of instructions, 60% of them are taken, and the pipeline predicts not-taken, so each taken branch costs 2 stall cycles. There are no other stalls. What is the average CPI?",
+    "answer": {
+      "min": 1.27,
+      "max": 1.29
+    },
+    "explanation": "$\\text{CPI} = 1 + 0.25 \\times 0.4 \\times 1 + 0.15 \\times 0.6 \\times 2 = 1 + 0.10 + 0.18 = 1.28$."
+  },
+  {
+    "id": "co-110",
+    "topic": "pipelining",
+    "type": "nat",
+    "marks": 2,
+    "q": "A 5-stage pipeline (IF, ID, EX, MEM, WB) with full forwarding runs this loop for 100 iterations (the branch is taken 99 times and falls through once):\n\n```\nLOOP: LW   R2, 0(R1)\n      ADD  R3, R3, R2\n      ADDI R1, R1, 4\n      BNE  R1, R5, LOOP\n```\n\nA load followed immediately by an instruction that uses its result costs 1 stall cycle. Branches are predicted not-taken, and a taken branch costs 2 stall cycles; a not-taken branch costs none. There are no other stalls. How many clock cycles pass from the IF of the first instruction to the WB of the last instruction?",
+    "answer": {
+      "min": 702,
+      "max": 702
+    },
+    "explanation": "400 instructions executed. Without stalls: $5 + 400 - 1 = 404$ cycles. Load-use stalls: 1 per iteration, 100. Taken-branch penalties: $99 \\times 2 = 198$. Total $404 + 100 + 198 = 702$."
+  },
+  {
+    "id": "co-111",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A pipeline uses delayed branches with one delay slot. The instruction placed in the delay slot",
+    "options": [
+      "is executed only if the branch is taken",
+      "is executed only if the branch is not taken",
+      "is never executed and only fills the slot",
+      "is executed whether or not the branch is taken"
+    ],
+    "answer": 3,
+    "explanation": "By definition the delay-slot instruction always completes; the branch takes effect after it. The compiler fills the slot with an instruction that is useful on both paths, or with a NOP."
+  },
+  {
+    "id": "co-112",
+    "topic": "pipelining",
+    "type": "msq",
+    "marks": 2,
+    "q": "A 5-stage pipeline (IF, ID, EX, MEM, WB) forwards results into the start of EX from the EX/MEM and MEM/WB pipeline registers. All source operands are needed at the start of EX. Which statements are correct?",
+    "options": [
+      "An ALU instruction followed immediately by an ALU instruction that uses its result needs no stall.",
+      "A load followed immediately by an ALU instruction that uses the loaded value still needs one stall cycle.",
+      "Forwarding removes the need for any hazard detection or interlock logic.",
+      "If an ALU instruction's result is used by the instruction two places after it, the value is forwarded from the MEM/WB register."
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "A: correct, the result in EX/MEM is forwarded to the next instruction's EX.\nB: correct, the loaded value exists only at the end of MEM, one cycle too late for the next instruction's EX.\nC: wrong, the load-use case still needs detection logic to insert the stall.\nD: correct, when the consumer is in EX the producer is in WB, so the value sits in MEM/WB."
+  },
+  {
+    "id": "co-113",
+    "topic": "pipelining",
+    "type": "nat",
+    "marks": 1,
+    "q": "A 4-stage pipeline has stage delays 5, 7, 6 and 4 ns, and each stage register adds 1 ns. Ignoring stalls, what is the throughput for a long instruction stream, in MIPS (millions of instructions per second)?",
+    "answer": {
+      "min": 125,
+      "max": 125
+    },
+    "explanation": "Clock $= \\max(5, 7, 6, 4) + 1 = 8$ ns, one instruction per cycle, so $1 / 8\\text{ ns} = 125$ MIPS."
+  },
+  {
+    "id": "co-114",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 4-stage pipeline has stage delays 10, 8, 12 and 10 ns, and each pipeline register adds 2 ns. The equivalent non-pipelined unit takes 40 ns per instruction. What is the speedup of the pipeline when executing exactly 10 instructions with no stalls?",
+    "options": [
+      "2.20",
+      "2.86",
+      "3.33",
+      "2.50"
+    ],
+    "answer": 0,
+    "explanation": "Clock $= 12 + 2 = 14$ ns. Pipelined time $= (4 + 10 - 1) \\times 14 = 182$ ns. Non-pipelined time $= 10 \\times 40 = 400$ ns. Speedup $= 400 / 182 \\approx 2.20$. The value 2.86 $= 40/14$ is the limit for a very long stream."
+  },
+  {
+    "id": "co-115",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A 6-stage pipeline has perfectly balanced stages and no latch overhead. Stalls add an average of 0.5 cycles per instruction. What is its speedup over the equivalent non-pipelined processor for a long program?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": 1,
+    "explanation": "Non-pipelined time per instruction $= 6$ cycles; pipelined CPI $= 1.5$. Speedup $= 6 / 1.5 = 4$."
+  },
+  {
+    "id": "co-116",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 5-stage pipeline has stage delays 1.2, 1.0, 1.5, 1.1 and 0.9 ns, and each pipeline register adds 0.1 ns. Loads are 25% of instructions and half of them are immediately followed by a dependent instruction, costing 1 stall cycle. Branches are 20% of instructions, 55% of them are taken, and each taken branch costs 2 stall cycles. There are no other stalls. What is the average time per instruction?",
+    "options": [
+      "1.60 ns",
+      "2.02 ns",
+      "2.15 ns",
+      "2.29 ns"
+    ],
+    "answer": 2,
+    "explanation": "Clock $= 1.5 + 0.1 = 1.6$ ns. CPI $= 1 + 0.25 \\times 0.5 + 0.2 \\times 0.55 \\times 2 = 1 + 0.125 + 0.22 = 1.345$. Time $= 1.345 \\times 1.6 = 2.152$ ns. Forgetting the register delay gives 2.02 ns."
+  },
+  {
+    "id": "co-117",
+    "topic": "pipelining",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which techniques reduce the average cost of conditional branches in a pipeline?",
+    "options": [
+      "Resolving branches in ID instead of EX",
+      "A branch target buffer that supplies the target address at fetch time",
+      "Filling the branch delay slot with a useful instruction",
+      "Adding more stages before the stage where branches are resolved"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A: correct, fewer wrong-path instructions are fetched before the outcome is known.\nB: correct, a predicted-taken branch can fetch from the target in the next cycle.\nC: correct, the slot then does useful work instead of a NOP.\nD: wrong, resolving later means more instructions to flush, so the penalty grows."
+  },
+  {
+    "id": "co-118",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A 5-stage pipeline (IF, ID, EX, MEM, WB) forwards into the start of EX from the EX/MEM and MEM/WB registers. All source operands, including store data, are needed at the start of EX. A load's result is available only at the end of MEM. How many clock cycles, from the IF of I1 to the WB of I4, does this sequence take?\n\n```\nI1: LW  R1, 0(R2)\nI2: LW  R3, 4(R1)\nI3: ADD R4, R3, R1\nI4: SW  R4, 8(R2)\n```",
+    "options": [
+      "8",
+      "9",
+      "12",
+      "10"
+    ],
+    "answer": 3,
+    "explanation": "I2 needs R1 (from load I1) for its address: 1 stall. I3 needs R3 (from load I2): 1 stall; its R1 comes from MEM/WB with no stall. I4 needs R4 from ALU instruction I3: forwarded from EX/MEM, no stall. Total $= 5 + 4 - 1 + 2 = 10$ cycles."
+  },
+  {
+    "id": "co-119",
+    "topic": "pipelining",
+    "type": "nat",
+    "marks": 1,
+    "q": "An 8-stage pipeline executes 200 instructions, and hazards add 30 stall cycles in total. How many clock cycles does the program take, from the first IF to the last instruction leaving the pipeline?",
+    "answer": {
+      "min": 237,
+      "max": 237
+    },
+    "explanation": "$k + n - 1 + \\text{stalls} = 8 + 200 - 1 + 30 = 237$ cycles."
+  },
+  {
+    "id": "co-120",
+    "topic": "pipelining",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Why does splitting a pipeline into more and more stages eventually stop improving performance?",
+    "options": [
+      "Latch delay becomes a large share of each short cycle, and hazard penalties measured in cycles grow with depth",
+      "The number of instructions in the program increases with depth",
+      "A deeper pipeline cannot use forwarding",
+      "Each instruction must pass through every stage twice"
+    ],
+    "answer": 0,
+    "explanation": "Clock period is $\\tau/k + d$, so it cannot drop below the latch delay $d$. Meanwhile branches and load-use hazards are resolved more stages from the front, so each one costs more cycles. Together these cap the useful depth."
   }
 ]

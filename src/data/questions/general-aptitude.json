@@ -1488,5 +1488,1495 @@
       3
     ],
     "explanation": "G starts at the bottom-left. A 180 degree rotation sends each corner to the opposite corner, so G goes to the top-right. Reflecting left to right moves G to the bottom-right, and then reflecting top to bottom moves it to the top-right (two such reflections equal a 180 degree rotation). A 90 degree clockwise turn sends G to the top-left, and a 90 degree anticlockwise turn sends it to the bottom-right."
+  },
+  {
+    "id": "ga-101",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the option that correctly fills the blank.\n\nEach of the students ___ submitted the assignment on time.",
+    "options": [
+      "have",
+      "are",
+      "were",
+      "has"
+    ],
+    "answer": 3,
+    "explanation": "The subject is \"Each\", which is singular; \"of the students\" only describes it. A singular subject takes \"has\"."
+  },
+  {
+    "id": "ga-102",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is closest in meaning to the word **meticulous**?",
+    "options": [
+      "Scrupulous",
+      "Hasty",
+      "Generous",
+      "Timid"
+    ],
+    "answer": 0,
+    "explanation": "Meticulous means showing great attention to detail. Scrupulous (very careful and thorough) is the closest. Hasty is nearly the opposite."
+  },
+  {
+    "id": "ga-103",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is most nearly **opposite** in meaning to **verbose**?",
+    "options": [
+      "Wordy",
+      "Concise",
+      "Fluent",
+      "Loud"
+    ],
+    "answer": 1,
+    "explanation": "Verbose means using more words than needed. Concise means saying a lot in few words, so it is the opposite. Wordy is a synonym."
+  },
+  {
+    "id": "ga-104",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Doctor : Hospital :: Teacher : ___",
+    "options": [
+      "School",
+      "Student",
+      "Book",
+      "Lesson"
+    ],
+    "answer": 0,
+    "explanation": "A doctor works in a hospital. In the same way, a teacher works in a school. The other options are people or things a teacher deals with, not a workplace."
+  },
+  {
+    "id": "ga-105",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the correct preposition.\n\nHe insisted ___ paying the bill for everyone.",
+    "options": [
+      "on",
+      "for",
+      "at",
+      "to"
+    ],
+    "answer": 0,
+    "explanation": "The verb \"insist\" takes the preposition \"on\" (or \"upon\"): to insist on doing something."
+  },
+  {
+    "id": "ga-106",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the option that correctly fills the blank.\n\nIf I ___ you, I would accept the offer.",
+    "options": [
+      "am",
+      "will be",
+      "were",
+      "have been"
+    ],
+    "answer": 2,
+    "explanation": "This is an imagined (unreal) condition in the present, paired with \"would accept\". Standard English uses the past subjunctive \"were\" here."
+  },
+  {
+    "id": "ga-107",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The phrase **a blessing in disguise** means",
+    "options": [
+      "something that seems bad at first but turns out to be good",
+      "a gift that is given secretly",
+      "a hidden danger in a pleasant situation",
+      "a person who pretends to be kind"
+    ],
+    "answer": 0,
+    "explanation": "A blessing in disguise is a misfortune that later proves to be beneficial, for example missing a train that then breaks down."
+  },
+  {
+    "id": "ga-108",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which word does NOT belong with the others?",
+    "options": [
+      "Violin",
+      "Guitar",
+      "Flute",
+      "Sitar"
+    ],
+    "answer": 2,
+    "explanation": "Violin, guitar and sitar are string instruments. The flute is a wind instrument."
+  },
+  {
+    "id": "ga-109",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following words is spelt correctly?",
+    "options": [
+      "Acommodate",
+      "Accomodate",
+      "Accommodate",
+      "Acomodate"
+    ],
+    "answer": 2,
+    "explanation": "The correct spelling has a double c and a double m: accommodate."
+  },
+  {
+    "id": "ga-110",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the word that best fills the blank.\n\nThe scientist's claims were met with ___, since she offered no evidence to support them.",
+    "options": [
+      "applause",
+      "skepticism",
+      "enthusiasm",
+      "gratitude"
+    ],
+    "answer": 1,
+    "explanation": "Claims made without evidence are doubted, not welcomed. Skepticism (doubt) fits the reason given in the sentence; the other words are positive reactions."
+  },
+  {
+    "id": "ga-111",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Thermometer : Temperature :: Barometer : ___",
+    "options": [
+      "Humidity",
+      "Wind speed",
+      "Rainfall",
+      "Atmospheric pressure"
+    ],
+    "answer": 3,
+    "explanation": "A thermometer measures temperature. A barometer measures atmospheric pressure. Humidity is measured with a hygrometer, wind speed with an anemometer and rainfall with a rain gauge."
+  },
+  {
+    "id": "ga-112",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the option that correctly fills the blank.\n\nThere were ___ people at the meeting than we had expected.",
+    "options": [
+      "less",
+      "lesser",
+      "little",
+      "fewer"
+    ],
+    "answer": 3,
+    "explanation": "\"People\" is a countable plural noun, so the comparative is \"fewer\". \"Less\" is used with uncountable nouns such as water or time."
+  },
+  {
+    "id": "ga-113",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In which one of the following sentences is the word **affect** used correctly?",
+    "options": [
+      "The new rule will take affect next month.",
+      "The medicine had no affect on him.",
+      "The cold weather affected the harvest.",
+      "We could see the affects of the storm everywhere."
+    ],
+    "answer": 2,
+    "explanation": "\"Affect\" is normally a verb meaning to influence. The noun meaning a result is \"effect\": take effect, no effect, the effects of the storm. Only the sentence using \"affected\" as a verb is correct."
+  },
+  {
+    "id": "ga-114",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Choose the one word for the following.\n\nA person who can speak two languages fluently",
+    "options": [
+      "Bipartisan",
+      "Biennial",
+      "Bilateral",
+      "Bilingual"
+    ],
+    "answer": 3,
+    "explanation": "Bilingual means able to use two languages. Bipartisan means supported by two parties, biennial means every two years and bilateral means involving two sides."
+  },
+  {
+    "id": "ga-115",
+    "topic": "verbal",
+    "type": "msq",
+    "marks": 1,
+    "q": "Select ALL the words that are closest in meaning to **abundant**.",
+    "options": [
+      "Plentiful",
+      "Scarce",
+      "Ample",
+      "Meagre"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Abundant means existing in large quantities. Plentiful and ample both mean more than enough. Scarce and meagre mean too little, which is the opposite."
+  },
+  {
+    "id": "ga-116",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Read the passage.\n\n\"Every student who passed the final test had attended the revision workshop. Farah did not attend the revision workshop.\"\n\nWhich one of the following can be inferred with certainty?",
+    "options": [
+      "Farah did not pass the final test.",
+      "Farah failed the test because she missed the workshop.",
+      "Everyone who attended the workshop passed the final test.",
+      "Farah did not take the final test."
+    ],
+    "answer": 0,
+    "explanation": "Passing requires having attended the workshop. Farah did not attend, so she cannot be among those who passed. The passage does not say the workshop caused passing, does not say all attendees passed, and does not say whether Farah sat the test (she may have taken it and failed)."
+  },
+  {
+    "id": "ga-117",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Arrange the sentences P, Q, R and S into a logical paragraph.\n\nP: Within a few weeks, the shelves were nearly empty again.\nQ: The village library received a large donation of children's books last month.\nR: Volunteers spent a weekend sorting the books and putting them on the shelves.\nS: This shows how much unmet demand there was among local families.",
+    "options": [
+      "QPRS",
+      "RQPS",
+      "QRSP",
+      "QRPS"
+    ],
+    "answer": 3,
+    "explanation": "Q introduces the donation. R describes what was done with the books. P says they were borrowed quickly, and S draws the conclusion from P (\"This shows\"). S cannot come before P, since the shelving alone shows nothing about demand."
+  },
+  {
+    "id": "ga-118",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A company claims that its new app improves sleep, because people who installed it reported sleeping 30 minutes longer each night than they did before installing it.\n\nWhich one of the following, if true, most weakens the company's claim?",
+    "options": [
+      "Most users installed the app at the start of a long holiday, when they had no work commitments.",
+      "The app is available in several languages.",
+      "Many people find it hard to fall asleep.",
+      "The app was designed with help from sleep doctors."
+    ],
+    "answer": 0,
+    "explanation": "If most users started the app at the start of a holiday, the extra sleep can be explained by the holiday rather than the app. This offers an alternative cause and weakens the claim. The other options are irrelevant or, in the case of the doctors, mildly support it."
+  },
+  {
+    "id": "ga-119",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The sentence below is divided into four parts. Identify the part that contains an error.\n\n(P) One of my oldest friends / (Q) have recently moved / (R) to a small town / (S) near the coast.",
+    "options": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "answer": 1,
+    "explanation": "The subject is \"One\", which is singular, so the verb must be \"has recently moved\". Part Q uses \"have\", which is the error."
+  },
+  {
+    "id": "ga-120",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Read the passage.\n\n\"Streets lined with trees stay noticeably cooler in summer than bare streets. But a sapling needs regular watering and protection for its first two years, and in many city planting drives most saplings die within that time because no one is assigned to look after them. Drives that report only the number of saplings planted therefore overstate what they achieve.\"\n\nWhich one of the following best states the main point of the passage?",
+    "options": [
+      "Counting saplings planted gives an inflated picture of a planting drive's benefit when survival is not tracked.",
+      "Trees along streets do not make the streets cooler.",
+      "Cities should stop planting trees along streets.",
+      "Most saplings die because they are planted in summer."
+    ],
+    "answer": 0,
+    "explanation": "The passage accepts that trees cool streets, then argues that many saplings die without care, so a count of saplings planted overstates the result. The first wrong option contradicts the passage, the second goes far beyond it, and the third gives a cause the passage never mentions."
+  },
+  {
+    "id": "ga-121",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the pair of words that best fills the blanks.\n\nAlthough the plan looked ___ on paper, it proved ___ in practice.",
+    "options": [
+      "flawed, unworkable",
+      "promising, successful",
+      "weak, useless",
+      "promising, unworkable"
+    ],
+    "answer": 3,
+    "explanation": "\"Although\" signals a contrast between how the plan looked and how it turned out. Only \"promising\" followed by \"unworkable\" gives a contrast. The other pairs describe the plan the same way twice."
+  },
+  {
+    "id": "ga-122",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the pair that has the same relationship as\n\nDrought : Famine",
+    "options": [
+      "Negligence : Accident",
+      "Rain : Umbrella",
+      "Hunger : Food",
+      "Doctor : Patient"
+    ],
+    "answer": 0,
+    "explanation": "A drought can cause a famine: the first is a cause and the second its effect. Negligence can cause an accident in the same way. An umbrella is protection against rain, food relieves hunger, and a doctor treats a patient; none of these is cause and effect."
+  },
+  {
+    "id": "ga-123",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A notice at a club says: \"Only members may use the swimming pool.\"\n\nIf the notice is followed, which one of the following must be true?",
+    "options": [
+      "Every member uses the pool.",
+      "Non-members may use the pool on weekends.",
+      "Everyone who uses the pool is a member.",
+      "Members may not bring guests to the club."
+    ],
+    "answer": 2,
+    "explanation": "\"Only members may use the pool\" means that using the pool requires being a member, so every pool user is a member. It does not say all members use it, it rules out non-members at all times, and it says nothing about guests at the club."
+  },
+  {
+    "id": "ga-124",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A reviewer wrote that the ending of a novel was \"contrived\". The reviewer thinks the ending is",
+    "options": [
+      "surprising and clever",
+      "sad but believable",
+      "forced and artificial",
+      "too short"
+    ],
+    "answer": 2,
+    "explanation": "Contrived means created deliberately in a way that seems unnatural or forced. It is a criticism that the ending does not follow naturally from the story."
+  },
+  {
+    "id": "ga-125",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which one of the following sentences is grammatically correct?",
+    "options": [
+      "Neither of the two answers is correct.",
+      "Each of the boys have brought a lunch box.",
+      "The news are very disturbing.",
+      "He did not knew the answer."
+    ],
+    "answer": 0,
+    "explanation": "\"Neither\" is singular, so \"is\" is right. \"Each\" is singular and needs \"has\"; \"news\" is uncountable and takes \"is\"; after \"did not\" the base form \"know\" is required."
+  },
+  {
+    "id": "ga-126",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Read the passage.\n\n\"In 2020 a town had 40 bookshops. Between 2020 and 2025, 12 of them closed and 5 new ones opened. Over the same period, online book sales in the town doubled.\"\n\nWhich one of the following is supported by the passage?",
+    "options": [
+      "Online sales caused the bookshops to close.",
+      "The town had fewer bookshops in 2025 than in 2020.",
+      "Most book buyers in the town now shop online.",
+      "The new bookshops sell mainly second-hand books."
+    ],
+    "answer": 1,
+    "explanation": "The town had 40 - 12 + 5 = 33 bookshops in 2025, fewer than 40. The passage reports that online sales rose at the same time but gives no evidence of cause, no share of buyers, and nothing about what the new shops sell."
+  },
+  {
+    "id": "ga-127",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Arrange the sentences P, Q, R and S into a logical paragraph.\n\nP: As a result, the owners installed solar panels on the factory roof.\nQ: For years, the factory's electricity bills had been rising.\nR: Within two years, the savings had covered the cost of the panels.\nS: The owners began looking for a cheaper source of power.",
+    "options": [
+      "QSPR",
+      "SQPR",
+      "QPSR",
+      "QSRP"
+    ],
+    "answer": 0,
+    "explanation": "Q states the problem, S is the response to it, P (\"As a result\") is the action taken, and R reports the outcome of the panels. R mentions the panels, so it must come after P."
+  },
+  {
+    "id": "ga-128",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Choose the word that best fills the blank.\n\nThe witness gave a ___ account of the accident, leaving out no detail.",
+    "options": [
+      "cursory",
+      "comprehensive",
+      "vague",
+      "brief"
+    ],
+    "answer": 1,
+    "explanation": "\"Leaving out no detail\" describes an account that is complete. Comprehensive means including everything. Cursory, vague and brief all suggest the opposite."
+  },
+  {
+    "id": "ga-129",
+    "topic": "verbal",
+    "type": "mcq",
+    "marks": 2,
+    "q": "An advertisement says: \"Buy our water filter. It removes 99% of germs from tap water.\"\n\nWhich one of the following is an assumption the advertisement relies on?",
+    "options": [
+      "Some people are concerned about germs in their tap water.",
+      "Tap water contains no germs.",
+      "All water filters remove 99% of germs.",
+      "Nobody drinks bottled water."
+    ],
+    "answer": 0,
+    "explanation": "The advertisement tries to sell the filter by mentioning germs, which only works if some buyers care about germs in tap water. If tap water had no germs, the claim would be pointless; the other two options are not needed for the argument."
+  },
+  {
+    "id": "ga-130",
+    "topic": "verbal",
+    "type": "msq",
+    "marks": 2,
+    "q": "Select ALL the sentences in which the word **principal** is used correctly.",
+    "options": [
+      "The principal reason for the delay was bad weather.",
+      "She stood by her principals even when it cost her the job.",
+      "The school principal addressed the students on the first day.",
+      "The theory rests on a simple principal."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "Principal means main (adjective) or the head of a school (noun), so the first and third sentences are correct. A rule or belief is a principle, so the second should be \"principles\" and the fourth \"principle\"."
+  },
+  {
+    "id": "ga-131",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Two successive discounts of 10% and 20% on the marked price of an article are equivalent to a single discount of",
+    "options": [
+      "30%",
+      "28%",
+      "25%",
+      "32%"
+    ],
+    "answer": 1,
+    "explanation": "After both discounts the price is $0.9 \\times 0.8 = 0.72$ of the marked price. The single equivalent discount is $1 - 0.72 = 0.28$, that is 28%."
+  },
+  {
+    "id": "ga-132",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A man walks 15 km in 1 hour 15 minutes. His speed in metres per second is",
+    "options": [
+      "3",
+      "4",
+      "$\\frac{25}{6}$",
+      "$\\frac{10}{3}$"
+    ],
+    "answer": 3,
+    "explanation": "Speed = 15 km / 1.25 h = 12 km/h. Converting, $12 \\times \\frac{5}{18} = \\frac{10}{3}$ m/s."
+  },
+  {
+    "id": "ga-133",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 1,
+    "q": "The highest common factor (HCF) of 84, 126 and 210 is ___.",
+    "answer": {
+      "min": 42,
+      "max": 42
+    },
+    "explanation": "$84 = 2^2 \\cdot 3 \\cdot 7$, $126 = 2 \\cdot 3^2 \\cdot 7$, $210 = 2 \\cdot 3 \\cdot 5 \\cdot 7$. The common prime factors with the lowest powers are $2 \\cdot 3 \\cdot 7 = 42$."
+  },
+  {
+    "id": "ga-134",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the next number in the series?\n\n5, 11, 23, 47, 95, ___",
+    "options": [
+      "191",
+      "189",
+      "193",
+      "190"
+    ],
+    "answer": 0,
+    "explanation": "Each term is twice the previous term plus 1: $5 \\to 11 \\to 23 \\to 47 \\to 95 \\to 2 \\times 95 + 1 = 191$."
+  },
+  {
+    "id": "ga-135",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Rs. 7200 is divided among Kiran, Lisa and Omar in the ratio 2 : 3 : 4. Lisa's share (in rupees) is",
+    "options": [
+      "1600",
+      "3200",
+      "2700",
+      "2400"
+    ],
+    "answer": 3,
+    "explanation": "The ratio has 2 + 3 + 4 = 9 parts, so one part is 7200 / 9 = 800. Lisa gets 3 parts, which is Rs. 2400."
+  },
+  {
+    "id": "ga-136",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A card is drawn at random from 20 cards numbered 1 to 20. The probability that the number on the card is a multiple of 3 or of 4 is",
+    "options": [
+      "$\\frac{11}{20}$",
+      "$\\frac{9}{20}$",
+      "$\\frac{2}{5}$",
+      "$\\frac{1}{2}$"
+    ],
+    "answer": 3,
+    "explanation": "Multiples of 3: 6 cards. Multiples of 4: 5 cards. Multiples of both (12): 1 card. Favourable = 6 + 5 - 1 = 10, so the probability is 10/20 = 1/2."
+  },
+  {
+    "id": "ga-137",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Aditi's salary is 25% more than Ben's salary. By what percentage is Ben's salary less than Aditi's?",
+    "options": [
+      "25%",
+      "15%",
+      "22.5%",
+      "20%"
+    ],
+    "answer": 3,
+    "explanation": "Take Ben's salary as 100, so Aditi's is 125. Ben's is less by 25 out of 125, which is 20%."
+  },
+  {
+    "id": "ga-138",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 1,
+    "q": "The compound interest (in rupees) on Rs. 5000 at 10% per annum for 2 years, compounded annually, is ___.",
+    "answer": {
+      "min": 1050,
+      "max": 1050
+    },
+    "explanation": "Amount = $5000 \\times 1.1^2 = 6050$. Compound interest = 6050 - 5000 = Rs. 1050."
+  },
+  {
+    "id": "ga-139",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The average of the first 10 odd natural numbers is",
+    "options": [
+      "10",
+      "11",
+      "9",
+      "10.5"
+    ],
+    "answer": 0,
+    "explanation": "The first $n$ odd numbers add up to $n^2$, so the sum is 100 and the average is 100 / 10 = 10."
+  },
+  {
+    "id": "ga-140",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The value of $\\sqrt{0.0169}$ is",
+    "options": [
+      "0.13",
+      "1.3",
+      "0.013",
+      "0.0013"
+    ],
+    "answer": 0,
+    "explanation": "$0.0169 = \\frac{169}{10000}$, and $\\sqrt{\\frac{169}{10000}} = \\frac{13}{100} = 0.13$."
+  },
+  {
+    "id": "ga-141",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Sunil can finish a job in 12 days. Sunil and Grace working together finish it in 8 days. Working alone, Grace would finish the job in",
+    "options": [
+      "20 days",
+      "24 days",
+      "18 days",
+      "16 days"
+    ],
+    "answer": 1,
+    "explanation": "Grace's daily work = 1/8 - 1/12 = 3/24 - 2/24 = 1/24 of the job, so she needs 24 days."
+  },
+  {
+    "id": "ga-142",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The smaller angle between the hour hand and the minute hand of a clock at 7:20 is",
+    "options": [
+      "110 degrees",
+      "100 degrees",
+      "90 degrees",
+      "80 degrees"
+    ],
+    "answer": 1,
+    "explanation": "The hour hand is at $7 \\times 30 + 20 \\times 0.5 = 220$ degrees from 12. The minute hand is at $20 \\times 6 = 120$ degrees. The angle between them is 220 - 120 = 100 degrees."
+  },
+  {
+    "id": "ga-143",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 1,
+    "q": "The number of distinct arrangements of all the letters of the word LEVEL is ___.",
+    "answer": {
+      "min": 30,
+      "max": 30
+    },
+    "explanation": "LEVEL has 5 letters with L twice and E twice. The number of arrangements is $\\frac{5!}{2! \\, 2!} = \\frac{120}{4} = 30$."
+  },
+  {
+    "id": "ga-144",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "If $x + \\frac{1}{x} = 4$, then $x^2 + \\frac{1}{x^2}$ equals",
+    "options": [
+      "14",
+      "16",
+      "18",
+      "12"
+    ],
+    "answer": 0,
+    "explanation": "Square both sides: $x^2 + 2 + \\frac{1}{x^2} = 16$, so $x^2 + \\frac{1}{x^2} = 14$."
+  },
+  {
+    "id": "ga-145",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A boat moves at 10 km/h in still water, and the river flows at 2 km/h. The time taken to go 24 km downstream and come back the same 24 km upstream is",
+    "options": [
+      "4.8 hours",
+      "4 hours",
+      "6 hours",
+      "5 hours"
+    ],
+    "answer": 3,
+    "explanation": "Downstream speed = 12 km/h, upstream speed = 8 km/h. Time = 24/12 + 24/8 = 2 + 3 = 5 hours."
+  },
+  {
+    "id": "ga-146",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The remainder when $2^{20}$ is divided by 7 is",
+    "options": [
+      "1",
+      "2",
+      "6",
+      "4"
+    ],
+    "answer": 3,
+    "explanation": "$2^3 = 8$ leaves remainder 1 when divided by 7. So $2^{20} = (2^3)^6 \\cdot 2^2$ leaves the same remainder as $1 \\cdot 4 = 4$."
+  },
+  {
+    "id": "ga-147",
+    "topic": "quantitative",
+    "type": "msq",
+    "marks": 1,
+    "q": "Select ALL the numbers that are perfect squares.",
+    "options": [
+      "1444",
+      "1690",
+      "2025",
+      "2890"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "$1444 = 38^2$ and $2025 = 45^2$. 1690 and 2890 end in a single zero, and a perfect square that ends in 0 must end in an even number of zeros, so neither is a square."
+  },
+  {
+    "id": "ga-148",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The table shows a farm's wheat production (in tonnes) over five years.\n\n| Year | 2021 | 2022 | 2023 | 2024 | 2025 |\n|---|---|---|---|---|---|\n| Production | 250 | 300 | 330 | 400 | 440 |\n\nIn which year was the percentage increase over the previous year the highest?",
+    "options": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "answer": 2,
+    "explanation": "Increases: 2022: 50/250 = 20%. 2023: 30/300 = 10%. 2024: 70/330 = 21.2%. 2025: 40/400 = 10%. The highest is in 2024."
+  },
+  {
+    "id": "ga-149",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "The table shows a farm's wheat production (in tonnes) over five years.\n\n| Year | 2021 | 2022 | 2023 | 2024 | 2025 |\n|---|---|---|---|---|---|\n| Production | 250 | 300 | 330 | 400 | 440 |\n\nThe average annual production (in tonnes) over the five years is ___.",
+    "answer": {
+      "min": 344,
+      "max": 344
+    },
+    "explanation": "Total = 250 + 300 + 330 + 400 + 440 = 1720 tonnes. Average = 1720 / 5 = 344 tonnes."
+  },
+  {
+    "id": "ga-150",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A trader sells two articles for Rs. 990 each. On one he gains 10% and on the other he loses 10% (both on cost price). On the whole, he makes a",
+    "options": [
+      "neither profit nor loss",
+      "loss of 1%",
+      "gain of 1%",
+      "loss of 2%"
+    ],
+    "answer": 1,
+    "explanation": "Cost of the first = 990 / 1.1 = 900. Cost of the second = 990 / 0.9 = 1100. Total cost = 2000, total selling price = 1980. Loss = 20 on 2000, which is 1%."
+  },
+  {
+    "id": "ga-151",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A committee of 3 people is chosen at random from 4 men and 3 women. The probability that the committee has at least one woman is",
+    "options": [
+      "$\\frac{31}{35}$",
+      "$\\frac{4}{35}$",
+      "$\\frac{27}{35}$",
+      "$\\frac{18}{35}$"
+    ],
+    "answer": 0,
+    "explanation": "Total committees = $\\binom{7}{3} = 35$. Committees with no woman = $\\binom{4}{3} = 4$. So the probability of at least one woman is $1 - \\frac{4}{35} = \\frac{31}{35}$."
+  },
+  {
+    "id": "ga-152",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "A team of 5 is to be chosen from 6 boys and 4 girls. The number of ways of choosing the team so that it has at least 2 girls is ___.",
+    "answer": {
+      "min": 186,
+      "max": 186
+    },
+    "explanation": "All teams: $\\binom{10}{5} = 252$. Teams with no girl: $\\binom{6}{5} = 6$. Teams with exactly one girl: $4 \\times \\binom{6}{4} = 60$. Teams with at least 2 girls = 252 - 6 - 60 = 186."
+  },
+  {
+    "id": "ga-153",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Towns P and Q are 60 km apart. Hema leaves P at 8:00 am and cycles toward Q at 12 km/h. Daniel leaves Q at 8:30 am and cycles toward P at 18 km/h on the same road. They meet at",
+    "options": [
+      "10:00 am",
+      "10:30 am",
+      "10:12 am",
+      "10:18 am"
+    ],
+    "answer": 3,
+    "explanation": "By 8:30 am Hema has covered 6 km, leaving 54 km. They then close the gap at 12 + 18 = 30 km/h, taking 54/30 = 1.8 h = 1 hour 48 minutes. They meet at 8:30 + 1:48 = 10:18 am."
+  },
+  {
+    "id": "ga-154",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The sum of the present ages of a mother and her daughter is 50 years. Five years ago, the mother's age was 7 times the daughter's age. The mother's age 5 years from now will be",
+    "options": [
+      "40 years",
+      "45 years",
+      "50 years",
+      "42 years"
+    ],
+    "answer": 1,
+    "explanation": "Let the daughter be $d$, so the mother is $50 - d$. Then $45 - d = 7(d - 5)$, giving $8d = 80$ and $d = 10$. The mother is 40 now and will be 45 in 5 years."
+  },
+  {
+    "id": "ga-155",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A rectangular field is 40 m long and 30 m wide. A path 2 m wide runs all around the field, inside its boundary. The area of the path is",
+    "options": [
+      "280 square metres",
+      "256 square metres",
+      "264 square metres",
+      "296 square metres"
+    ],
+    "answer": 2,
+    "explanation": "The part inside the path measures (40 - 4) by (30 - 4) = 36 m by 26 m = 936 square metres. Path area = 1200 - 936 = 264 square metres."
+  },
+  {
+    "id": "ga-156",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "A pipe can fill an empty tank in 6 hours. Because of a leak at the bottom, it takes 8 hours to fill the tank. Working alone, the leak would empty the full tank in ___ hours.",
+    "answer": {
+      "min": 24,
+      "max": 24
+    },
+    "explanation": "The leak's rate = 1/6 - 1/8 = 4/24 - 3/24 = 1/24 of the tank per hour. So it empties the full tank in 24 hours."
+  },
+  {
+    "id": "ga-157",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What is the next number in the series?\n\n2, 3, 10, 15, 26, 35, ___",
+    "options": [
+      "48",
+      "49",
+      "50",
+      "52"
+    ],
+    "answer": 2,
+    "explanation": "The $n$-th term is $n^2 + 1$ when $n$ is odd and $n^2 - 1$ when $n$ is even: 2, 3, 10, 15, 26, 35. The 7th term is $49 + 1 = 50$."
+  },
+  {
+    "id": "ga-158",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A sum of money doubles itself in 5 years at simple interest. In how many years will it become four times itself at the same rate?",
+    "options": [
+      "10 years",
+      "15 years",
+      "20 years",
+      "12 years"
+    ],
+    "answer": 1,
+    "explanation": "Doubling in 5 years means the interest equals the principal in 5 years, so the rate is 20% per annum. To become four times, the interest must be 300% of the principal, which takes 300/20 = 15 years."
+  },
+  {
+    "id": "ga-159",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Alloy X contains copper and zinc in the ratio 3 : 2 by weight, and alloy Y contains them in the ratio 1 : 4. X and Y are melted together in the ratio 2 : 3 by weight. The ratio of copper to zinc in the new alloy is",
+    "options": [
+      "7 : 13",
+      "3 : 7",
+      "11 : 14",
+      "9 : 16"
+    ],
+    "answer": 3,
+    "explanation": "Take 2 kg of X and 3 kg of Y. Copper = $2 \\times \\frac{3}{5} + 3 \\times \\frac{1}{5} = \\frac{9}{5}$ kg. Zinc = $2 \\times \\frac{2}{5} + 3 \\times \\frac{4}{5} = \\frac{16}{5}$ kg. The ratio is 9 : 16."
+  },
+  {
+    "id": "ga-160",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "The remainder when $1! + 2! + 3! + \\cdots + 50!$ is divided by 12 is ___.",
+    "answer": {
+      "min": 9,
+      "max": 9
+    },
+    "explanation": "From $4! = 24$ onward every factorial is a multiple of 12. So the remainder comes from $1! + 2! + 3! = 1 + 2 + 6 = 9$."
+  },
+  {
+    "id": "ga-161",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A family spends Rs. 60000 a month, divided as follows.\n\n| Item | Share of spending |\n|---|---|\n| Rent | 30% |\n| Food | 25% |\n| Education | 15% |\n| Transport | 10% |\n| Others | 20% |\n\nIf the rent goes up by 20% and every other amount stays the same, rent's share of the new total spending, to the nearest whole percent, is",
+    "options": [
+      "36%",
+      "33%",
+      "34%",
+      "30%"
+    ],
+    "answer": 2,
+    "explanation": "Rent was 30% of 60000 = Rs. 18000 and becomes Rs. 21600. The total becomes 60000 + 3600 = Rs. 63600. Rent's share = 21600 / 63600 = 33.96%, which is 34% to the nearest percent."
+  },
+  {
+    "id": "ga-162",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Ishaan can complete a job in 10 days and Maria can complete it in 15 days. They complete it together and are paid Rs. 4500 in total, shared in proportion to the work each did. Ishaan's share (in rupees) is",
+    "options": [
+      "1800",
+      "2250",
+      "2700",
+      "3000"
+    ],
+    "answer": 2,
+    "explanation": "Working together, each does work in proportion to their daily rate: 1/10 : 1/15 = 3 : 2. Ishaan's share = $\\frac{3}{5} \\times 4500 = 2700$."
+  },
+  {
+    "id": "ga-163",
+    "topic": "quantitative",
+    "type": "nat",
+    "marks": 2,
+    "q": "A train 240 m long, running at 72 km/h, crosses a platform completely in 30 seconds. The length of the platform (in metres) is ___.",
+    "answer": {
+      "min": 360,
+      "max": 360
+    },
+    "explanation": "72 km/h = 20 m/s. In 30 seconds the train covers 600 m, which is its own length plus the platform. Platform = 600 - 240 = 360 m."
+  },
+  {
+    "id": "ga-164",
+    "topic": "quantitative",
+    "type": "msq",
+    "marks": 2,
+    "q": "$a$ and $b$ are positive integers with $a + b = 10$. Select ALL the values that the product $ab$ can take.",
+    "options": [
+      "9",
+      "21",
+      "23",
+      "25"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "The possible pairs are (1, 9), (2, 8), (3, 7), (4, 6), (5, 5) and their reverses, giving products 9, 16, 21, 24 and 25. So 9, 21 and 25 are possible, and 23 is not."
+  },
+  {
+    "id": "ga-165",
+    "topic": "quantitative",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The average of 8 numbers is 20. The average of the first 5 numbers is 18 and the average of the last 4 numbers is 23. The 5th number (which belongs to both groups) is",
+    "options": [
+      "20",
+      "24",
+      "22",
+      "18"
+    ],
+    "answer": 2,
+    "explanation": "Sum of all 8 = 160. Sum of the first 5 = 90 and sum of the last 4 = 92. Adding these counts the 5th number twice, so it equals 90 + 92 - 160 = 22."
+  },
+  {
+    "id": "ga-166",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Neha walks 6 km east, then turns left and walks 8 km. How far is she now from her starting point, in a straight line?",
+    "options": [
+      "14 km",
+      "12 km",
+      "10 km",
+      "8 km"
+    ],
+    "answer": 2,
+    "explanation": "Turning left from east means facing north. She is 6 km east and 8 km north of the start, so the distance is $\\sqrt{6^2 + 8^2} = 10$ km."
+  },
+  {
+    "id": "ga-167",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Introducing a woman, Sameer said, \"Her mother is the only daughter of my mother.\" How is the woman related to Sameer?",
+    "options": [
+      "Sister",
+      "Niece",
+      "Daughter",
+      "Cousin"
+    ],
+    "answer": 1,
+    "explanation": "The only daughter of Sameer's mother is Sameer's sister. The woman's mother is Sameer's sister, so the woman is Sameer's niece."
+  },
+  {
+    "id": "ga-168",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a code, a word is written as the sum of the positions of its letters in the alphabet (A = 1, B = 2, ..., Z = 26). So CAT is written as 24. How is DOG written?",
+    "options": [
+      "24",
+      "27",
+      "26",
+      "25"
+    ],
+    "answer": 2,
+    "explanation": "D = 4, O = 15, G = 7, and 4 + 15 + 7 = 26. (Check: C + A + T = 3 + 1 + 20 = 24.)"
+  },
+  {
+    "id": "ga-169",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Statements:\n\n1. All doctors are graduates.\n2. No graduate is illiterate.\n\nConclusions:\n\nI. No doctor is illiterate.\nII. All graduates are doctors.\n\nWhich of the conclusions follow from the statements?",
+    "options": [
+      "Only II follows",
+      "Both I and II follow",
+      "Neither I nor II follows",
+      "Only I follows"
+    ],
+    "answer": 3,
+    "explanation": "Every doctor is a graduate and no graduate is illiterate, so no doctor is illiterate: I follows. Statement 1 says doctors are inside the set of graduates, not that the two sets are equal, so II does not follow."
+  },
+  {
+    "id": "ga-170",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a class, Rohan is 12th from the top and 28th from the bottom in the order of marks, and no two students have the same marks. How many students are in the class?",
+    "options": [
+      "40",
+      "38",
+      "41",
+      "39"
+    ],
+    "answer": 3,
+    "explanation": "Rohan is counted in both positions, so the total is 12 + 28 - 1 = 39."
+  },
+  {
+    "id": "ga-171",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Today is a Monday. What day of the week will it be 100 days from today?",
+    "options": [
+      "Wednesday",
+      "Tuesday",
+      "Thursday",
+      "Friday"
+    ],
+    "answer": 0,
+    "explanation": "100 = 14 x 7 + 2, so 100 days is 14 full weeks plus 2 days. Two days after Monday is Wednesday."
+  },
+  {
+    "id": "ga-172",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What comes next in the letter series?\n\nZ, X, U, Q, L, ___",
+    "options": [
+      "G",
+      "F",
+      "E",
+      "H"
+    ],
+    "answer": 1,
+    "explanation": "The letters move back by 2, 3, 4, 5 and then 6 places: Z(26), X(24), U(21), Q(17), L(12), and 12 - 6 = 6, which is F."
+  },
+  {
+    "id": "ga-173",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which number does NOT belong with the others?",
+    "options": [
+      "216",
+      "125",
+      "343",
+      "196"
+    ],
+    "answer": 3,
+    "explanation": "216, 125 and 343 are perfect cubes ($6^3$, $5^3$, $7^3$). 196 is $14^2$, a perfect square but not a cube."
+  },
+  {
+    "id": "ga-174",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Ali, Bea, Chen, Dia and Eli sit in a row of five seats, all facing north.\n\n- Chen sits in the middle seat.\n- Ali sits at the left end.\n- Bea sits immediately to the right of Ali.\n- Eli does not sit at the right end.\n\nWho sits at the right end?",
+    "options": [
+      "Eli",
+      "Dia",
+      "Bea",
+      "Chen"
+    ],
+    "answer": 1,
+    "explanation": "Facing north, left to right the seats are 1 to 5. Ali is in seat 1, Bea in seat 2 and Chen in seat 3. Eli cannot be in seat 5, so Eli is in seat 4 and Dia is at the right end."
+  },
+  {
+    "id": "ga-175",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In a code, GATE is written as EYRC, with each letter replaced by the letter two places before it in the alphabet (wrapping round from A to Z). How is MATH written in this code?",
+    "options": [
+      "KYRG",
+      "LZSG",
+      "KYRF",
+      "KZRF"
+    ],
+    "answer": 2,
+    "explanation": "Move each letter back by two: M to K, A to Y (wrapping round), T to R, H to F. So MATH becomes KYRF."
+  },
+  {
+    "id": "ga-176",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The statement \"Some students in the class wear glasses\" is known to be false. Which one of the following must be true?",
+    "options": [
+      "Exactly one student in the class wears glasses.",
+      "No student in the class wears glasses.",
+      "Most students in the class wear glasses.",
+      "The teacher of the class wears glasses."
+    ],
+    "answer": 1,
+    "explanation": "\"Some students wear glasses\" means at least one does. If that is false, then not even one student wears glasses. The other options either contradict this or talk about someone other than the students."
+  },
+  {
+    "id": "ga-177",
+    "topic": "analytical",
+    "type": "nat",
+    "marks": 1,
+    "q": "A clock strikes once at 1 o'clock, twice at 2 o'clock, and so on, up to 12 times at 12 o'clock. It strikes only on the hour. The total number of strikes in one full day of 24 hours is ___.",
+    "answer": {
+      "min": 156,
+      "max": 156
+    },
+    "explanation": "In 12 hours the clock strikes $1 + 2 + \\cdots + 12 = 78$ times. A day has two such 12-hour cycles, so the total is 156."
+  },
+  {
+    "id": "ga-178",
+    "topic": "analytical",
+    "type": "msq",
+    "marks": 1,
+    "q": "Statements:\n\n1. Some fruits are sweet.\n2. All sweet things are tasty.\n\nSelect ALL the conclusions that follow.",
+    "options": [
+      "Some fruits are tasty.",
+      "All tasty things are sweet.",
+      "Some tasty things are fruits.",
+      "No fruit is bitter."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "The fruits that are sweet are also tasty, so some fruits are tasty, and the same objects show that some tasty things are fruits. Statement 2 does not say every tasty thing is sweet, and nothing is said about bitterness."
+  },
+  {
+    "id": "ga-179",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Priya, Tom, Aisha and Karan each own exactly one pet, and the pets are a cat, a dog, a parrot and a fish (one each).\n\n- Priya owns neither the cat nor the dog.\n- Tom owns neither the fish nor the cat.\n- Aisha owns the dog.\n- Karan does not own the fish.\n\nWho owns the fish?",
+    "options": [
+      "Tom",
+      "Aisha",
+      "Priya",
+      "Karan"
+    ],
+    "answer": 2,
+    "explanation": "Aisha has the dog. Tom has neither the fish nor the cat, and the dog is taken, so Tom has the parrot. Priya cannot have the cat or the dog, and the parrot is taken, so Priya has the fish. Karan then has the cat, which also fits his clue."
+  },
+  {
+    "id": "ga-180",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Usha, Vikram, Wen, Xavier and Yusuf each give one presentation, one per day from Monday to Friday.\n\n- Wen presents on Wednesday.\n- Usha presents after Xavier but before Vikram.\n- Yusuf presents on the day immediately after Vikram.\n\nWho presents on Tuesday?",
+    "options": [
+      "Xavier",
+      "Vikram",
+      "Usha",
+      "Yusuf"
+    ],
+    "answer": 2,
+    "explanation": "Wen takes Wednesday. Vikram and Yusuf need two consecutive free days with Vikram first, so they are Monday-Tuesday or Thursday-Friday. Vikram cannot be on Monday because Usha and Xavier come before him, so Vikram is on Thursday and Yusuf on Friday. Xavier and Usha fill Monday and Tuesday in that order, so Usha presents on Tuesday."
+  },
+  {
+    "id": "ga-181",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "On an island, every person is either a truth-teller, who always tells the truth, or a liar, who always lies. Two islanders, Amar and Bella, make these statements.\n\n- Amar: \"Bella is a liar.\"\n- Bella: \"Amar and I are of the same type.\"\n\nWhich one of the following is correct?",
+    "options": [
+      "Amar is a liar and Bella is a truth-teller.",
+      "Amar is a truth-teller and Bella is a liar.",
+      "Both are truth-tellers.",
+      "Both are liars."
+    ],
+    "answer": 1,
+    "explanation": "If Amar tells the truth, Bella is a liar; Bella's claim that they are the same type is then false, which fits. If Amar lies, Bella is a truth-teller, but then her claim that they are the same type would have to be true, which is impossible. So Amar is a truth-teller and Bella is a liar."
+  },
+  {
+    "id": "ga-182",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "In a code:\n\n- P # Q means P is the mother of Q.\n- P @ Q means P is the brother of Q.\n- P % Q means P is the wife of Q.\n\nIf A # B @ C % D, how is D related to A?",
+    "options": [
+      "Son",
+      "Son-in-law",
+      "Brother",
+      "Nephew"
+    ],
+    "answer": 1,
+    "explanation": "A is the mother of B, B is the brother of C, so C is also A's child. C is the wife of D, so C is A's daughter and D is her husband. D is A's son-in-law."
+  },
+  {
+    "id": "ga-183",
+    "topic": "analytical",
+    "type": "nat",
+    "marks": 2,
+    "q": "Four-digit numbers are formed using the digits 1, 2, 3, 4, 5 and 6, with no digit repeated. The number of such four-digit numbers that are divisible by 5 is ___.",
+    "answer": {
+      "min": 60,
+      "max": 60
+    },
+    "explanation": "A number is divisible by 5 only if it ends in 0 or 5, and 0 is not available, so the last digit is 5. The other three places are filled from the remaining 5 digits in $5 \\times 4 \\times 3 = 60$ ways."
+  },
+  {
+    "id": "ga-184",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Question: What is the value of the integer $x$?\n\nStatement I: $x^2 = 16$\n\nStatement II: $x > 0$\n\nWhich one of the following is correct?",
+    "options": [
+      "Statement I alone is sufficient.",
+      "Both statements together are sufficient, but neither statement alone is sufficient.",
+      "Statement II alone is sufficient.",
+      "Even both statements together are not sufficient."
+    ],
+    "answer": 1,
+    "explanation": "Statement I gives $x = 4$ or $x = -4$, so it is not enough. Statement II only says $x$ is positive. Together they give $x = 4$."
+  },
+  {
+    "id": "ga-185",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A clock gains 4 minutes every hour, at a steady rate. It is set to the correct time at 6:00 am. Later the same day the clock shows 6:00 pm. What is the correct time at that moment?",
+    "options": [
+      "5:12 pm",
+      "5:20 pm",
+      "5:15 pm",
+      "5:00 pm"
+    ],
+    "answer": 2,
+    "explanation": "The clock advances 64 minutes for every 60 real minutes. It shows 12 hours = 720 minutes have passed, so the real time passed is $720 \\times \\frac{60}{64} = 675$ minutes = 11 hours 15 minutes. The correct time is 5:15 pm."
+  },
+  {
+    "id": "ga-186",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Lena, Mohan, Nora, Om, Pooja and Quinn sit around a round table at six equally spaced seats, all facing the centre.\n\n- Lena sits directly opposite Om.\n- Mohan sits immediately to the left of Lena.\n- Pooja sits next to Om.\n- Nora does not sit next to Om.\n- Quinn does not sit next to Nora.\n\nWho sits immediately to the right of Om?",
+    "options": [
+      "Pooja",
+      "Quinn",
+      "Nora",
+      "Mohan"
+    ],
+    "answer": 1,
+    "explanation": "Number the seats 0 to 5 so that each next seat is on a person's right. Put Lena at 0, so Om is at 3 and Mohan, on Lena's left, is at 5. The free seats are 1, 2 and 4. Nora cannot be next to Om (seats 2 and 4), so Nora is at 1. Quinn cannot be next to Nora, so Quinn is not at 2; Quinn is at 4 and Pooja at 2, which is next to Om as required. The seat to Om's right is 4, so Quinn sits immediately to the right of Om."
+  },
+  {
+    "id": "ga-187",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Five people P, Q, R, S and T took a test, and no two scored the same.\n\n- Q scored more than R but less than T.\n- P scored less than S but more than T.\n\nWho scored the second highest marks?",
+    "options": [
+      "T",
+      "S",
+      "P",
+      "Q"
+    ],
+    "answer": 2,
+    "explanation": "From the clues, R < Q < T and T < P < S. Joining them gives R < Q < T < P < S. S is highest and P is second highest."
+  },
+  {
+    "id": "ga-188",
+    "topic": "analytical",
+    "type": "msq",
+    "marks": 2,
+    "q": "Four people A, B, C and D stand in a single queue, one behind another.\n\n- A is not first.\n- B is somewhere ahead of C.\n- D stands immediately behind A.\n\nSelect ALL the statements that MUST be true.",
+    "options": [
+      "B is first in the queue.",
+      "C is last in the queue.",
+      "D is somewhere behind B.",
+      "A is second in the queue."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "A cannot be first or last (D must stand behind A). If A is second, D is third and B, C fill first and fourth with B ahead: B, A, D, C. If A is third, D is fourth and B, C fill the first two: B, C, A, D. In both, B is first and D is behind B. C is last only in the first queue and A is second only in the first queue, so those need not be true."
+  },
+  {
+    "id": "ga-189",
+    "topic": "analytical",
+    "type": "msq",
+    "marks": 2,
+    "q": "Consider the statement: \"If a number is divisible by 6, then it is divisible by 3.\"\n\nSelect ALL the statements that are logically equivalent to it.",
+    "options": [
+      "If a number is not divisible by 3, then it is not divisible by 6.",
+      "If a number is divisible by 3, then it is divisible by 6.",
+      "Every number that is divisible by 6 is divisible by 3.",
+      "If a number is not divisible by 6, then it is not divisible by 3."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "The first option is the contrapositive, which is always equivalent. The third is the same statement in different words. The second is the converse and the fourth is the inverse; neither is equivalent (for example 9 is divisible by 3 but not by 6)."
+  },
+  {
+    "id": "ga-190",
+    "topic": "analytical",
+    "type": "mcq",
+    "marks": 2,
+    "q": "In a code, each letter is replaced by its mirror letter in the alphabet: A and Z swap, B and Y swap, C and X swap, and so on. In this code a word is written as SVOK. What is the word?",
+    "options": [
+      "HELD",
+      "HOLP",
+      "HELM",
+      "HELP"
+    ],
+    "answer": 3,
+    "explanation": "A letter at position $n$ becomes the letter at position $27 - n$. S (19) becomes H (8), V (22) becomes E (5), O (15) becomes L (12), and K (11) becomes P (16). The word is HELP."
+  },
+  {
+    "id": "ga-191",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A solid cube is painted on all six faces and then cut into 216 identical smaller cubes. How many of the smaller cubes have exactly one painted face?",
+    "options": [
+      "64",
+      "96",
+      "144",
+      "48"
+    ],
+    "answer": 1,
+    "explanation": "216 = $6^3$, so each edge is cut into 6. On each face, the cubes with only that face painted form the inner $4 \\times 4$ block, which is 16 cubes. Six faces give $6 \\times 16 = 96$."
+  },
+  {
+    "id": "ga-192",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Each word below is written in capital letters in a plain font, and a mirror is held upright to the right of the word. Which word looks exactly the same in the mirror?",
+    "options": [
+      "WOW",
+      "MOON",
+      "NOON",
+      "BOB"
+    ],
+    "answer": 0,
+    "explanation": "A mirror on the side reverses the order of the letters and flips each letter left to right. A word looks the same only if it reads the same backwards and every letter is symmetric about a vertical line. W and O are such letters, and WOW is a palindrome. MOON is not a palindrome, and N and B change when flipped left to right."
+  },
+  {
+    "id": "ga-193",
+    "topic": "spatial",
+    "type": "nat",
+    "marks": 1,
+    "q": "A rectangle is divided into a grid of 2 rows and 3 columns of equal unit squares by drawing lines parallel to its sides. The total number of rectangles of all sizes in the figure (squares count as rectangles) is ___.",
+    "answer": {
+      "min": 18,
+      "max": 18
+    },
+    "explanation": "A rectangle is fixed by choosing 2 of the 3 horizontal lines and 2 of the 4 vertical lines. That gives $\\binom{3}{2} \\times \\binom{4}{2} = 3 \\times 6 = 18$."
+  },
+  {
+    "id": "ga-194",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The small letter **b** is written in a plain font, as a tall vertical stroke with a round bowl attached at the bottom right. The letter is rotated by 180 degrees in its own plane (turned upside down without flipping the paper over). It now looks like which letter?",
+    "options": [
+      "d",
+      "p",
+      "b",
+      "q"
+    ],
+    "answer": 3,
+    "explanation": "A 180 degree rotation moves the bottom right to the top left and turns the upward stroke into a downward stroke. The result is a bowl at the top left with a stroke going down on the right, which is the letter q. (A left-right mirror image of b would give d, and a top-bottom mirror image would give p.)"
+  },
+  {
+    "id": "ga-195",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A wall clock with no numbers on its face (only 12 evenly spaced marks, with the 12 mark at the top) shows the time 3:40. If you look at this clock in a mirror held upright beside it, what time does the reflection appear to show?",
+    "options": [
+      "8:20",
+      "9:20",
+      "8:40",
+      "9:40"
+    ],
+    "answer": 0,
+    "explanation": "A side mirror reflects each hand about the vertical line through 12 and 6. The minute hand at 40 minutes goes to 20 minutes, and the hour hand just past 3 (two thirds of the way to 4) goes to two thirds of the way from 8 to 9. The reflection shows 8:20. A quick rule: mirror time = 11:60 - 3:40 = 8:20."
+  },
+  {
+    "id": "ga-196",
+    "topic": "spatial",
+    "type": "nat",
+    "marks": 2,
+    "q": "Unit cubes are stacked on a 3 x 3 square base on the ground. The table gives the number of cubes stacked on each cell; cubes rest flat on the ground or on another cube.\n\n| | C1 | C2 | C3 |\n|---|---|---|---|\n| R1 | 2 | 1 | 3 |\n| R2 | 1 | 0 | 2 |\n| R3 | 3 | 2 | 1 |\n\nCount the faces of unit cubes that are exposed to the air: a face is NOT exposed if it rests on the ground or touches a face of another cube. The number of exposed faces is ___.",
+    "answer": {
+      "min": 48,
+      "max": 48
+    },
+    "explanation": "Top faces: every non-empty cell shows exactly one top face, and 8 cells are non-empty, so 8. Side faces: a stack shows as many faces toward the front as it is taller than the stack directly in front of it (the front row R3 is compared with height 0). Column C1: 3 + 0 + 1 = 4 (R3 shows 3, R2 is shorter than R3, R1 is 1 taller than R2). Column C2: 2 + 0 + 1 = 3. Column C3: 1 + 1 + 1 = 3. That is 10 faces facing the front. Counting the same way toward the back, the left and the right also gives 10 each. Total = 8 + 4 x 10 = 48."
+  },
+  {
+    "id": "ga-197",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A square sheet of paper is folded in half by bringing its top edge down onto its bottom edge. The folded sheet is then folded in half again by bringing its left edge onto its right edge. In the small folded square, a small triangle is cut off the one corner where both folds meet, with a straight cut across that corner. What does the sheet look like when it is fully unfolded?",
+    "options": [
+      "It has four small triangular notches, one at each corner of the sheet.",
+      "It has four separate holes, one near the middle of each edge.",
+      "It has one hole, shaped like a square standing on a corner, at the centre of the sheet.",
+      "It has two triangular notches, at the middle of the left and right edges."
+    ],
+    "answer": 2,
+    "explanation": "The corner where both folds meet is the point that was the centre of the original sheet. Cutting across it removes a small triangle from each of the four layers there, and these four triangles meet at the centre. Unfolded, they form one hole at the centre shaped like a square turned 45 degrees."
+  },
+  {
+    "id": "ga-198",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A solid cuboid measuring 4 cm x 3 cm x 2 cm is painted on all six faces and then cut into 24 cubes of side 1 cm. How many of these small cubes have exactly two painted faces?",
+    "options": [
+      "8",
+      "4",
+      "16",
+      "12"
+    ],
+    "answer": 3,
+    "explanation": "The cuboid is 2 cubes thick, so every small cube lies in the top layer or the bottom layer and has exactly one painted face from the top or bottom. Each layer is a 4 x 3 arrangement: its 4 corner cubes touch two side faces, its 2 inner cubes touch none, and the other 12 - 4 - 2 = 6 cubes touch exactly one side face. Those 6 cubes per layer have exactly 2 painted faces, so the total is 2 x 6 = 12."
+  },
+  {
+    "id": "ga-199",
+    "topic": "spatial",
+    "type": "msq",
+    "marks": 2,
+    "q": "Each capital letter below is written in a plain block font. Select ALL the letters that look exactly the same after being rotated by 180 degrees in their own plane.",
+    "options": [
+      "H",
+      "N",
+      "S",
+      "E"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "H, N and S each have a centre of symmetry, so turning them upside down (180 degrees in the plane) gives the same letter. E rotated by 180 degrees has its arms pointing left, so it does not look like E."
+  },
+  {
+    "id": "ga-200",
+    "topic": "spatial",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A triangle ABC has its vertex A at the top and side BC as its base. Two straight lines are drawn from A to two points on BC, dividing BC into three parts. Then one straight line is drawn parallel to BC, joining the midpoints of AB and AC, so that it crosses both of the lines drawn from A. How many triangles of any size are there in the figure?",
+    "options": [
+      "12",
+      "10",
+      "14",
+      "16"
+    ],
+    "answer": 0,
+    "explanation": "A triangle needs three lines that meet in pairs. The two horizontal lines (BC and the middle line) are parallel, so a triangle can use at most one of them, and its other two sides lie on lines through A; so every triangle has A as a vertex. From A there are 4 lines (AB, AC and the two inner lines), and any 2 of them together with one horizontal line make a triangle. That gives $\\binom{4}{2} = 6$ triangles with base on BC and 6 with base on the middle line, so 12 in all."
   }
 ]

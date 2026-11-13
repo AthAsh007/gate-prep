@@ -882,5 +882,892 @@
     ],
     "answer": 0,
     "explanation": "$P(X = k) = \\frac{e^{-\\lambda}\\lambda^k}{k!}$. Setting $e^{-\\lambda}\\lambda = e^{-\\lambda}\\frac{\\lambda^2}{2}$ gives $\\lambda = 2$ (since $\\lambda > 0$). Then $P(X = 0) = e^{-2} \\approx 0.135$."
+  },
+  {
+    "id": "em-061",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following is NOT logically equivalent to $p \\to (q \\to r)$?",
+    "options": [
+      "$(p \\to q) \\to r$",
+      "$(p \\land q) \\to r$",
+      "$q \\to (p \\to r)$",
+      "$\\lnot p \\lor \\lnot q \\lor r$"
+    ],
+    "answer": 0,
+    "explanation": "$p \\to (q \\to r) \\equiv \\lnot p \\lor \\lnot q \\lor r \\equiv \\lnot(p \\land q) \\lor r \\equiv (p \\land q) \\to r$ (exportation). Since $\\lnot p \\lor \\lnot q \\lor r$ is symmetric in $p$ and $q$, it also equals $q \\to (p \\to r)$.\n\n$(p \\to q) \\to r$ differs: take $p = 0$, $r = 0$. Then $p \\to (q \\to r)$ is true (false antecedent), but $p \\to q$ is true and $r$ is false, so $(p \\to q) \\to r$ is false. Implication is not associative."
+  },
+  {
+    "id": "em-062",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following formulas is satisfiable but NOT a tautology?",
+    "options": [
+      "$(p \\to q) \\lor (q \\to p)$",
+      "$(p \\to q) \\land (q \\to \\lnot p)$",
+      "$(p \\land \\lnot p) \\to q$",
+      "$(p \\leftrightarrow q) \\land (p \\leftrightarrow \\lnot q)$"
+    ],
+    "answer": 1,
+    "explanation": "- $(p \\to q) \\land (q \\to \\lnot p)$: if $p = 0$ both implications are true (the first has a false antecedent, the second a true consequent). If $p = 1$ the first forces $q = 1$ and the second forces $q = 0$. So the formula is equivalent to $\\lnot p$: satisfiable, not a tautology.\n- $(p \\to q) \\lor (q \\to p)$ is a tautology: if $q$ is true the first disjunct holds, if $q$ is false the second holds.\n- $(p \\land \\lnot p) \\to q$ has a false antecedent always, so it is a tautology.\n- $p \\leftrightarrow q$ and $p \\leftrightarrow \\lnot q$ cannot both hold, so the last formula is a contradiction."
+  },
+  {
+    "id": "em-063",
+    "topic": "logic",
+    "type": "msq",
+    "marks": 2,
+    "q": "In options A and B, $Q$ is a proposition that does not contain the variable $x$. In option D, $Q$ is a unary predicate. $P$ is a predicate of the arity shown, and domains are non-empty. Which of the following formulas is/are valid?",
+    "options": [
+      "$\\forall x\\,\\big(P(x) \\to Q\\big) \\leftrightarrow \\big(\\exists x\\, P(x) \\to Q\\big)$",
+      "$\\exists x\\,\\big(P(x) \\to Q\\big) \\leftrightarrow \\big(\\forall x\\, P(x) \\to Q\\big)$",
+      "$\\forall x\\, \\exists y\\, P(x,y) \\to \\exists y\\, \\forall x\\, P(x,y)$",
+      "$\\forall x\\,\\big(P(x) \\to Q(x)\\big) \\to \\big(\\exists x\\, P(x) \\to \\exists x\\, Q(x)\\big)$"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "**A (valid).** $\\forall x (\\lnot P(x) \\lor Q) \\equiv (\\forall x\\, \\lnot P(x)) \\lor Q \\equiv \\lnot \\exists x\\, P(x) \\lor Q$. A quantifier moving into the antecedent of an implication flips from $\\forall$ to $\\exists$.\n\n**B (valid).** $\\exists x (\\lnot P(x) \\lor Q) \\equiv (\\exists x\\, \\lnot P(x)) \\lor Q \\equiv \\lnot \\forall x\\, P(x) \\lor Q$. The step that pulls $Q$ out of $\\exists$ uses a non-empty domain.\n\n**C (not valid).** Domain $\\{1, 2\\}$ with $P(x, y)$ meaning $x = y$. Every $x$ has a $y$ equal to it, but no single $y$ equals every $x$.\n\n**D (valid).** If some $a$ satisfies $P(a)$, then $P(a) \\to Q(a)$ gives $Q(a)$, so $\\exists x\\, Q(x)$ holds."
+  },
+  {
+    "id": "em-064",
+    "topic": "logic",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many Boolean functions $f(p, q, r)$ of three variables have the property that $f(p, q, r) \\to (p \\lor q)$ is a tautology?",
+    "answer": {
+      "min": 64,
+      "max": 64
+    },
+    "explanation": "$f \\to (p \\lor q)$ is a tautology exactly when $f$ is false on every assignment where $p \\lor q$ is false. $p \\lor q$ is false only when $p = q = 0$, which covers 2 of the 8 assignments ($r = 0$ or $1$). On those 2 rows $f$ must be 0. On the other 6 rows $f$ is free.\n\nCount: $2^6 = 64$."
+  },
+  {
+    "id": "em-065",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 2,
+    "q": "From the premises $\\forall x\\,\\big(P(x) \\to Q(x)\\big)$ and $\\exists x\\,\\big(P(x) \\land R(x)\\big)$, which one of the following can be validly concluded?",
+    "options": [
+      "$\\forall x\\,\\big(R(x) \\to Q(x)\\big)$",
+      "$\\exists x\\,\\big(Q(x) \\land \\lnot R(x)\\big)$",
+      "$\\exists x\\,\\big(Q(x) \\land R(x)\\big)$",
+      "$\\forall x\\,\\big(Q(x) \\to P(x)\\big)$"
+    ],
+    "answer": 2,
+    "explanation": "Existential instantiation on the second premise gives some $a$ with $P(a) \\land R(a)$. Universal instantiation of the first gives $P(a) \\to Q(a)$, so $Q(a)$. Then $Q(a) \\land R(a)$, and existential generalisation gives $\\exists x\\,(Q(x) \\land R(x))$.\n\nCountermodels for the others, on domain $\\{a, b\\}$:\n- $P = Q = \\{a\\}$, $R = \\{a, b\\}$: premises hold, but $R(b) \\to Q(b)$ fails.\n- $P = Q = R = \\{a\\}$: premises hold, but no element is in $Q$ and outside $R$.\n- $P = R = \\{a\\}$, $Q = \\{a, b\\}$: premises hold, but $Q(b) \\to P(b)$ fails."
+  },
+  {
+    "id": "em-066",
+    "topic": "logic",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Let $E(x)$ mean \"$x$ is eligible\" and $G(x)$ mean \"$x$ is a graduate\", over the domain of all applicants. Which formula expresses \"Only graduates are eligible\"?",
+    "options": [
+      "$\\forall x\\,\\big(G(x) \\to E(x)\\big)$",
+      "$\\forall x\\,\\big(G(x) \\land E(x)\\big)$",
+      "$\\exists x\\,\\big(E(x) \\land G(x)\\big)$",
+      "$\\forall x\\,\\big(E(x) \\to G(x)\\big)$"
+    ],
+    "answer": 3,
+    "explanation": "\"Only $G$ are $E$\" means anyone who is $E$ must be $G$: $\\forall x\\,(E(x) \\to G(x))$, equivalently $\\forall x\\,(\\lnot G(x) \\to \\lnot E(x))$.\n\n$\\forall x\\,(G(x) \\to E(x))$ says \"all graduates are eligible\", which is the converse. $\\forall x\\,(G(x) \\land E(x))$ says everyone is both, and the existential version only says some eligible graduate exists."
+  },
+  {
+    "id": "em-067",
+    "topic": "logic",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following sets of connectives is/are functionally complete? ($\\mathbf{F}$ denotes the constant false.)",
+    "options": [
+      "$\\{\\lnot, \\land\\}$",
+      "$\\{\\lnot, \\to\\}$",
+      "$\\{\\land, \\lor\\}$",
+      "$\\{\\to, \\mathbf{F}\\}$"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "**A.** $p \\lor q \\equiv \\lnot(\\lnot p \\land \\lnot q)$, and $\\{\\lnot, \\land, \\lor\\}$ is complete.\n\n**B.** $p \\lor q \\equiv \\lnot p \\to q$, and $p \\land q \\equiv \\lnot(p \\to \\lnot q)$.\n\n**C (not complete).** Every formula built from $\\land$ and $\\lor$ is monotone and outputs 1 when all inputs are 1, so $\\lnot p$ cannot be built.\n\n**D.** $\\lnot p \\equiv p \\to \\mathbf{F}$, and with $\\lnot$ and $\\to$ we are back to B."
+  },
+  {
+    "id": "em-068",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "On $A = \\{1, 2, 3, 4, 5, 6\\}$ define $a\\,R\\,b$ if and only if $a \\equiv b \\pmod 3$. How many ordered pairs belong to $R$?",
+    "options": [
+      "12",
+      "9",
+      "18",
+      "36"
+    ],
+    "answer": 0,
+    "explanation": "$R$ is an equivalence relation with classes $\\{1, 4\\}$, $\\{2, 5\\}$, $\\{3, 6\\}$. A class of size $k$ contributes $k^2$ ordered pairs (every pair inside the class, including $(a, a)$).\n\n$|R| = 2^2 + 2^2 + 2^2 = 12$."
+  },
+  {
+    "id": "em-069",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider the lattice $(D_{60}, \\mid)$ of positive divisors of 60 ordered by divisibility, with join $= \\operatorname{lcm}$, meet $= \\gcd$, least element 1 and greatest element 60. How many elements of this lattice have a complement?",
+    "options": [
+      "4",
+      "8",
+      "6",
+      "12"
+    ],
+    "answer": 1,
+    "explanation": "$b$ is a complement of $a$ when $\\gcd(a, b) = 1$ and $\\operatorname{lcm}(a, b) = 60$, which forces $ab = 60$ with $\\gcd(a, 60/a) = 1$.\n\n$60 = 2^2 \\cdot 3 \\cdot 5$. Such $a$ must take each prime power fully or not at all: choose $2^2$ or not, $3$ or not, $5$ or not, giving $2^3 = 8$ elements ($1, 3, 4, 5, 12, 15, 20, 60$).\n\nFor example 2 has no complement: any $b$ with $\\operatorname{lcm}(2, b) = 60$ needs $4 \\mid b$, and then $\\gcd(2, b) = 2$. So $D_{60}$ is not complemented, unlike $D_{30}$."
+  },
+  {
+    "id": "em-070",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following posets is a lattice?",
+    "options": [
+      "$(\\{1, 2, 3, 4, 6\\}, \\mid)$",
+      "$(\\{2, 3, 6, 12\\}, \\mid)$",
+      "$(\\{1, 2, 3, 6\\}, \\mid)$",
+      "The non-empty subsets of $\\{a, b, c\\}$ ordered by $\\subseteq$"
+    ],
+    "answer": 2,
+    "explanation": "$\\{1, 2, 3, 6\\}$ under divisibility is $D_6$: every pair has its gcd and lcm inside the set, so it is a lattice.\n\n- $\\{1, 2, 3, 4, 6\\}$: 4 and 6 have no common upper bound in the set (their lcm 12 is missing).\n- $\\{2, 3, 6, 12\\}$: 2 and 3 have no common lower bound (1 is missing).\n- Non-empty subsets: $\\{a\\}$ and $\\{b\\}$ have no common lower bound, since $\\varnothing$ was removed."
+  },
+  {
+    "id": "em-071",
+    "topic": "sets-relations-functions",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many equivalence relations on $\\{1, 2, 3, 4, 5, 6\\}$ put 1 and 2 in the same equivalence class but put 3 in a different class from 1?",
+    "answer": {
+      "min": 37,
+      "max": 37
+    },
+    "explanation": "Equivalence relations correspond to set partitions. Glue 1 and 2 into a single element $u$. Partitions of the 6-set with 1, 2 together are exactly partitions of the 5-set $\\{u, 3, 4, 5, 6\\}$: Bell number $B_5 = 52$.\n\nRemove those where 3 is also with $u$: glue $u$ and 3, leaving a 4-set, $B_4 = 15$.\n\nAnswer: $52 - 15 = 37$."
+  },
+  {
+    "id": "em-072",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $R = \\{(1,2), (2,3), (3,4), (4,2)\\}$ on the set $\\{1, 2, 3, 4\\}$. How many ordered pairs are in the transitive closure $R^{+}$ of $R$ (the smallest transitive relation containing $R$)?",
+    "options": [
+      "9",
+      "10",
+      "16",
+      "12"
+    ],
+    "answer": 3,
+    "explanation": "$(a, b) \\in R^{+}$ exactly when there is a directed path of length at least 1 from $a$ to $b$. The edges are $1 \\to 2$ and the cycle $2 \\to 3 \\to 4 \\to 2$.\n\n- From 1: reaches 2, 3, 4 (3 pairs; 1 is not on a cycle, so $(1,1) \\notin R^{+}$).\n- From each of 2, 3, 4: reaches 2, 3, 4, including itself via the cycle (3 pairs each).\n\nTotal $3 + 3 \\cdot 3 = 12$."
+  },
+  {
+    "id": "em-073",
+    "topic": "sets-relations-functions",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following statements is/are true?",
+    "options": [
+      "$f: \\mathbb{Z} \\to \\mathbb{Z}$, $f(x) = 2x + 1$ is a bijection.",
+      "$g: \\mathbb{R} \\to \\mathbb{R}$, $g(x) = x^3 - x$ is surjective but not injective.",
+      "$h: \\mathbb{Z} \\times \\mathbb{Z} \\to \\mathbb{Z}$, $h(a, b) = a + b$ is surjective but not injective.",
+      "$k: \\mathbb{Z} \\to \\mathbb{Z}$, $k(x) = \\lfloor x/2 \\rfloor$ is injective."
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "**A (false).** $f$ is injective, but its values are all odd, so $0$ is never hit.\n\n**B (true).** $g$ is continuous with $g(x) \\to \\pm\\infty$ as $x \\to \\pm\\infty$, so by the intermediate value theorem every real is a value. $g(0) = g(1) = 0$, so not injective.\n\n**C (true).** $h(n, 0) = n$ covers every integer, and $h(1, 2) = h(2, 1)$.\n\n**D (false).** $k(0) = k(1) = 0$."
+  },
+  {
+    "id": "em-074",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many antisymmetric binary relations are there on a set with 3 elements?",
+    "options": [
+      "216",
+      "64",
+      "27",
+      "512"
+    ],
+    "answer": 0,
+    "explanation": "The 3 diagonal pairs $(a, a)$ are unrestricted: $2^3$ choices. For each of the $\\binom{3}{2} = 3$ unordered pairs $\\{a, b\\}$ with $a \\ne b$, antisymmetry allows: neither, only $(a, b)$, or only $(b, a)$, but not both. That is 3 choices each.\n\nTotal $2^3 \\cdot 3^3 = 8 \\cdot 27 = 216$. In general $2^n \\cdot 3^{n(n-1)/2}$."
+  },
+  {
+    "id": "em-075",
+    "topic": "sets-relations-functions",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which one of the following lattices is NOT distributive?",
+    "options": [
+      "$(D_{42}, \\mid)$, the divisors of 42 under divisibility",
+      "The set of all partitions of $\\{1, 2, 3\\}$, ordered by refinement",
+      "$(\\mathcal{P}(\\{a, b, c\\}), \\subseteq)$",
+      "$(\\{1, 2, 4, 8, 16\\}, \\mid)$"
+    ],
+    "answer": 1,
+    "explanation": "$\\{1, 2, 3\\}$ has 5 partitions: the finest $\\{1\\}\\{2\\}\\{3\\}$, the coarsest $\\{1,2,3\\}$, and three middle ones $\\{1,2\\}\\{3\\}$, $\\{1,3\\}\\{2\\}$, $\\{2,3\\}\\{1\\}$ that are pairwise incomparable. Any two middle ones meet at the finest and join at the coarsest. This is the diamond $M_3$. With $a, b, c$ the middle elements: $a \\land (b \\lor c) = a \\land 1 = a$, but $(a \\land b) \\lor (a \\land c) = 0 \\lor 0 = 0$. Not distributive.\n\n$D_{42}$ ($42 = 2 \\cdot 3 \\cdot 7$, squarefree) is isomorphic to the Boolean lattice $\\mathcal{P}(\\{2, 3, 7\\})$, power sets are distributive, and every chain is distributive."
+  },
+  {
+    "id": "em-076",
+    "topic": "groups",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the order of the element $(8, 3)$ in the group $\\mathbb{Z}_{12} \\times \\mathbb{Z}_{18}$ under componentwise addition?",
+    "options": [
+      "3",
+      "18",
+      "6",
+      "36"
+    ],
+    "answer": 2,
+    "explanation": "In $\\mathbb{Z}_n$ the order of $a$ is $n / \\gcd(a, n)$.\n\n- $8$ in $\\mathbb{Z}_{12}$: $12/\\gcd(8, 12) = 12/4 = 3$.\n- $3$ in $\\mathbb{Z}_{18}$: $18/\\gcd(3, 18) = 18/3 = 6$.\n\nThe order of a pair is the lcm of the component orders: $\\operatorname{lcm}(3, 6) = 6$."
+  },
+  {
+    "id": "em-077",
+    "topic": "groups",
+    "type": "mcq",
+    "marks": 2,
+    "q": "How many subgroups (including the trivial subgroup and the whole group) does $\\mathbb{Z}_2 \\times \\mathbb{Z}_2 \\times \\mathbb{Z}_2$ have?",
+    "options": [
+      "8",
+      "10",
+      "14",
+      "16"
+    ],
+    "answer": 3,
+    "explanation": "The group has order 8, so subgroup orders are 1, 2, 4, 8. Every non-identity element has order 2.\n\n- Order 1: 1.\n- Order 2: each is $\\{0, v\\}$ for one of the 7 non-zero elements: 7.\n- Order 4: each contains 3 non-zero elements, and any two distinct non-zero elements $u, v$ generate $\\{0, u, v, u + v\\}$. Pairs: $\\binom{7}{2} = 21$, each subgroup counted $\\binom{3}{2} = 3$ times: 7.\n- Order 8: 1.\n\nTotal $1 + 7 + 7 + 1 = 16$."
+  },
+  {
+    "id": "em-078",
+    "topic": "groups",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following algebraic structures is/are monoids that are NOT groups? ($S$ is a non-empty finite set, $\\mathcal{P}(S)$ its power set, and $\\times_6$ is multiplication modulo 6.)",
+    "options": [
+      "$(\\mathbb{Z}_{\\ge 0}, +)$",
+      "$(\\mathbb{Z}, -)$",
+      "$(\\mathcal{P}(S), \\cup)$",
+      "$(\\{1, 2, 3, 4, 5\\}, \\times_6)$"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "**A.** Closed, associative, identity 0. But $1$ has no inverse in the non-negative integers. Monoid, not a group.\n\n**B.** Subtraction is not associative: $(5 - 3) - 1 = 1$ but $5 - (3 - 1) = 3$. Not even a semigroup.\n\n**C.** Union is associative with identity $\\varnothing$. For non-empty $X$, $X \\cup Y \\ne \\varnothing$ for every $Y$, so $X$ has no inverse. Monoid, not a group.\n\n**D.** Not closed: $2 \\times_6 3 = 0 \\notin \\{1, \\dots, 5\\}$."
+  },
+  {
+    "id": "em-079",
+    "topic": "groups",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many elements of the symmetric group $S_5$ have order exactly 6?",
+    "answer": {
+      "min": 20,
+      "max": 20
+    },
+    "explanation": "The order of a permutation is the lcm of its cycle lengths. With 5 points, lcm $= 6$ needs a 3-cycle and a disjoint 2-cycle (cycle type $3 + 2$).\n\nChoose the 3 points of the 3-cycle: $\\binom{5}{3} = 10$. They form $2$ distinct 3-cycles. The remaining 2 points form one transposition.\n\n$10 \\cdot 2 \\cdot 1 = 20$."
+  },
+  {
+    "id": "em-080",
+    "topic": "groups",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$G$ is a group in which $x \\cdot x = e$ for every $x \\in G$ ($e$ is the identity). Which one of the following must be true?",
+    "options": [
+      "$G$ is abelian",
+      "$G$ is cyclic",
+      "$|G|$ is prime",
+      "$G$ is finite"
+    ],
+    "answer": 0,
+    "explanation": "Every element is its own inverse. For any $a, b$: $ab = (ab)^{-1} = b^{-1}a^{-1} = ba$. So $G$ is abelian.\n\nThe others fail: $\\mathbb{Z}_2 \\times \\mathbb{Z}_2$ satisfies the condition but is not cyclic and has order 4, and the group of all infinite 0/1 sequences under componentwise XOR is infinite."
+  },
+  {
+    "id": "em-081",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A connected simple planar graph has 10 vertices and 18 edges. In any planar embedding, how many faces does it have, counting the unbounded outer face?",
+    "options": [
+      "8",
+      "10",
+      "6",
+      "12"
+    ],
+    "answer": 1,
+    "explanation": "Euler's formula for a connected planar graph: $V - E + F = 2$. So $F = 2 - 10 + 18 = 10$.\n\n(Such a graph can exist: $E \\le 3V - 6 = 24$.)"
+  },
+  {
+    "id": "em-082",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following graphs has an Euler circuit (a closed walk using every edge exactly once)?",
+    "options": [
+      "$K_4$",
+      "$K_{3,4}$",
+      "$K_5$",
+      "The Petersen graph"
+    ],
+    "answer": 2,
+    "explanation": "A connected graph has an Euler circuit if and only if every vertex has even degree.\n\n- $K_5$: every degree is 4. Yes.\n- $K_4$: every degree is 3.\n- $K_{3,4}$: the 3-side vertices have degree 4, but the 4-side vertices have degree 3.\n- Petersen graph: 3-regular."
+  },
+  {
+    "id": "em-083",
+    "topic": "graph-theory",
+    "type": "nat",
+    "marks": 2,
+    "q": "What is the maximum number of edges in a simple planar bipartite graph with 12 vertices?",
+    "answer": {
+      "min": 20,
+      "max": 20
+    },
+    "explanation": "A bipartite graph has no odd cycles, so no triangles, and in a planar embedding of a graph with at least 3 vertices and a cycle every face is bounded by at least 4 edges. Counting edge-face incidences: $4F \\le 2E$. With $V - E + F = 2$ this gives $E \\le 2V - 4 = 20$.\n\nThe bound is reached: $K_{2,10}$ is planar (draw the two hub vertices on either side of a line of 10 vertices) and has $2 \\cdot 10 = 20$ edges."
+  },
+  {
+    "id": "em-084",
+    "topic": "graph-theory",
+    "type": "nat",
+    "marks": 2,
+    "q": "The wheel $W$ has a hub vertex joined to every vertex of a 5-cycle, so it has 6 labelled vertices and 10 edges. How many proper vertex colourings of $W$ use colours from a given set of 4 colours (not all colours need to be used)?",
+    "answer": {
+      "min": 120,
+      "max": 120
+    },
+    "explanation": "Colour the hub first: 4 ways. The rim vertices must then avoid the hub colour, so the rim $C_5$ is properly coloured with the remaining 3 colours.\n\nThe chromatic polynomial of a cycle is $P(C_n, k) = (k - 1)^n + (-1)^n (k - 1)$, so $P(C_5, 3) = 2^5 - 2 = 30$.\n\nTotal $4 \\cdot 30 = 120$. (Since an odd cycle needs 3 colours and the hub needs one more, $\\chi(W) = 4$.)"
+  },
+  {
+    "id": "em-085",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following graphs is NOT Hamiltonian?",
+    "options": [
+      "The 3-dimensional hypercube $Q_3$",
+      "$K_{4,4}$",
+      "$K_5$",
+      "$K_{3,4}$"
+    ],
+    "answer": 3,
+    "explanation": "A cycle in a bipartite graph alternates sides, so a Hamiltonian cycle must use equally many vertices from each side. $K_{3,4}$ has sides of size 3 and 4, so it has no Hamiltonian cycle.\n\n$Q_3$ has the Gray code cycle $000, 001, 011, 010, 110, 111, 101, 100$. $K_{4,4}$ and $K_5$ are clearly Hamiltonian."
+  },
+  {
+    "id": "em-086",
+    "topic": "graph-theory",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about finite simple undirected graphs is/are true?",
+    "options": [
+      "If $G$ has $n \\ge 3$ vertices and every vertex has degree at least $n/2$, then $G$ is Hamiltonian.",
+      "$K_{3,3}$ is planar.",
+      "A connected graph with exactly two vertices of odd degree has an Euler trail (a walk using every edge exactly once) but no Euler circuit.",
+      "Every Hamiltonian graph has an Euler circuit."
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "**A (true).** This is Dirac's theorem.\n\n**B (false).** $K_{3,3}$ is bipartite, so $E \\le 2V - 4 = 8$ for a planar version, but it has 9 edges. It is one of the two Kuratowski graphs.\n\n**C (true).** The trail must start and end at the two odd vertices. A circuit needs all degrees even.\n\n**D (false).** $K_4$ is Hamiltonian, but all its degrees are 3."
+  },
+  {
+    "id": "em-087",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let $G$ be the $3 \\times 3$ grid graph: 9 vertices at the integer points $(i, j)$, $0 \\le i, j \\le 2$, with an edge between points at distance 1 (12 edges). Let $m$ be the size of a maximum matching, $c$ the size of a minimum vertex cover, and $\\alpha$ the size of a maximum independent set. What is $(m, c, \\alpha)$?",
+    "options": [
+      "$(4, 4, 5)$",
+      "$(4, 5, 4)$",
+      "$(5, 4, 5)$",
+      "$(4, 4, 4)$"
+    ],
+    "answer": 0,
+    "explanation": "With 9 vertices a matching covers at most 8, so $m \\le 4$; four disjoint edges exist, for example $(0,0)(0,1)$, $(0,2)(1,2)$, $(1,0)(2,0)$, $(1,1)(2,1)$, leaving only $(2,2)$ unmatched. So $m = 4$.\n\nThe grid is bipartite (colour by parity of $i + j$: 5 even, 4 odd). By König's theorem $c = m = 4$; the 4 odd vertices form a cover.\n\nThe complement of a minimum vertex cover is a maximum independent set, so $\\alpha = 9 - c = 5$ (the 5 even vertices)."
+  },
+  {
+    "id": "em-088",
+    "topic": "graph-theory",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the chromatic number of the Petersen graph?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 1,
+    "explanation": "The Petersen graph contains 5-cycles (the outer pentagon), which are odd, so it is not bipartite and needs at least 3 colours. Brooks' theorem gives $\\chi \\le \\Delta = 3$, since the graph is connected, 3-regular, and neither complete nor an odd cycle. So $\\chi = 3$."
+  },
+  {
+    "id": "em-089",
+    "topic": "graph-theory",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many distinct Hamiltonian cycles does the complete bipartite graph $K_{4,4}$ have? (Two cycles are the same if they use the same set of edges.)",
+    "answer": {
+      "min": 72,
+      "max": 72
+    },
+    "explanation": "Label the sides $L = \\{a_1, \\dots, a_4\\}$ and $R$. Fix the start at $a_1$. A Hamiltonian cycle alternates: $a_1, r_1, a_{\\sigma(2)}, r_2, a_{\\sigma(3)}, r_3, a_{\\sigma(4)}, r_4$, back to $a_1$.\n\nOrder the other three $L$ vertices: $3!$ ways. Order the four $R$ vertices: $4!$ ways. That counts each cycle twice (once per direction).\n\n$\\dfrac{3! \\cdot 4!}{2} = \\dfrac{6 \\cdot 24}{2} = 72$. In general $K_{n,n}$ has $\\dfrac{n!\\,(n-1)!}{2}$ Hamiltonian cycles."
+  },
+  {
+    "id": "em-090",
+    "topic": "combinatorics",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many functions from a set of 7 elements onto a set of 3 elements are there?",
+    "answer": {
+      "min": 1806,
+      "max": 1806
+    },
+    "explanation": "Inclusion-exclusion over the set of missed values:\n$$\\sum_{i=0}^{3} (-1)^i \\binom{3}{i} (3 - i)^7 = 3^7 - 3 \\cdot 2^7 + 3 \\cdot 1^7 - 0 = 2187 - 384 + 3 = 1806.$$\nEquivalently $3!\\,S(7, 3) = 6 \\cdot 301 = 1806$."
+  },
+  {
+    "id": "em-091",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "How many permutations of $\\{1, 2, 3, 4, 5\\}$ have exactly 2 cycles in their disjoint cycle decomposition (fixed points count as cycles of length 1)?",
+    "options": [
+      "15",
+      "35",
+      "50",
+      "24"
+    ],
+    "answer": 2,
+    "explanation": "This is the unsigned Stirling number of the first kind $c(5, 2)$. Count by cycle type:\n\n- $4 + 1$: choose the fixed point (5), arrange the other 4 in a cycle ($3! = 6$): 30.\n- $3 + 2$: choose the 3-cycle's points ($\\binom{5}{3} = 10$), $2$ cyclic orders, the rest is one transposition: 20.\n\nTotal $30 + 20 = 50$. (15 is $S(5, 2)$, the number of partitions into 2 blocks, and 35 is $c(5, 3)$.)"
+  },
+  {
+    "id": "em-092",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the coefficient of $x^{10}$ in the power series of $\\dfrac{1}{(1 - x)(1 - x^2)}$?",
+    "options": [
+      "5",
+      "11",
+      "89",
+      "6"
+    ],
+    "answer": 3,
+    "explanation": "$\\dfrac{1}{1-x} = \\sum x^{a}$ and $\\dfrac{1}{1-x^2} = \\sum x^{2b}$. The coefficient of $x^{10}$ counts pairs $(a, b)$ of non-negative integers with $a + 2b = 10$, that is, $b = 0, 1, \\dots, 5$.\n\nAnswer: 6. (It counts partitions of 10 into parts 1 and 2. 89 would be the number of ordered sums, a Fibonacci number.)"
+  },
+  {
+    "id": "em-093",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Which one of the following is the ordinary generating function $\\sum_{n \\ge 0} a_n x^n$ of the sequence $a_n = 2^n + n$?",
+    "options": [
+      "$\\dfrac{1}{1 - 2x} + \\dfrac{x}{(1 - x)^2}$",
+      "$\\dfrac{1}{1 - 2x} + \\dfrac{1}{(1 - x)^2}$",
+      "$\\dfrac{1}{1 - 2x} + \\dfrac{x}{1 - x}$",
+      "$\\dfrac{2x}{1 - 2x} + \\dfrac{x}{(1 - x)^2}$"
+    ],
+    "answer": 0,
+    "explanation": "$\\sum 2^n x^n = \\dfrac{1}{1 - 2x}$. Differentiating $\\sum x^n = \\dfrac{1}{1-x}$ and multiplying by $x$ gives $\\sum n x^n = \\dfrac{x}{(1 - x)^2}$. Add them.\n\nCheck $a_0 = 1$, $a_1 = 3$: the series of the correct option starts $1 + (2 + 1)x + \\cdots$. The second option gives $2^n + n + 1$, the third gives $2^n + 1$ for $n \\ge 1$, and the fourth gives $a_0 = 0$."
+  },
+  {
+    "id": "em-094",
+    "topic": "combinatorics",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many integers in $\\{1, 2, \\dots, 1000\\}$ are divisible by none of 2, 3 and 5?",
+    "answer": {
+      "min": 266,
+      "max": 266
+    },
+    "explanation": "Let $A_d$ be the multiples of $d$. $|A_2| = 500$, $|A_3| = 333$, $|A_5| = 200$, $|A_6| = 166$, $|A_{10}| = 100$, $|A_{15}| = 66$, $|A_{30}| = 33$.\n\n$$|A_2 \\cup A_3 \\cup A_5| = 500 + 333 + 200 - 166 - 100 - 66 + 33 = 734.$$\n\nAnswer $1000 - 734 = 266$."
+  },
+  {
+    "id": "em-095",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A lattice path from $(0, 0)$ to $(5, 5)$ uses unit steps right $(+1, 0)$ and up $(0, +1)$. How many such paths never go above the line $y = x$?",
+    "options": [
+      "14",
+      "42",
+      "132",
+      "252"
+    ],
+    "answer": 1,
+    "explanation": "These are counted by the Catalan number\n$$C_n = \\frac{1}{n + 1}\\binom{2n}{n}, \\qquad C_5 = \\frac{1}{6}\\binom{10}{5} = \\frac{252}{6} = 42.$$\n252 is the count without the restriction; 14 is $C_4$ and 132 is $C_6$."
+  },
+  {
+    "id": "em-096",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The sequence $a_n$ satisfies $a_n = 4a_{n-1} - 4a_{n-2}$ for $n \\ge 2$, with $a_0 = 1$ and $a_1 = 4$. Which one of the following is a closed form for $a_n$?",
+    "options": [
+      "$4^n$",
+      "$(n^2 + 1)\\,2^n$",
+      "$(n + 1)\\,2^n$",
+      "$2^n + 2n$"
+    ],
+    "answer": 2,
+    "explanation": "The characteristic equation $t^2 - 4t + 4 = 0$ has the repeated root $t = 2$, so $a_n = (A + Bn)\\,2^n$.\n\n$a_0 = A = 1$. $a_1 = 2(A + B) = 4$ gives $B = 1$. So $a_n = (n + 1)\\,2^n$.\n\nAll four options match $a_0 = 1$ and $a_1 = 4$, so check $a_2 = 4 \\cdot 4 - 4 \\cdot 1 = 12$: only $(2 + 1) \\cdot 4 = 12$ works ($4^2 = 16$, $5 \\cdot 4 = 20$, $4 + 4 = 8$)."
+  },
+  {
+    "id": "em-097",
+    "topic": "combinatorics",
+    "type": "msq",
+    "marks": 2,
+    "q": "$S(n, k)$ denotes the Stirling number of the second kind (the number of partitions of an $n$-element set into $k$ non-empty blocks). Which of the following is/are true for all $n \\ge 2$ and $1 \\le k \\le n$ where the terms are defined?",
+    "options": [
+      "$S(n, 2) = 2^{n-1} - 1$",
+      "$S(n, n - 1) = \\binom{n}{2}$",
+      "The number of functions from an $n$-element set onto a $k$-element set is $k!\\,S(n, k)$.",
+      "$S(n, k) = S(n - 1, k - 1) + S(n - 1, k)$"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "**A (true).** Each of the $2^n$ subsets with its complement gives an ordered split; remove the 2 with an empty part and divide by 2: $(2^n - 2)/2$.\n\n**B (true).** One block has size 2 and the rest are singletons: choose the pair.\n\n**C (true).** An onto function is a partition of the domain into $k$ blocks (the preimages) plus an assignment of the $k$ distinct values to blocks.\n\n**D (false).** The correct recurrence is $S(n, k) = S(n-1, k-1) + k\\,S(n-1, k)$: element $n$ is either a singleton block or joins one of the $k$ blocks. For example $S(5, 3) = 25$ but $S(4, 2) + S(4, 3) = 7 + 6 = 13$."
+  },
+  {
+    "id": "em-098",
+    "topic": "combinatorics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "How many strings of 4 decimal digits (leading 0 allowed) have their digits in strictly increasing order from left to right?",
+    "options": [
+      "5040",
+      "126",
+      "715",
+      "210"
+    ],
+    "answer": 3,
+    "explanation": "A strictly increasing string is determined by its set of 4 distinct digits, which can be listed in only one increasing order. So the count is $\\binom{10}{4} = 210$.\n\n(715 $= \\binom{13}{4}$ would count non-decreasing strings, and 5040 counts all strings with 4 distinct digits.)"
+  },
+  {
+    "id": "em-099",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$A$ is a real $5 \\times 7$ matrix of rank 3. What is the dimension of the null space $\\{x \\in \\mathbb{R}^7 : Ax = 0\\}$?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "answer": 0,
+    "explanation": "Rank-nullity: rank + nullity $=$ number of columns. Nullity $= 7 - 3 = 4$.\n\n(The left null space, in $\\mathbb{R}^5$, would have dimension $5 - 3 = 2$.)"
+  },
+  {
+    "id": "em-100",
+    "topic": "linear-algebra",
+    "type": "nat",
+    "marks": 2,
+    "q": "A real $3 \\times 3$ matrix $A$ has eigenvalues $1$, $-1$ and $2$. What is the trace of $A^{-1} + A^2$?",
+    "answer": {
+      "min": 6.5,
+      "max": 6.5
+    },
+    "explanation": "If $\\lambda$ is an eigenvalue of $A$ then $1/\\lambda$ is an eigenvalue of $A^{-1}$ and $\\lambda^2$ of $A^2$, and since $A$ has 3 distinct eigenvalues it is diagonalisable, so $A^{-1} + A^2$ has eigenvalues $1/\\lambda + \\lambda^2$.\n\nTrace $= (1 + 1) + (-1 + 1) + (0.5 + 4) = 2 + 0 + 4.5 = 6.5$."
+  },
+  {
+    "id": "em-101",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Let\n$$A = \\begin{bmatrix} 2 & 4 & -2 \\\\ 4 & 9 & -3 \\\\ -2 & -3 & 7 \\end{bmatrix} = LU,$$\nwhere $L$ is lower triangular with 1s on its diagonal and $U$ is upper triangular (Doolittle form). What are $l_{32}$ and $u_{33}$?",
+    "options": [
+      "$l_{32} = -1$, $u_{33} = 4$",
+      "$l_{32} = 1$, $u_{33} = 4$",
+      "$l_{32} = 1$, $u_{33} = 2$",
+      "$l_{32} = 2$, $u_{33} = 4$"
+    ],
+    "answer": 1,
+    "explanation": "Gaussian elimination without row swaps. Multipliers $l_{21} = 4/2 = 2$, $l_{31} = -2/2 = -1$:\n- $R_2 - 2R_1 = [0, 1, 1]$\n- $R_3 + R_1 = [0, 1, 5]$\n\nThen $l_{32} = 1/1 = 1$, and $R_3 - R_2 = [0, 0, 4]$, so $u_{33} = 4$.\n\n$$L = \\begin{bmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & 1 & 1 \\end{bmatrix}, \\quad U = \\begin{bmatrix} 2 & 4 & -2 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 4 \\end{bmatrix}.$$\nCheck: $\\det A = 2 \\cdot 1 \\cdot 4 = 8$."
+  },
+  {
+    "id": "em-102",
+    "topic": "linear-algebra",
+    "type": "msq",
+    "marks": 2,
+    "q": "$A$ is a real $m \\times n$ matrix and $b \\in \\mathbb{R}^m$. Which of the following statements is/are always true?",
+    "options": [
+      "If $m < n$, then $Ax = 0$ has a non-zero solution.",
+      "If $\\operatorname{rank}(A) = \\operatorname{rank}([A \\mid b]) = n$, then $Ax = b$ has exactly one solution.",
+      "If $m > n$, then there is some $b$ for which $Ax = b$ has no solution.",
+      "If $m = n$ and $Ax = 0$ has only the zero solution, then $Ax = b$ is inconsistent for some $b$."
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "**A (true).** $\\operatorname{rank}(A) \\le m < n$, so nullity $= n - \\operatorname{rank} \\ge 1$.\n\n**B (true).** Equal ranks means consistent, and rank $n$ means no free variables.\n\n**C (true).** The column space has dimension at most $n < m$, so it is a proper subspace of $\\mathbb{R}^m$; any $b$ outside it gives no solution.\n\n**D (false).** For a square matrix, only the zero solution means $A$ is invertible, so $x = A^{-1}b$ solves every system."
+  },
+  {
+    "id": "em-103",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$A$ is a real square matrix with $A^2 = A$. Which one of the following sets contains every eigenvalue of $A$?",
+    "options": [
+      "$\\{1\\}$",
+      "$\\{-1, 1\\}$",
+      "$\\{0, 1\\}$",
+      "$\\{0\\}$"
+    ],
+    "answer": 2,
+    "explanation": "If $Av = \\lambda v$ with $v \\ne 0$, then $A^2 v = \\lambda^2 v$ and also $A^2 v = Av = \\lambda v$. So $\\lambda^2 = \\lambda$, giving $\\lambda \\in \\{0, 1\\}$.\n\nBoth values can occur (e.g. $\\operatorname{diag}(1, 0)$), so neither $\\{1\\}$ nor $\\{0\\}$ is right in general."
+  },
+  {
+    "id": "em-104",
+    "topic": "linear-algebra",
+    "type": "nat",
+    "marks": 2,
+    "q": "What is the determinant of the $5 \\times 5$ matrix whose diagonal entries are all 2 and whose off-diagonal entries are all 1?",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "The matrix is $I + J$, where $J$ is the all-ones matrix. $J$ has rank 1 with eigenvalues $5$ (eigenvector all ones) and $0$ (multiplicity 4). So $I + J$ has eigenvalues $6$ and $1, 1, 1, 1$.\n\n$\\det = 6 \\cdot 1^4 = 6$. In general $\\det(aI + bJ)_{n \\times n} = a^{n-1}(a + nb)$."
+  },
+  {
+    "id": "em-105",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 2,
+    "q": "For which real values of $k$ does the matrix\n$$M = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & k & 1 \\\\ 1 & 1 & k \\end{bmatrix}$$\nhave rank exactly 2?",
+    "options": [
+      "$k = 1$ only",
+      "$k = -1$ and $k = 1$",
+      "$k = -2$ only",
+      "For no real value of $k$"
+    ],
+    "answer": 3,
+    "explanation": "Subtract row 1 from rows 2 and 3:\n$$\\begin{bmatrix} 1 & 1 & 1 \\\\ 0 & k - 1 & 0 \\\\ 0 & 0 & k - 1 \\end{bmatrix}.$$\nSo $\\det M = (k - 1)^2$.\n\n- $k \\ne 1$: rank 3.\n- $k = 1$: all rows equal $[1, 1, 1]$, rank 1.\n\nRank 2 never occurs."
+  },
+  {
+    "id": "em-106",
+    "topic": "linear-algebra",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For $A = \\begin{bmatrix} 2 & 1 \\\\ 1 & 2 \\end{bmatrix}$, which one of the following is an eigenvector corresponding to the eigenvalue 3?",
+    "options": [
+      "$(1, 1)^T$",
+      "$(1, -1)^T$",
+      "$(1, 2)^T$",
+      "$(2, 1)^T$"
+    ],
+    "answer": 0,
+    "explanation": "$A(1, 1)^T = (3, 3)^T = 3\\,(1, 1)^T$.\n\n$(1, -1)^T$ is the eigenvector for the other eigenvalue 1: $A(1, -1)^T = (1, -1)^T$. $A(1, 2)^T = (4, 5)^T$ and $A(2, 1)^T = (5, 4)^T$ are not multiples."
+  },
+  {
+    "id": "em-107",
+    "topic": "calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For $f(x) = \\ln x$ on $[1, e]$, the value of $c \\in (1, e)$ given by Lagrange's mean value theorem is",
+    "options": [
+      "$\\dfrac{e + 1}{2}$",
+      "$e - 1$",
+      "$\\sqrt{e}$",
+      "$\\dfrac{1}{e - 1}$"
+    ],
+    "answer": 1,
+    "explanation": "$f'(c) = \\dfrac{f(e) - f(1)}{e - 1} = \\dfrac{1 - 0}{e - 1}$. Since $f'(c) = 1/c$, we get $c = e - 1 \\approx 1.718$, which lies in $(1, e)$."
+  },
+  {
+    "id": "em-108",
+    "topic": "calculus",
+    "type": "nat",
+    "marks": 1,
+    "q": "Evaluate $\\displaystyle \\lim_{x \\to 0} \\frac{\\sin x - x}{x^3}$. Give the answer rounded to three decimal places.",
+    "answer": {
+      "min": -0.168,
+      "max": -0.166
+    },
+    "explanation": "Taylor series: $\\sin x = x - \\dfrac{x^3}{6} + O(x^5)$. So $\\dfrac{\\sin x - x}{x^3} = -\\dfrac{1}{6} + O(x^2) \\to -\\dfrac{1}{6} \\approx -0.167$.\n\n(Applying L'Hospital's rule three times gives the same: $\\dfrac{-\\cos x}{6} \\to -\\dfrac16$.)"
+  },
+  {
+    "id": "em-109",
+    "topic": "calculus",
+    "type": "mcq",
+    "marks": 2,
+    "q": "What is the shortest distance from the point $(0, 3)$ to the parabola $y = x^2$?",
+    "options": [
+      "$3$",
+      "$\\sqrt{3}$",
+      "$\\dfrac{\\sqrt{11}}{2}$",
+      "$\\dfrac{\\sqrt{5}}{2}$"
+    ],
+    "answer": 2,
+    "explanation": "Minimise the squared distance $D(x) = x^2 + (x^2 - 3)^2$.\n\n$D'(x) = 2x + 4x(x^2 - 3) = 2x(2x^2 - 5)$. Critical points: $x = 0$ ($D = 9$) and $x^2 = 5/2$ ($D = \\tfrac52 + \\tfrac14 = \\tfrac{11}{4}$). $D \\to \\infty$ as $|x| \\to \\infty$, so the minimum is $11/4$ and the distance is $\\sqrt{11}/2 \\approx 1.658$.\n\nNote $x = 0$ is a local maximum of $D$ here, a common trap."
+  },
+  {
+    "id": "em-110",
+    "topic": "calculus",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Which one of the following improper integrals converges?",
+    "options": [
+      "$\\displaystyle \\int_1^\\infty \\frac{dx}{x}$",
+      "$\\displaystyle \\int_0^1 \\frac{dx}{x^2}$",
+      "$\\displaystyle \\int_1^\\infty \\frac{dx}{\\sqrt{x}}$",
+      "$\\displaystyle \\int_0^1 \\frac{dx}{\\sqrt{x}}$"
+    ],
+    "answer": 3,
+    "explanation": "$p$-test: $\\int_1^\\infty x^{-p}\\,dx$ converges iff $p > 1$, and $\\int_0^1 x^{-p}\\,dx$ converges iff $p < 1$.\n\n$\\int_0^1 x^{-1/2}\\,dx = \\big[2\\sqrt{x}\\big]_0^1 = 2$. The others have $p = 1$ at infinity, $p = 2$ near 0, and $p = 1/2$ at infinity, and all diverge."
+  },
+  {
+    "id": "em-111",
+    "topic": "calculus",
+    "type": "nat",
+    "marks": 2,
+    "q": "Evaluate $\\displaystyle \\int_{-1}^{2} |x^2 - 1| \\, dx$. Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 2.66,
+      "max": 2.67
+    },
+    "explanation": "$x^2 - 1 \\le 0$ on $[-1, 1]$ and $\\ge 0$ on $[1, 2]$.\n\n$$\\int_{-1}^{1} (1 - x^2)\\,dx = 2 - \\frac{2}{3} = \\frac{4}{3}, \\qquad \\int_{1}^{2} (x^2 - 1)\\,dx = \\Big(\\frac{8}{3} - 2\\Big) - \\Big(\\frac{1}{3} - 1\\Big) = \\frac{4}{3}.$$\n\nTotal $\\dfrac{8}{3} \\approx 2.67$."
+  },
+  {
+    "id": "em-112",
+    "topic": "calculus",
+    "type": "msq",
+    "marks": 1,
+    "q": "For which of the following does the function satisfy all hypotheses of Rolle's theorem on the given interval (continuous on the closed interval, differentiable on the open interval, equal values at the endpoints)?",
+    "options": [
+      "$f(x) = |x|$ on $[-1, 1]$",
+      "$f(x) = x^2$ on $[-2, 2]$",
+      "$f(x) = \\tan x$ on $[0, \\pi]$",
+      "$f(x) = \\sin x$ on $[0, \\pi]$"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "**A.** $|x|$ is not differentiable at $0 \\in (-1, 1)$.\n\n**B.** Polynomial, and $f(-2) = f(2) = 4$. Rolle gives $c = 0$.\n\n**C.** $\\tan x$ is undefined at $\\pi/2$, so not continuous on $[0, \\pi]$.\n\n**D.** Smooth, and $\\sin 0 = \\sin \\pi = 0$. Rolle gives $c = \\pi/2$."
+  },
+  {
+    "id": "em-113",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 2,
+    "q": "Urn 1 has 2 white and 3 black balls, urn 2 has 4 white and 1 black, urn 3 has 3 white and 3 black. An urn is chosen with probabilities $\\tfrac12$, $\\tfrac13$, $\\tfrac16$ for urns 1, 2, 3 respectively, and two balls are drawn from it without replacement. Both are white. What is the probability that urn 2 was chosen? Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 0.7,
+      "max": 0.71
+    },
+    "explanation": "Likelihood of two whites without replacement:\n- Urn 1: $\\tfrac25 \\cdot \\tfrac14 = \\tfrac{1}{10}$\n- Urn 2: $\\tfrac45 \\cdot \\tfrac34 = \\tfrac35$\n- Urn 3: $\\tfrac36 \\cdot \\tfrac25 = \\tfrac15$\n\nJoint with the priors: $\\tfrac{1}{20}$, $\\tfrac15$, $\\tfrac{1}{30}$, which are $\\tfrac{3}{60}, \\tfrac{12}{60}, \\tfrac{2}{60}$, total $\\tfrac{17}{60}$.\n\nBayes: $P(\\text{urn 2} \\mid WW) = \\dfrac{12}{17} \\approx 0.71$."
+  },
+  {
+    "id": "em-114",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Each of 1000 items produced is independently defective with probability 0.002. Using the Poisson approximation to the binomial, the probability that at most one item is defective is approximately",
+    "options": [
+      "$3e^{-2}$",
+      "$e^{-2}$",
+      "$2e^{-2}$",
+      "$1 - e^{-2}$"
+    ],
+    "answer": 0,
+    "explanation": "$\\lambda = np = 1000 \\times 0.002 = 2$. Then\n$$P(X \\le 1) \\approx e^{-2} + 2e^{-2} = 3e^{-2} \\approx 0.406.$$\nThe exact binomial value is about 0.4057, so the approximation is close because $n$ is large and $p$ is small."
+  },
+  {
+    "id": "em-115",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$X$ is normally distributed with mean 50 and variance 25. Let $\\Phi$ be the CDF of the standard normal distribution. Then $P(X > 60)$ equals",
+    "options": [
+      "$1 - \\Phi(0.4)$",
+      "$1 - \\Phi(2)$",
+      "$\\Phi(2)$",
+      "$1 - \\Phi(10)$"
+    ],
+    "answer": 1,
+    "explanation": "The standard deviation is $\\sqrt{25} = 5$. Standardise: $Z = (X - 50)/5$, so $X > 60$ is $Z > 2$, and $P(Z > 2) = 1 - \\Phi(2) \\approx 0.0228$.\n\nDividing by the variance instead of the standard deviation gives the wrong $0.4$."
+  },
+  {
+    "id": "em-116",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 2,
+    "q": "Two fair six-sided dice are rolled, showing $X$ and $Y$. What is $E\\big[\\max(X, Y) \\mid X + Y = 8\\big]$? Give the answer rounded to one decimal place.",
+    "answer": {
+      "min": 5.2,
+      "max": 5.2
+    },
+    "explanation": "The outcomes with sum 8 are $(2,6), (3,5), (4,4), (5,3), (6,2)$, each equally likely given the condition. Their maxima are $6, 5, 4, 5, 6$.\n\n$E[\\max \\mid X + Y = 8] = \\dfrac{6 + 5 + 4 + 5 + 6}{5} = \\dfrac{26}{5} = 5.2$."
+  },
+  {
+    "id": "em-117",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 1,
+    "q": "$X$ is uniformly distributed on $[0, 6]$. What is the variance of $X$?",
+    "options": [
+      "2",
+      "6",
+      "3",
+      "12"
+    ],
+    "answer": 2,
+    "explanation": "For $X \\sim U(a, b)$, $\\operatorname{Var}(X) = \\dfrac{(b - a)^2}{12} = \\dfrac{36}{12} = 3$."
+  },
+  {
+    "id": "em-118",
+    "topic": "probability-statistics",
+    "type": "nat",
+    "marks": 1,
+    "q": "$X$ is exponentially distributed with rate $\\lambda = 0.5$ (so $E[X] = 2$). What is the median of $X$? Give the answer rounded to two decimal places.",
+    "answer": {
+      "min": 1.38,
+      "max": 1.4
+    },
+    "explanation": "The median $m$ satisfies $P(X \\le m) = 1 - e^{-\\lambda m} = \\tfrac12$, so $m = \\dfrac{\\ln 2}{\\lambda} = 2 \\ln 2 \\approx 1.39$.\n\nThe median is below the mean 2 because the distribution is right-skewed."
+  },
+  {
+    "id": "em-119",
+    "topic": "probability-statistics",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements is/are true?",
+    "options": [
+      "For any two random variables $X$ and $Y$ with finite variances, $\\operatorname{Var}(X + Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y)$.",
+      "If $X$ and $Y$ are independent with finite means, then $E[XY] = E[X]\\,E[Y]$.",
+      "If $X \\sim \\text{Poisson}(\\lambda_1)$ and $Y \\sim \\text{Poisson}(\\lambda_2)$ are independent, then $X + Y \\sim \\text{Poisson}(\\lambda_1 + \\lambda_2)$.",
+      "If $X \\sim \\text{Binomial}(n, p)$, then $\\operatorname{Var}(X) \\le E[X]$."
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "**A (false).** In general $\\operatorname{Var}(X + Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y) + 2\\operatorname{Cov}(X, Y)$. With $Y = X$ the left side is $4\\operatorname{Var}(X)$, not $2\\operatorname{Var}(X)$.\n\n**B (true).** Independence makes the joint distribution factor.\n\n**C (true).** Standard closure property, for example by multiplying generating functions $e^{\\lambda_1(z - 1)} e^{\\lambda_2(z - 1)}$.\n\n**D (true).** $\\operatorname{Var}(X) = np(1 - p) \\le np = E[X]$."
+  },
+  {
+    "id": "em-120",
+    "topic": "probability-statistics",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A fair coin is tossed. On heads, one fair die is rolled and the result is its value. On tails, two fair dice are rolled and the result is their sum. Given that the result is 6, what is the probability that the coin showed heads?",
+    "options": [
+      "$\\dfrac{5}{11}$",
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{6}{17}$",
+      "$\\dfrac{6}{11}$"
+    ],
+    "answer": 3,
+    "explanation": "$P(6 \\mid H) = \\tfrac16$ and $P(6 \\mid T) = \\tfrac{5}{36}$ (sums $(1,5), (2,4), (3,3), (4,2), (5,1)$).\n\n$$P(H \\mid 6) = \\frac{\\tfrac12 \\cdot \\tfrac16}{\\tfrac12 \\cdot \\tfrac16 + \\tfrac12 \\cdot \\tfrac{5}{36}} = \\frac{6/36}{6/36 + 5/36} = \\frac{6}{11}.$$"
   }
 ]

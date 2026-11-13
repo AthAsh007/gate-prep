@@ -32,6 +32,7 @@ function checkProse(where: string, text: string) {
   if (/—/.test(text)) fail(where, "contains an em dash");
   if (/[“”‘’]/.test(text)) fail(where, "contains curly quotes");
   if (/\b(AI|LLM)[- ]generated\b/i.test(text)) fail(where, "says it was generated");
+  if (/\\u[0-9a-fA-F]{4}/.test(text)) fail(where, "contains a literal \\uXXXX escape that will show as text");
 }
 
 for (const slug of targets) {

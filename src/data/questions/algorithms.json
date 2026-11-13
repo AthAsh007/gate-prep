@@ -887,5 +887,891 @@
     ],
     "answer": 1,
     "explanation": "Tree {1}: cheapest crossing edge (1,3,3). Tree {1,3}: (1,2,4). Tree {1,2,3}: candidates (2,4,5), (3,4,7), (3,5,9), (2,7,12); pick (2,4,5). Tree {1,2,3,4}: (4,5,2) is now the cheapest crossing edge, so it is the 4th edge. Then (5,7,6) and (6,7,1) follow. Prim grows one tree, so (6,7,1) comes last even though it is the lightest edge."
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "nat",
+    "marks": 1,
+    "q": "How many times is `count++` executed when the fragment below runs with $n = 16$?\n\n```c\nint count = 0;\nfor (int i = 1; i <= n; i++)\n    for (int j = 1; j < i; j = j * 2)\n        count++;\n```",
+    "answer": {
+      "min": 49,
+      "max": 49
+    },
+    "explanation": "For a given $i$, $j$ takes the values $1, 2, 4, \\dots$ that are strictly less than $i$, so the inner loop runs $\\lceil \\log_2 i \\rceil$ times. For $i = 1$ to $16$ this is $0, 1, 2, 2, 3 \\times 4, 4 \\times 8$, giving $0 + 1 + 4 + 12 + 32 = 49$. In general the fragment is $\\Theta(n \\log n)$.",
+    "id": "alg-061"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "For which of the following pairs is $f(n) = \\Theta(g(n))$?",
+    "options": [
+      "$f(n) = 3^{\\log_2 n}$, $g(n) = n^2$",
+      "$f(n) = 2^{\\log_4 n}$, $g(n) = n$",
+      "$f(n) = \\binom{n}{2}$, $g(n) = n^2$",
+      "$f(n) = \\binom{2n}{n}$, $g(n) = 4^n$"
+    ],
+    "answer": 2,
+    "explanation": "(C) $\\binom{n}{2} = n(n-1)/2$, which is within a constant factor of $n^2$. (A) $3^{\\log_2 n} = n^{\\log_2 3} \\approx n^{1.585}$, which is $o(n^2)$. (B) $2^{\\log_4 n} = n^{\\log_4 2} = \\sqrt{n}$. (D) $\\binom{2n}{n} \\approx 4^n/\\sqrt{\\pi n}$, so the ratio to $4^n$ goes to 0.",
+    "id": "alg-062"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The recurrence $T(n) = 7T(n/3) + n^2$, with $T(1) = 1$, solves to:",
+    "options": [
+      "$\\Theta(n^2)$",
+      "$\\Theta(n^{\\log_3 7})$",
+      "$\\Theta(n^2 \\log n)$",
+      "$\\Theta(n^{\\log_2 7})$"
+    ],
+    "answer": 0,
+    "explanation": "Here $a = 7$, $b = 3$ and $\\log_3 7 \\approx 1.77 < 2$, so $f(n) = n^2$ dominates (Master theorem case 3). The regularity condition holds: $7(n/3)^2 = \\frac{7}{9}n^2 \\le c\\,n^2$ with $c = 7/9 < 1$. So $T(n) = \\Theta(n^2)$.",
+    "id": "alg-063"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following recurrences have the solution $T(n) = \\Theta(n \\log n)$? Assume $T(n) = 1$ for $n \\le 2$.",
+    "options": [
+      "$T(n) = 2T(n/2) + n/\\log n$",
+      "$T(n) = T(n/3) + T(2n/3) + n$",
+      "$T(n) = 8T(n/8) + 5n$",
+      "$T(n) = 2T(n/2) + n\\log n$"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "(A) No: $n/\\log n$ is smaller than $n^{\\log_2 2} = n$ but not polynomially smaller, so the Master theorem does not apply. Summing the recursion tree, level $i$ costs $n/\\log(n/2^i)$, and the sum over levels is $n \\sum 1/k = \\Theta(n \\log\\log n)$. (B) Yes: every level of the recursion tree costs at most $n$ and the depth is between $\\log_3 n$ and $\\log_{3/2} n$. (C) Yes: $a = b = 8$, so $n^{\\log_8 8} = n$ matches $f(n)$ (case 2). (D) No: level $i$ costs $n\\log(n/2^i)$, and summing gives $\\Theta(n \\log^2 n)$.",
+    "id": "alg-064"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Consider $T(n) = \\sqrt{n}\\, T(\\sqrt{n}) + n$ for $n > 2$, with $T(2) = 1$. Which of the following is correct?",
+    "options": [
+      "$T(n) = \\Theta(n)$",
+      "$T(n) = \\Theta(n \\log\\log n)$",
+      "$T(n) = \\Theta(n \\log n)$",
+      "$T(n) = \\Theta(n \\sqrt{n})$"
+    ],
+    "answer": 1,
+    "explanation": "Divide by $n$: with $S(n) = T(n)/n$ the recurrence becomes $S(n) = S(\\sqrt{n}) + 1$. Taking square roots repeatedly reaches 2 after $\\log_2\\log_2 n$ steps, so $S(n) = \\Theta(\\log\\log n)$ and $T(n) = \\Theta(n\\log\\log n)$.",
+    "id": "alg-065"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many times is `count++` executed when the fragment below runs with $n = 20$?\n\n```c\nint count = 0;\nfor (int i = 1; i <= n; i++)\n    for (int j = i; j <= n; j = j + i)\n        count++;\n```",
+    "answer": {
+      "min": 66,
+      "max": 66
+    },
+    "explanation": "For a given $i$, $j$ runs over $i, 2i, 3i, \\dots$ up to $n$, which is $\\lfloor n/i \\rfloor$ iterations. So the count is $\\sum_{i=1}^{20} \\lfloor 20/i \\rfloor = 20 + 10 + 6 + 5 + 4 + 3 + 2 + 2 + 2 + 2 + 1 \\times 10 = 66$. In general this is about $n \\ln n$, so the fragment is $\\Theta(n \\log n)$.",
+    "id": "alg-066"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A quicksort implementation always makes its recursive call on the smaller of the two partitions and handles the larger partition with a loop (tail-call elimination). In the worst case, the extra stack space it uses on an array of $n$ elements is:",
+    "options": [
+      "$\\Theta(\\log n)$",
+      "$\\Theta(1)$",
+      "$\\Theta(\\sqrt{n})$",
+      "$\\Theta(n)$"
+    ],
+    "answer": 0,
+    "explanation": "Each recursive call is on a part of size at most half of the current range, so the recursion depth is at most $\\log_2 n$. The time can still be $\\Theta(n^2)$, but the stack never holds more than $O(\\log n)$ frames, and perfectly balanced splits do reach depth $\\log_2 n$.",
+    "id": "alg-067"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "mcq",
+    "marks": 1,
+    "q": "What is the time complexity of the fragment below as a function of $n$?\n\n```c\nfor (int i = 2; i <= n; i = i * i)\n    for (int j = 1; j <= n; j = j * 2)\n        sum++;\n```",
+    "options": [
+      "$\\Theta(\\log^2 n)$",
+      "$\\Theta(\\log n)$",
+      "$\\Theta(\\log n \\cdot \\log\\log n)$",
+      "$\\Theta(n \\log\\log n)$"
+    ],
+    "answer": 2,
+    "explanation": "The outer loop takes $i = 2, 4, 16, 256, \\dots = 2^{2^k}$, and stops once $2^{2^k} > n$, so it runs $\\Theta(\\log\\log n)$ times. The inner loop doubles $j$, so it runs $\\Theta(\\log n)$ times for every $i$. The total is $\\Theta(\\log n \\cdot \\log\\log n)$.",
+    "id": "alg-068"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "msq",
+    "marks": 2,
+    "q": "Let $f$ and $g$ be functions from positive integers to positive reals. Which of the following statements are TRUE?",
+    "options": [
+      "If $f(n) = O(g(n))$ then $2^{f(n)} = O(2^{g(n)})$",
+      "If $f(n) = O(g(n))$ then $g(n) = \\Omega(f(n))$",
+      "No function is in both $o(g(n))$ and $\\omega(g(n))$",
+      "$\\max(f(n), g(n)) = \\Theta(f(n) + g(n))$"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "(A) False: $f(n) = 2n$, $g(n) = n$ gives $2^{2n}/2^n = 2^n$, unbounded. (B) True: $f \\le c\\,g$ is the same as $g \\ge f/c$. (C) True: $o(g)$ needs $f/g \\to 0$ and $\\omega(g)$ needs $f/g \\to \\infty$; both cannot hold. (D) True: $\\max(f, g) \\le f + g \\le 2\\max(f, g)$.",
+    "id": "alg-069"
+  },
+  {
+    "topic": "asymptotic-analysis",
+    "type": "nat",
+    "marks": 2,
+    "q": "Consider the function below. How many times in total is `print` called when `f(16)` is executed? (Integer division.)\n\n```c\nvoid f(int n) {\n    if (n <= 1) return;\n    f(n / 2);\n    f(n / 2);\n    f(n / 2);\n    for (int i = 0; i < n; i++)\n        print(i);\n}\n```",
+    "answer": {
+      "min": 130,
+      "max": 130
+    },
+    "explanation": "Let $P(n)$ be the number of prints. $P(1) = 0$ and $P(n) = 3P(n/2) + n$. So $P(2) = 2$, $P(4) = 6 + 4 = 10$, $P(8) = 30 + 8 = 38$, $P(16) = 114 + 16 = 130$. Asymptotically $P(n) = \\Theta(n^{\\log_2 3})$.",
+    "id": "alg-070"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Counting sort is applied to $A = [4, 1, 3, 4, 2, 1, 0, 3]$ with keys in the range 0 to 4. After the counting step, the count array is made cumulative so that $C[i]$ holds the number of elements $\\le i$. What is $C[3]$?",
+    "options": [
+      "4",
+      "8",
+      "5",
+      "6"
+    ],
+    "answer": 3,
+    "explanation": "Plain counts for keys 0 to 4 are $1, 2, 1, 2, 2$. The prefix sums are $C = [1, 3, 4, 6, 8]$, so $C[3] = 6$: six elements ($0, 1, 1, 2, 3, 3$) are at most 3.",
+    "id": "alg-071"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "mcq",
+    "marks": 2,
+    "q": "LSD radix sort with base 10 is applied to $[512, 308, 147, 293, 615, 381, 734]$. Each pass sorts on one digit with a stable sort, starting from the units digit. What is the order after the second pass (tens digit)?",
+    "options": [
+      "$[308, 512, 615, 734, 147, 381, 293]$",
+      "$[512, 308, 615, 147, 734, 381, 293]$",
+      "$[381, 512, 293, 734, 615, 147, 308]$",
+      "$[308, 615, 512, 734, 147, 381, 293]$"
+    ],
+    "answer": 0,
+    "explanation": "Pass 1 (units, stable): $381, 512, 293, 734, 615, 147, 308$. Pass 2 (tens, stable, ties kept in pass 1 order): tens digit 0: $308$; 1: $512, 615$ (512 came first after pass 1); 3: $734$; 4: $147$; 8: $381$; 9: $293$. Result: $[308, 512, 615, 734, 147, 381, 293]$. Option D swaps 512 and 615, which breaks stability.",
+    "id": "alg-072"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Two sorted lists of lengths 5 and 8 are merged by the standard merge procedure (one comparison per step; once a list is empty, the rest of the other list is copied without comparisons). What is the minimum possible number of comparisons?",
+    "options": [
+      "5",
+      "8",
+      "12",
+      "13"
+    ],
+    "answer": 0,
+    "explanation": "Each comparison outputs one element. If all 5 elements of the shorter list are smaller than every element of the longer list, 5 comparisons empty the shorter list and the remaining 8 are copied. The maximum is $5 + 8 - 1 = 12$.",
+    "id": "alg-073"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "nat",
+    "marks": 2,
+    "q": "Top-down merge sort sorts $[7, 3, 9, 1, 5, 8, 2, 6]$ in ascending order. An array of length $k$ is split into the first $\\lfloor k/2 \\rfloor$ and the remaining elements. A merge compares the front elements of the two lists until one list is empty, then copies the rest without comparisons. What is the total number of element comparisons?",
+    "answer": {
+      "min": 17,
+      "max": 17
+    },
+    "explanation": "Pairs: $(7,3), (9,1), (5,8), (2,6)$ take 1 comparison each: 4. Merging $[3,7]$ with $[1,9]$: 1, 3, 7 are output by comparisons, then 9 is copied: 3 comparisons. $[5,8]$ with $[2,6]$: 2, 5, 6 output, 8 copied: 3. Final merge of $[1,3,7,9]$ with $[2,5,6,8]$: outputs 1, 2, 3, 5, 6, 7, 8 by comparisons (7), then 9 is copied. Total $4 + 3 + 3 + 7 = 17$.",
+    "id": "alg-074"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Quicksort uses the Lomuto partition: the pivot is the last element, and every element $\\le$ pivot is moved to the left part. What is its running time on an array of $n$ identical keys?",
+    "options": [
+      "$\\Theta(n)$",
+      "$\\Theta(n \\log n)$",
+      "$\\Theta(n^2)$",
+      "$\\Theta(n^2 \\log n)$"
+    ],
+    "answer": 2,
+    "explanation": "Every element is $\\le$ the pivot, so the left part gets all $n - 1$ other elements and the right part is empty. The recursion is $T(n) = T(n-1) + \\Theta(n)$, which is $\\Theta(n^2)$. Hoare partition or a three-way partition avoids this.",
+    "id": "alg-075"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "nat",
+    "marks": 2,
+    "q": "The second smallest of 64 distinct numbers is found by a knockout tournament: pair up the numbers and compare, keep the winners (smaller values), and repeat until one minimum remains; then find the smallest among the numbers that lost directly to the minimum. How many comparisons does this take in total?",
+    "answer": {
+      "min": 68,
+      "max": 68
+    },
+    "explanation": "The tournament takes $n - 1 = 63$ comparisons. The minimum plays one match per round, so it beat $\\log_2 64 = 6$ numbers, and the second smallest must be among them. Finding the smallest of 6 numbers takes 5 comparisons. Total $63 + 5 = 68$, which is $n + \\lceil \\log_2 n \\rceil - 2$.",
+    "id": "alg-076"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The function below is called on a sorted array `A` of `n` integers (duplicates allowed). What does it return?\n\n```c\nint lo = 0, hi = n;\nwhile (lo < hi) {\n    int mid = (lo + hi) / 2;\n    if (A[mid] <= x) lo = mid + 1;\n    else hi = mid;\n}\nreturn lo;\n```",
+    "options": [
+      "The index of the first occurrence of $x$",
+      "The number of elements that are at most $x$",
+      "The index of the last occurrence of $x$",
+      "The number of elements strictly less than $x$"
+    ],
+    "answer": 1,
+    "explanation": "The loop keeps the invariant that everything before index lo is $\\le x$ and everything from hi onward is $> x$. It stops at the first index whose element exceeds $x$ (or $n$), which equals the count of elements $\\le x$. For $A = [1, 3, 3, 3, 5]$ and $x = 3$ it returns 4. With $<$ in place of $\\le$ it would return the first index of $x$.",
+    "id": "alg-077"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "nat",
+    "marks": 2,
+    "q": "Binary search with $mid = \\lfloor (lo + hi)/2 \\rfloor$ is run on a sorted array of 31 distinct keys. One three-way comparison (less, equal or greater) of the search key with an array element counts as one comparison. If every one of the 31 keys is searched for with equal probability, what is the average number of comparisons for a successful search? (Round to two decimals.)",
+    "answer": {
+      "min": 4.15,
+      "max": 4.17
+    },
+    "explanation": "With 31 keys the decision tree is a perfect binary tree with levels of 1, 2, 4, 8 and 16 nodes. A key at level $d$ needs $d$ comparisons. Total $= 1\\cdot1 + 2\\cdot2 + 3\\cdot4 + 4\\cdot8 + 5\\cdot16 = 129$, so the average is $129/31 \\approx 4.16$.",
+    "id": "alg-078"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements are TRUE?",
+    "options": [
+      "Every comparison-based sorting algorithm makes $\\Omega(n \\log n)$ comparisons in the worst case",
+      "Heapsort is stable",
+      "Insertion sort runs in $O(n + I)$ time, where $I$ is the number of inversions in the input",
+      "Selection sort performs $\\Theta(n^2)$ swaps in the worst case"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "(A) True: the decision tree has at least $n!$ leaves, so its height is at least $\\log_2 n! = \\Omega(n \\log n)$. (B) False: building the heap and swapping the root to the end reorders equal keys. (C) True: each shift removes exactly one inversion, plus $O(n)$ for the outer loop. (D) False: selection sort does at most one swap per pass, so at most $n - 1$ swaps.",
+    "id": "alg-079"
+  },
+  {
+    "topic": "searching-sorting",
+    "type": "mcq",
+    "marks": 2,
+    "q": "The linear-time selection algorithm (median of medians) normally splits the input into groups of 5. If groups of 3 are used instead, the recurrence for the worst case and its solution are:",
+    "options": [
+      "$T(n) = T(n/3) + T(n/2) + O(n)$, so $\\Theta(n)$",
+      "$T(n) = T(n/3) + T(2n/3) + O(n)$, so $\\Theta(n)$",
+      "$T(n) = 2T(n/3) + O(n)$, so $\\Theta(n)$",
+      "$T(n) = T(n/3) + T(2n/3) + O(n)$, so $\\Theta(n \\log n)$"
+    ],
+    "answer": 3,
+    "explanation": "The median of the $n/3$ group medians is found recursively: $T(n/3)$. In half of the groups, 2 of the 3 elements are at most the pivot, so about $n/3$ elements are guaranteed smaller and $n/3$ larger, leaving up to $2n/3$ for the recursive call. Since $1/3 + 2/3 = 1$, each level of the recursion tree costs $\\Theta(n)$ over $\\Theta(\\log n)$ levels, giving $\\Theta(n \\log n)$. With groups of 5 the fractions are $1/5 + 7/10 < 1$, which gives $\\Theta(n)$.",
+    "id": "alg-080"
+  },
+  {
+    "topic": "hashing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A hash table has 13 slots (0 to 12) and uses double hashing: probe $i$ ($i = 0, 1, 2, \\dots$) for key $k$ goes to $(h_1(k) + i \\cdot h_2(k)) \\bmod 13$, with $h_1(k) = k \\bmod 13$ and $h_2(k) = 1 + (k \\bmod 11)$. The keys $18, 41, 22, 44, 59, 32$ are inserted in that order into an empty table. In which slot is 32 stored?",
+    "options": [
+      "6",
+      "10",
+      "0",
+      "4"
+    ],
+    "answer": 3,
+    "explanation": "18 to slot 5, 41 to 2, 22 to 9. 44: $h_1 = 5$ (taken), $h_2 = 1$, next probe 6, stored at 6. 59: $h_1 = 7$, free. 32: $h_1 = 6$ (taken by 44), $h_2 = 1 + 10 = 11$, next probe $(6 + 11) \\bmod 13 = 4$, which is free. So 32 is in slot 4.",
+    "id": "alg-081"
+  },
+  {
+    "topic": "hashing",
+    "type": "msq",
+    "marks": 1,
+    "q": "A table of size $m = 16$ uses double hashing $h(k, i) = (h_1(k) + i \\cdot h_2(k)) \\bmod 16$. For which choices of $h_2$ does the probe sequence of every key visit all 16 slots?",
+    "options": [
+      "$h_2(k) = 1 + 2(k \\bmod 8)$",
+      "$h_2(k) = k \\bmod 16$",
+      "$h_2(k) = 2 + (k \\bmod 7)$",
+      "$h_2(k) = 2(k \\bmod 8) + 3$"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "The sequence covers all $m$ slots exactly when $\\gcd(h_2(k), m) = 1$. With $m = 16$ this means $h_2(k)$ must be odd. (A) and (D) always give odd values. (B) can be 0 or even, and (C) gives even values such as 2, 4, 6.",
+    "id": "alg-082"
+  },
+  {
+    "topic": "hashing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A family $H$ of hash functions from a universe $U$ to $\\{0, 1, \\dots, m-1\\}$ is called universal if, for every pair of distinct keys $x, y \\in U$, when $h$ is chosen uniformly at random from $H$:",
+    "options": [
+      "$\\Pr[h(x) = h(y)] = 0$",
+      "$\\Pr[h(x) = h(y)] \\le 1/m$",
+      "$\\Pr[h(x) = i] = 1/m$ for every slot $i$, but nothing is said about pairs",
+      "$\\Pr[h(x) = h(y)] \\le 1/|U|$"
+    ],
+    "answer": 1,
+    "explanation": "Universality bounds the collision probability of any fixed pair of distinct keys by $1/m$, where the randomness is over the choice of $h$ only, not over the keys. This gives expected chain length at most $1 + \\alpha$ with chaining for any input, even an adversarial one.",
+    "id": "alg-083"
+  },
+  {
+    "topic": "hashing",
+    "type": "nat",
+    "marks": 2,
+    "q": "100 distinct keys are inserted into a table with 50 slots using a hash function chosen uniformly at random from a universal family. What is the best upper bound that universality guarantees on the expected number of pairs of keys that collide (hash to the same slot)?",
+    "answer": {
+      "min": 99,
+      "max": 99
+    },
+    "explanation": "There are $\\binom{100}{2} = 4950$ pairs and each collides with probability at most $1/50$. By linearity of expectation the expected number of colliding pairs is at most $4950/50 = 99$.",
+    "id": "alg-084"
+  },
+  {
+    "topic": "hashing",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A hash table with 7 slots uses $h(k) = k \\bmod 7$ and separate chaining, where each new key is inserted at the head of its chain. The keys $15, 8, 22, 3, 10, 29$ are inserted in that order. How many key comparisons does a successful search for 15 make?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 3,
+    "explanation": "15, 8, 22 and 29 all hash to slot 1 (3 and 10 go to slot 3). Head insertion gives the chain $29 \\to 22 \\to 8 \\to 15$, so the search compares with 29, 22, 8 and then finds 15: 4 comparisons.",
+    "id": "alg-085"
+  },
+  {
+    "topic": "hashing",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A table of size 8 uses quadratic probing $h(k, i) = (h(k) + i^2) \\bmod 8$ for $i = 0, 1, 2, \\dots$. For a key with $h(k) = 0$, how many distinct slots can the probe sequence ever reach?",
+    "options": [
+      "8",
+      "4",
+      "3",
+      "2"
+    ],
+    "answer": 2,
+    "explanation": "Squares modulo 8 take only the values 0, 1 and 4 ($0, 1, 4, 9 \\equiv 1, 16 \\equiv 0, 25 \\equiv 1, 36 \\equiv 4, \\dots$). So the sequence only reaches slots 0, 1 and 4, and an insertion can fail even though 5 slots are empty. This is why quadratic probing needs a suitable table size, such as a prime with load factor below $1/2$.",
+    "id": "alg-086"
+  },
+  {
+    "topic": "greedy",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Huffman coding is applied to an alphabet of 8 symbols with positive frequencies. What is the largest possible length of a codeword in the resulting code?",
+    "options": [
+      "7",
+      "3",
+      "4",
+      "8"
+    ],
+    "answer": 0,
+    "explanation": "A Huffman tree on 8 leaves has 7 internal nodes. When frequencies grow like Fibonacci numbers ($1, 1, 2, 3, 5, 8, 13, 21$), each merge combines the previous subtree with one new leaf, giving a chain of depth 7. A depth above $n - 1 = 7$ is impossible in a full binary tree with 8 leaves.",
+    "id": "alg-087"
+  },
+  {
+    "topic": "greedy",
+    "type": "nat",
+    "marks": 2,
+    "q": "Five sorted files have 20, 30, 10, 5 and 30 records. They are merged into one file by repeatedly merging two files, where merging files of sizes $p$ and $q$ costs $p + q$ record moves. What is the minimum total cost?",
+    "answer": {
+      "min": 205,
+      "max": 205
+    },
+    "explanation": "Always merge the two smallest (optimal merge pattern, same as Huffman). $5 + 10 = 15$; $15 + 20 = 35$; $30 + 30 = 60$; $35 + 60 = 95$. Total $15 + 35 + 60 + 95 = 205$.",
+    "id": "alg-088"
+  },
+  {
+    "topic": "greedy",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Eight lectures need rooms, given as half-open intervals [start, end): $[1,4)$, $[2,5)$, $[3,7)$, $[5,8)$, $[6,9)$, $[8,10)$, $[4,6)$, $[3,6)$. Two lectures can share a room only if their intervals do not overlap. What is the minimum number of rooms needed?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 2,
+    "explanation": "The minimum equals the largest number of intervals that contain a common point (the greedy that sorts by start time and reuses any free room achieves it). At time 4, the lectures $[2,5)$, $[3,7)$, $[4,6)$ and $[3,6)$ are all running ($[1,4)$ has ended), so at least 4 rooms are needed, and no point is covered by 5 intervals.",
+    "id": "alg-089"
+  },
+  {
+    "topic": "greedy",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Coins of denominations 1, 7 and 10 are available in unlimited supply. For the amount 15, the greedy method (always take the largest coin that fits) uses $g$ coins and an optimal solution uses $o$ coins. What are $g$ and $o$?",
+    "options": [
+      "$g = 6$, $o = 3$",
+      "$g = 3$, $o = 3$",
+      "$g = 6$, $o = 2$",
+      "$g = 4$, $o = 3$"
+    ],
+    "answer": 0,
+    "explanation": "Greedy takes 10 and then five 1s: 6 coins. The optimum is $7 + 7 + 1$: 3 coins. Greedy coin change is optimal only for canonical systems such as $\\{1, 2, 5, 10\\}$.",
+    "id": "alg-090"
+  },
+  {
+    "topic": "greedy",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following greedy rules always give an optimal answer?",
+    "options": [
+      "Single machine, minimise the sum of completion times: run jobs in increasing order of processing time",
+      "Single machine, minimise the maximum lateness: run jobs in increasing order of deadline",
+      "0/1 knapsack: take items in decreasing order of value/weight while they fit",
+      "Activity selection: repeatedly pick the shortest activity that does not overlap the ones already chosen"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "(A) Shortest processing time first is optimal by an exchange argument: swapping an adjacent longer-before-shorter pair lowers the sum. (B) Earliest deadline first is optimal for maximum lateness, also by exchange. (C) Fails: capacity 10, items (6, 7), (5, 5), (5, 5); ratio greedy takes the first item for 7, while the two others give 10. (D) Fails: $[1,5)$, $[4,7)$, $[6,10)$; the shortest $[4,7)$ blocks both others, but $[1,5)$ and $[6,10)$ is a set of 2.",
+    "id": "alg-091"
+  },
+  {
+    "topic": "greedy",
+    "type": "nat",
+    "marks": 2,
+    "q": "Five jobs run one at a time on one machine with no idle time, starting at time 0. Job $j$ has processing time $p_j$ and weight $w_j$: $J_1(3, 6)$, $J_2(5, 5)$, $J_3(2, 1)$, $J_4(4, 10)$, $J_5(1, 3)$, written as $(p_j, w_j)$. If $C_j$ is the completion time of job $j$, what is the minimum possible value of $\\sum_j w_j C_j$?",
+    "answer": {
+      "min": 181,
+      "max": 181
+    },
+    "explanation": "Order jobs by decreasing $w_j/p_j$ (Smith's rule): $J_5$ (3), $J_4$ (2.5), $J_1$ (2), $J_2$ (1), $J_3$ (0.5). Completion times are $1, 5, 8, 13, 15$. The sum is $3\\cdot1 + 10\\cdot5 + 6\\cdot8 + 5\\cdot13 + 1\\cdot15 = 3 + 50 + 48 + 65 + 15 = 181$.",
+    "id": "alg-092"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "nat",
+    "marks": 1,
+    "q": "What is the length of a longest strictly increasing subsequence of $9, 2, 5, 3, 7, 11, 8, 10, 13, 6$?",
+    "answer": {
+      "min": 6,
+      "max": 6
+    },
+    "explanation": "One longest subsequence is $2, 3, 7, 8, 10, 13$ (length 6). Using $L[i]$ = length of the longest increasing subsequence ending at position $i$: $1, 1, 2, 2, 3, 4, 4, 5, 6, 3$, whose maximum is 6.",
+    "id": "alg-093"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "nat",
+    "marks": 2,
+    "q": "The edit distance between two strings is the minimum number of single-character insertions, deletions and substitutions (each of cost 1) needed to turn one into the other. What is the edit distance between KITCHEN and THICKEN?",
+    "answer": {
+      "min": 4,
+      "max": 4
+    },
+    "explanation": "Both words end in EN, so the cost comes from turning KITCH into THICK. Align K-I-T-C-H with T-H-I-C-K: substitute K by T, insert H, keep I, delete T, keep C, substitute H by K. That is 4 operations, and filling the full DP table $d[i][j] = \\min(d[i-1][j] + 1,\\ d[i][j-1] + 1,\\ d[i-1][j-1] + [a_i \\ne b_j])$ confirms that 3 is not possible.",
+    "id": "alg-094"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "nat",
+    "marks": 2,
+    "q": "How many subsets of $\\{7, 11, 13, 17, 23\\}$ have elements summing to exactly 41?",
+    "answer": {
+      "min": 2,
+      "max": 2
+    },
+    "explanation": "Subset-sum counting DP: $N[i][s]$ = number of subsets of the first $i$ elements with sum $s$, with $N[i][s] = N[i-1][s] + N[i-1][s - a_i]$. With 23, the rest must sum to 18, and only $7 + 11$ does. Without 23, the other four sum to 48, so the left-out elements must sum to 7: only $\\{7\\}$. The two subsets are $\\{7, 11, 23\\}$ and $\\{11, 13, 17\\}$.",
+    "id": "alg-095"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The dynamic programming algorithm for subset sum with $n$ integers and target $W$ runs in $O(nW)$ time. Why is this not considered a polynomial-time algorithm?",
+    "options": [
+      "Because the table has $2^n$ entries",
+      "Because $W$ can be exponential in the number of bits needed to write the input",
+      "Because each entry needs $O(n)$ time to fill",
+      "Because the DP must be run once per subset"
+    ],
+    "answer": 1,
+    "explanation": "The input size counts the bits of $W$, which is about $\\log_2 W$. A running time linear in the value $W$ is exponential in that size, so the algorithm is pseudo-polynomial. Subset sum is NP-complete.",
+    "id": "alg-096"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "nat",
+    "marks": 2,
+    "q": "Four keys $k_1 < k_2 < k_3 < k_4$ are searched with frequencies $4, 2, 6, 3$ respectively (no unsuccessful searches). The cost of a binary search tree is $\\sum_i f_i \\cdot \\text{depth}(k_i)$, where the root has depth 1. What is the minimum cost over all BSTs on these keys?",
+    "answer": {
+      "min": 26,
+      "max": 26
+    },
+    "explanation": "Use $e[i][j] = \\min_{r} (e[i][r-1] + e[r+1][j]) + \\sum_{t=i}^{j} f_t$. The best tree has $k_3$ (6) at the root, $k_1$ as its left child with $k_2$ below it, and $k_4$ as its right child. Cost $= 6\\cdot1 + 4\\cdot2 + 3\\cdot2 + 2\\cdot3 = 26$. With $k_1$ or $k_2$ at the root the best cost is 31, and with $k_4$ at the root it is 35.",
+    "id": "alg-097"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The standard dynamic programming algorithm for the optimal binary search tree on $n$ keys (trying every root for every range of keys, without Knuth's speed-up) runs in:",
+    "options": [
+      "$\\Theta(n^2)$",
+      "$\\Theta(n \\log n)$",
+      "$\\Theta(n^3)$",
+      "$\\Theta(2^n)$"
+    ],
+    "answer": 2,
+    "explanation": "There are $\\Theta(n^2)$ ranges $[i, j]$ and each tries up to $n$ roots, giving $\\Theta(n^3)$. Knuth's observation that the optimal root is monotone in $i$ and $j$ reduces it to $\\Theta(n^2)$.",
+    "id": "alg-098"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about the longest increasing subsequence (LIS) of a sequence of $n$ distinct numbers are TRUE?",
+    "options": [
+      "The LIS length can be found in $O(n \\log n)$ time",
+      "The LIS length equals the length of the longest common subsequence of the sequence and its sorted copy",
+      "Any sequence of $k^2 + 1$ distinct numbers has an increasing or a decreasing subsequence of length $k + 1$",
+      "The basic $L[i] = 1 + \\max_{j < i,\\ a_j < a_i} L[j]$ recurrence can be evaluated in $O(n)$ total time"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "(A) True: keep, for each length, the smallest possible tail and binary search it. (B) True: a common subsequence with the sorted copy is exactly an increasing subsequence. (C) True: this is the Erdos-Szekeres theorem. (D) False: each $L[i]$ scans all earlier positions, so the direct evaluation is $\\Theta(n^2)$.",
+    "id": "alg-099"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "mcq",
+    "marks": 2,
+    "q": "On a grid of points $(x, y)$ with $0 \\le x, y \\le 4$, a path moves from $(0,0)$ to $(4,4)$ using only unit steps right ($x + 1$) or up ($y + 1$). The point $(2,2)$ is blocked. How many paths avoid $(2,2)$?",
+    "options": [
+      "70",
+      "36",
+      "34",
+      "40"
+    ],
+    "answer": 2,
+    "explanation": "Without the block there are $\\binom{8}{4} = 70$ paths. Paths through $(2,2)$: $\\binom{4}{2} \\cdot \\binom{4}{2} = 36$. So $70 - 36 = 34$. The DP $P[x][y] = P[x-1][y] + P[x][y-1]$ with $P[2][2] = 0$ gives the same value.",
+    "id": "alg-100"
+  },
+  {
+    "topic": "dynamic-programming",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A rod of length 5 can be cut into integer pieces. A piece of length $1, 2, 3, 4, 5$ sells for $2, 5, 7, 9, 10$ respectively. What is the maximum total revenue?",
+    "options": [
+      "10",
+      "11",
+      "13",
+      "12"
+    ],
+    "answer": 3,
+    "explanation": "$r[n] = \\max_{1 \\le k \\le n}(p_k + r[n-k])$ gives $r = 0, 2, 5, 7, 10, 12$ for $n = 0..5$. The best cut is $2 + 2 + 1$ with revenue $5 + 5 + 2 = 12$.",
+    "id": "alg-101"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "nat",
+    "marks": 2,
+    "q": "Strassen's method multiplies $n \\times n$ matrices by splitting them into $2 \\times 2$ blocks and using 7 block multiplications, giving $T(n) = 7T(n/2) + \\Theta(n^2)$. Suppose a method splits matrices into $3 \\times 3$ blocks and uses $k$ block multiplications, with $\\Theta(n^2)$ extra work. What is the largest integer $k$ for which this method is asymptotically faster than Strassen's?",
+    "answer": {
+      "min": 21,
+      "max": 21
+    },
+    "explanation": "The new method runs in $\\Theta(n^{\\log_3 k})$ when $\\log_3 k > 2$. It beats Strassen when $\\log_3 k < \\log_2 7 \\approx 2.807$, that is $k < 3^{2.807} \\approx 21.85$. So $k = 21$ works ($\\log_3 21 \\approx 2.771$) and $k = 22$ does not ($\\log_3 22 \\approx 2.814$).",
+    "id": "alg-102"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A divide-and-conquer closest pair algorithm for $n$ points in the plane splits the points by $x$-coordinate, recurses on both halves, and then sorts the points in the middle strip by $y$-coordinate from scratch with an $O(n \\log n)$ sort in every call (instead of reusing a presorted list). What is its running time?",
+    "options": [
+      "$\\Theta(n \\log n)$",
+      "$\\Theta(n \\log^2 n)$",
+      "$\\Theta(n^2)$",
+      "$\\Theta(n \\log n \\log\\log n)$"
+    ],
+    "answer": 1,
+    "explanation": "The recurrence becomes $T(n) = 2T(n/2) + \\Theta(n \\log n)$. Level $i$ of the recursion tree costs $n \\log(n/2^i)$, and summing over $\\log n$ levels gives $\\Theta(n \\log^2 n)$. Presorting by $y$ once and splitting that list in linear time brings the merge step to $O(n)$ and the total to $\\Theta(n \\log n)$.",
+    "id": "alg-103"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "nat",
+    "marks": 1,
+    "q": "What is the largest sum of a contiguous non-empty subarray of $[-2, 11, -4, 13, -5, -2, 9, -10, 4]$?",
+    "answer": {
+      "min": 22,
+      "max": 22
+    },
+    "explanation": "The subarray $11, -4, 13, -5, -2, 9$ sums to 22. Stopping at 13 gives only 20, and adding $-10$ or extending left only lowers the sum. Kadane's scan or the divide-and-conquer method (best of left half, right half and the best crossing subarray) gives the same answer.",
+    "id": "alg-104"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "In the divide-and-conquer closest pair algorithm, let $\\delta$ be the smaller of the two distances returned for the halves. When the points in the middle strip of width $2\\delta$ are scanned in order of $y$-coordinate, each point is compared with only a constant number of the points after it. Why is that enough?",
+    "options": [
+      "Points in the strip are at most $\\delta$ apart",
+      "The strip contains at most a constant number of points",
+      "A $\\delta \\times 2\\delta$ rectangle can hold only a constant number of points that are pairwise at least $\\delta$ apart within each half",
+      "Points of the same half are never compared"
+    ],
+    "answer": 2,
+    "explanation": "Any partner of a point $p$ closer than $\\delta$ lies in the $\\delta \\times 2\\delta$ rectangle above $p$. Points from the same half are at least $\\delta$ apart, so each $\\delta \\times \\delta$ square holds at most 4 of them and the rectangle at most 8 in total. So checking the next 7 points in $y$ order is enough, and the strip may still hold $\\Theta(n)$ points.",
+    "id": "alg-105"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following problems are solved in $O(n \\log n)$ worst-case time by a standard divide-and-conquer algorithm?",
+    "options": [
+      "Closest pair among $n$ points in the plane",
+      "Counting the inversions in an array of $n$ numbers",
+      "Maximum sum contiguous subarray of an array of $n$ numbers",
+      "Multiplying two $n \\times n$ matrices"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "(A) Split by $x$, recurse, linear strip check: $O(n \\log n)$. (B) Merge sort that adds the number of remaining left elements whenever a right element is output: $O(n \\log n)$. (C) Best of the two halves and the best crossing sum: $T(n) = 2T(n/2) + O(n)$. (D) Matrix multiplication needs to write $n^2$ outputs and Strassen takes $\\Theta(n^{2.807})$, far above $n \\log n$.",
+    "id": "alg-106"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "mcq",
+    "marks": 1,
+    "q": "The function below computes $x^n$ for $n$ a power of 2. How many multiplications does `power(x, n)` perform, as a function of $n$?\n\n```c\ndouble power(double x, int n) {\n    if (n == 1) return x;\n    return power(x, n / 2) * power(x, n / 2);\n}\n```",
+    "options": [
+      "$\\Theta(\\log n)$",
+      "$\\Theta(n)$",
+      "$\\Theta(n \\log n)$",
+      "$\\Theta(\\log^2 n)$"
+    ],
+    "answer": 1,
+    "explanation": "The two recursive calls are both evaluated, so $M(n) = 2M(n/2) + 1$ with $M(1) = 0$, which gives $M(n) = n - 1$, that is $\\Theta(n)$. Storing $y = $ power(x, n/2) once and returning $y \\cdot y$ gives $M(n) = M(n/2) + 1 = \\log_2 n$.",
+    "id": "alg-107"
+  },
+  {
+    "topic": "divide-and-conquer",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Strassen's method multiplies two $n \\times n$ matrices ($n$ a power of 2) with 7 recursive products of $n/2 \\times n/2$ matrices and 18 additions or subtractions of $n/2 \\times n/2$ matrices. If the recursion goes down to $1 \\times 1$ matrices, how many scalar additions and subtractions are done in total for $n = 4$?",
+    "options": [
+      "162",
+      "198",
+      "144",
+      "216"
+    ],
+    "answer": 1,
+    "explanation": "Let $A(n)$ be the count. $A(1) = 0$ and $A(n) = 7A(n/2) + 18(n/2)^2$. So $A(2) = 0 + 18 = 18$ and $A(4) = 7 \\cdot 18 + 18 \\cdot 4 = 126 + 72 = 198$.",
+    "id": "alg-108"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 2,
+    "q": "A DAG has vertices $P, Q, R, S, T, U$ and edges $P \\to Q$, $P \\to R$, $Q \\to S$, $R \\to S$, $S \\to T$, $U \\to T$. How many distinct topological orderings does it have?",
+    "options": [
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "answer": 3,
+    "explanation": "Ignoring $U$, the order must be $P$, then $Q$ and $R$ in either order, then $S$, then $T$: 2 orders. $U$ only has to come before $T$, so it can go in any of the 5 positions before $T$. Total $2 \\times 5 = 10$.",
+    "id": "alg-109"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 1,
+    "q": "A directed graph has vertices $A$ to $H$ and edges $A \\to B$, $B \\to C$, $C \\to A$, $C \\to D$, $D \\to E$, $E \\to F$, $F \\to D$, $E \\to B$, $G \\to F$, $G \\to H$, $H \\to G$. How many strongly connected components does it have?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 0,
+    "explanation": "$A, B, C$ form a cycle and $D, E, F$ form a cycle. The edge $E \\to B$ together with $C \\to D$ joins them, since $B$ reaches $D$ through $C$ and $D$ reaches $B$ through $E$. So $\\{A, B, C, D, E, F\\}$ is one component. $G$ and $H$ form the second; $G \\to F$ goes in only one direction.",
+    "id": "alg-110"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "msq",
+    "marks": 2,
+    "q": "An undirected graph has vertices 1 to 7 and edges $\\{1,2\\}, \\{1,3\\}, \\{2,3\\}, \\{3,4\\}, \\{4,5\\}, \\{4,6\\}, \\{5,6\\}, \\{6,7\\}$. Which of the following vertices are articulation points (removing the vertex disconnects the graph)?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Removing 3 separates $\\{1, 2\\}$ from the rest. Removing 4 separates $\\{1, 2, 3\\}$ from $\\{5, 6, 7\\}$. Removing 6 isolates 7. Removing 5 leaves 4 and 6 connected by the edge $\\{4,6\\}$. In DFS terms, a non-root vertex $u$ is an articulation point when some child $v$ has $low[v] \\ge disc[u]$.",
+    "id": "alg-111"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Kruskal's algorithm with a union-find structure is run on the undirected graph with edges (u, v, weight): $(A,B,3)$, $(A,C,5)$, $(B,C,4)$, $(B,D,6)$, $(C,D,2)$, $(C,E,7)$, $(D,E,8)$, $(D,F,9)$, $(E,F,1)$, $(B,E,10)$. Which edge is the first one rejected because its endpoints are already in the same set?",
+    "options": [
+      "$(B,D,6)$",
+      "$(B,C,4)$",
+      "$(D,E,8)$",
+      "$(A,C,5)$"
+    ],
+    "answer": 3,
+    "explanation": "In weight order: $(E,F,1)$ accepted, $(C,D,2)$ accepted, $(A,B,3)$ accepted, $(B,C,4)$ accepted (joins $\\{A,B\\}$ and $\\{C,D\\}$), $(A,C,5)$: $A$ and $C$ are now in the same set, so it is rejected first. Then $(B,D,6)$ is rejected, $(C,E,7)$ is accepted and completes the tree of weight 17.",
+    "id": "alg-112"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Kruskal's algorithm on a connected graph with $V$ vertices and $E$ edges, using union-find with union by rank and path compression, runs in:",
+    "options": [
+      "$O(E \\log E)$",
+      "$O(V^2)$",
+      "$O(E + V)$",
+      "$O(EV)$"
+    ],
+    "answer": 0,
+    "explanation": "Sorting the edges takes $O(E \\log E)$. The $O(E)$ find and union operations take $O(E\\,\\alpha(V))$, which is smaller. Since $E \\le V^2$, $O(E \\log E) = O(E \\log V)$.",
+    "id": "alg-113"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Bellman-Ford runs $V - 1$ rounds of relaxing every edge from source $s$. How does it then detect a negative-weight cycle?",
+    "options": [
+      "Some distance is still $\\infty$",
+      "Some edge $(u, v)$ still satisfies $d[u] + w(u, v) < d[v]$ in one extra round",
+      "Some distance is negative",
+      "The source distance $d[s]$ is still 0"
+    ],
+    "answer": 1,
+    "explanation": "Without a negative cycle reachable from $s$, all shortest paths have at most $V - 1$ edges, so the distances are final after $V - 1$ rounds and no edge can be relaxed further. If an edge can still be relaxed, a negative cycle is reachable from $s$. Negative distances alone are fine when edges are negative.",
+    "id": "alg-114"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "msq",
+    "marks": 2,
+    "q": "Which of the following statements about single-source shortest paths are TRUE?",
+    "options": [
+      "Dijkstra's algorithm can return wrong distances on a graph with a negative edge even when there is no negative cycle",
+      "Bellman-Ford runs in $O(VE)$ time",
+      "Dijkstra's algorithm reports a negative cycle if one is reachable from the source",
+      "Adding the same positive constant to every edge weight never changes which path is shortest"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "(A) True: Dijkstra finalises a vertex when it is extracted and never revisits it, so a later negative edge can make that value wrong. (B) True: $V - 1$ rounds over $E$ edges. (C) False: Dijkstra has no such check. (D) False: a path with more edges gains more. With edges $s \\to t$ (5) and $s \\to a \\to t$ (2 + 2), adding 2 to every edge gives 7 against 8, so the shortest path changes.",
+    "id": "alg-115"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "nat",
+    "marks": 2,
+    "q": "Floyd-Warshall is run on the directed graph with vertices 1 to 4 and edges $1 \\to 2$ (3), $1 \\to 4$ (7), $2 \\to 1$ (8), $2 \\to 3$ (2), $3 \\to 1$ (5), $3 \\to 4$ (1), $4 \\to 1$ (2). Let $D^{(k)}[i][j]$ be the shortest distance from $i$ to $j$ using only intermediate vertices from $\\{1, \\dots, k\\}$. What is $D^{(3)}[2][1]$?",
+    "answer": {
+      "min": 7,
+      "max": 7
+    },
+    "explanation": "With intermediates from $\\{1, 2, 3\\}$ the paths from 2 to 1 are $2 \\to 1$ (8) and $2 \\to 3 \\to 1$ ($2 + 5 = 7$). So $D^{(3)}[2][1] = 7$. Only after vertex 4 is allowed does it drop to $2 \\to 3 \\to 4 \\to 1$ ($2 + 1 + 2 = 5$), so $D^{(4)}[2][1] = 5$.",
+    "id": "alg-116"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 1,
+    "q": "During a DFS of a directed graph, the edge $(u, v)$ is examined while $v$ has been discovered but not yet finished (it is still on the recursion stack). What can be concluded?",
+    "options": [
+      "$(u, v)$ is a cross edge",
+      "$(u, v)$ is a forward edge",
+      "$(u, v)$ is a back edge and the graph has a cycle",
+      "$(u, v)$ is a tree edge"
+    ],
+    "answer": 2,
+    "explanation": "A vertex on the stack is an ancestor of $u$ (or $u$ itself), so $(u, v)$ points back to an ancestor: a back edge. The tree path from $v$ to $u$ plus this edge forms a cycle. Forward and cross edges lead to finished vertices, and tree edges lead to undiscovered ones.",
+    "id": "alg-117"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 2,
+    "q": "Dijkstra's algorithm is run from $S$ on the directed graph with edges $S \\to A$ (7), $S \\to B$ (2), $B \\to A$ (3), $B \\to C$ (8), $A \\to C$ (2), $A \\to D$ (6), $C \\to D$ (3), $B \\to D$ (9), $C \\to E$ (4), $D \\to E$ (1). In what order are the vertices extracted from the priority queue?",
+    "options": [
+      "$S, B, A, D, C, E$",
+      "$S, B, C, A, D, E$",
+      "$S, A, B, C, D, E$",
+      "$S, B, A, C, D, E$"
+    ],
+    "answer": 3,
+    "explanation": "$S$ (0) sets $A = 7$, $B = 2$. $B$ (2) sets $A = 5$, $C = 10$, $D = 11$. $A$ (5) sets $C = 7$, $D = 11$ (no change). $C$ (7) sets $D = 10$, $E = 11$. $D$ (10) sets $E = 11$ (no change). $E$ (11). Order: $S, B, A, C, D, E$.",
+    "id": "alg-118"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "mcq",
+    "marks": 1,
+    "q": "Contract every strongly connected component of a directed graph $G$ into a single vertex, keeping an edge between two components whenever $G$ has an edge between them. The resulting component graph is always:",
+    "options": [
+      "A tree",
+      "Strongly connected",
+      "A directed acyclic graph",
+      "A graph with exactly one source"
+    ],
+    "answer": 2,
+    "explanation": "If the component graph had a cycle, every vertex in the components on it could reach every other, so those components would be one strongly connected component, a contradiction. It need not be a tree or have a single source; for example, a graph with no edges has $V$ components and no edges between them.",
+    "id": "alg-119"
+  },
+  {
+    "topic": "graph-algorithms",
+    "type": "msq",
+    "marks": 1,
+    "q": "Which of the following run in $O(V + E)$ time on a graph stored as adjacency lists?",
+    "options": [
+      "Topological sort of a DAG",
+      "Finding all strongly connected components (Kosaraju or Tarjan)",
+      "Dijkstra's algorithm with a binary heap",
+      "Bellman-Ford"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "(A) and (B) are one or two DFS passes, so $O(V + E)$. (C) takes $O((V + E) \\log V)$. (D) takes $O(VE)$.",
+    "id": "alg-120"
   }
 ]

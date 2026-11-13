@@ -1,0 +1,193 @@
+---
+// Reading settings for notes and formula sheets: colours, text size, font and
+// line spacing. Saved in localStorage and applied before paint by the inline
+// script in Base.astro (see READER_BOOT there).
+import "@fontsource-variable/source-serif-4";
+import "@fontsource/atkinson-hyperlegible/400.css";
+import "@fontsource/atkinson-hyperlegible/700.css";
+
+// Preset pairs, contrast-checked: text 11:1 or better, muted text 5:1 or better.
+const THEMES = [
+  { id: "paper", name: "Paper", bg: "#f6f4ef", fg: "#16171b" },
+  { id: "white", name: "White", bg: "#ffffff", fg: "#1a1a1a" },
+  { id: "sepia", name: "Sepia", bg: "#f4ecd8", fg: "#3b2f1e" },
+  { id: "mint", name: "Mint", bg: "#e6f1ea", fg: "#14281d" },
+  { id: "slate", name: "Slate", bg: "#1f2329", fg: "#d8dde3" },
+  { id: "night", name: "Night", bg: "#0f1014", fg: "#eceae4" },
+  { id: "black", name: "Black", bg: "#000000", fg: "#d4d4d4" },
+];
+const FONTS = [
+  { id: "sans", name: "Sans", css: "var(--sans)" },
+  { id: "serif", name: "Serif", css: "'Source Serif 4 Variable', Georgia, serif" },
+  { id: "readable", name: "Readable", css: "'Atkinson Hyperlegible', var(--sans)" },
+  { id: "mono", name: "Mono", css: "var(--mono)" },
+];
+const SPACING = [
+  { id: "1.55", name: "Compact" },
+  { id: "1.75", name: "Normal" },
+  { id: "2", name: "Relaxed" },
+];
+---
+<button class="reader-fab" id="reader-open" type="button" aria-haspopup="dialog" aria-controls="reader-panel" aria-label="Reading settings">
+  <span aria-hidden="true">Aa</span>
+</button>
+
+<div class="reader-panel" id="reader-panel" role="dialog" aria-label="Reading settings" hidden>
+  <div class="reader-head">
+    <b>Reading settings</b>
+    <button class="icon-btn" type="button" id="reader-close" aria-label="Close reading settings">✕</button>
+  </div>
+
+  <fieldset>
+    <legend>Background</legend>
+    <div class="swatches">
+      <button type="button" class="swatch site" data-theme-id="site" title="Site theme" aria-label="Site theme"><span>Site</span></button>
+      {THEMES.map((t) => (
+        <button type="button" class="swatch" data-theme-id={t.id} data-bg={t.bg} data-fg={t.fg} title={t.name} aria-label={t.name} style={`--sw-bg:${t.bg};--sw-fg:${t.fg}`}>
+          <span>Aa</span>
+        </button>
+      ))}
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Custom colours</legend>
+    <div class="custom-row">
+      <label>Background <input type="color" id="reader-bg" value="#f6f4ef" /></label>
+      <label>Text <input type="color" id="reader-fg" value="#16171b" /></label>
+      <span class="contrast" id="reader-contrast" aria-live="polite"></span>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Text size <output id="reader-size-out">17px</output></legend>
+    <div class="size-row">
+      <button type="button" class="step" id="reader-smaller" aria-label="Smaller text">A−</button>
+      <input type="range" id="reader-size" min="14" max="26" step="1" value="17" aria-label="Text size in pixels" />
+      <button type="button" class="step big" id="reader-bigger" aria-label="Larger text">A+</button>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Font</legend>
+    <div class="seg" id="reader-font">
+      {FONTS.map((f) => <button type="button" data-font={f.id} data-css={f.css} style={`font-family:${f.css}`}>{f.name}</button>)}
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Line spacing</legend>
+    <div class="seg" id="reader-lh">
+      {SPACING.map((s) => <button type="button" data-lh={s.id}>{s.name}</button>)}
+    </div>
+  </fieldset>
+
+  <button class="btn secondary reader-reset" type="button" id="reader-reset">Reset to default</button>
+</div>
+
+<script>
+  type Reader = { theme?: string; bg?: string; fg?: string; size?: number; font?: string; fontCss?: string; lh?: string };
+  const KEY = "gate27:reader";
+  const apply = (window as any).__applyReader as (r: Reader | null) => void;
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+
+  let r: Reader = {};
+  try {
+    r = JSON.parse(localStorage.getItem(KEY) ?? "{}") ?? {};
+  } catch {}
+
+  const panel = $("reader-panel");
+  const open = $<HTMLButtonElement>("reader-open");
+  const save = () => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(r));
+    } catch {}
+    apply(r);
+    paint();
+  };
+
+  // WCAG contrast ratio between two hex colours.
+  const lum = (hex: string) => {
+    const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const ratio = (a: string, b: string) => {
+    const x = lum(a), y = lum(b);
+    return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+  };
+
+  function paint() {
+    panel.querySelectorAll<HTMLButtonElement>(".swatch").forEach((b) => b.setAttribute("aria-pressed", String((r.theme ?? "site") === b.dataset.themeId)));
+    const bg = r.bg ?? getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+    const fg = r.fg ?? getComputedStyle(document.documentElement).getPropertyValue("--text").trim();
+    if (/^#[0-9a-f]{6}$/i.test(bg)) $<HTMLInputElement>("reader-bg").value = bg;
+    if (/^#[0-9a-f]{6}$/i.test(fg)) $<HTMLInputElement>("reader-fg").value = fg;
+    const cr = ratio($<HTMLInputElement>("reader-bg").value, $<HTMLInputElement>("reader-fg").value);
+    const el = $("reader-contrast");
+    el.textContent = `${cr.toFixed(1)}:1 ${cr >= 7 ? "AAA" : cr >= 4.5 ? "AA" : "low contrast"}`;
+    el.className = `contrast ${cr >= 4.5 ? "ok" : "low"}`;
+    const size = r.size ?? 17;
+    $<HTMLInputElement>("reader-size").value = String(size);
+    $("reader-size-out").textContent = `${size}px`;
+    $("reader-font").querySelectorAll<HTMLButtonElement>("button").forEach((b) => b.setAttribute("aria-pressed", String((r.font ?? "sans") === b.dataset.font)));
+    $("reader-lh").querySelectorAll<HTMLButtonElement>("button").forEach((b) => b.setAttribute("aria-pressed", String((r.lh ?? "1.75") === b.dataset.lh)));
+  }
+
+  const toggle = (show: boolean) => {
+    panel.hidden = !show;
+    open.setAttribute("aria-expanded", String(show));
+    if (show) paint();
+  };
+  open.addEventListener("click", () => toggle(panel.hidden));
+  $("reader-close").addEventListener("click", () => toggle(false));
+  document.addEventListener("keydown", (e) => e.key === "Escape" && !panel.hidden && toggle(false));
+  document.addEventListener("click", (e) => {
+    if (!panel.hidden && !panel.contains(e.target as Node) && !open.contains(e.target as Node)) toggle(false);
+  });
+
+  panel.querySelectorAll<HTMLButtonElement>(".swatch").forEach((b) =>
+    b.addEventListener("click", () => {
+      if (b.dataset.themeId === "site") {
+        delete r.theme; delete r.bg; delete r.fg;
+      } else {
+        r.theme = b.dataset.themeId; r.bg = b.dataset.bg; r.fg = b.dataset.fg;
+      }
+      save();
+    }),
+  );
+  for (const id of ["reader-bg", "reader-fg"]) {
+    $<HTMLInputElement>(id).addEventListener("input", () => {
+      r.theme = "custom";
+      r.bg = $<HTMLInputElement>("reader-bg").value;
+      r.fg = $<HTMLInputElement>("reader-fg").value;
+      save();
+    });
+  }
+  const setSize = (n: number) => {
+    r.size = Math.max(14, Math.min(26, n));
+    save();
+  };
+  $<HTMLInputElement>("reader-size").addEventListener("input", (e) => setSize(Number((e.target as HTMLInputElement).value)));
+  $("reader-smaller").addEventListener("click", () => setSize((r.size ?? 17) - 1));
+  $("reader-bigger").addEventListener("click", () => setSize((r.size ?? 17) + 1));
+  $("reader-font").querySelectorAll<HTMLButtonElement>("button").forEach((b) =>
+    b.addEventListener("click", () => {
+      r.font = b.dataset.font; r.fontCss = b.dataset.css;
+      save();
+    }),
+  );
+  $("reader-lh").querySelectorAll<HTMLButtonElement>("button").forEach((b) =>
+    b.addEventListener("click", () => {
+      r.lh = b.dataset.lh;
+      save();
+    }),
+  );
+  $("reader-reset").addEventListener("click", () => {
+    r = {};
+    try {
+      localStorage.removeItem(KEY);
+    } catch {}
+    apply(null);
+    paint();
+  });
+</script>
