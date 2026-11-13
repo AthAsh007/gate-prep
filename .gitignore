@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.env
+.env.*
+.dev.vars
+
+# private working notes, never committed
+NOTES.local.md
+.claude/
+CLAUDE.md

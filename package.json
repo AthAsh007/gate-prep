@@ -1,0 +1,21 @@
+{
+  "name": "gate-prep",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "astro": "5.18.2",
+    "katex": "0.16.22",
+    "marked": "15.0.12",
+    "rehype-katex": "7.0.1",
+    "remark-math": "6.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.154.0"
+  }
+}
