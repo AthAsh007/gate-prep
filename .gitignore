@@ -6,7 +6,5 @@ dist/
 .env.*
 .dev.vars
 
-# private working notes, never committed
+# private working notes
 NOTES.local.md
-.claude/
-CLAUDE.md
